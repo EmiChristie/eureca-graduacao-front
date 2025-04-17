@@ -1,4 +1,4 @@
-import { Avatar, Box, Button, Card, } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 const Curso = () => {
   return (
