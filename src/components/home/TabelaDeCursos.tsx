@@ -142,7 +142,7 @@ import {
                       border={"none"}
                       textAlign={"center"}
                       color={"white"}
-                      onClick={() => toggleSort("campus")}
+                      onClick={() => toggleSort("codigo_do_curriculo")}
                       cursor="pointer"
                     >
                       <Button color={"white"} variant={"plain"}>
@@ -195,7 +195,7 @@ import {
                           {item.nome_do_campus}
                         </Table.Cell>
                         <Table.Cell color={"white"} textAlign={"center"} border={"none"}>
-                          {item.campus}
+                          {item.codigo_do_curriculo}
                         </Table.Cell>
                       </Table.Row>
                     ))
