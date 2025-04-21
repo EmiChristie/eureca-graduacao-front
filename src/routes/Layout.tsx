@@ -5,15 +5,6 @@ import { useEffect } from 'react';
 import { Header } from '@/components/geral/Header';
 
 export default function Layout() {
-    const location = useLocation();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        if (location.pathname === '/') {
-            navigate('/', { replace: true });
-        }
-        }, [location, navigate]);
-        
     return (
         <>
             <Header />
