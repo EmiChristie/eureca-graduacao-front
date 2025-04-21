@@ -7,9 +7,9 @@ import { Header } from '@/components/geral/Header';
 export default function Layout() {
     return (
         <>
-            <Header />
+            {/*<Header />*/}
             <Outlet />
-            <Footer />
+            {/*<Footer />*/}
         </>
     );
 }
