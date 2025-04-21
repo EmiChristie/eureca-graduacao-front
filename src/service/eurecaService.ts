@@ -11,6 +11,7 @@ export const testarConexao = async () => {
 }
 
 export const getCursos = async () => {
+    console.log("cheguei")
     const { data } = await axiosInstance.get<CursoHome[]>(
         `/${ENDPOINT.CURSOS}`
     );
