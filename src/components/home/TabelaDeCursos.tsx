@@ -7,6 +7,7 @@ import {
     Table,
     Text,
     Center,
+    Separator,
   } from "@chakra-ui/react";
   import { useState, useMemo } from "react";
   import { Toaster } from "@/components/ui/toaster";
@@ -70,7 +71,7 @@ import {
   
     return (
       <>
-        <Box w={"full"} bgColor={EURECA_COLORS.CINZA_CLARO}>
+        <Box w={"full"} color={EURECA_COLORS.CINZA}>
           <Flex
             w={"full"}
             justify="space-between"
@@ -90,68 +91,93 @@ import {
             </InputGroup>
   
             <Flex>
-              <Button bgColor={EURECA_COLORS.AZUL_CLARO} px={6}>
+              <Button bgColor={EURECA_COLORS.CINZA_CLARO} px={6}>
                 Entrar
               </Button>
             </Flex>
           </Flex>
   
           <Box>
+          <Separator size={"sm"} placeSelf={"center"} w={"full"}/>
             <Table.ScrollArea h={"60vh"}>
-              <Table.Root stickyHeader showColumnBorder>
+              <Table.Root stickyHeader interactive>
                 <Table.Header>
-                  <Table.Row bgColor={EURECA_COLORS.AZUL_CLARO}>
+                  <Table.Row>
                     <Table.ColumnHeader
-                      p={2}
+                      p={0}
                       border={"none"}
                       textAlign={"center"}
-                      color={"white"}
                       onClick={() => toggleSort("descricao")}
                       cursor="pointer"
+                      w={"25vw"}
+                      maxW={"25vw"}
+                      whiteSpace="normal"
+                      wordBreak="break-word"
                     >
-                      <Button color={"white"} variant={"plain"}>
-                        Curso <LuArrowUpDown />
+                      <Button 
+                        my={2}
+                        variant={"ghost"}>
+                        Curso <LuArrowUpDown strokeWidth={"1.75"} />
                       </Button>
+                      <Separator/>
                     </Table.ColumnHeader>
                     <Table.ColumnHeader
                       p={0}
                       border={"none"}
                       textAlign={"center"}
-                      color={"white"}
                       onClick={() => toggleSort("area_de_retencao_descricao")}
                       cursor="pointer"
+                      w={"25vw"}
+                      maxW={"25vw"}
+                      whiteSpace="normal"
+                      wordBreak="break-word"
                     >
-                      <Button color={"white"} variant={"plain"}>
-                        Área <LuArrowUpDown />
+                      <Button
+                        my={2}
+                        variant={"ghost"}>
+                        Área <LuArrowUpDown strokeWidth={"1.75"} />
                       </Button>
+                      <Separator/>
                     </Table.ColumnHeader>
                     <Table.ColumnHeader
                       p={0}
                       border={"none"}
                       textAlign={"center"}
-                      color={"white"}
                       onClick={() => toggleSort("nome_do_campus")}
                       cursor="pointer"
+                      w={"25vw"}
+                      maxW={"25vw"}
+                      whiteSpace="normal"
+                      wordBreak="break-word"
                     >
-                      <Button color={"white"} variant={"plain"}>
-                        Campus <LuArrowUpDown />
+                      <Button 
+                        my={2}
+                        variant={"ghost"}>
+                        Campus <LuArrowUpDown strokeWidth={"1.75"} />
                       </Button>
+                      <Separator/>
                     </Table.ColumnHeader>
                     <Table.ColumnHeader
                       p={0}
                       border={"none"}
                       textAlign={"center"}
-                      color={"white"}
                       onClick={() => toggleSort("codigo_do_curriculo")}
                       cursor="pointer"
+                      w={"25vw"}
+                      maxW={"25vw"}
+                      whiteSpace="normal"
+                      wordBreak="break-word"
                     >
-                      <Button color={"white"} variant={"plain"}>
-                        Currículo <LuArrowUpDown />
+                      <Button
+                        my={2}
+                        variant={"ghost"}>
+                        Currículo <LuArrowUpDown strokeWidth={"1.75"} />
                       </Button>
+                      <Separator/>
                     </Table.ColumnHeader>
                   </Table.Row>
                 </Table.Header>
-  
+                
                 <Table.Body>
                   {isLoading ? (
                     <Table.Row>
@@ -170,8 +196,8 @@ import {
                       </Table.Cell>
                     </Table.Row>
                   ) : cursosFiltrados.length === 0 ? (
-                    <Table.Row bgColor={EURECA_COLORS.CINZA_CLARO}>
-                      <Table.Cell color={"white"} border={"none"} colSpan={4}>
+                    <Table.Row>
+                      <Table.Cell border={"none"} colSpan={4}>
                         <Center w={"full"} h={"40vh"}>
                           <Text textAlign="center">Nenhum curso encontrado.</Text>
                         </Center>
@@ -183,18 +209,45 @@ import {
                         key={index}
                         cursor={"pointer"}
                         onClick={() => alert(item.codigo_do_curso)}
-                        bgColor={EURECA_COLORS.CINZA_CLARO}
                       >
-                        <Table.Cell color={"white"} textAlign={"center"} border={"none"}>
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
                           {item.descricao}
                         </Table.Cell>
-                        <Table.Cell color={"white"} textAlign={"center"} border={"none"}>
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
                           {item.area_de_retencao_descricao}
                         </Table.Cell>
-                        <Table.Cell color={"white"} textAlign={"center"} border={"none"}>
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
                           {item.nome_do_campus}
                         </Table.Cell>
-                        <Table.Cell color={"white"} textAlign={"center"} border={"none"}>
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
                           {item.codigo_do_curriculo}
                         </Table.Cell>
                       </Table.Row>
