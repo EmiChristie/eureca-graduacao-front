@@ -1,8 +1,13 @@
 @import "tailwindcss";
 
-p,span,h1,h2,h3,h4,h5,h6,Text,Button,Input,Table{
+p,span,h1,h2,h3,h4,h5,h6,Text,Button,Input,Table,Dialog{
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 300;
+}
+
+.text{
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-weight: 300;
 }
 
 .merriweather-sans{

@@ -1,6 +1,7 @@
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",
     CURSOS: "eureca/cursos",
+    USER_INFO: "eureca/user-info",
 } as const;
 
 export const EURECA_COLORS = {

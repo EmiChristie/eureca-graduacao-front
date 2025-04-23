@@ -8,18 +8,24 @@ import {
     Text,
     Center,
     Separator,
+    IconButton,
   } from "@chakra-ui/react";
-  import { useState, useMemo } from "react";
+  import { useState, useMemo, useReducer } from "react";
   import { Toaster } from "@/components/ui/toaster";
   import { EURECA_COLORS } from "@/util/constants";
-  import { LuArrowUpDown, LuSearch } from "react-icons/lu";
+  import { LuArrowUpDown, LuLogOut, LuSearch } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
-  import { CursoHome } from "../interfaces/types";
+  import { CursoHome } from "../../interfaces/types";
   import { getCursos } from "@/service/eurecaService";
+import { LoginDialog } from "./LoginDialog";
+import { useUserStore } from "@/stores/user/user.store";
   
   export const TabelaDeCursos = () => {
+    const user = useUserStore((state) => state);
+
     const [search, setSearch] = useState("");
     const [sortConfig, setSortConfig] = useState<{ key: keyof CursoHome; direction: "asc" | "desc" } | null>(null);
+    //const [,forceUpdate] = useReducer(x=>x+1,0);
   
     const { data: cursosHome = [], isLoading, isError } = useQuery<CursoHome[], Error>({
       queryKey: ["cursos"],
@@ -68,6 +74,14 @@ import {
         return { key, direction: "asc" };
       });
     };
+
+    function formatarNome(nome:string){
+      return nome;
+    }
+
+    function logout(){
+      user.setUser(undefined);
+    }
   
     return (
       <>
@@ -79,21 +93,34 @@ import {
             h={"15vh"}
             px={8}
           >
-            <InputGroup startElement={
-              <LuSearch/>}>
-              <Input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                maxW={"30vw"}
-                bgColor={"white"}
-                placeholder="Buscar cursos..."
-              />
-            </InputGroup>
+            <Box w={"30vw"}>
+              <InputGroup startElement={
+                <LuSearch/>}>
+                <Input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  bgColor={"white"}
+                  placeholder="Buscar cursos..."
+                />
+              </InputGroup>
+            </Box>
   
             <Flex>
-              <Button bgColor={EURECA_COLORS.CINZA_CLARO} px={6}>
-                Entrar
-              </Button>
+              {
+                user.user ?
+                <>
+                  <Flex w={"full"} alignItems={"center"} gap={2}>
+                    <Text>Olá, {formatarNome(user.user.nome)}!</Text>
+                    <IconButton onClick={()=>logout()} color={EURECA_COLORS.CINZA} variant={"ghost"}>
+                      <LuLogOut strokeWidth={1.75}/>
+                    </IconButton>
+                  </Flex>
+                </>
+                :
+                <>
+                  <LoginDialog/>
+                </>
+              }
             </Flex>
           </Flex>
   
