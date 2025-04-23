@@ -15,8 +15,6 @@ export const getCursos = async () => {
     const { data } = await axiosInstance.get<CursoHome[]>(
         `/${ENDPOINT.CURSOS}`
     );
-
-    console.log(data);
     
     return data;
 }
@@ -34,7 +32,6 @@ export const getToken = async (credenciais: Autenticacao) => {
       body
     );
 
-    console.log(data.token);
     sessionStorage.setItem("token",data.token);
     return data.token;
 };
@@ -44,8 +41,6 @@ export const getUserInfo = async ({matricula}:UserInfoPayload) => {
     const { data } = await axiosInstance.get<User>(
         `/${ENDPOINT.USER_INFO}?matricula=${matricula}`,
     );
-
-    console.log(data);
     
     return data;
 }

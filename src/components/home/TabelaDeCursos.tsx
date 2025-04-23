@@ -9,8 +9,9 @@ import {
     Center,
     Separator,
     IconButton,
+    Span,
   } from "@chakra-ui/react";
-  import { useState, useMemo, useReducer } from "react";
+  import { useState, useMemo, useReducer, useEffect } from "react";
   import { Toaster } from "@/components/ui/toaster";
   import { EURECA_COLORS } from "@/util/constants";
   import { LuArrowUpDown, LuLogOut, LuSearch } from "react-icons/lu";
@@ -19,13 +20,15 @@ import {
   import { getCursos } from "@/service/eurecaService";
 import { LoginDialog } from "./LoginDialog";
 import { useUserStore } from "@/stores/user/user.store";
+import { useNavigate } from "react-router-dom";
   
   export const TabelaDeCursos = () => {
+    const navigate = useNavigate();
     const user = useUserStore((state) => state);
 
     const [search, setSearch] = useState("");
     const [sortConfig, setSortConfig] = useState<{ key: keyof CursoHome; direction: "asc" | "desc" } | null>(null);
-    //const [,forceUpdate] = useReducer(x=>x+1,0);
+    const [,forceUpdate] = useReducer(x=>x+1,0);
   
     const { data: cursosHome = [], isLoading, isError } = useQuery<CursoHome[], Error>({
       queryKey: ["cursos"],
@@ -42,7 +45,8 @@ import { useUserStore } from "@/stores/user/user.store";
           cursos = cursos.filter((curso) =>
             curso.descricao.toLowerCase().includes(search.toLowerCase()) ||
             curso.area_de_retencao_descricao.toLowerCase().includes(search.toLowerCase()) ||
-            curso.nome_do_campus.toLowerCase().includes(search.toLowerCase())
+            curso.nome_do_campus.toLowerCase().includes(search.toLowerCase()) ||
+            String(curso.codigo_do_curriculo).includes(search)
           );
         } catch (e) {
           cursos = [];
@@ -62,6 +66,18 @@ import { useUserStore } from "@/stores/user/user.store";
   
       return cursos;
     }, [cursosHome, search, sortConfig]);
+
+    const cursoDoUsuario = useMemo(() => {
+      let cursos = [...cursosHome];
+  
+        try {
+          cursos = cursos.filter((curso) => curso.codigo_do_curso === user.user.codigo_do_curso);
+        } catch (e) {
+          cursos = [];
+        }
+  
+      return cursos;
+    }, [cursosHome, user.user?.codigo_do_curso]);
   
     const toggleSort = (key: keyof CursoHome) => {
       setSortConfig((prev) => {
@@ -75,12 +91,20 @@ import { useUserStore } from "@/stores/user/user.store";
       });
     };
 
-    function formatarNome(nome:string){
-      return nome;
+    function formatarNome(texto: string): string {
+      return texto
+        .toLowerCase()
+        .split(' ')
+        .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+        .join(' ');
     }
 
     function logout(){
       user.setUser(undefined);
+    }
+
+    function verCurso(curso:number){
+      navigate(`/${curso}`);
     }
   
     return (
@@ -110,7 +134,7 @@ import { useUserStore } from "@/stores/user/user.store";
                 user.user ?
                 <>
                   <Flex w={"full"} alignItems={"center"} gap={2}>
-                    <Text>Olá, {formatarNome(user.user.nome)}!</Text>
+                    <Text>Olá, <Span color={EURECA_COLORS.AZUL_CLARO}>{formatarNome(user.user.nome)}</Span>!</Text>
                     <IconButton onClick={()=>logout()} color={EURECA_COLORS.CINZA} variant={"ghost"}>
                       <LuLogOut strokeWidth={1.75}/>
                     </IconButton>
@@ -118,7 +142,7 @@ import { useUserStore } from "@/stores/user/user.store";
                 </>
                 :
                 <>
-                  <LoginDialog/>
+                  <LoginDialog handleClose={forceUpdate}/>
                 </>
               }
             </Flex>
@@ -230,12 +254,62 @@ import { useUserStore } from "@/stores/user/user.store";
                         </Center>
                       </Table.Cell>
                     </Table.Row>
+                  ) : user.user ?
+                  (
+                    cursoDoUsuario.map((item, index) => (
+                      <Table.Row
+                        key={index}
+                        cursor={"pointer"}
+                        onClick={() => verCurso(item.codigo_do_curso)}
+                      >
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
+                          {item.descricao}
+                        </Table.Cell>
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
+                          {item.area_de_retencao_descricao}
+                        </Table.Cell>
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
+                          {item.nome_do_campus}
+                        </Table.Cell>
+                        <Table.Cell
+                          textAlign={"center"}
+                          border={"none"}
+                          w="25%"
+                          maxW="25%"
+                          whiteSpace="normal"
+                          wordBreak="break-word"
+                          >
+                          {user.user.codigo_do_curriculo}
+                        </Table.Cell>
+                      </Table.Row>
+                    ))
                   ) : (
                     cursosFiltrados.map((item, index) => (
                       <Table.Row
                         key={index}
                         cursor={"pointer"}
-                        onClick={() => alert(item.codigo_do_curso)}
+                        onClick={() => verCurso(item.codigo_do_curso)}
                       >
                         <Table.Cell
                           textAlign={"center"}
