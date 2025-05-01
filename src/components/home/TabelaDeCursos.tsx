@@ -10,6 +10,8 @@ import {
     Separator,
     IconButton,
     Span,
+    Spinner,
+    VStack,
   } from "@chakra-ui/react";
   import { useState, useMemo, useReducer, useEffect } from "react";
   import { Toaster } from "@/components/ui/toaster";
@@ -234,7 +236,9 @@ import { useNavigate } from "react-router-dom";
                     <Table.Row>
                       <Table.Cell colSpan={4}>
                         <Center w="full" h="40vh">
-                          <Text>Carregando cursos...</Text>
+                          <VStack>
+                            <Spinner size={"lg"} borderWidth={3}/>
+                          </VStack>
                         </Center>
                       </Table.Cell>
                     </Table.Row>

@@ -1,7 +1,9 @@
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",
     CURSOS: "eureca/cursos",
+    CURSO: "eureca/curso",
     USER_INFO: "eureca/user-info",
+    DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
 } as const;
 
 export const EURECA_COLORS = {

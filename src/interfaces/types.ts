@@ -49,3 +49,69 @@ export type UserInfoPayload = {
     matricula: string,
     token: string
 }
+
+export type Curso = {
+    codigo_do_curso: number;
+    descricao: string;
+    status: string;
+    grau_do_curso: string;
+    codigo_do_setor: number;
+    nome_do_setor: string;
+    campus: number;
+    nome_do_campus: string;
+    turno: string;
+    periodo_de_inicio: string;
+    data_de_funcionamento: string;
+    codigo_inep: number;
+    modalidade_academica: string;
+    curriculo_atual: number;
+    area_de_retencao: number;
+    ciclo_enade: number;
+};
+
+export type DisciplinasReprovacao = {
+    codigo: number;
+    nome: string;
+    numeroDeReprovacoes: number;
+}
+
+export type MotivoEvasao = {
+    motivo: string;
+    porcentagem_evadidos: number;
+};
+  
+export type PeriodoQuantidadeGraduados = {
+    quantidade_de_periodos: number;
+    quantidade_de_graduados: number;
+    porcentagem_de_graduados: number;
+};
+  
+export type GraduadosEvadidosPorPeriodo = {
+    quantidade_graduados_periodo: number;
+    quantidade_evadidos_periodo: number;
+    taxa_de_sucesso_periodo: number;
+    periodo: string;
+};
+  
+export type MetricasCurso = {
+    codigo_do_curso: number;
+    taxa_de_sucesso: number;
+    quantidade_de_graduados: number;
+    quantidade_de_evadidos: number;
+    quantidade_mulheres_graduadas: number;
+    porcentagem_mulheres_graduadas: number;
+    motivo_de_evasao_mais_comum: MotivoEvasao[];
+    quantidade_real_periodos: PeriodoQuantidadeGraduados[];
+    graduados_e_evadidos_por_periodo: GraduadosEvadidosPorPeriodo[];
+    qtd_media_graduados_por_periodo: number;
+    qtd_media_evadidos_por_periodo: number;
+    periodo_mais_comum_de_evadir: number;
+    qtd_media_creditos_reprovados: number;
+};
+
+export type MetricasCursoSimples = {
+    taxaDeSucesso: number;
+    quantidadeDeGraduados: number;
+    quantidadeDeEvadidos: number;
+    motivoEvasaoMaisComum: string;
+}

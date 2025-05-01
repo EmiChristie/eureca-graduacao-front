@@ -8,8 +8,8 @@ export const Header = () => {
                 <Center h={"full"}>
                     <Text fontSize={"5xl"} fontWeight={"lighter"}>Eureca Graduação</Text>
                 </Center>
+                <Separator size={"sm"} placeSelf={"center"} w={"95.5vw"}/>
             </Box>
-            <Separator size={"sm"} placeSelf={"center"} w={"95.5vw"}/>
         </>
     )
 }
