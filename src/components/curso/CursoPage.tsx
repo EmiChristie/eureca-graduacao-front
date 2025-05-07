@@ -12,7 +12,7 @@ import {
     VStack,
   } from "@chakra-ui/react";
   import { Toaster } from "@/components/ui/toaster";
-  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, } from "react-icons/lu";
+  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuCircleX, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
   import { Curso } from "../../interfaces/types";
 import { getCurso } from "@/service/metricasService";
@@ -64,7 +64,7 @@ export interface CursoPageProps{
             <Center placeItems={"stretch"}>
             <Box my={4} ml={4} w={"20vw"}>
                 <Box w={"full"}>
-                    <Box h={"8vh"} bg={`${EURECA_COLORS.AZUL_ESCURO}/70`} boxShadow={"sm"} rounded={"xs"}>
+                    <Box h={"8vh"} bg={`${EURECA_COLORS.AZUL_ESCURO}/70`} boxShadow={"sm"} rounded={"sm"}>
                         <Center h={"8vh"} px={4} gapX={2}>
                             <LuLightbulb size={"4vh"} color={EURECA_COLORS.BRANCO}/>
                             <Text fontSize={"xl"} lineHeight={"shorter"} color={EURECA_COLORS.BRANCO}>Eureca Graduação</Text>
@@ -108,14 +108,13 @@ export interface CursoPageProps{
                 {
                     isLoading ?
                     <>
-                        <Box h={"8vh"} bg={EURECA_COLORS.AZUL_CLARO} boxShadow={"sm"} rounded={"xs"}>
+                        <Box m={4} h={"8vh"} bg={EURECA_COLORS.AZUL_CLARO} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
-                                <LuBookText size={"4vh"} color={EURECA_COLORS.BRANCO}/>
                                 <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>Carregando curso...</Text>
                                 </Flex>
                         </Box>
-                        <Box h={"92vh"}>
-                            <Center>
+                        <Box>
+                            <Center h={"80vh"}>
                                 <VStack>
                                 <Spinner size={"lg"} borderWidth={3}/>
                                 <Text mt={2}>Carregando Curso...</Text>
@@ -126,23 +125,21 @@ export interface CursoPageProps{
                     :
                     isError ?
                     <>
-                        <Box h={"8vh"} bg={EURECA_COLORS.AZUL_CLARO} boxShadow={"sm"} rounded={"xs"}>
-                                <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
-                                <LuBookText size={"4vh"} color={EURECA_COLORS.BRANCO}/>
-                                <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}></Text>
-                                </Flex>
+                        <Box m={4} h={"8vh"} bg={EURECA_COLORS.AZUL_CLARO} boxShadow={"sm"} rounded={"sm"}>
+
                         </Box>
-                        <Box h={"92vh"}>
-                            <Center>
+                        <Box>
+                            <Center h={"80vh"}>
                                 <VStack>
-                                <Text mt={2}>Erro ao tentar carregar o curso.</Text>
+                                <LuCircleX size={36} strokeWidth={1.8} />
+                                <Text>Não foi possível carregar o curso</Text>
                                 </VStack>
                             </Center>
                         </Box>
                     </>
                     :
                     <>
-                        <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"xs"}>
+                        <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
                                 {/* <LuBookText size={"4vh"} color={EURECA_COLORS.BRANCO}/> */}
                                 <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>{curso.descricao}</Text>
