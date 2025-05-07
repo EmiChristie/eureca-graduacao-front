@@ -1,9 +1,27 @@
 @import "tailwindcss";
 
-p,span,h1,h2,h3,h4,h5,h6,Text,Button,Input,Table,Dialog{
+p,span,h1,h2,h3,h4,h5,h6,Text,Button,Input,Table,Dialog,Link{
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 300;
 }
+
+body {
+    background-size: 20px 20px;
+    background-image:
+        linear-gradient(to right, rgb(231, 231, 231) 1px, transparent 1px),
+        linear-gradient(to bottom, rgb(231, 231, 231) 1px, transparent 1px);
+    background-color: rgb(251, 251, 255);
+}
+
+/*
+body {
+  background-size: 20px 20px;
+  background-image:
+      linear-gradient(to right, rgb(235, 226, 213) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(235, 226, 213) 1px, transparent 1px);
+  background-color: rgb(250, 243, 234);
+}
+*/
 
 .text{
   font-family: "Be Vietnam Pro", sans-serif;

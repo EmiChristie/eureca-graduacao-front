@@ -11,9 +11,9 @@ const Curso = () => {
   return (
     <>
       <Box h={"100vh"} overflow={"hidden"}>
-        <Header/>
+        {/*<Header/>*/}
         <CursoPage codigo_curso={parseInt(id)}/>
-        <Footer/>
+        {/*<Footer/>*/}
       </Box>
     </>
   );

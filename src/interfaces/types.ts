@@ -115,3 +115,21 @@ export type MetricasCursoSimples = {
     quantidadeDeEvadidos: number;
     motivoEvasaoMaisComum: string;
 }
+
+export type Curriculo = {
+    codigo_do_curso: number;
+    codigo_do_curriculo: number;
+    duracao_minima: number;
+    duracao_maxima: number;
+    carga_horaria_disciplinas_obrigatorias_minima: number;
+    carga_horaria_disciplinas_optativas_minima: number;
+    carga_horaria_atividades_complementares_minima: number;
+    carga_horaria_minima_total: number;
+    minimo_creditos_disciplinas_obrigatorias: number;
+    minimo_creditos_disciplinas_optativas: number;
+    minimo_creditos_atividades_complementares: number;
+    minimo_creditos_total: number;
+    numero_disciplinas_obrigatorias_minimo: number;
+    numero_disciplinas_optativas_minimo: number;
+    numero_disciplinas_minimo: number;
+  };

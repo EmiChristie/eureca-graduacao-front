@@ -1,10 +1,10 @@
-import { EURECA_COLORS } from "@/util/constants"
+import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants"
 import { Box,Center,Separator,Text } from "@chakra-ui/react"
 
 export const Header = () => {
     return (
         <>
-            <Box h={"16vh"} w={"full"} color={EURECA_COLORS.CINZA}>
+            <Box h={"16vh"} w={"full"} color={EURECA_COLORS.CINZA} bg={EURECA_GRADUACAO_COLORS.BRANCO}>
                 <Center h={"full"}>
                     <Text fontSize={"5xl"} fontWeight={"lighter"}>Eureca Graduação</Text>
                 </Center>

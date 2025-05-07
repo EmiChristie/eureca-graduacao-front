@@ -1,7 +1,8 @@
 import { ENDPOINT } from "@/util/constants";
 import axiosInstance from "./axios";
-import { Autenticacao, CursoHome, Token, User, UserInfoPayload } from "@/interfaces/types";
+import { Autenticacao, Curriculo, CursoHome, Token, User, UserInfoPayload } from "@/interfaces/types";
 import axiosEureca from "./axiosEureca";
+import { cursorTo } from "readline";
 
 export const testarConexao = async () => {
     const { data } = await axiosInstance.get<String>(
@@ -40,6 +41,24 @@ export const getToken = async (credenciais: Autenticacao) => {
 export const getUserInfo = async ({matricula}:UserInfoPayload) => {
     const { data } = await axiosInstance.get<User>(
         `/${ENDPOINT.USER_INFO}?matricula=${matricula}`,
+    );
+    
+    return data;
+}
+
+
+export const getCurriculoAtivoMaisRecente = async (curso: number) => {
+    const { data } = await axiosInstance.get<number>(
+        `/${ENDPOINT.CURRICULO_ATIVO_MAIS_RECENTE}?curso=${curso}`,
+    );
+    
+    return data;
+}
+
+
+export const getCurriculo = async (curso: number,curriculo:number) => {
+    const { data } = await axiosInstance.get<Curriculo>(
+        `/${ENDPOINT.CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
     );
     
     return data;

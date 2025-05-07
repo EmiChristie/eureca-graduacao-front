@@ -3,6 +3,9 @@ export const ENDPOINT = {
     CURSOS: "eureca/cursos",
     CURSO: "eureca/curso",
     USER_INFO: "eureca/user-info",
+    CURRICULO_ATIVO_MAIS_RECENTE: "eureca/curriculo-ativo-mais-recente",
+    CURRICULO: "eureca/curriculo",
+    
     DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
 } as const;
 
@@ -12,5 +15,15 @@ export const EURECA_COLORS = {
     AZUL_CLARO: "#3D87CB",
     CIANO: "#00BCE1",
     BRANCO: "#F6FAFC",
+    CINZA: "#4B4F54",
+} as const;
+
+export const EURECA_GRADUACAO_COLORS = {
+    AZUL_ESCURO: "#00205B",
+    AZUL_MEDIO: "#1A4E8A",
+    AZUL_CLARO: "#3D87CB",
+    CIANO: "#00BCE1",
+    //BRANCO: "#fefdfb",
+    BRANCO: "#FFF",
     CINZA: "#4B4F54",
 } as const;
