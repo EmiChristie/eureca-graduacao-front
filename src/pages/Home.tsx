@@ -8,9 +8,13 @@ const Home = () => {
   return (
     <>
       <Box h={"100vh"} overflow={"hidden"}>
-        <Header/>
-        <TabelaDeCursos/>
-        <Footer/>
+        <Box m={4}>
+          <Header/>
+          <TabelaDeCursos/>
+          <Box mt={4}>
+            <Footer/>
+          </Box>
+        </Box>
       </Box>
     </>
   );

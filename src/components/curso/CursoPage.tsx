@@ -108,7 +108,7 @@ export interface CursoPageProps{
                 {
                     isLoading ?
                     <>
-                        <Box m={4} h={"8vh"} bg={EURECA_COLORS.AZUL_CLARO} boxShadow={"sm"} rounded={"sm"}>
+                        <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
                                 <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>Carregando curso...</Text>
                                 </Flex>
@@ -116,8 +116,8 @@ export interface CursoPageProps{
                         <Box>
                             <Center h={"80vh"}>
                                 <VStack>
-                                <Spinner size={"lg"} borderWidth={3}/>
-                                <Text mt={2}>Carregando Curso...</Text>
+                                <Spinner color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={"lg"} borderWidth={3}/>
+                                <Text   color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>Carregando Curso...</Text>
                                 </VStack>
                             </Center>
                         </Box>
@@ -131,8 +131,8 @@ export interface CursoPageProps{
                         <Box>
                             <Center h={"80vh"}>
                                 <VStack>
-                                <LuCircleX size={36} strokeWidth={1.8} />
-                                <Text>Não foi possível carregar o curso</Text>
+                                <LuCircleX  color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={36} strokeWidth={1.8} />
+                                <Text  color={`${EURECA_COLORS.AZUL_MEDIO}/70`}>Não foi possível carregar o curso</Text>
                                 </VStack>
                             </Center>
                         </Box>

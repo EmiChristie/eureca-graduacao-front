@@ -29,6 +29,7 @@ import { useNavigate } from "react-router-dom";
     const user = useUserStore((state) => state);
 
     const [search, setSearch] = useState("");
+    const [indice, setIndice] = useState(-1);
     const [sortConfig, setSortConfig] = useState<{ key: keyof CursoHome; direction: "asc" | "desc" } | null>(null);
     const [,forceUpdate] = useReducer(x=>x+1,0);
   
@@ -116,8 +117,7 @@ import { useNavigate } from "react-router-dom";
             w={"full"}
             justify="space-between"
             alignItems={"center"}
-            h={"15vh"}
-            px={8}
+            my={4}
           >
             <Box w={"30vw"}>
               <InputGroup startElement={
@@ -125,8 +125,9 @@ import { useNavigate } from "react-router-dom";
                 <Input
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  bgColor={"white"}
+                  bgColor={"white/70"}
                   placeholder="Buscar cursos..."
+                  h={"7vh"}
                 />
               </InputGroup>
             </Box>
@@ -135,12 +136,14 @@ import { useNavigate } from "react-router-dom";
               {
                 user.user ?
                 <>
-                  <Flex w={"full"} alignItems={"center"} gap={2}>
-                    <Text>Olá, <Span color={EURECA_COLORS.AZUL_CLARO}>{formatarNome(user.user.nome)}</Span>!</Text>
-                    <IconButton onClick={()=>logout()} color={EURECA_COLORS.CINZA} variant={"ghost"}>
-                      <LuLogOut strokeWidth={1.75}/>
-                    </IconButton>
-                  </Flex>
+                  <Box bg={`#7c95b9/70`} boxShadow={"sm"} rounded={"sm"}>
+                    <Flex px={4} gapX={4} h={"7vh"} alignItems={"center"}>
+                      <Text  color={EURECA_COLORS.BRANCO}>Olá, <Span>{formatarNome(user.user.nome)}</Span>!</Text>
+                      <IconButton onClick={()=>logout()} color={EURECA_COLORS.BRANCO} size={"sm"} variant={"ghost"}>
+                        <LuLogOut strokeWidth={2.5}/>
+                      </IconButton>
+                    </Flex>
+                </Box>
                 </>
                 :
                 <>
@@ -151,11 +154,10 @@ import { useNavigate } from "react-router-dom";
           </Flex>
   
           <Box>
-          <Separator size={"sm"} placeSelf={"center"} w={"full"}/>
-            <Table.ScrollArea h={"60vh"}>
+            <Table.ScrollArea h={"64vh"}>
               <Table.Root stickyHeader interactive>
                 <Table.Header>
-                  <Table.Row>
+                  <Table.Row bg={"transparent"}>
                     <Table.ColumnHeader
                       p={0}
                       border={"none"}
@@ -166,8 +168,11 @@ import { useNavigate } from "react-router-dom";
                       maxW={"25vw"}
                       whiteSpace="normal"
                       wordBreak="break-word"
+                      colorPalette={"blue"}
+                      roundedLeft={"sm"}
+                      bg={`#5d82ad`}
                     >
-                      <Button 
+                      <Button  color={EURECA_COLORS.BRANCO}
                         my={2}
                         variant={"ghost"}>
                         Curso <LuArrowUpDown strokeWidth={"1.75"} />
@@ -184,8 +189,10 @@ import { useNavigate } from "react-router-dom";
                       maxW={"25vw"}
                       whiteSpace="normal"
                       wordBreak="break-word"
+                      colorPalette={"blue"}
+                      bg={`#5d82ad`}
                     >
-                      <Button
+                      <Button  color={EURECA_COLORS.BRANCO}
                         my={2}
                         variant={"ghost"}>
                         Área <LuArrowUpDown strokeWidth={"1.75"} />
@@ -202,8 +209,10 @@ import { useNavigate } from "react-router-dom";
                       maxW={"25vw"}
                       whiteSpace="normal"
                       wordBreak="break-word"
+                      colorPalette={"blue"}
+                      bg={`#5d82ad`}
                     >
-                      <Button 
+                      <Button  color={EURECA_COLORS.BRANCO}
                         my={2}
                         variant={"ghost"}>
                         Campus <LuArrowUpDown strokeWidth={"1.75"} />
@@ -220,8 +229,10 @@ import { useNavigate } from "react-router-dom";
                       maxW={"25vw"}
                       whiteSpace="normal"
                       wordBreak="break-word"
+                      colorPalette={"blue"}
+                      bg={`#5d82ad`}
                     >
-                      <Button
+                      <Button  color={EURECA_COLORS.BRANCO}
                         my={2}
                         variant={"ghost"}>
                         Currículo <LuArrowUpDown strokeWidth={"1.75"} />
@@ -229,13 +240,15 @@ import { useNavigate } from "react-router-dom";
                       <Separator/>
                     </Table.ColumnHeader>
                   </Table.Row>
+                  <Box h={4}></Box>
                 </Table.Header>
-                
                 <Table.Body>
                   {isLoading ? (
                     <Table.Row>
-                      <Table.Cell colSpan={4}>
-                        <Center w="full" h="40vh">
+                      <Table.Cell colSpan={4}
+                        bgColor={"#7c95b9/70"}
+                        color={"white"}>
+                        <Center w="full" h="48vh">
                           <VStack>
                             <Spinner size={"lg"} borderWidth={3}/>
                           </VStack>
@@ -244,16 +257,21 @@ import { useNavigate } from "react-router-dom";
                     </Table.Row>
                   ) : isError ? (
                     <Table.Row>
-                      <Table.Cell colSpan={4}>
-                        <Center w="full" h="40vh">
+                      <Table.Cell colSpan={4}
+                        bgColor={"#7c95b9/70"}
+                        color={"white"}>
+                        <Center w="full" h="full">
                           <Text>Erro ao carregar cursos.</Text>
                         </Center>
                       </Table.Cell>
                     </Table.Row>
                   ) : cursosFiltrados.length === 0 ? (
                     <Table.Row>
-                      <Table.Cell border={"none"} colSpan={4}>
-                        <Center w={"full"} h={"40vh"}>
+                      <Table.Cell border={"none"} colSpan={4}
+                        bgColor={"#7c95b9/70"}
+                        color={"white"}
+                        >
+                        <Center w={"full"} h={"full"}>
                           <Text textAlign="center">Nenhum curso encontrado.</Text>
                         </Center>
                       </Table.Cell>
@@ -265,6 +283,8 @@ import { useNavigate } from "react-router-dom";
                         key={index}
                         cursor={"pointer"}
                         onClick={() => verCurso(item.codigo_do_curso)}
+                        bgColor={indice === index ? "#7c95b9" : "#7c95b9/70"}
+                        color={"white"}
                       >
                         <Table.Cell
                           textAlign={"center"}
@@ -313,7 +333,10 @@ import { useNavigate } from "react-router-dom";
                       <Table.Row
                         key={index}
                         cursor={"pointer"}
-                        onClick={() => verCurso(item.codigo_do_curso)}
+                        onClick={() => verCurso(item.codigo_do_curso)} 
+                        bgColor={indice === index ? "#7c95b9" : "#7c95b9/70"  }
+                        color={"white"}
+                        onMouseOver={()=>setIndice(index)}
                       >
                         <Table.Cell
                           textAlign={"center"}

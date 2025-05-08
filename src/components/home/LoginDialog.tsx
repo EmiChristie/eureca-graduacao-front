@@ -65,14 +65,14 @@ return (
             placement={"center"}
             size={"xs"}>
             <Dialog.Trigger asChild>
-                <Button px={6}>
+                <Button h={"7vh"} bg={`#7c95b9/70`} px={6}>
                   Entrar
                 </Button>
             </Dialog.Trigger>
             <Portal>
                 <Dialog.Backdrop />
                 <Dialog.Positioner>
-                  <Dialog.Content className="text" color={EURECA_COLORS.CINZA} textAlign={"justify"}>
+                  <Dialog.Content bgColor={`${EURECA_COLORS.BRANCO}/95`} className="text" color={EURECA_COLORS.CINZA} textAlign={"justify"}>
                       <Dialog.Header display={"flex"} flexDir={"column"}>
                           <Dialog.Title color={"black"}>Login</Dialog.Title>
                           <Dialog.Description>Já é estudante da UFCG? Entre com suas credenciais do SCAO e acesse métricas particulares sobre o seu desempenho acadêmico!</Dialog.Description>
@@ -90,7 +90,7 @@ return (
                         </form>
                       </Dialog.Body>
                       <Dialog.Footer mb={4} placeContent={"center"}>
-                          <Button onClick={()=>mutation.mutate({username: loginvalue, password: passwordvalue})} px={6}>Entrar</Button>
+                          <Button bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`} onClick={()=>mutation.mutate({username: loginvalue, password: passwordvalue})} px={6}>Entrar</Button>
                       </Dialog.Footer>
                       <Dialog.CloseTrigger asChild>
                       <CloseButton m={2} size="sm" />
