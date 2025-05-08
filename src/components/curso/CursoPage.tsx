@@ -14,7 +14,7 @@ import {
   import { Toaster } from "@/components/ui/toaster";
   import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuCircleX, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
-  import { Curso } from "../../interfaces/types";
+  import { Curriculo, Curso } from "../../interfaces/types";
 import { getCurso } from "@/service/metricasService";
 import { CursoPerfil } from "./CursoPerfil";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
@@ -24,6 +24,7 @@ import { MeuDesempenho } from "./MeuDesempenho";
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { useNavigate } from "react-router-dom";
+import { getCurriculoAtivoMaisRecente, getCurriculo } from "@/service/eurecaService";
   
 export interface CursoPageProps{
     codigo_curso:number,
@@ -35,6 +36,8 @@ export interface CursoPageProps{
     }:CursoPageProps
   ) => {
 
+    console.log(codigo_curso)
+
     const navigate = useNavigate();
     const [aba, setAba] = useState(1)
 
@@ -44,6 +47,22 @@ export interface CursoPageProps{
         staleTime: 1000 * 60 * 5,
         refetchOnWindowFocus: false,
         enabled: !!codigo_curso,
+    });
+
+    const { data: curriculo, isLoading:isLoading2, isError:isError2 } = useQuery<number, Error>({
+      queryKey: ["curriculoAtivoMaisRecente", codigo_curso],
+      queryFn: () => getCurriculoAtivoMaisRecente(codigo_curso),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!codigo_curso,
+    });
+
+    const { data: requisitos, isLoading:isLoading3, isError:isError3 } = useQuery<Curriculo, Error>({
+      queryKey: ["curriculo", codigo_curso],
+      queryFn: () => getCurriculo(codigo_curso, curriculo),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!curriculo && !!codigo_curso,
     });
 
     console.log(curso);
@@ -106,7 +125,7 @@ export interface CursoPageProps{
 
             <Box  w={"80vw"}>
                 {
-                    isLoading ?
+                    isLoading || isLoading2||isLoading3 ?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -123,7 +142,7 @@ export interface CursoPageProps{
                         </Box>
                     </>
                     :
-                    isError ?
+                    isError||isError2||isError3 ?
                     <>
                         <Box m={4} h={"8vh"} bg={EURECA_COLORS.AZUL_CLARO} boxShadow={"sm"} rounded={"sm"}>
 
@@ -150,10 +169,10 @@ export interface CursoPageProps{
                         <Box mx={4} h={"86vh"}>
                             {
                                 aba == 1 ?
-                                <CursoPerfil curso={curso}/>
+                                <CursoPerfil curso={curso} requisitos={requisitos}/>
                                 :
                                 aba == 2 ?
-                                <CursoFluxograma curso={curso}/>
+                                <CursoFluxograma curso={curso} curriculo={curriculo} requisitos={requisitos}/>
                                 :
                                 aba == 3 ?
                                 <CursoDiagnostico curso={curso}/>

@@ -18,30 +18,17 @@ import { PerfilPPC } from "./PerfilPPC"
 import { PerfilAlunoIdeal } from "./PerfilAlunoIdeal"
 
 export interface CursoProps{
-    curso:Curso,
+    curso?:Curso,
+    curriculo?:number,
+    requisitos?:Curriculo,
   }
     
   export const CursoPerfil = (
     {
-        curso
+        curso,
+        requisitos
     }:CursoProps
   ) => {
-
-    const { data: curriculo, isLoading, isError } = useQuery<number, Error>({
-      queryKey: ["curriculoAtivoMaisRecente", curso.codigo_do_curso],
-      queryFn: () => getCurriculoAtivoMaisRecente(curso.codigo_do_curso),
-      staleTime: 1000 * 60 * 5,
-      refetchOnWindowFocus: false,
-      enabled: !!curso.codigo_do_curso,
-    });
-
-    const { data: requisitos, isLoading:isLoading2, isError:isError2 } = useQuery<Curriculo, Error>({
-      queryKey: ["curriculo", curso.codigo_do_curso],
-      queryFn: () => getCurriculo(curso.codigo_do_curso, curriculo),
-      staleTime: 1000 * 60 * 5,
-      refetchOnWindowFocus: false,
-      enabled: !!curso.codigo_do_curso,
-    });
     
     const corPeriodo = (turno:string) => {
       switch(turno){
@@ -56,6 +43,7 @@ export interface CursoProps{
     return(
         <>
             {
+              /*
               isLoading || isLoading2 ?
                 <Center h={"76vh"}>
                 <VStack>
@@ -67,11 +55,13 @@ export interface CursoProps{
               isError || isError2 ?
                 <Center h={"76vh"}>
                 <VStack>
-                    <LuCircleX  color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={36} strokeWidth={1.8} />
+                    <Icon color={`${EURECA_COLORS.AZUL_MEDIO}/70`} >
+                      <LuCircleX size={36} strokeWidth={1.8} />
+                    </Icon>
                     <Text  color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>O curso não pôde ser carregado.</Text>
                 </VStack>
                 </Center>
-              :
+              :*/
                 <Box color={EURECA_COLORS.CINZA}>
 
                       <Box>

@@ -1,8 +1,9 @@
-import { ENDPOINT } from "@/util/constants";
+import { DAS_ENDPOINT, ENDPOINT } from "@/util/constants";
 import axiosInstance from "./axios";
-import { Autenticacao, Curriculo, CursoHome, Token, User, UserInfoPayload } from "@/interfaces/types";
+import { Autenticacao, Curriculo, CursoHome, DisciplinaCurriculo, Token, User, UserInfoPayload } from "@/interfaces/types";
 import axiosEureca from "./axiosEureca";
 import { cursorTo } from "readline";
+import axiosDAS from "./axiosDAS";
 
 export const testarConexao = async () => {
     const { data } = await axiosInstance.get<String>(
@@ -59,6 +60,15 @@ export const getCurriculoAtivoMaisRecente = async (curso: number) => {
 export const getCurriculo = async (curso: number,curriculo:number) => {
     const { data } = await axiosInstance.get<Curriculo>(
         `/${ENDPOINT.CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
+    );
+    
+    return data;
+}
+
+
+export const getDisciplinasPorCurriculo = async (curso: number,curriculo:number) => {
+    const { data } = await axiosDAS.get<DisciplinaCurriculo[]>(
+        `/${DAS_ENDPOINT.DISCIPLINAS_CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
     );
     
     return data;

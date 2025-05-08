@@ -16,13 +16,14 @@ import {
   import { useState, useMemo, useReducer, useEffect } from "react";
   import { Toaster } from "@/components/ui/toaster";
   import { EURECA_COLORS } from "@/util/constants";
-  import { LuArrowUpDown, LuLogOut, LuSearch } from "react-icons/lu";
+  import { LuArrowUpDown, LuLightbulb, LuLogOut, LuSearch } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
   import { CursoHome } from "../../interfaces/types";
   import { getCursos } from "@/service/eurecaService";
 import { LoginDialog } from "./LoginDialog";
 import { useUserStore } from "@/stores/user/user.store";
 import { useNavigate } from "react-router-dom";
+import { Header } from "../geral/Header";
   
   export const TabelaDeCursos = () => {
     const navigate = useNavigate();
@@ -109,6 +110,10 @@ import { useNavigate } from "react-router-dom";
     function verCurso(curso:number){
       navigate(`/${curso}`);
     }
+
+    const tamanhoTabela = "60vh";
+    const tabelaBg = `#52627a/70`;
+    const tabelaAccent = `#52627a/60`;
   
     return (
       <>
@@ -118,8 +123,16 @@ import { useNavigate } from "react-router-dom";
             justify="space-between"
             alignItems={"center"}
             my={4}
+            gap={4}
           >
-            <Box w={"30vw"}>
+            <Box minW={"20vw"} w={"20vw"} h={"8vh"} bg={`${EURECA_COLORS.AZUL_ESCURO}/70`} boxShadow={"sm"} rounded={"sm"}>
+                <Center h={"8vh"} px={4} gapX={2}>
+                    <LuLightbulb size={"4vh"} color={EURECA_COLORS.BRANCO}/>
+                    <Text fontSize={"xl"} lineHeight={"shorter"} color={EURECA_COLORS.BRANCO}>Eureca Graduação</Text>
+                </Center>
+            </Box>
+
+            <Box minW={"20vw"} w={"full"}>
               <InputGroup startElement={
                 <LuSearch/>}>
                 <Input
@@ -127,7 +140,8 @@ import { useNavigate } from "react-router-dom";
                   onChange={(e) => setSearch(e.target.value)}
                   bgColor={"white/70"}
                   placeholder="Buscar cursos..."
-                  h={"7vh"}
+                  h={"8vh"}
+                  
                 />
               </InputGroup>
             </Box>
@@ -136,8 +150,8 @@ import { useNavigate } from "react-router-dom";
               {
                 user.user ?
                 <>
-                  <Box bg={`#7c95b9/70`} boxShadow={"sm"} rounded={"sm"}>
-                    <Flex px={4} gapX={4} h={"7vh"} alignItems={"center"}>
+                  <Box maxW={"full"} minW={"30vw"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
+                    <Flex px={4} gapX={4} h={"8vh"} alignItems={"center"} justify={"center"}>
                       <Text  color={EURECA_COLORS.BRANCO}>Olá, <Span>{formatarNome(user.user.nome)}</Span>!</Text>
                       <IconButton onClick={()=>logout()} color={EURECA_COLORS.BRANCO} size={"sm"} variant={"ghost"}>
                         <LuLogOut strokeWidth={2.5}/>
@@ -152,103 +166,70 @@ import { useNavigate } from "react-router-dom";
               }
             </Flex>
           </Flex>
-  
-          <Box>
-            <Table.ScrollArea h={"64vh"}>
-              <Table.Root stickyHeader interactive>
-                <Table.Header>
-                  <Table.Row bg={"transparent"}>
-                    <Table.ColumnHeader
-                      p={0}
-                      border={"none"}
-                      textAlign={"center"}
-                      onClick={() => toggleSort("descricao")}
-                      cursor="pointer"
-                      w={"25vw"}
-                      maxW={"25vw"}
-                      whiteSpace="normal"
-                      wordBreak="break-word"
-                      colorPalette={"blue"}
-                      roundedLeft={"sm"}
-                      bg={`#5d82ad`}
-                    >
-                      <Button  color={EURECA_COLORS.BRANCO}
-                        my={2}
-                        variant={"ghost"}>
-                        Curso <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                      <Separator/>
-                    </Table.ColumnHeader>
-                    <Table.ColumnHeader
-                      p={0}
-                      border={"none"}
-                      textAlign={"center"}
-                      onClick={() => toggleSort("area_de_retencao_descricao")}
-                      cursor="pointer"
-                      w={"25vw"}
-                      maxW={"25vw"}
-                      whiteSpace="normal"
-                      wordBreak="break-word"
-                      colorPalette={"blue"}
-                      bg={`#5d82ad`}
-                    >
-                      <Button  color={EURECA_COLORS.BRANCO}
-                        my={2}
-                        variant={"ghost"}>
-                        Área <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                      <Separator/>
-                    </Table.ColumnHeader>
-                    <Table.ColumnHeader
-                      p={0}
-                      border={"none"}
-                      textAlign={"center"}
-                      onClick={() => toggleSort("nome_do_campus")}
-                      cursor="pointer"
-                      w={"25vw"}
-                      maxW={"25vw"}
-                      whiteSpace="normal"
-                      wordBreak="break-word"
-                      colorPalette={"blue"}
-                      bg={`#5d82ad`}
-                    >
-                      <Button  color={EURECA_COLORS.BRANCO}
-                        my={2}
-                        variant={"ghost"}>
-                        Campus <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                      <Separator/>
-                    </Table.ColumnHeader>
-                    <Table.ColumnHeader
-                      p={0}
-                      border={"none"}
-                      textAlign={"center"}
-                      onClick={() => toggleSort("codigo_do_curriculo")}
-                      cursor="pointer"
-                      w={"25vw"}
-                      maxW={"25vw"}
-                      whiteSpace="normal"
-                      wordBreak="break-word"
-                      colorPalette={"blue"}
-                      bg={`#5d82ad`}
-                    >
-                      <Button  color={EURECA_COLORS.BRANCO}
-                        my={2}
-                        variant={"ghost"}>
-                        Currículo <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                      <Separator/>
-                    </Table.ColumnHeader>
-                  </Table.Row>
-                  <Box h={4}></Box>
-                </Table.Header>
-                <Table.Body>
+
+          <Box w={"full"} h={"8vh"} bg={`#f97316/70`} rounded={"sm"}>
+            <Flex h={"full"} >
+              <Box w={"full"} 
+                cursor={"pointer"}
+                onClick={() => toggleSort("descricao")} 
+                >
+                  <Center h={"full"} >
+                    <Button color={EURECA_COLORS.BRANCO}
+                      colorPalette={"orange"}
+                      variant={"ghost"}>
+                      Curso <LuArrowUpDown strokeWidth={"1.75"} />
+                    </Button>
+                  </Center>
+              </Box>
+              <Box w={"full"} 
+                cursor={"pointer"}
+                onClick={() => toggleSort("area_de_retencao_descricao")}
+                >
+                  <Center h={"full"} >
+                    <Button color={EURECA_COLORS.BRANCO}
+                      colorPalette={"orange"}
+                      variant={"ghost"}>
+                      Área <LuArrowUpDown strokeWidth={"1.75"} />
+                    </Button>
+                  </Center>
+              </Box>
+              <Box w={"full"} 
+                cursor={"pointer"}
+                onClick={() => toggleSort("nome_do_campus")}
+                >
+                  <Center h={"full"} >
+                    <Button color={EURECA_COLORS.BRANCO}
+                      colorPalette={"orange"}
+                      variant={"ghost"}>
+                      Campus <LuArrowUpDown strokeWidth={"1.75"} />
+                    </Button>
+                  </Center>
+              </Box>
+              <Box w={"full"} 
+                cursor={"pointer"}
+                onClick={() => toggleSort("codigo_do_curriculo")}
+                >
+                  <Center h={"full"} >
+                    <Button color={EURECA_COLORS.BRANCO}
+                      colorPalette={"orange"}
+                      variant={"ghost"}>
+                      Currículo <LuArrowUpDown strokeWidth={"1.75"} />
+                    </Button>
+                  </Center>
+              </Box>
+            </Flex>
+          </Box>
+
+          <Box h={"65vh"} bgColor={tabelaBg} overflow={"auto"} mt={4} rounded={"sm"}>
+            <Table.ScrollArea>
+              <Table.Root>
+          <Table.Body>
                   {isLoading ? (
-                    <Table.Row>
+                    <Table.Row border={"none"} bg={"transparent"}>
                       <Table.Cell colSpan={4}
-                        bgColor={"#7c95b9/70"}
+                        bg={"transparent"} border={"none"}
                         color={"white"}>
-                        <Center w="full" h="48vh">
+                        <Center bg={"transparent"} border={"none"} w="full" h={tamanhoTabela}>
                           <VStack>
                             <Spinner size={"lg"} borderWidth={3}/>
                           </VStack>
@@ -256,22 +237,20 @@ import { useNavigate } from "react-router-dom";
                       </Table.Cell>
                     </Table.Row>
                   ) : isError ? (
-                    <Table.Row>
-                      <Table.Cell colSpan={4}
-                        bgColor={"#7c95b9/70"}
+                    <Table.Row border={"none"} bg={"transparent"}>
+                      <Table.Cell colSpan={4} border={"none"} bg={"transparent"}
                         color={"white"}>
-                        <Center w="full" h="full">
+                        <Center w="full" h={tamanhoTabela}>
                           <Text>Erro ao carregar cursos.</Text>
                         </Center>
                       </Table.Cell>
                     </Table.Row>
                   ) : cursosFiltrados.length === 0 ? (
-                    <Table.Row>
-                      <Table.Cell border={"none"} colSpan={4}
-                        bgColor={"#7c95b9/70"}
+                    <Table.Row border={"none"} bg={"transparent"}>
+                      <Table.Cell border={"none"} colSpan={4} bg={"transparent"}
                         color={"white"}
                         >
-                        <Center w={"full"} h={"full"}>
+                        <Center w={"full"} h={tamanhoTabela}>
                           <Text textAlign="center">Nenhum curso encontrado.</Text>
                         </Center>
                       </Table.Cell>
@@ -283,7 +262,7 @@ import { useNavigate } from "react-router-dom";
                         key={index}
                         cursor={"pointer"}
                         onClick={() => verCurso(item.codigo_do_curso)}
-                        bgColor={indice === index ? "#7c95b9" : "#7c95b9/70"}
+                        bgColor={tabelaAccent}
                         color={"white"}
                       >
                         <Table.Cell
@@ -334,7 +313,7 @@ import { useNavigate } from "react-router-dom";
                         key={index}
                         cursor={"pointer"}
                         onClick={() => verCurso(item.codigo_do_curso)} 
-                        bgColor={indice === index ? "#7c95b9" : "#7c95b9/70"  }
+                        bgColor={indice === index ? tabelaAccent : "transparent" }
                         color={"white"}
                         onMouseOver={()=>setIndice(index)}
                       >
@@ -385,6 +364,7 @@ import { useNavigate } from "react-router-dom";
               </Table.Root>
             </Table.ScrollArea>
           </Box>
+          
         </Box>
         <Toaster />
       </>

@@ -133,3 +133,15 @@ export type Curriculo = {
     numero_disciplinas_optativas_minimo: number;
     numero_disciplinas_minimo: number;
   };
+
+export type DisciplinaCurriculo = {
+    codigo_do_curso: number;
+    codigo_do_curriculo: number|string;
+    codigo_da_disciplina: number;
+    tipo: string;
+    semestre_ideal: string|number|null;
+    status: string;
+    horas_totais: number;
+    nome: string;
+    quantidade_de_creditos: number;
+}

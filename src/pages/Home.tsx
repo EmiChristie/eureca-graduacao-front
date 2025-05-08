@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <Box h={"100vh"} overflow={"hidden"}>
         <Box m={4}>
-          <Header/>
+          {/* <Header/>*/}
           <TabelaDeCursos/>
           <Box mt={4}>
             <Footer/>

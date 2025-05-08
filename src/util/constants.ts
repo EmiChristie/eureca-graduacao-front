@@ -9,6 +9,10 @@ export const ENDPOINT = {
     DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
 } as const;
 
+export const DAS_ENDPOINT = {
+    DISCIPLINAS_CURRICULO: "disciplinas-por-curriculo",
+}
+
 export const EURECA_COLORS = {
     AZUL_ESCURO: "#00205B",
     AZUL_MEDIO: "#1A4E8A",
