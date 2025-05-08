@@ -27,7 +27,7 @@ import { Cell, Pie, PieChart, Tooltip } from "recharts"
 
     return(
         <>
-            <Card.Root  boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+            <Card.Root minW={"24vw"} maxW={"full"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
               <Card.Body>
                   <Stat.Root >
                     <HStack justify="space-between">

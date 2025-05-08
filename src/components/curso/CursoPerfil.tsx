@@ -71,10 +71,14 @@ export interface CursoProps{
                 </VStack>
                 </Center>
               :
-                <Box color={EURECA_COLORS.CINZA} h={"full"} overflow={"auto"}>
+                <Box color={EURECA_COLORS.CINZA}>
 
-                    <PerfilPPC curso={curso} requisitos={requisitos} w={"max"}/>
-                    <PerfilAlunoIdeal/>
+                      <Box>
+                        <PerfilPPC curso={curso} requisitos={requisitos} w={"max"}/>
+                      </Box>
+                      <Box mt={4}>
+                        <PerfilAlunoIdeal requisitos={requisitos}/>
+                      </Box>
 
                 </Box>
             }

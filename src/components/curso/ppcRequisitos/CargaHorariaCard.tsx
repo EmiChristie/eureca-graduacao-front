@@ -29,7 +29,7 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
         
     return(
         <>
-            <Card.Root boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+            <Card.Root minW={"20vw"} maxW={"full"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
               <Card.Body>
                   <Stat.Root>
                     <HStack justify="space-between">
@@ -39,8 +39,6 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
                         </Icon>
                     </HStack>
                     
-                    <Center h={"full"}>
-                        <div>
                     <Stat.ValueText mt={2} color={EURECA_COLORS.BRANCO}>{requisitos.carga_horaria_minima_total} horas totais</Stat.ValueText>
 
                     <Chart.Root border={"none"} chart={chart} mx="auto">
@@ -80,8 +78,6 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
                         <Chart.Legend color={EURECA_COLORS.BRANCO}/>
                     </PieChart>
                     </Chart.Root>
-                    </div>
-                    </Center>
                   </Stat.Root>
               </Card.Body>
             </Card.Root>

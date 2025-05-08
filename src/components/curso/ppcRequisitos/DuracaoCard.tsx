@@ -18,7 +18,7 @@ export interface CardProps {
   ) => {
     return(
         <>
-            <Card.Root maxW={"30vw"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+            <Card.Root h={"full"} maxW={"30vw"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
               <Card.Body>
                   <Stat.Root >
                     <HStack justify="space-between">

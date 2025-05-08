@@ -138,13 +138,13 @@ export interface CursoPageProps{
                         </Box>
                     </>
                     :
-                    <>
+                    <Box overflowY={"auto"}>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
                                 {/* <LuBookText size={"4vh"} color={EURECA_COLORS.BRANCO}/> */}
                                 <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>{curso.descricao}</Text>
-                                <LuChevronRight color={EURECA_COLORS.BRANCO}/>
-                                <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>{getAba()}</Text>
+                                {/*<LuChevronRight color={EURECA_COLORS.BRANCO}/>
+                                <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>{getAba()}</Text> */}
                                 </Flex>
                         </Box>
                         <Box mx={4} h={"86vh"}>
@@ -164,7 +164,7 @@ export interface CursoPageProps{
                                 <CursoPerfil curso={curso}/>
                             }
                         </Box>
-                    </>
+                    </Box>
                     
                 }
             </Box>
