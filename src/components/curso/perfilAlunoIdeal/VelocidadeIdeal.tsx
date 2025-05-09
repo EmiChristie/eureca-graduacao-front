@@ -12,7 +12,7 @@ export const VelocidadeIdeal = (
       <>
         <Flex>
           <Icon mt={7}><LuArrowUpRight size={36} /></Icon>
-          <Text fontSize={"lg"} fontWeight={"normal"}>Mantém velocidade média de <Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/50`} p={1} rounded={"xs"}>{valor}</Span> <br></br><Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/50`} p={1} rounded={"xs"}>créditos</Span> bem-sucedidos por período</Text>
+          <Text fontSize={"lg"} fontWeight={"normal"}>Mantém velocidade média de <Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/35`} p={1} rounded={"xs"}>{valor}</Span> <br></br><Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/35`} p={1} rounded={"xs"}>créditos</Span> bem-sucedidos por período</Text>
         </Flex>
       </>
   )

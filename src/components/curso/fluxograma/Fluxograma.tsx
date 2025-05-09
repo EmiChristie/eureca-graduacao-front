@@ -1,33 +1,163 @@
-import { Curriculo, DisciplinaCurriculo } from "@/interfaces/types"
-import { Box, Card, For } from "@chakra-ui/react"
+import { Curriculo, DisciplinaCurriculo, DisciplinaPreRequisito } from "@/interfaces/types";
+import { EURECA_COLORS } from "@/util/constants";
+import {
+    Box,
+    Center,
+    Flex,
+    IconButton,
+    Text,
+    VStack,
+    useBreakpointValue
+} from "@chakra-ui/react";
+import { For } from "@chakra-ui/react";
+import { useRef, useState } from "react";
+import { LuChevronLeft, LuChevronRight, LuCoffee } from "react-icons/lu";
 
 export interface FluxogramaProps {
-    disciplinas: DisciplinaCurriculo[];
-    requisitos: Curriculo;
+    disciplinas?: DisciplinaCurriculo[];
+    requisitos?: Curriculo;
+    preRequisitos?: DisciplinaPreRequisito[];
 }
 
-  export const Fluxograma = (
-    {
-        disciplinas,
-        requisitos
-    }:FluxogramaProps
-  ) => {
-    //para cada período, crie uma coluna em um flex
-    //para cada disciplina obrigatória daquele período, adicione um card em um VStack naquela coluna
-    //para cada disciplina optativa, adicione-a à lista que vai ficar abaixo do fluxograma de obrigatórias
-    return(
-        <>
-            <Box w={"full"}>
-                <For each={disciplinas}>
-                    {
-                        (item)=>(
-                            <Box>
-                                {item.codigo_da_disciplina}
-                            </Box>
-                        )
-                    }
-                </For>
+export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: FluxogramaProps) => {
+    const scrollContainerRef = useRef<HTMLDivElement>(null);
+    const [preRequisites,setPreRequisites] = useState([]);
+
+    const disciplinasValidas = disciplinas.filter(
+        (d) => d.tipo === "OBRIGATORIO" && d.status === "ATIVO" && d.semestre_ideal !== null
+    );
+
+    const disciplinasPorSemestre: Record<string, DisciplinaCurriculo[]> = {};
+    let maiorSemestre = 1;
+
+    for (const disc of disciplinasValidas) {
+        const semestre = Number(disc.semestre_ideal);
+        if (!disciplinasPorSemestre[semestre]) {
+            disciplinasPorSemestre[semestre] = [];
+        }
+        disciplinasPorSemestre[semestre].push(disc);
+        if (semestre > maiorSemestre) {
+            maiorSemestre = semestre;
+        }
+    }
+
+    // Gera a lista de semestres de 1 até o maior encontrado
+    const semestresOrdenados = Array.from({ length: maiorSemestre }, (_, i) => (i + 1).toString());
+
+    const w = useBreakpointValue({ base: "70vw", md: "12vw" }); // ajusta largura no mobile
+
+    const scroll = (direction: "left" | "right") => {
+        const container = scrollContainerRef.current;
+        if (!container) return;
+        const scrollAmount = 300;
+        container.scrollBy({
+            left: direction === "left" ? -scrollAmount : scrollAmount,
+            behavior: "smooth",
+        });
+    };
+
+    const changePreRequisites = (disciplina:number) =>{
+        const pr = preRequisitos.filter((p)=>p.codigo_da_disciplina === disciplina);
+        setPreRequisites(pr);
+    }
+
+    return (
+        <Box position="relative" w="full" pt={4}>
+            <IconButton
+                aria-label="scroll left"
+                onClick={() => scroll("left")}
+                position="absolute"
+                left={-3}
+                top="35vh"
+                transform="translateY(-50%)"
+                zIndex={1}
+                size="sm"
+                bg={"orange.500/40"}
+                _hover={{ bg: "orange.500/70" }}
+                display={{ base: "none", md: "flex" }}
+            >
+                <LuChevronLeft />
+            </IconButton>
+            <IconButton
+                aria-label="scroll right"
+                onClick={() => scroll("right")}
+                position="absolute"
+                right={-3}
+                top="35vh"
+                transform="translateY(-50%)"
+                zIndex={1}
+                size="sm"
+                bg={"orange.500/40"}
+                _hover={{ bg: "orange.500/70" }}
+                display={{ base: "none", md: "flex" }}
+            >
+                <LuChevronRight />
+            </IconButton>
+
+            <Box ref={scrollContainerRef} overflowX={"hidden"}>
+                <Flex direction="row" gap={4} align="flex-start" w="max-content">
+                    <For each={semestresOrdenados}>
+                        {(semestre) => (
+                            <VStack
+                                key={semestre}
+                                align="stretch"
+                                minW={w}
+                                maxW={w}
+                                w={w}
+                                flexShrink={0}
+                            >
+                                <Box w="full" p={1} boxShadow={"sm"} rounded="sm" bgColor={`#225893/70`}>
+                                    <Text fontSize={"sm"} color={EURECA_COLORS.BRANCO} fontWeight="normal" textAlign="center">
+                                        {semestre}º período
+                                    </Text>
+                                </Box>
+                                <For 
+                                each={disciplinasPorSemestre[semestre] || []}
+                                fallback={
+                                    <Box 
+                                        bgColor={`#8797a7/70`}
+                                        px={4} 
+                                        boxShadow={"sm"} 
+                                        borderWidth="1px" 
+                                        rounded="sm"
+                                        h={"21.3vh"}
+                                        >
+                                            <Center h={"full"}>
+                                                <VStack>
+                                                <LuCoffee color="white" size={24}/>
+                                                <Text color="white" textAlign={"center"} fontSize="xs" fontWeight="semibold">
+                                                    Nenhuma disciplina obrigatória neste período!
+                                                </Text>
+                                                </VStack>
+                                            </Center>
+                                        </Box>
+                                }
+                                >
+                                    {(disciplina) => (
+                                        <Box 
+                                        h={"10vh"} 
+                                        cursor={"pointer"} 
+                                        onMouseOverCapture={()=>changePreRequisites(disciplina.codigo_da_disciplina)} 
+                                        _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/70` }} 
+                                        bgColor={preRequisites.find(p=>p.condicao === disciplina.codigo_da_disciplina) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
+                                        key={disciplina.codigo_da_disciplina} 
+                                        px={4} 
+                                        boxShadow={"sm"} 
+                                        borderWidth="1px" 
+                                        rounded="sm">
+                                            <Center h={"full"}>
+                                                <Text color={"white"} lineClamp="2" fontSize="xs" fontWeight="semibold">
+                                                    {disciplina.nome}
+                                                </Text>
+                                            </Center>
+                                        </Box>
+                                    )}
+                                </For>
+                            </VStack>
+                        )}
+                    </For>
+                </Flex>
             </Box>
-        </>
-    )
-  }
+        </Box>
+    );
+};

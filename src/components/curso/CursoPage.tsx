@@ -123,7 +123,7 @@ export interface CursoPageProps{
                 </Box>
             </Box>
 
-            <Box  w={"80vw"}>
+            <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
                     isLoading || isLoading2||isLoading3 ?
                     <>

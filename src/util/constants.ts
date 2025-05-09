@@ -11,6 +11,7 @@ export const ENDPOINT = {
 
 export const DAS_ENDPOINT = {
     DISCIPLINAS_CURRICULO: "disciplinas-por-curriculo",
+    PRE_REQUISITOS: "pre-requisito-disciplinas",
 }
 
 export const EURECA_COLORS = {

@@ -12,7 +12,7 @@ export const QtdCreditosFalhadosIdeal = (
         <>
           <Flex>
             <Icon ><LuArrowDownRight size={36} /></Icon>
-            <Text mt={9} fontSize={"lg"} fontWeight={"normal"}><Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/50`} p={1} rounded={"xs"}>Não possui</Span> reprovações</Text>
+            <Text mt={9} fontSize={"lg"} fontWeight={"normal"}><Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/35`} p={1} rounded={"xs"}>Não possui</Span> reprovações</Text>
           </Flex>
         </>
   )

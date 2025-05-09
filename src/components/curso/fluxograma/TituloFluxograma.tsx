@@ -1,21 +1,25 @@
-import { Box, Button, Card, Flex, HoverCard, IconButton, Text } from "@chakra-ui/react"
+import { Box, Button, Card, Flex, HoverCard, IconButton, Span, Text } from "@chakra-ui/react"
 import { EURECA_COLORS } from "@/util/constants"
-import { LuBookText, LuInfo, LuSunMoon } from "react-icons/lu"
-import { CardProps } from "./DuracaoCard";
-import { TituloFluxogramaProps } from "../fluxograma/TituloFluxograma";
+import { LuBookText, LuCombine, LuInfo, LuSunMoon } from "react-icons/lu"
 
-  export const TituloPerfilPPC = (
+export interface TituloFluxogramaProps{
+    curriculo?:number;
+    curso?:string;
+}
+
+  export const TituloFluxograma= (
     {
+        curriculo,
         curso
-    }:TituloFluxogramaProps
+    }: TituloFluxogramaProps
   ) => {
     return(
         <>
             <Box bgColor={`#f97316/70`} boxShadow={"sm"} rounded={"sm"}>
                 <Flex alignItems={"center"} placeContent={"space-between"} h={"8vh"} px={4} gap={2}>
                     <Flex alignItems={"center"} gap={2}>
-                        <LuBookText size={"4vh"} color={"white"}/>
-                        <Text fontSize={"xl"} color={"white"}>Perfil do curso segundo o PPC</Text>
+                        <LuCombine size={"4vh"} color={"white"}/>
+                        <Text fontSize={"xl"} color={"white"}>Fluxograma de disciplinas obrigatórias</Text>
                     </Flex>
                     <HoverCard.Root positioning={{ placement: "bottom" }}>
                     <HoverCard.Trigger asChild>
@@ -29,7 +33,8 @@ import { TituloFluxogramaProps } from "../fluxograma/TituloFluxograma";
                                 <HoverCard.ArrowTip />
                             </HoverCard.Arrow>
 
-                            <Text fontWeight={"normal"}>O PPC (Plano Pedagógico de Curso) é o documento que define os pormenores de um curso de graduação. Abaixo, você encontrará, de forma geral, o que o PPC do currículo ativo mais recente define para o curso de {curso}!</Text>
+                            <Text fontWeight={"normal"}>O fluxograma é a <Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/30`} py={0.5} px={1} rounded={"xs"}>sequência ideal de disciplinas</Span> para cursar a cada período. Você pode conferir o fluxo sugerido para as disciplinas de {curso} no currículo de {curriculo} abaixo!</Text>
+                            <Text mt={2} fontWeight={"normal"}>Note que essa sequência ideal cobre apenas as disciplinas obrigatórias do curso. Caso queira conferir as disciplinas optativas, que também fazem parte da carga horária, veja a lista abaixo do fluxograma!</Text>
                         </HoverCard.Content>
                     </HoverCard.Positioner>
                     </HoverCard.Root>

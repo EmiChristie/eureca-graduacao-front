@@ -145,3 +145,13 @@ export type DisciplinaCurriculo = {
     nome: string;
     quantidade_de_creditos: number;
 }
+
+export type DisciplinaPreRequisito = {
+    codigo_do_curso: number;
+    codigo_da_disciplina: number;
+    codigo_do_curriculo: number | string;
+    ordem_de_prioridade: number;
+    tipo: string;
+    condicao: number;
+    operador: string;
+}

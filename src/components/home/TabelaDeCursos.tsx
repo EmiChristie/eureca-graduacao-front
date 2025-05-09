@@ -313,7 +313,8 @@ import { Header } from "../geral/Header";
                         key={index}
                         cursor={"pointer"}
                         onClick={() => verCurso(item.codigo_do_curso)} 
-                        bgColor={indice === index ? tabelaAccent : "transparent" }
+                        bgColor={"transparent" }
+                        _hover={{ bg: tabelaAccent }}
                         color={"white"}
                         onMouseOver={()=>setIndice(index)}
                       >

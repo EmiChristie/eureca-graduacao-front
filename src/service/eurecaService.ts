@@ -1,6 +1,6 @@
 import { DAS_ENDPOINT, ENDPOINT } from "@/util/constants";
 import axiosInstance from "./axios";
-import { Autenticacao, Curriculo, CursoHome, DisciplinaCurriculo, Token, User, UserInfoPayload } from "@/interfaces/types";
+import { Autenticacao, Curriculo, CursoHome, DisciplinaCurriculo, DisciplinaPreRequisito, Token, User, UserInfoPayload } from "@/interfaces/types";
 import axiosEureca from "./axiosEureca";
 import { cursorTo } from "readline";
 import axiosDAS from "./axiosDAS";
@@ -69,6 +69,15 @@ export const getCurriculo = async (curso: number,curriculo:number) => {
 export const getDisciplinasPorCurriculo = async (curso: number,curriculo:number) => {
     const { data } = await axiosDAS.get<DisciplinaCurriculo[]>(
         `/${DAS_ENDPOINT.DISCIPLINAS_CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
+    );
+    
+    return data;
+}
+
+
+export const getPreRequisitos = async (curso: number,curriculo:number) => {
+    const { data } = await axiosDAS.get<DisciplinaPreRequisito[]>(
+        `/${DAS_ENDPOINT.PRE_REQUISITOS}?curso=${curso}&curriculo=${curriculo}`,
     );
     
     return data;

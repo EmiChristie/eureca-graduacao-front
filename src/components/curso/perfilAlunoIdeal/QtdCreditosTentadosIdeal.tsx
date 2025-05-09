@@ -12,7 +12,7 @@ export const QtdCreditosTentadosIdeal = (
         <>
           <Flex ml={6} alignItems={"center"}>
             <Icon><LuArrowRight size={36} /></Icon>
-            <Text textAlign={"center"} ml={2} fontSize={"lg"} fontWeight={"normal"}>Matricula-se em <Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/50`} p={1} rounded={"xs"}>{valor} créditos</Span> ao longo do curso</Text>
+            <Text textAlign={"center"} ml={2} fontSize={"lg"} fontWeight={"normal"}>Matricula-se em <Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/35`} p={1} rounded={"xs"}>{valor} créditos</Span> ao longo do curso</Text>
           </Flex>
         </>
   )
