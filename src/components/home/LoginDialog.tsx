@@ -65,7 +65,7 @@ return (
             placement={"center"}
             size={"xs"}>
             <Dialog.Trigger asChild>
-                <Button h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} px={6}>
+                <Button h={"7vh"} _hover={{ bg: `orange.500` }} boxShadow={"sm"} bgColor={`orange.400`} px={6}>
                   Entrar
                 </Button>
             </Dialog.Trigger>
@@ -90,7 +90,7 @@ return (
                         </form>
                       </Dialog.Body>
                       <Dialog.Footer mb={4} placeContent={"center"}>
-                          <Button bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} onClick={()=>mutation.mutate({username: loginvalue, password: passwordvalue})} px={6}>Entrar</Button>
+                          <Button _hover={{ bg: `orange.500` }} boxShadow={"sm"} bgColor={`orange.400`} onClick={()=>mutation.mutate({username: loginvalue, password: passwordvalue})} px={6}>Entrar</Button>
                       </Dialog.Footer>
                       <Dialog.CloseTrigger asChild>
                       <CloseButton m={2} size="sm" />

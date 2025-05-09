@@ -17,7 +17,7 @@ export const PerfilAlunoIdeal = (
       <>
         <TituloAlunoIdeal/>
 
-        <Box py={12}>
+        <Box py={16}>
             <PerfilAlunoIdealComponent requisitos={requisitos}/>
         </Box>
         

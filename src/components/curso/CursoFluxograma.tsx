@@ -63,9 +63,9 @@ import { Optativas } from "./fluxograma/Optativas";
                     {<TituloFluxograma curso={curso.descricao} curriculo={curriculo}/>}
                     <Fluxograma disciplinas={disciplinas} requisitos={requisitos} preRequisitos={preRequisitos}/>
                   </Box>
-                  <Box mt={4}>
+                  <Box py={4}>
                     {<TituloListaOptativas/>}
-                    <Optativas disciplinas={disciplinas.filter(d=>d.tipo === "OPCIONAL")}/>
+                    <Optativas disciplinas={disciplinas.filter(d=>d.tipo === "OPCIONAL" && d.status === "ATIVO")}/>
                   </Box>
                 </Box>
             }

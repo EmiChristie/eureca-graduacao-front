@@ -41,10 +41,9 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
         }
     }
 
-    // Gera a lista de semestres de 1 até o maior encontrado
     const semestresOrdenados = Array.from({ length: maiorSemestre }, (_, i) => (i + 1).toString());
 
-    const w = useBreakpointValue({ base: "70vw", md: "12vw" }); // ajusta largura no mobile
+    const w = useBreakpointValue({ base: "70vw", md: `11.98vw` });
 
     const scroll = (direction: "left" | "right") => {
         const container = scrollContainerRef.current;
@@ -59,6 +58,10 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
     const changePreRequisites = (disciplina:number) =>{
         const pr = preRequisitos.filter((p)=>p.codigo_da_disciplina === disciplina);
         setPreRequisites(pr);
+    }
+
+    const mostrarDisciplina = (disciplina:number) =>{
+        alert(disciplina);
     }
 
     return (
@@ -138,7 +141,8 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
                                         h={"10vh"} 
                                         cursor={"pointer"} 
                                         onMouseOverCapture={()=>changePreRequisites(disciplina.codigo_da_disciplina)} 
-                                        _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/70` }} 
+                                        onClick={()=>mostrarDisciplina(disciplina.codigo_da_disciplina)}
+                                        _hover={{ bg: `#1d8bdf/70` }} 
                                         bgColor={preRequisites.find(p=>p.condicao === disciplina.codigo_da_disciplina) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
                                         key={disciplina.codigo_da_disciplina} 
                                         px={4} 

@@ -23,7 +23,7 @@ export interface TituloFluxogramaProps{
                     </Flex>
                     <HoverCard.Root positioning={{ placement: "bottom" }}>
                     <HoverCard.Trigger asChild>
-                        <IconButton colorPalette={"orange"} size="xs" variant="ghost" aria-label="Info" rounded="full">
+                        <IconButton _hover={{ bg: `orange.500/70` }} size="xs" variant="ghost" aria-label="Info" rounded="full">
                             <LuInfo color="white" />
                         </IconButton>
                     </HoverCard.Trigger>

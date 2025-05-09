@@ -11,9 +11,9 @@ const Home = () => {
         <Box m={4}>
           {/* <Header/>*/}
           <TabelaDeCursos/>
-          <Box mt={4}>
+          {/*<Box mt={4}>
             <Footer/>
-          </Box>
+          </Box>*/}
         </Box>
       </Box>
     </>
