@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCurriculoAtivoMaisRecente, getDisciplinasPorCurriculo, getPreRequisitos } from "@/service/eurecaService";
 import { DisciplinaCurriculo, DisciplinaPreRequisito } from "@/interfaces/types";
 import { EURECA_COLORS } from "@/util/constants";
-import { LuCircleX } from "react-icons/lu";
+import { LuFrown } from "react-icons/lu";
 import { PerfilAlunoIdeal } from "./PerfilAlunoIdeal";
 import { PerfilPPC } from "./PerfilPPC";
 import { Fluxograma } from "./fluxograma/Fluxograma";
@@ -51,7 +51,7 @@ import { Optativas } from "./fluxograma/Optativas";
                 <Center h={"76vh"}>
                 <VStack>
                     <Icon color={`${EURECA_COLORS.AZUL_MEDIO}/70`} >
-                      <LuCircleX size={36} strokeWidth={1.8} />
+                      <LuFrown size={36} strokeWidth={1.8} />
                     </Icon>
                     <Text  color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>O fluxograma do curso não pôde ser carregado.</Text>
                 </VStack>

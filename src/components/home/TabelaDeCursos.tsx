@@ -12,11 +12,14 @@ import {
     Span,
     Spinner,
     VStack,
+    Icon,
+    FieldHelperText,
+    Link,
   } from "@chakra-ui/react";
   import { useState, useMemo, useReducer, useEffect } from "react";
   import { Toaster } from "@/components/ui/toaster";
-  import { EURECA_COLORS } from "@/util/constants";
-  import { LuArrowUpDown, LuLightbulb, LuLogOut, LuSearch } from "react-icons/lu";
+  import { EURECA_COLORS, linkTCC } from "@/util/constants";
+  import { LuArrowUpDown, LuCloudy, LuExternalLink, LuFrown, LuLightbulb, LuLogOut, LuSearch } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
   import { CursoHome } from "../../interfaces/types";
   import { getCursos } from "@/service/eurecaService";
@@ -111,7 +114,7 @@ import { Header } from "../geral/Header";
       navigate(`/${curso}`);
     }
 
-    const tamanhoTabela = "80vh";
+    const tamanhoTabela = "72vh";
     const tamanhoTabelaFull = "76vh";
     const tabelaBg = `#8797a7/70`;
     const tabelaAccent = `#8797a7/60`;
@@ -133,7 +136,7 @@ import { Header } from "../geral/Header";
             <Box minW={"20vw"} w={"20vw"}>
               
 
-              <Box mb={4} w={"full"}>
+              <Box mb={4} w={"full"} boxShadow={"sm"}>
                 <InputGroup startElement={
                   <LuSearch/>}>
                   <Input
@@ -147,25 +150,118 @@ import { Header } from "../geral/Header";
                 </InputGroup>
               </Box>
 
-              <Box textAlign={"center"} h={tamanhoTabelaFull} bg={"#7c95b9/70"} boxShadow={"sm"} rounded={"sm"} p={4}>
-                  {
-                  user.user ?
-                  <>
-                      <Flex px={4} gapX={4} h={"8vh"} alignItems={"center"} justify={"center"}>
-                        <Text  color={EURECA_COLORS.BRANCO}>Olá, <Span>{formatarNome(user.user.nome)}</Span>!</Text>
-                        <IconButton rounded={"full"} onClick={()=>logout()} color={EURECA_COLORS.BRANCO} size={"sm"} variant={"ghost"}>
-                          <LuLogOut strokeWidth={2.5}/>
-                        </IconButton>
-                      </Flex>
-                  </>
-                  :
-                  <>
-                    <LoginDialog handleClose={forceUpdate}/>
-                  </>
-                }
-              </Box>
-    
-                
+              <Flex h={tamanhoTabelaFull} flexDir={"column"} gap={4}>
+                  <Box h={"full"} textAlign={"center"} bg={"#7c95b9/70"} boxShadow={"sm"} rounded={"sm"} p={4} >
+                    <Center h={"full"}>
+                        {
+                          user.user ?
+                          <>
+                          <Flex
+                          flexDir={"column"}
+                          textAlign={"left"} 
+                          placeItems={"center"}
+                          justifyContent={"center"}
+                          color={EURECA_COLORS.BRANCO}
+                          h={"full"}
+                          gap={4}
+                          >
+                            <Flex flexDir={"column"} gap={2}>
+                              <Text 
+                                fontWeight={"medium"}
+                                placeSelf={"start"}
+                                lineHeight={"short"}
+                                >
+                                  Olá, {formatarNome(user.user.nome)}!
+                              </Text>
+                              <Text 
+                                fontWeight={"normal"}
+                                fontSize={"sm"}>
+                                  Aqui você pode acessar informações de planejamento e execução curricular sobre os cursos de graduação oferecidos pela UFCG.
+                              </Text>
+                              <Text 
+                                fontWeight={"normal"}
+                                fontSize={"sm"}>
+                                  Você está logado como <Span fontWeight={"medium"}>aluno{/* depois adaptar p outros perfis */}</Span>. Acesse seu curso para visualizar métricas particulares sobre o seu desempenho acadêmico!
+                              </Text>
+                              <Center>
+                                <IconButton rounded={"full"} onClick={()=>logout()} color={EURECA_COLORS.BRANCO} size={"sm"} variant={"ghost"}>
+                                  <LuLogOut strokeWidth={2.5}/>
+                                </IconButton>
+                              </Center>
+                            </Flex>
+
+                          </Flex>
+                          </>
+                          :
+                          <>
+                          <Flex
+                          flexDir={"column"}
+                          textAlign={"left"} 
+                          placeItems={"center"}
+                          justifyContent={"center"}
+                          color={EURECA_COLORS.BRANCO}
+                          h={"full"}
+                          gap={4}
+                          >
+                            <Flex flexDir={"column"} gap={2}>
+                              <Text 
+                                fontWeight={"medium"}
+                                placeSelf={"start"}
+                                lineHeight={"short"}
+                                >
+                                  Bem vindo ao Eureca Graduação!
+                              </Text>
+                              <Text 
+                                fontWeight={"normal"}
+                                fontSize={"sm"}>
+                                  Aqui você pode acessar informações de planejamento e execução curricular sobre os cursos de graduação oferecidos pela UFCG.
+                              </Text>
+                            </Flex>
+                            <Flex flexDir={"column"} gap={2}>
+                              <Text 
+                                fontWeight={"medium"}
+                                placeSelf={"start"}
+                                lineHeight={"short"}>
+                                  Já faz parte da UFCG?
+                              </Text>
+                              <Text 
+                                fontWeight={"normal"}
+                                fontSize={"sm"}>
+                                  Faça login para acessar métricas particulares de desempenho!
+                              </Text>
+                              <Center mt={2}>
+                                <LoginDialog handleClose={forceUpdate}/>
+                              </Center>
+                            </Flex>
+
+                          </Flex>
+                          </>
+                        }
+                    </Center>
+                  </Box>
+                  <Flex
+                  flexDir={"column"}
+                  w={"full"} 
+                  gap={2}
+                  textAlign={"justify"}
+                  p={4} 
+                  alignContent={"end"} 
+                  bgColor={`orange.500/70`} 
+                  boxShadow={"sm"} 
+                  borderWidth={"1px"}
+                  rounded={"sm"}
+                  color={"white"}
+                  >
+                      <Text 
+                        fontWeight={"normal"}
+                        fontSize={"xs"}>
+                          Construído a partir do <Link fontWeight={"semibold"} color={"white"} target="blank" href="https://eureca.sti.ufcg.edu.br/">Eureca<LuExternalLink strokeWidth={"3"} /></Link>
+                      </Text>
+                      <Text fontSize={"xs"}>
+                        Quer saber como as métricas do Eureca Graduação são calculadas? Acesse a <Link fontWeight={"semibold"} color={"white"} target="blank" href={linkTCC}>documentação<LuExternalLink strokeWidth={"3"} /></Link> do site.
+                        </Text>
+                  </Flex>
+              </Flex>
             </Box>
               
 
@@ -244,7 +340,12 @@ import { Header } from "../geral/Header";
                         <Table.Cell colSpan={4} border={"none"} bg={"transparent"}
                           color={"white"}>
                           <Center w="full" h={tamanhoTabela}>
-                            <Text>Erro ao carregar cursos.</Text>
+                            <VStack>
+                                <Icon color={"white"}>
+                                  <LuFrown size={36} strokeWidth={1.8} />
+                                </Icon>
+                                <Text fontWeight={"normal"}>Erro ao carregar cursos</Text>
+                            </VStack>
                           </Center>
                         </Table.Cell>
                       </Table.Row>
@@ -254,7 +355,12 @@ import { Header } from "../geral/Header";
                           color={"white"}
                           >
                           <Center w={"full"} h={tamanhoTabela}>
-                            <Text textAlign="center">Nenhum curso encontrado.</Text>
+                            <VStack>
+                                <Icon color={"white"}>
+                                  <LuCloudy size={36} strokeWidth={1.8} />
+                                </Icon>
+                                <Text fontWeight={"normal"}>Nenhum curso encontrado</Text>
+                            </VStack>
                           </Center>
                         </Table.Cell>
                       </Table.Row>

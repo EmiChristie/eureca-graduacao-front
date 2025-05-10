@@ -5,6 +5,7 @@ import {
     Card,
     Center,
     Flex,
+    Icon,
     Link,
     Spinner,
     Tabs,
@@ -12,7 +13,7 @@ import {
     VStack,
   } from "@chakra-ui/react";
   import { Toaster } from "@/components/ui/toaster";
-  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuCircleX, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, } from "react-icons/lu";
+  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
   import { Curriculo, Curso } from "../../interfaces/types";
 import { getCurso } from "@/service/metricasService";
@@ -136,7 +137,7 @@ export interface CursoPageProps{
                             <Center h={"80vh"}>
                                 <VStack>
                                 <Spinner color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={"lg"} borderWidth={3}/>
-                                <Text   color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>Carregando Curso...</Text>
+                                <Text fontWeight={"normal"} color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>Carregando Curso...</Text>
                                 </VStack>
                             </Center>
                         </Box>
@@ -144,14 +145,16 @@ export interface CursoPageProps{
                     :
                     isError||isError2||isError3 ?
                     <>
-                        <Box m={4} h={"8vh"} bg={EURECA_COLORS.AZUL_CLARO} boxShadow={"sm"} rounded={"sm"}>
+                        <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
                         </Box>
                         <Box>
                             <Center h={"80vh"}>
                                 <VStack>
-                                <LuCircleX  color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={36} strokeWidth={1.8} />
-                                <Text  color={`${EURECA_COLORS.AZUL_MEDIO}/70`}>Não foi possível carregar o curso</Text>
+                                <Icon color={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+                                    <LuFrown size={36} strokeWidth={1.8} />
+                                </Icon>
+                                <Text fontWeight={"normal"} color={`${EURECA_COLORS.AZUL_MEDIO}/70`}>Não foi possível carregar o curso</Text>
                                 </VStack>
                             </Center>
                         </Box>

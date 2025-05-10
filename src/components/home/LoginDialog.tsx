@@ -72,16 +72,16 @@ return (
             <Portal>
                 <Dialog.Backdrop />
                 <Dialog.Positioner>
-                  <Dialog.Content bgColor={`${EURECA_COLORS.BRANCO}/95`} className="text" color={EURECA_COLORS.CINZA} textAlign={"justify"}>
+                  <Dialog.Content boxShadow={"sm"} bgColor={`${EURECA_COLORS.BRANCO}/95`} className="text" color={EURECA_COLORS.CINZA} textAlign={"justify"}>
                       <Dialog.Header display={"flex"} flexDir={"column"}>
                           <Dialog.Title color={"black"}>Login</Dialog.Title>
-                          <Dialog.Description>Já é estudante da UFCG? Entre com suas credenciais do SCAO e acesse métricas particulares sobre o seu desempenho acadêmico!</Dialog.Description>
+                          <Dialog.Description>Entre com suas credenciais do SCAO para acessar métricas particulares de desempenho acadêmico!</Dialog.Description>
                       </Dialog.Header>
                       <Dialog.Body>
                         <form>
                           <Stack gap="2" w="full">
                               <Field.Root>
-                                  <Input autoComplete="" value={loginvalue} onChange={(e) => setLoginValue(e.target.value)} placeholder="Matrícula" />
+                                  <Input autoComplete="" value={loginvalue} onChange={(e) => setLoginValue(e.target.value)} placeholder="Username" />
                               </Field.Root>
                               <Field.Root>
                                   <PasswordInput autoComplete="current-password" value={passwordvalue} onChange={(e) => setPasswordValue(e.target.value)} placeholder="Senha" />

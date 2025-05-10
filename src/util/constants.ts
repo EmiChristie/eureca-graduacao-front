@@ -32,3 +32,5 @@ export const EURECA_GRADUACAO_COLORS = {
     BRANCO: "#FFF",
     CINZA: "#4B4F54",
 } as const;
+
+export const linkTCC = "";
