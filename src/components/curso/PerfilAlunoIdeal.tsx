@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react"
 import { CursoProps } from "./CursoPerfil"
-import { TituloAlunoIdeal } from "./perfilAlunoIdeal/TituloAlunoIdeal"
+import { TituloAluno } from "./perfilAlunoIdeal/TituloAluno"
 import { Curriculo } from "@/interfaces/types"
 import { PerfilAlunoIdealComponent } from "./perfilAlunoIdeal/PerfilAlunoIdealComponent";
 
@@ -15,7 +15,7 @@ export const PerfilAlunoIdeal = (
 ) => {
   return(
       <>
-        <TituloAlunoIdeal/>
+        <TituloAluno tipo={"ideal"}/>
 
         <Box py={16}>
             <PerfilAlunoIdealComponent requisitos={requisitos}/>

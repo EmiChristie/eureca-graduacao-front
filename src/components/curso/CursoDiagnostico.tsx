@@ -5,6 +5,8 @@ import { getDisciplinasObrigatoriasQueMaisReprovam, getMetricasCurso } from "@/s
 import { EURECA_COLORS } from "@/util/constants";
 import { DisciplinasReprovacao, MetricasCurso } from "@/interfaces/types";
 import { LuFrown } from "react-icons/lu";
+import { PerfilAlunoMedio } from "./PerfilAlunoMedio";
+import { PerfilCalculado } from "./metricas/PerfilCalculado";
 
   export const CursoDiagnostico = (
     {
@@ -40,7 +42,7 @@ import { LuFrown } from "react-icons/lu";
  
     return(
         <>
-            <Box px={4}>
+            <Box>
               {
                   isLoading || isLoading2 ?
                   <>
@@ -65,7 +67,20 @@ import { LuFrown } from "react-icons/lu";
                   </>
                   :
                   <>
-                    <Text>{metricasCurso.erro_global}</Text>
+                    <Box color={EURECA_COLORS.CINZA}>
+
+                          {
+                            /*
+                              <Box>
+                                <PerfilCalculado metricas={metricasCurso} disciplinasReprovacao={disciplinasQueMaisReprovam}/>
+                              </Box>
+                            */
+                          }
+                          <Box>
+                            <PerfilAlunoMedio perfil={metricasCurso.perfil_aluno_medio}/>
+                          </Box>
+
+                    </Box>
                   </>
               }
             </Box>

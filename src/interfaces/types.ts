@@ -103,7 +103,7 @@ export type MetricasCurso = {
     media_periodos_para_se_formar: MediaPeriodosParaSeFormar;
     taxas_medias_graduados: TaxaMediaGraduados[];
     taxas_medias_globais: TaxasMediasGlobais;
-    perfil_aluno_medio: PerfilAlunoMedio;
+    perfil_aluno_medio: PerfilAlunoMedioType;
 };
 
 export type MetricasCursoSimples = {
@@ -209,7 +209,7 @@ export type TaxasMediasGlobais = {
   cra_medio_global: number;
 };
 
-export type PerfilAlunoMedio = {
+export type PerfilAlunoMedioType = {
   quantidade_de_periodos_media: number[];
   cra_medio: number;
   taxa_de_sucesso_media: number;
