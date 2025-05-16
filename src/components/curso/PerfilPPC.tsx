@@ -28,7 +28,7 @@ import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
                     <CampusCard curso={curso} requisitos={requisitos} w={statsW}/>
                     <TurnoCard curso={curso} requisitos={requisitos} w={statsW}/>
                 </Flex>
-                <Flex gap={4} w={"full"}  placeContent={"stretch"} placeItems={"stretch"}>
+                <Flex gap={4} w={"full"} placeItems={"stretch"}>
                     <DisciplinasCard curso={curso} requisitos={requisitos} w={statsW}/>
                     <Flex flexDir={"column"} gap={4}>
                     <DuracaoCard curso={curso} requisitos={requisitos} w={statsW}/>

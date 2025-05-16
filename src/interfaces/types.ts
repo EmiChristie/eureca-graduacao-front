@@ -70,43 +70,40 @@ export type Curso = {
 };
 
 export type DisciplinasReprovacao = {
-    codigo: number;
-    nome: string;
-    numeroDeReprovacoes: number;
+    codigo_da_disciplina: number;
+    nome_da_disciplina: string;
+    total_de_matriculas: number;
+    total_de_reprovacoes: number;
+    porcentagem_de_reprovacoes: number;
 }
 
-export type MotivoEvasao = {
-    motivo: string;
-    porcentagem_evadidos: number;
-};
-  
-export type PeriodoQuantidadeGraduados = {
-    quantidade_de_periodos: number;
-    quantidade_de_graduados: number;
-    porcentagem_de_graduados: number;
-};
-  
-export type GraduadosEvadidosPorPeriodo = {
-    quantidade_graduados_periodo: number;
-    quantidade_evadidos_periodo: number;
-    taxa_de_sucesso_periodo: number;
-    periodo: string;
-};
-  
 export type MetricasCurso = {
+    taxaDeSucesso: number;
     codigo_do_curso: number;
-    taxa_de_sucesso: number;
-    quantidade_de_graduados: number;
-    quantidade_de_evadidos: number;
-    quantidade_mulheres_graduadas: number;
-    porcentagem_mulheres_graduadas: number;
-    motivo_de_evasao_mais_comum: MotivoEvasao[];
-    quantidade_real_periodos: PeriodoQuantidadeGraduados[];
-    graduados_e_evadidos_por_periodo: GraduadosEvadidosPorPeriodo[];
-    qtd_media_graduados_por_periodo: number;
-    qtd_media_evadidos_por_periodo: number;
-    periodo_mais_comum_de_evadir: number;
-    qtd_media_creditos_reprovados: number;
+    graduados_evadidos_e_ativos_por_periodo: GraduadosEvadidosEAtivosPorPeriodo[];
+    taxa_de_sucesso_media: number;
+    desvio_padrao_percentual: number;
+    taxa_sucesso_media_mulheres: number;
+    desvio_padrao_percentual_mulheres: number;
+    desvio_padrao_percentual_medio_de_genero: number;
+    porcentagem_media_mulheres_entre_graduados: number;
+    porcentagem_media_homens_entre_graduados: number;
+    porcentagem_media_mulheres_graduadas_em_relacao_as_mulheres_ingressantes: number;
+    porcentagem_media_homens_graduados_em_relacao_aos_homens_ingressantes: number;
+    quantidade_media_ingressantes: number;
+    quantidade_media_graduados: number;
+    quantidade_media_evadidos: number;
+    quantidade_media_mulheres_ingressantes: number;
+    quantidade_media_homens_ingressantes: number;
+    desvio_padrao_ingressantes: number;
+    desvio_padrao_mulheres_ingressantes: number;
+    desvio_padrao_graduados: number;
+    erro_global: number;
+    periodos_mais_comuns_de_evadir: PeriodoMaisComumDeEvadir[];
+    media_periodos_para_se_formar: MediaPeriodosParaSeFormar;
+    taxas_medias_graduados: TaxaMediaGraduados[];
+    taxas_medias_globais: TaxasMediasGlobais;
+    perfil_aluno_medio: PerfilAlunoMedio;
 };
 
 export type MetricasCursoSimples = {
@@ -155,3 +152,68 @@ export type DisciplinaPreRequisito = {
     condicao: number;
     operador: string;
 }
+
+export type GraduadosEvadidosEAtivosPorPeriodo = {
+  periodo: string;
+  total_alunos: number;
+  mulheres_ingressantes: number;
+  mulheres_graduadas: number;
+  homens_ingressantes: number;
+  homens_graduados: number;
+  graduados: number;
+  evadidos: number;
+  ativos: number;
+  taxa_de_sucesso: number;
+  porcentagem_ativos: number;
+  porcentagem_mulheres_graduadas_em_relacao_aos_graduados: number;
+  porcentagem_mulheres_graduadas_em_relacao_ao_total: number;
+  porcentagem_mulheres_graduadas_em_relacao_as_mulheres_ingressantes: number;
+  porcentagem_homens_graduados_em_relacao_aos_graduados: number;
+  porcentagem_homens_graduados_em_relacao_ao_total: number;
+  porcentagem_homens_graduados_em_relacao_aos_homens_ingressantes: number;
+};
+
+export type PeriodoMaisComumDeEvadir = {
+  periodo: string;
+  quantidade_de_evadidos: number;
+  porcentagem_de_evadidos: number;
+};
+
+export type GraduadosPorQtdPeriodos = {
+  quantidade_de_periodos: string;
+  quantidade_de_graduados: number;
+  porcentagem_de_graduados: number;
+};
+
+export type MediaPeriodosParaSeFormar = {
+  media_periodos_para_se_formar: number;
+  periodo_em_destaque: string;
+  quantidade_media_periodos_para_se_formar: number[];
+  graduados_por_qtd_periodos: GraduadosPorQtdPeriodos[];
+};
+
+export type TaxaMediaGraduados = {
+  quantidade_de_periodos: string;
+  quantidade_de_graduados: number;
+  velocidade_media: number;
+  taxa_de_sucesso_media: number;
+  cra_medio: number;
+  desvio_padrao_velocidade_media: number;
+  desvio_padrao_taxa_de_sucesso_media: number;
+  desvio_padrao_cra_medio: number;
+};
+
+export type TaxasMediasGlobais = {
+  velocidade_media_global: number;
+  taxa_de_sucesso_media_global: number;
+  cra_medio_global: number;
+};
+
+export type PerfilAlunoMedio = {
+  quantidade_de_periodos_media: number[];
+  cra_medio: number;
+  taxa_de_sucesso_media: number;
+  velocidade_media: number;
+  creditos_matriculados_media: number;
+  creditos_reprovados_media: number;
+};

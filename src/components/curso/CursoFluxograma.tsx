@@ -40,7 +40,7 @@ import { Optativas } from "./fluxograma/Optativas";
         <>
             {
               isLoading ?
-                <Center h={"76vh"}>
+                <Center h={"80vh"}>
                 <VStack>
                     <Spinner color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={"lg"} borderWidth={3}/>
                     <Text color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>Carregando Fluxograma...</Text>
@@ -48,7 +48,7 @@ import { Optativas } from "./fluxograma/Optativas";
                 </Center>
               :
               isError ?
-                <Center h={"76vh"}>
+                <Center h={"80vh"}>
                 <VStack>
                     <Icon color={`${EURECA_COLORS.AZUL_MEDIO}/70`} >
                       <LuFrown size={36} strokeWidth={1.8} />

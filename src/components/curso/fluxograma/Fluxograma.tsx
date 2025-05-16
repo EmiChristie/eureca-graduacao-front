@@ -24,7 +24,7 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
     const [preRequisites,setPreRequisites] = useState([]);
 
     const disciplinasValidas = disciplinas.filter(
-        (d) => d.tipo === "OBRIGATORIO" && d.status === "ATIVO" && d.semestre_ideal !== null
+        (d) => (d.tipo === "OBRIGATORIO" || d.tipo === "COMPLEMENTAR") && d.status === "ATIVO" && d.semestre_ideal !== null
     );
 
     const disciplinasPorSemestre: Record<string, DisciplinaCurriculo[]> = {};

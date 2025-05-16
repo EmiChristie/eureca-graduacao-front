@@ -108,7 +108,7 @@ export interface CursoPageProps{
                                         <LuChartLine /> Diagnóstico
                                     </Link>
                                 </Button>
-                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
+                                <Button disabled justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
                                     <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
                                         <LuUser/> Meu Desempenho
                                     </Link>
@@ -178,7 +178,7 @@ export interface CursoPageProps{
                                 <CursoFluxograma curso={curso} curriculo={curriculo} requisitos={requisitos}/>
                                 :
                                 aba == 3 ?
-                                <CursoDiagnostico curso={curso}/>
+                                <CursoDiagnostico curso={curso} curriculo={curriculo}/>
                                 :
                                 aba == 4 ?
                                 <MeuDesempenho curso={curso}/>

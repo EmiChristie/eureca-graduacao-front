@@ -7,6 +7,7 @@ export const ENDPOINT = {
     CURRICULO: "eureca/curriculo",
     
     DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
+    METRICAS_CURSO: "metricas-curso/metricas-curso",
 } as const;
 
 export const DAS_ENDPOINT = {
