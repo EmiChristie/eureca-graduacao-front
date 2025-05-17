@@ -34,18 +34,18 @@ export const DisciplinasQueMaisReprovam = (
 
   return (
     <>
-      <Card.Root w={"full"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+      <Card.Root w={"5/12"} boxShadow={"sm"} bgColor={`#fff/70`}>
         <Card.Body>
           <Stat.Root >
             <HStack justify="space-between">
-              <Stat.Label color={"gray.muted"}>Top 5 disciplinas obrigatórias que mais reprovam</Stat.Label>
-              <Icon color={"gray.muted"}>
-                <LuCopyX />
+              <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/70`}>Top 5 disciplinas obrigatórias que mais reprovam</Stat.Label>
+              <Icon color={`${EURECA_COLORS.CINZA}/70`}>
+                <LuCopyX strokeWidth={2.6} />
               </Icon>
             </HStack>
 
             <Flex h={"full"} alignItems={"center"}>
-              <BarList.Root fontWeight={"normal"} borderRadius={"sm"} color={EURECA_COLORS.BRANCO} w={"full"} chart={chart}>
+              <BarList.Root fontWeight={"semibold"} borderRadius={"sm"} color={`${EURECA_COLORS.CINZA}/70`} w={"full"} chart={chart}>
                 <BarList.Content>
                   <BarList.Label title="" flex="1">
                     <BarList.Bar />

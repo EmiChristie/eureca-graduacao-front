@@ -35,23 +35,23 @@ export const PeriodosMaisComunsDeEvadir = (
 
     return(
         <>
-            <Card.Root w={"full"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`#fff/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label color={"gray.muted"}>Períodos mais comuns de evadir</Stat.Label>
-                    <Icon color={"gray.muted"}>
-                    <LuCalendarOff />
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/70`}>Períodos mais comuns de evadir</Stat.Label>
+                    <Icon color={`${EURECA_COLORS.CINZA}/70`}>
+                    <LuCalendarOff  strokeWidth={2.6}/>
                     </Icon>
                 </HStack>
 
                 <Flex h={"full"} alignItems={"center"} gap={0}>
-                        <Chart.Root boxSize={"300px"} mx="auto" chart={chart}>
+                        <Chart.Root chart={chart}>
                         <PieChart>
                             <Tooltip
                             cursor={false}
                             animationDuration={100}
-                            content={<Chart.Tooltip />}
+                            content={<Chart.Tooltip labelFormatter={()=>"Quantidade de Evadidos"} />}
                             />
                             <Pie
                             isAnimationActive={true}
@@ -66,8 +66,8 @@ export const PeriodosMaisComunsDeEvadir = (
                             </Pie>
                         </PieChart>
                         </Chart.Root>
-                        <BarSegment.Root justifySelf={"left"} chart={chart}>
-                        <BarSegment.Legend display={"flex"} flexDir={"column"} align={"left"} color={EURECA_COLORS.BRANCO}/>
+                        <BarSegment.Root mr={8} justifySelf={"left"} chart={chart}>
+                        <BarSegment.Legend display={"flex"} flexDir={"column"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
                         </BarSegment.Root>
                 </Flex>
                 </Stat.Root>

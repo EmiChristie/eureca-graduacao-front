@@ -33,7 +33,7 @@ export const PeriodosMaisComunsDeSeFormar = (
 
   const chart = useChart({
     data: periodos,
-    series: [{ name: "porcentagem_de_graduados", label: "Porcentagem de Graduados", color: "orange.500" }],
+    series: [{ name: "porcentagem_de_graduados", label: "Porcentagem de Graduados", color: "orange.400" }],
   })
 
       function formatarNome(texto: string): string {
@@ -46,13 +46,13 @@ export const PeriodosMaisComunsDeSeFormar = (
 
     return(
         <>
-            <Card.Root w={"full"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`#fff/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label color={"gray.muted"}>Distribuição de quantidade de períodos para se graduar</Stat.Label>
-                    <Icon color={"gray.muted"}>
-                    <LuGraduationCap />
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/70`}>Distribuição de quantidade de períodos para se graduar</Stat.Label>
+                    <Icon color={`${EURECA_COLORS.CINZA}/70`}>
+                    <LuGraduationCap strokeWidth={2.6} />
                     </Icon>
                 </HStack>
 
@@ -60,19 +60,24 @@ export const PeriodosMaisComunsDeSeFormar = (
                     <Box w={"full"}>
                         {
                             metricas.quantidade_media_periodos_para_se_formar.length == 1 ?
-                            <Stat.ValueText color={EURECA_COLORS.BRANCO}>
+                            <Stat.ValueText fontSize={"xl"} lineHeight={"short"} color={`${EURECA_COLORS.CINZA}/70`}>
                                 Os estudantes de {formatarNome(curso)} se graduam, em média, em {metricas.quantidade_media_periodos_para_se_formar[0]} períodos.
                             </Stat.ValueText>
                             :
-                            <Stat.ValueText color={EURECA_COLORS.BRANCO}>
+                            <Stat.ValueText fontSize={"xl"} lineHeight={"short"} color={`${EURECA_COLORS.CINZA}/70`}>
                                 Os estudantes de {formatarNome(curso)} se graduam, em média, entre {metricas.quantidade_media_periodos_para_se_formar[0]} e {metricas.quantidade_media_periodos_para_se_formar[1]} períodos.
                             </Stat.ValueText>
                         }
                     
-                    <Chart.Root mt={6} maxH="300px" chart={chart}>
+                    <Chart.Root pr={8} justifyContent={"left"} mt={6} maxH="2xs" chart={chart}>
                     <BarChart data={chart.data}>
-                        <CartesianGrid stroke={chart.color("border.muted")} vertical={false} />
-                        <XAxis axisLine={false} tickLine={false} dataKey={chart.key("quantidade_de_periodos")} />
+                        <CartesianGrid vertical={false} />
+                        <XAxis 
+                            axisLine={false} 
+                            tickLine={false} 
+                            dataKey={chart.key("quantidade_de_periodos")} 
+                            tickFormatter={(value) =>value.includes("mais") ? value.slice(0,2)+"+" : value.includes("menos") ? "-"+value.slice(0,2) : value.slice(0,2)}
+                        />
                         <YAxis
                         axisLine={false}
                         tickLine={false}
@@ -85,6 +90,7 @@ export const PeriodosMaisComunsDeSeFormar = (
                         />
                         {chart.series.map((item) => (
                         <Bar
+                            barSize={50}
                             key={item.name}
                             isAnimationActive={true}
                             dataKey={chart.key(item.name)}
