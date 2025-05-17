@@ -1,4 +1,4 @@
-export const dominio = "sti";
+export const dominio = "lsd";
 
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",

@@ -46,7 +46,7 @@ export const PeriodosMaisComunsDeEvadir = (
                 </HStack>
 
                 <Flex h={"full"} alignItems={"center"} gap={0}>
-                        <Chart.Root w={"fit"} mx="auto" chart={chart}>
+                        <Chart.Root boxSize={"300px"} mx="auto" chart={chart}>
                         <PieChart>
                             <Tooltip
                             cursor={false}

@@ -1,9 +1,10 @@
-import { useChart, BarListData, BarList } from "@chakra-ui/charts";
+import { useChart, BarListData, BarList, Chart } from "@chakra-ui/charts";
 import { MertricasProps } from "./PerfilCalculado";
 import { EURECA_COLORS } from "@/util/constants";
 import { mapArea } from "@/util/mapeamentos";
 import { Card, Stat, HStack, Icon, Flex } from "@chakra-ui/react";
 import { LuBookX, LuBriefcaseBusiness, LuCopyX, LuMedal } from "react-icons/lu";
+import { Tooltip } from "recharts";
 
 export const DisciplinasQueMaisReprovam = (
   {
@@ -44,7 +45,7 @@ export const DisciplinasQueMaisReprovam = (
             </HStack>
 
             <Flex h={"full"} alignItems={"center"}>
-              <BarList.Root borderRadius={"sm"} color={EURECA_COLORS.BRANCO} w={"full"} chart={chart}>
+              <BarList.Root fontWeight={"normal"} borderRadius={"sm"} color={EURECA_COLORS.BRANCO} w={"full"} chart={chart}>
                 <BarList.Content>
                   <BarList.Label title="" flex="1">
                     <BarList.Bar />
