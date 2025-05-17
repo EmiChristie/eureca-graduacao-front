@@ -1,0 +1,63 @@
+import { useChart, BarListData, BarList } from "@chakra-ui/charts";
+import { MertricasProps } from "./PerfilCalculado";
+import { EURECA_COLORS } from "@/util/constants";
+import { mapArea } from "@/util/mapeamentos";
+import { Card, Stat, HStack, Icon, Flex } from "@chakra-ui/react";
+import { LuBookX, LuBriefcaseBusiness, LuCopyX, LuMedal } from "react-icons/lu";
+
+export const DisciplinasQueMaisReprovam = (
+  {
+    disciplinasReprovacao
+  }: MertricasProps
+) => {
+
+  const disciplinas = [];
+  disciplinasReprovacao.map(
+    (d) => disciplinas.push({ name: d.nome_da_disciplina, value: d.porcentagem_de_reprovacoes })
+  );
+
+  const chart = useChart<BarListData>({
+    sort: { by: "value", direction: "desc" },
+    data: [
+      disciplinas[0],
+      disciplinas[1],
+      disciplinas[2],
+      disciplinas[3],
+      disciplinas[4],
+    ],
+    series: [{ name: "name", color: `blue.300/70` }],
+  });
+
+  const getPercent = (value: number) =>
+    chart.getValuePercent("value", value).toFixed(2);
+
+  return (
+    <>
+      <Card.Root w={"full"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
+        <Card.Body>
+          <Stat.Root >
+            <HStack justify="space-between">
+              <Stat.Label color={"gray.muted"}>Top 5 disciplinas obrigatórias que mais reprovam</Stat.Label>
+              <Icon color={"gray.muted"}>
+                <LuCopyX />
+              </Icon>
+            </HStack>
+
+            <Flex h={"full"} alignItems={"center"}>
+              <BarList.Root borderRadius={"sm"} color={EURECA_COLORS.BRANCO} w={"full"} chart={chart}>
+                <BarList.Content>
+                  <BarList.Label title="" flex="1">
+                    <BarList.Bar />
+                  </BarList.Label>
+                  <BarList.Label title="" minW="16" titleAlignment="end">
+                    <BarList.Value valueFormatter={(value) => `${value}%`} />
+                  </BarList.Label>
+                </BarList.Content>
+              </BarList.Root>
+            </Flex>
+          </Stat.Root>
+        </Card.Body>
+      </Card.Root>
+    </>
+  );
+};

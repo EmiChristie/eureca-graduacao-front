@@ -69,14 +69,11 @@ import { PerfilCalculado } from "./metricas/PerfilCalculado";
                   <>
                     <Box color={EURECA_COLORS.CINZA}>
 
-                          {
-                            /*
-                              <Box>
-                                <PerfilCalculado metricas={metricasCurso} disciplinasReprovacao={disciplinasQueMaisReprovam}/>
-                              </Box>
-                            */
-                          }
+                          
                           <Box>
+                            <PerfilCalculado metricas={metricasCurso} disciplinasReprovacao={disciplinasQueMaisReprovam}/>
+                          </Box>
+                          <Box mt={4}>
                             <PerfilAlunoMedio perfil={metricasCurso.perfil_aluno_medio}/>
                           </Box>
 

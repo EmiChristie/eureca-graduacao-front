@@ -1,3 +1,5 @@
+export const dominio = "sti";
+
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",
     CURSOS: "eureca/cursos",

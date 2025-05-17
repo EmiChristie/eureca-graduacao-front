@@ -1,11 +1,13 @@
 import { DisciplinasReprovacao, MetricasCurso } from "@/interfaces/types";
 import { Flex } from "@chakra-ui/react";
 import { TituloPerfilCalculado } from "./TituloPerfilCalculado";
+import { DisciplinasQueMaisReprovam } from "./DisciplinasQueMaisReprovam";
+import { PeriodosMaisComunsDeEvadir } from "./PeriodosMaisComunsDeEvadir";
 
 
 export interface MertricasProps {
-    metricas: MetricasCurso;
-    disciplinasReprovacao: DisciplinasReprovacao[];
+    metricas?: MetricasCurso;
+    disciplinasReprovacao?: DisciplinasReprovacao[];
 }
 
 export const PerfilCalculado = (
@@ -14,7 +16,7 @@ export const PerfilCalculado = (
         disciplinasReprovacao
     }:MertricasProps
   ) => {
-    const statsW = "max";
+    
     return(
         <>
             <TituloPerfilCalculado/>
@@ -29,6 +31,10 @@ export const PerfilCalculado = (
                 </Flex>
                     */
                 }
+                <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
+                    <DisciplinasQueMaisReprovam disciplinasReprovacao={disciplinasReprovacao}/>
+                    <PeriodosMaisComunsDeEvadir metricas={metricas.periodos_mais_comuns_de_evadir}/>
+                </Flex>
             </Flex>
         </>
     )
