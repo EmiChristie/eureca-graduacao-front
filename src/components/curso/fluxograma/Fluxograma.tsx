@@ -12,6 +12,7 @@ import {
 import { For } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { LuChevronLeft, LuChevronRight, LuCoffee } from "react-icons/lu";
+import { useNavigate, useParams } from "react-router-dom";
 
 export interface FluxogramaProps {
     disciplinas?: DisciplinaCurriculo[];
@@ -20,6 +21,10 @@ export interface FluxogramaProps {
 }
 
 export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: FluxogramaProps) => {
+
+    const {id} = useParams();
+
+    const navigate = useNavigate();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
     const [preRequisites,setPreRequisites] = useState([]);
 
@@ -61,7 +66,7 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
     }
 
     const mostrarDisciplina = (disciplina:number) =>{
-        alert(disciplina);
+        navigate(`/curso/${id}/disciplina/${disciplina}`);
     }
 
     return (

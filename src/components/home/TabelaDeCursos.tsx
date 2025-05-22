@@ -27,6 +27,7 @@ import { LoginDialog } from "./LoginDialog";
 import { useUserStore } from "@/stores/user/user.store";
 import { useNavigate } from "react-router-dom";
 import { Header } from "../geral/Header";
+import { formatarNome } from "@/util/utilities";
   
   export const TabelaDeCursos = () => {
     const navigate = useNavigate();
@@ -98,20 +99,12 @@ import { Header } from "../geral/Header";
       });
     };
 
-    function formatarNome(texto: string): string {
-      return texto
-        .toLowerCase()
-        .split(' ')
-        .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
-        .join(' ');
-    }
-
     function logout(){
       user.setUser(undefined);
     }
 
     function verCurso(curso:number){
-      navigate(`/${curso}`);
+      navigate(`/curso/${curso}`);
     }
 
     const tamanhoTabela = "72vh";

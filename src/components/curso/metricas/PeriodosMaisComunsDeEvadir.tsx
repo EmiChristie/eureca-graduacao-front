@@ -1,5 +1,5 @@
 import { PeriodoMaisComumDeEvadir } from "@/interfaces/types"
-import { EURECA_COLORS } from "@/util/constants";
+import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex, Box } from "@chakra-ui/react";
 import { LuCalendarOff, LuMedal } from "react-icons/lu";
@@ -35,12 +35,12 @@ export const PeriodosMaisComunsDeEvadir = (
 
     return(
         <>
-            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`#fff/70`}>
+            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/70`}>Períodos mais comuns de evadir</Stat.Label>
-                    <Icon color={`${EURECA_COLORS.CINZA}/70`}>
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Períodos mais comuns de evadir</Stat.Label>
+                    <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                     <LuCalendarOff  strokeWidth={2.6}/>
                     </Icon>
                 </HStack>
@@ -67,7 +67,7 @@ export const PeriodosMaisComunsDeEvadir = (
                         </PieChart>
                         </Chart.Root>
                         <BarSegment.Root mr={8} justifySelf={"left"} chart={chart}>
-                        <BarSegment.Legend display={"flex"} flexDir={"column"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
+                            <BarSegment.Legend display={"flex"} flexDir={"column"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
                         </BarSegment.Root>
                 </Flex>
                 </Stat.Root>

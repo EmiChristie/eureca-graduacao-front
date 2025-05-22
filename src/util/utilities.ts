@@ -6,3 +6,11 @@ export const initCap = (str: string): string => {
       return match.toUpperCase();
     });
   }
+
+export function formatarNome(texto: string): string {
+  return texto
+    .toLowerCase()
+    .split(' ')
+    .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
+    .join(' ');
+}

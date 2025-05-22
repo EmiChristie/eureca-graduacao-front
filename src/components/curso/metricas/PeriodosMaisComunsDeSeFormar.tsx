@@ -1,5 +1,6 @@
 import { MediaPeriodosParaSeFormar, PeriodoMaisComumDeEvadir } from "@/interfaces/types"
-import { EURECA_COLORS } from "@/util/constants";
+import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
+import { formatarNome } from "@/util/utilities";
 import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex, Box,Text } from "@chakra-ui/react";
 import { LuCalendarOff, LuGraduationCap, LuMedal } from "react-icons/lu";
@@ -36,22 +37,14 @@ export const PeriodosMaisComunsDeSeFormar = (
     series: [{ name: "porcentagem_de_graduados", label: "Porcentagem de Graduados", color: "orange.400" }],
   })
 
-      function formatarNome(texto: string): string {
-      return texto
-        .toLowerCase()
-        .split(' ')
-        .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
-        .join(' ');
-    }
-
     return(
         <>
-            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`#fff/70`}>
+            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/70`}>Distribuição de quantidade de períodos para se graduar</Stat.Label>
-                    <Icon color={`${EURECA_COLORS.CINZA}/70`}>
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Distribuição de quantidade de períodos para se graduar</Stat.Label>
+                    <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                     <LuGraduationCap strokeWidth={2.6} />
                     </Icon>
                 </HStack>
@@ -60,11 +53,11 @@ export const PeriodosMaisComunsDeSeFormar = (
                     <Box w={"full"}>
                         {
                             metricas.quantidade_media_periodos_para_se_formar.length == 1 ?
-                            <Stat.ValueText fontSize={"xl"} lineHeight={"short"} color={`${EURECA_COLORS.CINZA}/70`}>
+                            <Stat.ValueText fontSize={"xl"} lineHeight={"short"} color={`${EURECA_COLORS.CINZA}/80`}>
                                 Os estudantes de {formatarNome(curso)} se graduam, em média, em {metricas.quantidade_media_periodos_para_se_formar[0]} períodos.
                             </Stat.ValueText>
                             :
-                            <Stat.ValueText fontSize={"xl"} lineHeight={"short"} color={`${EURECA_COLORS.CINZA}/70`}>
+                            <Stat.ValueText fontSize={"xl"} lineHeight={"short"} color={`${EURECA_COLORS.CINZA}/80`}>
                                 Os estudantes de {formatarNome(curso)} se graduam, em média, entre {metricas.quantidade_media_periodos_para_se_formar[0]} e {metricas.quantidade_media_periodos_para_se_formar[1]} períodos.
                             </Stat.ValueText>
                         }

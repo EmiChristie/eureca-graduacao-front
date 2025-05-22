@@ -15,6 +15,7 @@ export const ENDPOINT = {
 export const DAS_ENDPOINT = {
     DISCIPLINAS_CURRICULO: "disciplinas-por-curriculo",
     PRE_REQUISITOS: "pre-requisito-disciplinas",
+    DISCIPLINAS:"disciplinas",
 }
 
 export const EURECA_COLORS = {
@@ -34,6 +35,7 @@ export const EURECA_GRADUACAO_COLORS = {
     //BRANCO: "#fefdfb",
     BRANCO: "#FFF",
     CINZA: "#4B4F54",
+    CINZA_CLARO: "#d1dcec",
 } as const;
 
 export const linkTCC = "";

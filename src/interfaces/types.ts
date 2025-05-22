@@ -217,3 +217,37 @@ export type PerfilAlunoMedioType = {
   creditos_matriculados_media: number;
   creditos_reprovados_media: number;
 };
+
+export type Disciplina = {
+  codigo_da_disciplina: number;
+  nome: string;
+  carga_horaria_teorica_semanal: number;
+  carga_horaria_pratica_semanal: number;
+  quantidade_de_creditos: number;
+  horas_totais: number;
+  media_de_aprovacao: number;
+  carga_horaria_teorica_minima: number | null;
+  carga_horaria_pratica_minima: number | null;
+  carga_horaria_teorica_maxima: number | null;
+  carga_horaria_pratica_maxima: number | null;
+  numero_de_semanas: number | null;
+  codigo_do_setor: number;
+  nome_do_setor: string;
+  campus: number;
+  nome_do_campus: string;
+  status: string;
+  contabiliza_creditos: string;
+  tipo_de_componente_curricular: string;
+  carga_horaria_extensao: number | null;
+}
+
+export type DisciplinaRelacionada = {
+  nome: string;
+  codigo: number;
+};
+
+export type RelacionamentosDisciplina = {
+  pre_requisitos: DisciplinaRelacionada[];
+  co_requisitos: DisciplinaRelacionada[];
+  disciplinas_equivalentes: DisciplinaRelacionada[];
+};

@@ -1,6 +1,6 @@
 import { useChart, BarListData, BarList, Chart } from "@chakra-ui/charts";
 import { MertricasProps } from "./PerfilCalculado";
-import { EURECA_COLORS } from "@/util/constants";
+import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { mapArea } from "@/util/mapeamentos";
 import { Card, Stat, HStack, Icon, Flex } from "@chakra-ui/react";
 import { LuBookX, LuBriefcaseBusiness, LuCopyX, LuMedal } from "react-icons/lu";
@@ -26,7 +26,7 @@ export const DisciplinasQueMaisReprovam = (
       disciplinas[3],
       disciplinas[4],
     ],
-    series: [{ name: "name", color: `blue.300/70` }],
+    series: [{ name: "name", color: `blue.400/40` }],
   });
 
   const getPercent = (value: number) =>
@@ -34,18 +34,18 @@ export const DisciplinasQueMaisReprovam = (
 
   return (
     <>
-      <Card.Root w={"5/12"} boxShadow={"sm"} bgColor={`#fff/70`}>
+      <Card.Root w={"5/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
         <Card.Body>
           <Stat.Root >
             <HStack justify="space-between">
-              <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/70`}>Top 5 disciplinas obrigatórias que mais reprovam</Stat.Label>
-              <Icon color={`${EURECA_COLORS.CINZA}/70`}>
+              <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Top 5 disciplinas obrigatórias que mais reprovam</Stat.Label>
+              <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                 <LuCopyX strokeWidth={2.6} />
               </Icon>
             </HStack>
 
             <Flex h={"full"} alignItems={"center"}>
-              <BarList.Root fontWeight={"semibold"} borderRadius={"sm"} color={`${EURECA_COLORS.CINZA}/70`} w={"full"} chart={chart}>
+              <BarList.Root fontWeight={"semibold"} borderRadius={"sm"} color={`${EURECA_COLORS.CINZA}/80`} w={"full"} chart={chart}>
                 <BarList.Content>
                   <BarList.Label title="" flex="1">
                     <BarList.Bar />
