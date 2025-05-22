@@ -13,14 +13,14 @@ import {
     VStack,
   } from "@chakra-ui/react";
   import { Toaster } from "@/components/ui/toaster";
-  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuNotebook, LuNotebookPen, LuNotebookTabs, LuNotebookText, } from "react-icons/lu";
+  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuNotebook, LuNotebookPen, LuNotebookTabs, LuNotebookText, LuChartPie, } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
-  import { Curriculo, Curso, Disciplina, DisciplinaCurriculo } from "../../interfaces/types";
+  import { Curriculo, Curso, Disciplina, DisciplinaCurriculo, PlanoDeCurso, RelacionamentosDisciplina } from "../../interfaces/types";
 import { getCurso } from "@/service/metricasService";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getCurriculo, getDisciplinaCurriculo, getDisciplina } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getCurriculo, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina } from "@/service/eurecaService";
 import { CursoDiagnostico } from "../curso/CursoDiagnostico";
 import { CursoFluxograma } from "../curso/CursoFluxograma";
 import { CursoPerfil } from "../curso/CursoPerfil";
@@ -61,7 +61,7 @@ export interface DisciplinaPageProps{
     });
 
     const { data: disciplinaCurriculo, isLoading:isLoading3, isError:isError3 } = useQuery<DisciplinaCurriculo[], Error>({
-      queryKey: ["pegarDisciplinaCurriculo", codigo_curso],
+      queryKey: ["pegarDisciplinaCurriculo", codigo_curso, curriculo,codigo_disciplina],
       queryFn: () => getDisciplinaCurriculo(codigo_curso, curriculo,codigo_disciplina),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
@@ -69,37 +69,29 @@ export interface DisciplinaPageProps{
     });
 
     const { data: disciplina, isLoading:isLoading4, isError:isError4 } = useQuery<Disciplina[], Error>({
-      queryKey: ["pegarDisciplina", codigo_curso],
+      queryKey: ["pegarDisciplina",codigo_disciplina],
       queryFn: () => getDisciplina(codigo_disciplina),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!curriculo && !!codigo_curso,
     });
 
-    console.log(disciplina);
+    const { data: informacoes, isLoading:isLoading5, isError:isError5 } = useQuery<PlanoDeCurso, Error>({
+      queryKey: ["pegarPlanoDeCurso",codigo_disciplina],
+      queryFn: () => getPlanoDeCurso(codigo_disciplina),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!curriculo && !!codigo_curso,
+    });
 
-    const requisitosDisciplina = {
-        pre_requisitos: [
-            {
-                nome:"Disciplina 1",
-                codigo:123456,
-            },
-            {
-                nome:"Disciplina 1",
-                codigo:123456,
-            },
-        ],
-        co_requisitos: [
-            {
-                nome:"Disciplina 1",
-                codigo:123456,
-            },
-        ],
-        disciplinas_equivalentes:[
-            
-        ],
-    }
-  
+    const { data: requisitosDisciplina, isLoading:isLoading6, isError:isError6 } = useQuery<RelacionamentosDisciplina, Error>({
+      queryKey: ["pegarRequisitosDaDisciplina",codigo_disciplina,codigo_curso,curriculo],
+      queryFn: () => getRequisitosDisciplina(codigo_disciplina,codigo_curso,curriculo),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!curriculo && !!codigo_curso,
+    });
+    
     return (
       <>
         <Box color={EURECA_COLORS.CINZA}>
@@ -118,6 +110,11 @@ export interface DisciplinaPageProps{
                                 <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(1)}>
                                     <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
                                         <LuNotebookText/> Perfil da disciplina
+                                    </Link>
+                                </Button>
+                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
+                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                        <LuChartPie/> Diagnóstico
                                     </Link>
                                 </Button>
                                 {
@@ -142,7 +139,7 @@ export interface DisciplinaPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4 ?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6 ?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -159,7 +156,7 @@ export interface DisciplinaPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4 ?
+                    isError||isError2||isError3||isError4||isError5||isError6 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -193,9 +190,16 @@ export interface DisciplinaPageProps{
                                     disciplina={disciplina[0]} 
                                     disciplinaCurriculo={disciplinaCurriculo[0]}
                                     requisitosDisciplina={requisitosDisciplina}
+                                    informacoes={informacoes}
                                     />
                                 :
-                                <></>
+                                <PerfilDisciplina 
+                                    curso={curso} 
+                                    disciplina={disciplina[0]} 
+                                    disciplinaCurriculo={disciplinaCurriculo[0]}
+                                    requisitosDisciplina={requisitosDisciplina}
+                                    informacoes={informacoes}
+                                    />
                             }
                         </Box>
                     </Box>

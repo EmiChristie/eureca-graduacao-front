@@ -7,6 +7,7 @@ export const ENDPOINT = {
     USER_INFO: "eureca/user-info",
     CURRICULO_ATIVO_MAIS_RECENTE: "eureca/curriculo-ativo-mais-recente",
     CURRICULO: "eureca/curriculo",
+    REQUISITOS_DISCIPLINA:"eureca/requisitos-disciplina",
     
     DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
     METRICAS_CURSO: "metricas-curso/metricas-curso",
@@ -16,6 +17,7 @@ export const DAS_ENDPOINT = {
     DISCIPLINAS_CURRICULO: "disciplinas-por-curriculo",
     PRE_REQUISITOS: "pre-requisito-disciplinas",
     DISCIPLINAS:"disciplinas",
+    PLANO_DE_CURSO:"planos-de-curso",
 }
 
 export const EURECA_COLORS = {

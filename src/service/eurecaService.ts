@@ -1,6 +1,6 @@
 import { DAS_ENDPOINT, ENDPOINT } from "@/util/constants";
 import axiosInstance from "./axios";
-import { Autenticacao, Curriculo, CursoHome, Disciplina, DisciplinaCurriculo, DisciplinaPreRequisito, Token, User, UserInfoPayload } from "@/interfaces/types";
+import { Autenticacao, Curriculo, CursoHome, Disciplina, DisciplinaCurriculo, DisciplinaPreRequisito, PlanoDeCurso, RelacionamentosDisciplina, Token, User, UserInfoPayload } from "@/interfaces/types";
 import axiosEureca from "./axiosEureca";
 import { cursorTo } from "readline";
 import axiosDAS from "./axiosDAS";
@@ -62,6 +62,19 @@ export const getCurriculo = async (curso: number,curriculo:number) => {
     return data;
 }
 
+export const getRequisitosDisciplina = async (disciplina:number,curso: number,curriculo:number) => {
+
+    console.log(curso)
+
+    const { data } = await axiosInstance.get<RelacionamentosDisciplina>(
+        `/${ENDPOINT.REQUISITOS_DISCIPLINA}?disciplina=${disciplina}&curso=${curso}&curriculo=${curriculo}`,
+    );
+    
+    console.log("relacionamentos:")
+    console.log(data)
+    return data;
+}
+
 export const getDisciplinasPorCurriculo = async (curso: number,curriculo:number) => {
     const { data } = await axiosDAS.get<DisciplinaCurriculo[]>(
         `/${DAS_ENDPOINT.DISCIPLINAS_CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
@@ -93,3 +106,12 @@ export const getDisciplina = async (disciplina:number) => {
     
     return data;
 }
+
+export const getPlanoDeCurso = async (disciplina:number) => {
+    const { data } = await axiosDAS.get<PlanoDeCurso[]>(
+        `/${DAS_ENDPOINT.PLANO_DE_CURSO}?disciplina=${disciplina}&turma=1`,
+    );
+    
+    return data[data.length-1];
+}
+

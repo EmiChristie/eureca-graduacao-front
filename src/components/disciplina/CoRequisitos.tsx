@@ -31,14 +31,16 @@ import { formatarNome } from "@/util/utilities"
 
                         <Flex mt={4} alignContent={"center"} flexDir={"column"} h={"full"}>
                             <For each={co_requisitos}>
-                                {(p)=><Link mb={1} className="text" href={`/curso/${curso.codigo_do_curso}/disciplina/${p.codigo}`} color={`${EURECA_COLORS.CINZA}/80`} fontWeight={"medium"}><LuDot/>{formatarNome(p.nome)}</Link>}
+                                {(p)=><Link mb={1} className="text" href={`/curso/${curso.codigo_do_curso}/disciplina/${p.codigo}`} color={`${EURECA_COLORS.CINZA}/80`} fontWeight={"medium"}><LuDot/>{p.nome}</Link>}
                             </For>
                         </Flex>
                         :
                         <Center h={"full"}>
                             <VStack>
-                            <LuCoffee color={EURECA_COLORS.BRANCO} size={24}/>
-                            <Text color={EURECA_COLORS.BRANCO} textAlign={"center"} fontSize="xs" fontWeight="medium">
+                            <Icon mt={6} color={`${EURECA_COLORS.CINZA}/80`}>
+                                <LuCoffee size={24}/>
+                            </Icon>
+                            <Text mb={4} color={`${EURECA_COLORS.CINZA}/80`} textAlign={"center"} fontSize="sm" fontWeight="medium">
                                 Esta disciplina não possui co-requisitos.
                             </Text>
                             </VStack>

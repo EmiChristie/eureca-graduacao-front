@@ -1,24 +1,26 @@
-import { Curso, Disciplina, DisciplinaCurriculo, RelacionamentosDisciplina } from "@/interfaces/types"
+import { Curso, Disciplina, DisciplinaCurriculo, PlanoDeCurso, RelacionamentosDisciplina } from "@/interfaces/types"
 import { TituloPerfilDisciplina } from "./TituloPerfilDisciplina"
 import { Sobre } from "./Sobre"
 import { Box, Flex} from "@chakra-ui/react"
 import { PreRequisitos } from "./PreRequisitos";
 import { DisciplinasEquivalentes } from "./DisciplinasEquivalentes";
 import { CoRequisitos } from "./CoRequisitos";
+import { Informacoes } from "./Informacoes";
 
 export interface PerfilDisciplinaProps {
     curso?:Curso,
     disciplina?:Disciplina,
     disciplinaCurriculo?:DisciplinaCurriculo,
-    requisitosDisciplina?:RelacionamentosDisciplina;
+    requisitosDisciplina?:RelacionamentosDisciplina,
+    informacoes?:PlanoDeCurso,
 }
 
 export const PerfilDisciplina = (
     {
         curso,
-        disciplina,
         disciplinaCurriculo,
-        requisitosDisciplina
+        requisitosDisciplina,
+        informacoes,
     }:PerfilDisciplinaProps
   ) => {
     
@@ -27,6 +29,7 @@ export const PerfilDisciplina = (
             <TituloPerfilDisciplina/>
             <Flex flexDir={"column"} gap={4} mt={4}>
                 <Sobre curso={curso} disciplinaCurriculo={disciplinaCurriculo}/>
+                <Informacoes informacoes={informacoes} />
                 <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                     <PreRequisitos curso={curso} requisitosDisciplina={requisitosDisciplina} />
                     <CoRequisitos curso={curso} requisitosDisciplina={requisitosDisciplina} />

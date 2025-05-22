@@ -243,7 +243,7 @@ export type Disciplina = {
 
 export type DisciplinaRelacionada = {
   nome: string;
-  codigo: number;
+  codigo: string;
 };
 
 export type RelacionamentosDisciplina = {
@@ -251,3 +251,18 @@ export type RelacionamentosDisciplina = {
   co_requisitos: DisciplinaRelacionada[];
   disciplinas_equivalentes: DisciplinaRelacionada[];
 };
+
+export type PlanoDeCurso = {
+  turma: number;
+  codigo_da_disciplina: number;
+  nome_da_disciplina: string;
+  codigo_do_setor: number;
+  nome_do_setor: string;
+  periodo: string;
+  ementa: string;
+  objetivos: string;
+  conteudo: string;
+  metodologia: string;
+  avaliacao: string;
+  referencias: string;
+}
