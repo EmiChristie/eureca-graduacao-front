@@ -39,7 +39,7 @@ export const EURECA_GRADUACAO_COLORS = {
     //BRANCO: "#fefdfb",
     BRANCO: "#FFF",
     CINZA: "#4B4F54",
-    CINZA_CLARO: "#d1dcec",
+    CINZA_CLARO: "#e2e8f0",
 } as const;
 
 export const linkTCC = "";
