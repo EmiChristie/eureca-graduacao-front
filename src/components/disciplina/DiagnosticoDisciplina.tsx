@@ -11,6 +11,7 @@ import { DistribuicaoPeriodos } from "./metricas/DistribuicaoPeriodos";
 import { MediaDeAprovacao } from "./metricas/MediaDeAprovacao";
 import { DistribuicaoStatus } from "./metricas/DistribuicaoStatus";
 import { DistribuicaoNotasFaixa } from "./metricas/DistribuicaoNotasFaixa";
+import { DistribuicaoNotasFaixaDeAprovacao } from "./metricas/DistribuicaoNotasFaixaDeAprovacao";
 
 export interface DiagnosticoDisciplinaProps {
     disciplina?:DisciplinaCurriculo,
@@ -32,18 +33,14 @@ export const DiagnosticoDisciplina = (
                     <MediaDeAprovacao media={metricas.media_de_notas_dos_aprovados}/>
                 </Flex>
                 <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
-                    {/*
-                    <DistribuicaoNotas/>
-                    <DistribuicaoNotasFaixaDeAprovacao/>
-                    */}
                     <DistribuicaoStatus metricas={metricas.distribuicao_de_status} />
                     <DistribuicaoNotasFaixa metricas={metricas.distribuicao_de_notas_faixa}/>
                 </Flex>
                 <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                     {/*
                     <DistribuicaoNotas/>
-                    <DistribuicaoNotasFaixaDeAprovacao/>
                     */}
+                    <DistribuicaoNotasFaixaDeAprovacao metricas={metricas.distribuicao_de_notas_em_faixas_de_aprovacao}/>
                     <DistribuicaoPeriodos metricas={metricas.distribuicao_de_periodos}/>
                 </Flex>
             </Flex>

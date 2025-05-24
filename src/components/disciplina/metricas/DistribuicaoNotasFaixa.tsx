@@ -3,7 +3,7 @@ import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { formatarNome } from "@/util/utilities";
 import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex, Box,Text } from "@chakra-ui/react";
-import { LuCalendarOff, LuGraduationCap, LuMedal } from "react-icons/lu";
+import { LuCalendarOff, LuChartColumn, LuGraduationCap, LuMedal } from "react-icons/lu";
 import { PieChart, Pie, Cell,Tooltip, Legend, LabelList, Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts";
 
 interface DistribuicaoProps{
@@ -17,14 +17,6 @@ export const DistribuicaoNotasFaixa = (
 ) => {
 
     const periodos = [];
-    const cores = [
-        "orange.500",
-        "pink.500",
-        "purple.500",
-        "blue.400",
-        "teal.500",
-        "yellow.500",
-    ]
     
     metricas.map(
         (x,index)=>periodos.push({index:index,faixa:x.faixa,quantidade:x.quantidade_de_alunos,porcentagem:x.porcentagem_de_alunos})
@@ -32,7 +24,7 @@ export const DistribuicaoNotasFaixa = (
 
   const chart = useChart({
     data: periodos,
-    series: [{ name: "quantidade", label: "Porcentagem", color: "orange.400" }],
+    series: [{ name: "porcentagem", label: "Porcentagem", color: "orange.400" }],
   })
 
     return(
@@ -43,7 +35,7 @@ export const DistribuicaoNotasFaixa = (
                 <HStack justify="space-between">
                     <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Distribuição de notas por faixa de pontos</Stat.Label>
                     <Icon color={`${EURECA_COLORS.CINZA}/55`}>
-                    <LuGraduationCap strokeWidth={2.6} />
+                    <LuChartColumn strokeWidth={2.6} />
                     </Icon>
                 </HStack>
 
@@ -70,12 +62,19 @@ export const DistribuicaoNotasFaixa = (
                         {chart.series.map((item) => (
                         <Bar
                             barSize={50}
-                            key={item.name}
+                            key={"porcentagem"}
                             isAnimationActive={true}
-                            dataKey={chart.key(item.name)}
+                            dataKey={chart.key("porcentagem")}
                             fill={chart.color(item.color)}
                             radius={4}
-                        />
+                        >
+                        {chart.data.map((item) => (
+                            <Cell
+                                key={item.name}
+                                fill={chart.color(item.faixa === "10" ? "teal.500" : item.faixa[0] < "5" ? "red.500" : item.faixa[0] < "7" ? "yellow.500" : "teal.500")}
+                            />
+                            ))}
+                        </Bar>
                         ))}
                     </BarChart>
                     </Chart.Root>

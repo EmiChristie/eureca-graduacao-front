@@ -46,7 +46,7 @@
                  </HStack>
  
                  <Flex h={"full"} alignItems={"center"} gap={0}>
-                     <Chart.Root boxSize={"200px"} border={"none"} chart={chart} mx="auto">
+                     <Chart.Root boxSize={"200px"} border={"none"} chart={chart} mx="auto" ml={6}>
                      <PieChart>
                          <Tooltip
                          cursor={false}
@@ -74,7 +74,7 @@
                          <Chart.Legend color={EURECA_COLORS.BRANCO}/>
                      </PieChart>
                      </Chart.Root>
-                         <BarSegment.Root mr={8} justifySelf={"left"} chart={chart}>
+                         <BarSegment.Root ml={8} mr={6} justifySelf={"left"} chart={chart}>
                              <BarSegment.Legend display={"flex"} flexDir={"column"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
                          </BarSegment.Root>
                  </Flex>
