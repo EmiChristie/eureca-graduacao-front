@@ -45,8 +45,8 @@
                      </Icon>
                  </HStack>
  
-                 <Flex h={"full"} alignItems={"center"} gap={0}>
-                     <Chart.Root boxSize={"200px"} border={"none"} chart={chart} mx="auto" ml={6}>
+                 <Flex h={"full"} alignItems={"center"} justify={"center"} gap={0}>
+                     <Chart.Root boxSize={"200px"} border={"none"} chart={chart} mr={6} ml={12}>
                      <PieChart>
                          <Tooltip
                          cursor={false}
@@ -54,8 +54,8 @@
                          content={<Chart.Tooltip labelFormatter={()=>"Quantidade de Alunos"} />}
                          />
                          <Pie
-                         innerRadius={40}
-                         outerRadius={70}
+                         innerRadius={60}
+                         outerRadius={100}
                          isAnimationActive={true}
                          data={chart.data}
                          dataKey={chart.key("quantidade")}

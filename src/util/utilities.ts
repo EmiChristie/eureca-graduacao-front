@@ -14,3 +14,6 @@ export function formatarNome(texto: string): string {
     .map(palavra => palavra.charAt(0).toUpperCase() + palavra.slice(1))
     .join(' ');
 }
+
+export const round2 = (valor: number) =>
+  Math.round(valor * 100) / 100;

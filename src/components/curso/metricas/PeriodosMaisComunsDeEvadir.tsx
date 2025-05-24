@@ -7,7 +7,7 @@ import { PieChart, Pie, Cell,Tooltip, Legend, LabelList } from "recharts";
 
 interface PeriodosMaisComunsDeEvadirProps{
     metricas:PeriodoMaisComumDeEvadir[];
-}
+} 
 
 export const PeriodosMaisComunsDeEvadir = (
   {
@@ -26,7 +26,7 @@ export const PeriodosMaisComunsDeEvadir = (
     ]
     
     metricas.map(
-        (p,index)=> periodos.push({name: p.periodo, quantidade_de_evadidos:p.quantidade_de_evadidos,porcentagem_de_evadidos:p.porcentagem_de_evadidos,color:cores[index]})
+        (p,index)=> periodos.push({name: p.periodo, quantidade:p.quantidade_de_evadidos,porcentagem:p.porcentagem_de_evadidos,color:cores[index]})
     )
 
     const chart = useChart({
@@ -45,28 +45,36 @@ export const PeriodosMaisComunsDeEvadir = (
                     </Icon>
                 </HStack>
 
-                <Flex h={"full"} alignItems={"center"} gap={0}>
-                        <Chart.Root chart={chart}>
-                        <PieChart>
-                            <Tooltip
-                            cursor={false}
-                            animationDuration={100}
-                            content={<Chart.Tooltip labelFormatter={()=>"Quantidade de Evadidos"} />}
-                            />
-                            <Pie
-                            isAnimationActive={true}
-                            data={chart.data}
-                            dataKey={chart.key("quantidade_de_evadidos")}
-                            stroke="none"
-                            >
-                            <LabelList dataKey={"porcentagem_de_evadidos"} formatter={(v)=>v+"%"} position="inside" fill="white" stroke="none" />
-                            {chart.data.map((item) => (
-                                <Cell key={item.name} fill={chart.color(item.color)} />
-                            ))}
-                            </Pie>
-                        </PieChart>
-                        </Chart.Root>
-                        <BarSegment.Root mr={8} justifySelf={"left"} chart={chart}>
+                <Flex h={"full"} alignItems={"center"} justify={"center"} gap={0}>
+                    <Chart.Root boxSize={"220px"} border={"none"} chart={chart} mr={8} ml={10}>
+                     <PieChart>
+                         <Tooltip
+                         cursor={false}
+                         animationDuration={100}
+                         content={<Chart.Tooltip labelFormatter={()=>"Quantidade de Alunos"} />}
+                         />
+                         <Pie
+                         innerRadius={60}
+                         outerRadius={100}
+                         isAnimationActive={true}
+                         data={chart.data}
+                         dataKey={chart.key("quantidade")}
+                         paddingAngle={8}
+                         cornerRadius={4}
+                         stroke="none"
+                         >
+                         <LabelList dataKey={"porcentagem"} formatter={(v)=>v+"%"} position="outside" />
+                             {chart.data.map((item) => (
+                                 <Cell key={item.name} fill={chart.color(item.color)} stroke={chart.color(item.color)} />
+                             ))}
+                         {chart.data.map((item) => (
+                             <Cell key={item.name} fill={chart.color(item.color)} />
+                         ))}
+                         </Pie>
+                         <Chart.Legend color={EURECA_COLORS.BRANCO}/>
+                     </PieChart>
+                     </Chart.Root>
+                        <BarSegment.Root mr={6} justifySelf={"left"} chart={chart}>
                             <BarSegment.Legend display={"flex"} flexDir={"column"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
                         </BarSegment.Root>
                 </Flex>

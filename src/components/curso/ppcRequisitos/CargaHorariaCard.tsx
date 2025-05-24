@@ -57,20 +57,8 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
                         paddingAngle={8}
                         cornerRadius={4}
                         stroke="none"
-                        >
-                            {/*
-                            <Label
-                                color={EURECA_COLORS.BRANCO}
-                                content={({ viewBox }) => (
-                                <Chart.RadialText
-                                    viewBox={viewBox}
-                                    title={chart.getTotal("value").toLocaleString()}
-                                    description="horas"
-                                />
-                                )}
-                            />
-                            
-                            */}
+                        > 
+                        
                         {chart.data.map((item) => (
                             <Cell key={item.name} fill={chart.color(item.color)} />
                         ))}
