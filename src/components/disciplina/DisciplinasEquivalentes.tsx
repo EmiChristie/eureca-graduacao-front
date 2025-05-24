@@ -1,5 +1,5 @@
 import { Box, Button, Card, Center, Flex, For, HStack, Icon, Link, Span, Stat, Text, VStack } from "@chakra-ui/react"
-import { LuCalendarClock, LuCoffee, LuCopyX, LuDot, LuFileCheck2, LuFileClock, LuNotebookText } from "react-icons/lu"
+import { LuCalendarClock, LuCoffee, LuCopyX, LuDot, LuFileCheck2, LuFileClock, LuFileCode, LuFiles, LuNotebookText } from "react-icons/lu"
 import { PerfilDisciplinaProps } from "./PerfilDisciplina"
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants"
 import { formatarNome } from "@/util/utilities"
@@ -22,7 +22,7 @@ import { formatarNome } from "@/util/utilities"
                     <HStack justify="space-between">
                         <Stat.Label  color={`${EURECA_COLORS.CINZA}/55`}>Disciplinas Equivalentes</Stat.Label>
                         <Icon  color={`${EURECA_COLORS.CINZA}/55`}>
-                        <LuFileClock />
+                        <LuFiles />
                         </Icon>
                     </HStack>
                     

@@ -22,7 +22,7 @@ import { formatarNome } from "@/util/utilities"
                     <HStack justify="space-between">
                         <Stat.Label  color={`${EURECA_COLORS.CINZA}/55`}>Pré-requisitos</Stat.Label>
                         <Icon color={`${EURECA_COLORS.CINZA}/55`}>
-                        <LuFileClock />
+                        <LuFileCheck2 />
                         </Icon>
                     </HStack>
                     

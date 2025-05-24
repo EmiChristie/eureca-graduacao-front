@@ -15,8 +15,8 @@ import {
   import { Toaster } from "@/components/ui/toaster";
   import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuNotebook, LuNotebookPen, LuNotebookTabs, LuNotebookText, LuChartPie, } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
-  import { Curriculo, Curso, Disciplina, DisciplinaCurriculo, PlanoDeCurso, RelacionamentosDisciplina } from "../../interfaces/types";
-import { getCurso } from "@/service/metricasService";
+  import { Curriculo, Curso, Disciplina, DisciplinaCurriculo, MetricasDisciplina, PlanoDeCurso, RelacionamentosDisciplina } from "../../interfaces/types";
+import { getCurso, getMetricasDisciplina } from "@/service/metricasService";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -26,6 +26,7 @@ import { CursoFluxograma } from "../curso/CursoFluxograma";
 import { CursoPerfil } from "../curso/CursoPerfil";
 import { MeuDesempenho } from "../curso/MeuDesempenho";
 import { PerfilDisciplina } from "./PerfilDisciplina";
+import { DiagnosticoDisciplina } from "./DiagnosticoDisciplina";
   
 export interface DisciplinaPageProps{
     codigo_curso:number,
@@ -73,7 +74,7 @@ export interface DisciplinaPageProps{
       queryFn: () => getDisciplina(codigo_disciplina),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curriculo && !!codigo_curso,
+      enabled: !!codigo_disciplina,
     });
 
     const { data: informacoes, isLoading:isLoading5, isError:isError5 } = useQuery<PlanoDeCurso, Error>({
@@ -81,7 +82,7 @@ export interface DisciplinaPageProps{
       queryFn: () => getPlanoDeCurso(codigo_disciplina),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curriculo && !!codigo_curso,
+      enabled: !!codigo_disciplina,
     });
 
     const { data: requisitosDisciplina, isLoading:isLoading6, isError:isError6 } = useQuery<RelacionamentosDisciplina, Error>({
@@ -89,7 +90,15 @@ export interface DisciplinaPageProps{
       queryFn: () => getRequisitosDisciplina(codigo_disciplina,codigo_curso,curriculo),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curriculo && !!codigo_curso,
+      enabled: !!curriculo && !!codigo_curso && !!codigo_disciplina,
+    });
+
+    const { data: metricas, isLoading:isLoading7, isError:isError7 } = useQuery<MetricasDisciplina, Error>({
+      queryKey: ["pegarMetricasDaDisciplina",codigo_disciplina,codigo_curso],
+      queryFn: () => getMetricasDisciplina(codigo_disciplina,codigo_curso),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!codigo_disciplina && !!codigo_curso,
     });
     
     return (
@@ -139,7 +148,7 @@ export interface DisciplinaPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6 ?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7 ?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -156,7 +165,7 @@ export interface DisciplinaPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4||isError5||isError6 ?
+                    isError||isError2||isError3||isError4||isError5||isError6||isError7 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -191,6 +200,12 @@ export interface DisciplinaPageProps{
                                     disciplinaCurriculo={disciplinaCurriculo[0]}
                                     requisitosDisciplina={requisitosDisciplina}
                                     informacoes={informacoes}
+                                    />
+                                :
+                                aba == 2 ?
+                                <DiagnosticoDisciplina 
+                                    disciplina={disciplinaCurriculo[0]}
+                                    metricas={metricas}
                                     />
                                 :
                                 <PerfilDisciplina 

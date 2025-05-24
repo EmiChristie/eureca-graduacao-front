@@ -11,6 +11,8 @@ export const ENDPOINT = {
     
     DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
     METRICAS_CURSO: "metricas-curso/metricas-curso",
+
+    METRICAS_DISCIPLINA: "metricas-disciplina/metricas-disciplina",
 } as const;
 
 export const DAS_ENDPOINT = {

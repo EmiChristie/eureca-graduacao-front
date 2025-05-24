@@ -1,6 +1,6 @@
 import { ENDPOINT } from "@/util/constants";
 import axiosInstance from "./axios";
-import { Autenticacao, Curso, CursoHome, DisciplinasReprovacao, MetricasCurso, Token, User, UserInfoPayload } from "@/interfaces/types";
+import { Autenticacao, Curso, CursoHome, DisciplinasReprovacao, MetricasCurso, MetricasDisciplina, Token, User, UserInfoPayload } from "@/interfaces/types";
 
 export const getCurso = async (curso: number) => {
     const { data } = await axiosInstance.get<Curso>(
@@ -37,6 +37,23 @@ export const getMetricasCurso = async (curso: number,curriculo: number) => {
         params: {
           curso,
           curriculo,
+        },
+      }
+    );
+  
+    console.log(data);
+  
+    return data;
+  };
+
+
+export const getMetricasDisciplina = async (disciplina: number,curso: number) => {
+    const { data } = await axiosInstance.get<MetricasDisciplina>(
+      `/${ENDPOINT.METRICAS_DISCIPLINA}`,
+      {
+        params: {
+          curso,
+          disciplina,
         },
       }
     );

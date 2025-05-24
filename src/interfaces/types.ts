@@ -266,3 +266,43 @@ export type PlanoDeCurso = {
   avaliacao: string;
   referencias: string;
 }
+
+export type DistribuicaoDeStatus = {
+  status:string;
+  quantidade_de_alunos:number;
+  porcentagem_de_alunos:number;
+};
+
+export type DistribuicaoPeriodo = {
+  periodo: string;
+  quantidade_de_alunos: number;
+  porcentagem_de_alunos: number;
+};
+
+export type DistribuicaoDePeriodos = {
+  quantidade_de_matriculas: number;
+  quantidade_de_estudantes_analisados: number;
+  erro_percentual: number;
+  distribuicao: DistribuicaoPeriodo[];
+};
+
+export type DistribuicaoNota = {
+  nota: number;
+  quantidade_de_alunos: number;
+  porcentagem_de_alunos: number;
+};
+
+export type DistribuicaoFaixa = {
+  faixa: string;
+  quantidade_de_alunos: number;
+  porcentagem_de_alunos: number;
+};
+
+export type MetricasDisciplina = {
+  media_de_notas_dos_aprovados: number;
+  distribuicao_de_status: DistribuicaoDeStatus[];
+  distribuicao_de_periodos: DistribuicaoDePeriodos;
+  distribuicao_de_notas: DistribuicaoNota[];
+  distribuicao_de_notas_faixa: DistribuicaoFaixa[];
+  distribuicao_de_notas_em_faixas_de_aprovacao: DistribuicaoFaixa[];
+}
