@@ -18,7 +18,7 @@ axiosDAS.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (error?.response?.status === 401) {
-      window.location.href = "/";
+      window.location.href = "/graduacao/";
     }
     return Promise.reject(error);
   }

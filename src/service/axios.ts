@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-const api_url = "https://eureca.lsd.ufcg.edu.br/graduacao-backend"
+const api_url = "http://localhost:8080/"
 
 export const axiosInstance = axios.create({
   baseURL: api_url,
@@ -26,7 +26,7 @@ axiosInstance.interceptors.response.use(
   },
   (error: AxiosError) => {
     if (error?.response?.status === 401) {
-      window.location.href = "/";
+      window.location.href = "/graduacao/";
     }
     return Promise.reject(error);
   }

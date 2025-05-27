@@ -9,11 +9,11 @@ export const PublicRoutes: RouteObject[] = [
         path: '/',
         element: <Layout />,
         children: [
-            { path: '/curso/:id', element: <Curso /> },
-            { path: '/curso/:idc/disciplina/:idd', element: <Disciplina /> },
+            { path: '/graduacao/curso/:id', element: <Curso /> },
+            { path: '/graduacao/curso/:idc/disciplina/:idd', element: <Disciplina /> },
             //{ path: '/:id/planejamento', element: <Planejamento /> },
-            { path: '/', element: <Home/> },
-            { path: '*', element: <Navigate to="/" replace /> },
+            { path: '/graduacao/', element: <Home/> },
+            { path: '*', element: <Navigate to="/graduacao/" replace /> },
         ]
     }
 ];

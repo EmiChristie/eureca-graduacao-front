@@ -12,7 +12,7 @@ function App() {
       path: "*",
       element: (
         <Navigate
-          to={"/"}
+          to={"/graduacao/"}
           replace
         />
       ),

@@ -117,12 +117,12 @@ export interface DisciplinaPageProps{
                         <Card.Body>
                             <Flex flexDir={"column"} gap={2}>
                                 <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(1)}>
-                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                    <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuNotebookText/> Perfil da disciplina
                                     </Link>
                                 </Button>
                                 <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
-                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                    <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuChartPie/> Diagnóstico
                                     </Link>
                                 </Button>
@@ -135,8 +135,8 @@ export interface DisciplinaPageProps{
                                         </Button>
                                     */
                                 }
-                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>navigate(`/curso/${codigo_curso}`)}>
-                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>navigate(`/graduacao/curso/${codigo_curso}`)}>
+                                    <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuUndo2/> Voltar ao curso
                                     </Link>
                                 </Button>

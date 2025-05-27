@@ -66,7 +66,7 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
     }
 
     const mostrarDisciplina = (disciplina:number) =>{
-        navigate(`/curso/${id}/disciplina/${disciplina}`);
+        navigate(`/graduacao/curso/${id}/disciplina/${disciplina}`);
     }
 
     return (

@@ -31,7 +31,7 @@ import { formatarNome } from "@/util/utilities"
 
                         <Flex mt={4} alignContent={"center"} flexDir={"column"} h={"full"}>
                             <For each={pre_requisitos}>
-                                {(p)=><Link mb={1} className="text" href={`/curso/${curso.codigo_do_curso}/disciplina/${p.codigo}`} color={`${EURECA_COLORS.CINZA}/80`} fontWeight={"medium"}><LuDot/>{p.nome}</Link>}
+                                {(p)=><Link mb={1} className="text" href={`/graduacao/curso/${curso.codigo_do_curso}/disciplina/${p.codigo}`} color={`${EURECA_COLORS.CINZA}/80`} fontWeight={"medium"}><LuDot/>{p.nome}</Link>}
                             </For>
                         </Flex>
                         :

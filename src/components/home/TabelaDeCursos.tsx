@@ -104,7 +104,7 @@ import { formatarNome } from "@/util/utilities";
     }
 
     function verCurso(curso:number){
-      navigate(`/curso/${curso}`);
+      navigate(`/graduacao/curso/${curso}`);
     }
 
     const tamanhoTabela = "72vh";

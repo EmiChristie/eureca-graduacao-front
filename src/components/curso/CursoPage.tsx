@@ -94,26 +94,26 @@ export interface CursoPageProps{
                         <Card.Body>
                             <Flex flexDir={"column"} gap={2}>
                                 <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(1)}>
-                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                    <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuBookText/> Perfil do curso
                                     </Link>
                                 </Button>
                                 <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
-                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                    <Link  color={EURECA_COLORS.BRANCO} className="text">
                                         <LuCombine /> Fluxograma
                                     </Link>
                                 </Button>
                                 <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(3)}>
-                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                    <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuChartLine /> Diagnóstico
                                     </Link>
                                 </Button>
                                 <Button disabled justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
-                                    <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
+                                    <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuUser/> Meu Desempenho
                                     </Link>
                                 </Button>
-                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>navigate("/")}>
+                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>navigate("/graduacao/")}>
                                     <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
                                         <LuUndo2/> Voltar
                                     </Link>
