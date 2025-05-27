@@ -5,5 +5,8 @@ import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tsconfigPaths(),tailwindcss(),],
+  plugins: [react(), tsconfigPaths(), tailwindcss()],
+  server: {
+    allowedHosts: ['eureca.lsd.ufcg.edu.br'],
+  },
 })
