@@ -9,4 +9,5 @@ export default defineConfig({
   server: {
     allowedHosts: ['eureca.lsd.ufcg.edu.br'],
   },
+  base: '/graduacao/'
 })
