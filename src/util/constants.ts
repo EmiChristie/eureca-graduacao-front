@@ -1,4 +1,4 @@
-export const dominio = import.meta.env.BACKEND_URL||"sti";
+export const dominio = "sti";
 
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",

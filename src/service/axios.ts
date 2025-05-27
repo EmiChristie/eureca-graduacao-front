@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-const api_url = import.meta.env.BACKEND_URL||"http://localhost:8080/"
+const api_url = "https://eureca.lsd.ufcg.edu.br/graduacao-backend"
 
 export const axiosInstance = axios.create({
   baseURL: api_url,
