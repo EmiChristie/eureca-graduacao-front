@@ -1,5 +1,6 @@
 import { MetricasCurso } from "@/interfaces/types"
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
+import { formatarNome } from "@/util/utilities";
 import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex, Box,Text, Alert } from "@chakra-ui/react";
 import { LuCalendarOff, LuMedal } from "react-icons/lu";
@@ -80,10 +81,10 @@ export const TaxaDeSucessoGeral = (
                     </Box>
                     <Box w={"4/6"} mt={1}>
                         <Text fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
-                            Dentre 100 ingressantes do curso de {curso}, em média, {apenas ? "apenas ":" "}{graduados_media} se graduam, com um desvio padrão de cerca de {metricas.desvio_padrao_percentual}% por período. Em números concretos, a cada novo semestre, o curso recebe cerca de {metricas.quantidade_media_ingressantes} ingressantes. Destes {metricas.quantidade_media_ingressantes}, em média, {metricas.quantidade_media_graduados} conseguirão se graduar, ao passo em que {metricas.quantidade_media_evadidos} acabarão evadindo do curso.
+                            Dentre 100 ingressantes do curso de {formatarNome(curso)}, em média, {apenas ? "apenas ":" "}{graduados_media} se graduam, com um desvio padrão de cerca de {metricas.desvio_padrao_percentual}% por período. Em números concretos, a cada novo semestre, o curso recebe cerca de {metricas.quantidade_media_ingressantes} ingressantes. Destes {metricas.quantidade_media_ingressantes}, em média, {metricas.quantidade_media_graduados} conseguirão se graduar, ao passo em que {metricas.quantidade_media_evadidos} acabarão evadindo do curso.
                         </Text>
                         <Text mt={4} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
-                            Abaixo, você encontrará detalhes sobre as taxas de sucesso, ingresso e evasão do curso de {curso}, bem como sobre possíveis disciplinas e períodos desafiadores ao longo da sua jornada acadêmica, identificados a partir do desempenho dos atuais e ex alunos do curso. Explore os detalhes da graduação e informe-se!
+                            Abaixo, você encontrará detalhes sobre as taxas de sucesso, ingresso e evasão do curso de {formatarNome(curso)}, bem como sobre possíveis disciplinas e períodos desafiadores ao longo da sua jornada acadêmica, identificados a partir do desempenho dos atuais e ex alunos do curso. Explore os detalhes da graduação e informe-se!
                         </Text>
                     </Box>
                 </Flex>
