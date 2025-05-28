@@ -14,15 +14,18 @@ import { For } from "@chakra-ui/react";
 import { useRef, useState } from "react";
 import { LuChevronLeft, LuChevronRight, LuCoffee } from "react-icons/lu";
 import { FluxogramaProps } from "./Fluxograma";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const Optativas = (
     { 
         disciplinas 
     }: FluxogramaProps
 ) => {
+    const navigate = useNavigate();
+    const {id} = useParams();
 
     const mostrarDisciplina = (disciplina:number) =>{
-        alert(disciplina);
+        navigate(`/graduacao/curso/${id}/disciplina/${disciplina}`);
     }
 
     return (

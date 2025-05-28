@@ -1,4 +1,5 @@
 import {
+    Alert,
     Box,
     Breadcrumb,
     Button,
@@ -121,7 +122,7 @@ export interface DisciplinaPageProps{
                                         <LuNotebookText/> Perfil da disciplina
                                     </Link>
                                 </Button>
-                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
+                                <Button disabled={isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7 || isError7} justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
                                     <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuChartPie/> Diagnóstico
                                     </Link>
@@ -152,7 +153,7 @@ export interface DisciplinaPageProps{
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
-                                <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>Carregando curso...</Text>
+                                <Text fontSize={"xl"} color={EURECA_COLORS.BRANCO}>Carregando disciplina...</Text>
                                 </Flex>
                         </Box>
                         <Box>
@@ -165,7 +166,7 @@ export interface DisciplinaPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4||isError5||isError6||isError7 ?
+                    isError||isError2||isError3||isError4||isError5||isError6 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -194,13 +195,28 @@ export interface DisciplinaPageProps{
                         <Box mx={4} h={"86vh"}>
                             {
                                 aba == 1 ?
-                                <PerfilDisciplina 
-                                    curso={curso} 
-                                    disciplina={disciplina[0]} 
-                                    disciplinaCurriculo={disciplinaCurriculo[0]}
-                                    requisitosDisciplina={requisitosDisciplina}
-                                    informacoes={informacoes}
-                                    />
+                                <>
+                                    <PerfilDisciplina 
+                                        curso={curso} 
+                                        disciplina={disciplina[0]} 
+                                        disciplinaCurriculo={disciplinaCurriculo[0]}
+                                        requisitosDisciplina={requisitosDisciplina}
+                                        informacoes={informacoes}
+                                        />
+                                    {isError7 ? 
+                                        <>
+                                            <Alert.Root status="warning" mt={4} bg={"orange.muted/70"} variant={"surface"} boxShadow={"sm"} title="Diagnóstico indisponível">
+                                                <Alert.Indicator />
+                                                <Alert.Content>
+                                                    <Alert.Title>Diagnóstico indisponível</Alert.Title>
+                                                    <Alert.Description>Não há registros de matrículas nesta disciplina dos últimos 5 anos.</Alert.Description>
+                                                </Alert.Content>
+                                            </Alert.Root>
+                                        </>
+                                        :
+                                        <></>
+                                    }
+                                </>
                                 :
                                 aba == 2 ?
                                 <DiagnosticoDisciplina 
