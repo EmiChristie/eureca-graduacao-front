@@ -47,9 +47,9 @@ export const PerfilCalculado = (
                     <PeriodosMaisComunsDeSeFormar curso={curso} metricas={metricas.media_periodos_para_se_formar}/>
                     <PeriodosMaisComunsDeEvadir metricas={metricas.periodos_mais_comuns_de_evadir}/>
                 </Flex>
-                <Alert.Root status="info" bg={"blue.muted/70"} title="This is the alert title">
+                <Alert.Root alignItems={"center"} status="info" bg={"blue.muted/70"} title="This is the alert title">
                     <Alert.Indicator />
-                    <Alert.Title>As métricas do Eureca Graduação procuram ser o mais atualizadas e relevantes possíveis. Nossos cálculos usam dados de alunos ingressantes entre 10 e 5 anos atrás, e podem conter uma taxa de erro de {metricas.erro_global}%, decorrente de alunos analisados que ainda estão ativos no curso.</Alert.Title>
+                    <Alert.Title>As métricas do Eureca Graduação procuram ser o mais atualizadas e relevantes possíveis para os nossos usuários. Nossos cálculos usam dados de alunos ingressantes entre 10 e 5 anos atrás, e podem conter uma taxa de erro de {metricas.erro_global}%, decorrente de alunos analisados que ainda estão ativos no curso.</Alert.Title>
                 </Alert.Root>
             </Flex>
         </>
