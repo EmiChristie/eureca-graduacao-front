@@ -39,7 +39,7 @@ import { Optativas } from "./fluxograma/Optativas";
     return(
         <>
             {
-              isLoading ?
+              isLoading || isLoading2?
                 <Center h={"80vh"}>
                 <VStack>
                     <Spinner color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={"lg"} borderWidth={3}/>
@@ -47,7 +47,7 @@ import { Optativas } from "./fluxograma/Optativas";
                 </VStack>
                 </Center>
               :
-              isError ?
+              isError || isError2?
                 <Center h={"80vh"}>
                 <VStack>
                     <Icon color={`${EURECA_COLORS.AZUL_MEDIO}/70`} >
@@ -58,15 +58,7 @@ import { Optativas } from "./fluxograma/Optativas";
                 </Center>
               :
                 <Box color={EURECA_COLORS.CINZA}>
-                  
-                  <Box>
-                    {<TituloFluxograma curso={curso.descricao} curriculo={curriculo}/>}
-                    <Fluxograma disciplinas={disciplinas} requisitos={requisitos} preRequisitos={preRequisitos}/>
-                  </Box>
-                  <Box py={4}>
-                    {<TituloListaOptativas/>}
-                    <Optativas disciplinas={disciplinas.filter(d=>d.tipo === "OPCIONAL" && d.status === "ATIVO")}/>
-                  </Box>
+                    <Fluxograma curso={curso} curriculo={curriculo} disciplinas={disciplinas} requisitos={requisitos} preRequisitos={preRequisitos}/>
                 </Box>
             }
         </>

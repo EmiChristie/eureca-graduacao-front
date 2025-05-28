@@ -1,28 +1,36 @@
-import { Curriculo, DisciplinaCurriculo, DisciplinaPreRequisito } from "@/interfaces/types";
+import { Curriculo, Curso, DisciplinaCurriculo, DisciplinaPreRequisito } from "@/interfaces/types";
 import { EURECA_COLORS } from "@/util/constants";
 import {
     Box,
     Center,
     Flex,
+    Grid,
     IconButton,
     Text,
     VStack,
     useBreakpointValue
 } from "@chakra-ui/react";
 import { For } from "@chakra-ui/react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LuChevronLeft, LuChevronRight, LuCoffee } from "react-icons/lu";
 import { useNavigate, useParams } from "react-router-dom";
+import { TituloFluxograma } from "./TituloFluxograma";
+import { TituloListaOptativas } from "./TituloListaOptativas";
+import { Optativas } from "./Optativas";
+import { TituloOutrosComponentesObrigatorios } from "./TituloOutrosComponentesObrigatorios";
 
 export interface FluxogramaProps {
     disciplinas?: DisciplinaCurriculo[];
     requisitos?: Curriculo;
     preRequisitos?: DisciplinaPreRequisito[];
+    curso?:Curso;
+    curriculo?:number;
 }
 
-export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: FluxogramaProps) => {
+export const Fluxograma = ({ disciplinas, requisitos,preRequisitos,curso,curriculo }: FluxogramaProps) => {
 
     const {id} = useParams();
+    const [mostrarOutrosComponentes,setMostrarOutrosComponentes] = useState(false);
 
     const navigate = useNavigate();
     const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -31,6 +39,16 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
     const disciplinasValidas = disciplinas.filter(
         (d) => (d.tipo === "OBRIGATORIO" || d.tipo === "COMPLEMENTAR") && d.status === "ATIVO" && d.semestre_ideal !== null
     );
+
+    const outrosComponentesObg = disciplinas.filter(
+        (d) => (d.tipo === "OBRIGATORIO" || d.tipo === "COMPLEMENTAR") && d.status === "ATIVO" && !d.semestre_ideal
+    );
+
+    useEffect(() => {
+        if(outrosComponentesObg.length > 0){
+            setMostrarOutrosComponentes(true);
+        }
+    }, [outrosComponentesObg.length,mostrarOutrosComponentes]);
 
     const disciplinasPorSemestre: Record<string, DisciplinaCurriculo[]> = {};
     let maiorSemestre = 1;
@@ -70,6 +88,8 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
     }
 
     return (
+        <>
+        {<TituloFluxograma curso={curso.descricao} curriculo={curriculo}/>}
         <Box position="relative" w="full" pt={4}>
             <IconButton
                 aria-label="scroll left"
@@ -168,5 +188,73 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos }: Fluxograma
                 </Flex>
             </Box>
         </Box>
+
+        {
+            mostrarOutrosComponentes ?
+        <Box py={4}>
+            {<TituloOutrosComponentesObrigatorios/>}
+            <Box position="relative" w="full" pt={4}>
+                <Grid className="grid-cols-6" gap={4}>
+                    <For each={outrosComponentesObg}>
+                        {
+                            (disciplina)=>
+                                <Box 
+                                onMouseOverCapture={()=>changePreRequisites(disciplina.codigo_da_disciplina)} 
+                                onClick={()=>mostrarDisciplina(disciplina.codigo_da_disciplina)}
+                                h={"10vh"} 
+                                cursor={"pointer"} 
+                                _hover={{ bg: `#1d8bdf/70` }} 
+                                bgColor={preRequisites.find(p=>p.condicao === disciplina.codigo_da_disciplina) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
+                                key={disciplina.codigo_da_disciplina} 
+                                px={4} 
+                                boxShadow={"sm"} 
+                                borderWidth="1px" 
+                                rounded="sm">
+                                    <Center h={"full"}>
+                                        <Text color={"white"} lineClamp="2" fontSize="xs" fontWeight="semibold">
+                                            {disciplina.nome}
+                                        </Text>
+                                    </Center>
+                                </Box>
+                        }
+                    </For>
+                </Grid>
+            </Box>
+        </Box>
+        :
+        <></>
+        }
+
+        <Box py={4}>
+            {<TituloListaOptativas cor={mostrarOutrosComponentes ? "#f97316" : "#ec4899"}/>}
+            <Box position="relative" w="full" pt={4}>
+                <Grid className="grid-cols-6" gap={4}>
+                    <For each={disciplinas.filter(d=>d.tipo === "OPCIONAL" && d.status === "ATIVO")}>
+                        {
+                            (disciplina)=>
+                                <Box 
+                                onMouseOverCapture={()=>changePreRequisites(disciplina.codigo_da_disciplina)} 
+                                onClick={()=>mostrarDisciplina(disciplina.codigo_da_disciplina)}
+                                h={"10vh"} 
+                                cursor={"pointer"} 
+                                _hover={{ bg: `#1d8bdf/70` }} 
+                                bgColor={preRequisites.find(p=>p.condicao === disciplina.codigo_da_disciplina) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
+                                key={disciplina.codigo_da_disciplina} 
+                                px={4} 
+                                boxShadow={"sm"} 
+                                borderWidth="1px" 
+                                rounded="sm">
+                                    <Center h={"full"}>
+                                        <Text color={"white"} lineClamp="2" fontSize="xs" fontWeight="semibold">
+                                            {disciplina.nome}
+                                        </Text>
+                                    </Center>
+                                </Box>
+                        }
+                    </For>
+                </Grid>
+            </Box>
+        </Box>
+        </>
     );
 };
