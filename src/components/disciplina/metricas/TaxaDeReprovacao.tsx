@@ -58,7 +58,7 @@ import { PieChart, Pie, Cell,Tooltip, Legend, LabelList } from "recharts";
                 </HStack>
 
                 <Flex h={"full"} alignItems={"center"} gap={0}>
-                    <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>A taxa média de reprovação é de {percentual}%, a qual é considerada {mapear(percentual)}.</Stat.ValueText>
+                    <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>A taxa de reprovação é de cerca de {percentual}%, a qual é considerada {mapear(percentual)}.</Stat.ValueText>
                 </Flex>
                 </Stat.Root>
             </Card.Body>

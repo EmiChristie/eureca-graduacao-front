@@ -75,7 +75,7 @@ export const TaxaDeSucessoGeral = (
                          <Chart.Legend color={EURECA_COLORS.BRANCO}/>
                      </PieChart>
                      </Chart.Root>
-                    <BarSegment.Root mt={2} justifySelf={"center"} chart={chart}>
+                    <BarSegment.Root mt={4} justifySelf={"center"} chart={chart}>
                         <BarSegment.Legend display={"flex"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
                     </BarSegment.Root>
                     </Box>

@@ -11,6 +11,7 @@ import { PerfilCalculado } from "./metricas/PerfilCalculado";
   export const CursoDiagnostico = (
     {
         curso,
+        requisitos,
         curriculo
     }:CursoProps
   ) => {
@@ -71,7 +72,7 @@ import { PerfilCalculado } from "./metricas/PerfilCalculado";
 
                           
                           <Box>
-                            <PerfilCalculado curso={curso.descricao} metricas={metricasCurso} disciplinasReprovacao={disciplinasQueMaisReprovam}/>
+                            <PerfilCalculado requisitos={requisitos} curso={curso.descricao} metricas={metricasCurso} disciplinasReprovacao={disciplinasQueMaisReprovam}/>
                           </Box>
                           <Box mt={4}>
                             <PerfilAlunoMedio perfil={metricasCurso.perfil_aluno_medio}/>

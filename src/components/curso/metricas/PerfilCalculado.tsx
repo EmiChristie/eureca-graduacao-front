@@ -1,4 +1,4 @@
-import { DisciplinasReprovacao, MetricasCurso } from "@/interfaces/types";
+import { Curriculo, DisciplinasReprovacao, MetricasCurso } from "@/interfaces/types";
 import { Alert, Flex, Skeleton } from "@chakra-ui/react";
 import { TituloPerfilCalculado } from "./TituloPerfilCalculado";
 import { DisciplinasQueMaisReprovam } from "./DisciplinasQueMaisReprovam";
@@ -6,19 +6,25 @@ import { PeriodosMaisComunsDeEvadir } from "./PeriodosMaisComunsDeEvadir";
 import { PeriodosMaisComunsDeSeFormar } from "./PeriodosMaisComunsDeSeFormar";
 import { GraduadosEvadidosEAtivos } from "./GraduadosEvadidosEAtivos";
 import { TaxaDeSucessoGeral } from "./TaxaDeSucessoGeral";
+import { CraMedioPorPeriodo } from "./CraMedioPorPeriodo";
+import { formatarNome } from "@/util/utilities";
+import { VelocidadeMediaPorPeriodo } from "./VelocidadeMediaPorPeriodo";
+import { TaxaDeSucessoMediaPorPeriodo } from "./TaxaDeSucessoMediaPorPeriodo";
 
 
 export interface MertricasProps {
     metricas?: MetricasCurso;
     disciplinasReprovacao?: DisciplinasReprovacao[];
     curso?:string;
+    requisitos?:Curriculo;
 }
 
 export const PerfilCalculado = (
     {
         metricas,
         disciplinasReprovacao,
-        curso
+        curso,
+        requisitos
     }:MertricasProps
   ) => {
     
@@ -46,6 +52,12 @@ export const PerfilCalculado = (
                 <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                     <PeriodosMaisComunsDeSeFormar curso={curso} metricas={metricas.media_periodos_para_se_formar}/>
                     <PeriodosMaisComunsDeEvadir metricas={metricas.periodos_mais_comuns_de_evadir}/>
+                </Flex>
+                <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
+                    <CraMedioPorPeriodo curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.cra_medio_global}/>
+                    <VelocidadeMediaPorPeriodo requisitos={requisitos} curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.velocidade_media_global}/>
+                    <TaxaDeSucessoMediaPorPeriodo curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.taxa_de_sucesso_media_global}/>
+                    
                 </Flex>
                 <Alert.Root alignItems={"center"} status="info" bg={"blue.muted/70"} title="This is the alert title">
                     <Alert.Indicator />

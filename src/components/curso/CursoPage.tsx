@@ -178,7 +178,7 @@ export interface CursoPageProps{
                                 <CursoFluxograma curso={curso} curriculo={curriculo} requisitos={requisitos}/>
                                 :
                                 aba == 3 ?
-                                <CursoDiagnostico curso={curso} curriculo={curriculo}/>
+                                <CursoDiagnostico requisitos={requisitos} curso={curso} curriculo={curriculo}/>
                                 :
                                 aba == 4 ?
                                 <MeuDesempenho curso={curso}/>

@@ -31,6 +31,7 @@ export const PeriodosMaisComunsDeSeFormar = ({
   metricas,
   curso,
 }: PeriodosMaisComunsDeSeFormarProps) => {
+  
   const periodos = metricas.graduados_por_qtd_periodos.map((x) => ({
     quantidade_de_graduados: x.quantidade_de_graduados,
     porcentagem_de_graduados: x.porcentagem_de_graduados,
