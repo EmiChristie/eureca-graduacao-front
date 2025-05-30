@@ -120,10 +120,10 @@ export const ComparacaoGeralGenero = (
                     </BarSegment.Root>
                     </Box>
                     <Box w={"4/6"} mt={1}>
-                        <Text fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
+                        <Text fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
                             Dentre 100 graduados do curso de {formatarNome(curso)}, em média, {apenas ? "apenas ":" "}{graduadas_media} são mulheres, com um desvio padrão de gênero de {metricas.desvio_padrao_percentual_medio_de_genero}% entre os graduados analisados. Em números concretos, dos 16 graduados entre os 40 ingressantes do mesmo período, {apenas ? "apenas":""} {qtd_mulheres} serão mulheres, enquanto os outros {qtd_homens} serão homens.
                         </Text>
-                        <Text mt={4} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
+                        <Text fontSize={"sm"} mt={4} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
                             Dada a variação de cerca de {Math.round(metricas.desvio_padrao_percentual_medio_de_genero)}% nessa análise, a taxa de sucesso feminina entre os graduados é considerada {categoria_sucesso_feminino()} {porem()? "porém":"e"} com uma variação {categoria_variacao()}. Enquanto isso, a taxa de sucesso masculina é considerada {categoria_sucesso_masculino()}, com a mesma variação.
                         </Text>
                     </Box>

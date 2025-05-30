@@ -76,7 +76,7 @@ export const PeriodosMaisComunsDeSeFormar = ({
             <Box w={"full"}>
               {metricas.quantidade_media_periodos_para_se_formar.length === 1 ? (
                 <Stat.ValueText
-                  fontSize={"xl"}
+                  fontSize={"lg"}
                   lineHeight={"short"}
                   color={`${EURECA_COLORS.CINZA}/80`}
                 >
@@ -85,7 +85,7 @@ export const PeriodosMaisComunsDeSeFormar = ({
                 </Stat.ValueText>
               ) : (
                 <Stat.ValueText
-                  fontSize={"xl"}
+                  fontSize={"lg"}
                   lineHeight={"short"}
                   color={`${EURECA_COLORS.CINZA}/80`}
                 >

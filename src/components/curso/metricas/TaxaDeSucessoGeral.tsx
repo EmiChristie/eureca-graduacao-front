@@ -71,11 +71,11 @@ export const TaxaDeSucessoGeral = (
                         <BarSegment.Legend display={"flex"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
                     </BarSegment.Root>
                     </Box>
-                    <Box w={"4/6"} mt={1}>
-                        <Text fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    <Box w={"4/6"} mt={6}>
+                        <Text fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
                             Dentre 100 ingressantes do curso de {formatarNome(curso)}, em média, {apenas ? "apenas ":" "}{graduados_media} se graduam, com um desvio padrão de cerca de {metricas.desvio_padrao_percentual}% por período. Em números concretos, a cada novo semestre, o curso recebe cerca de {metricas.quantidade_media_ingressantes} ingressantes. Destes {metricas.quantidade_media_ingressantes}, em média, {metricas.quantidade_media_graduados} conseguirão se graduar, ao passo em que {metricas.quantidade_media_evadidos} acabarão evadindo do curso.
                         </Text>
-                        <Text mt={4} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
+                        <Text fontSize={"sm"} mt={4} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
                             Abaixo, você encontrará detalhes sobre as taxas de sucesso, ingresso e evasão do curso de {formatarNome(curso)}, bem como sobre possíveis disciplinas e períodos desafiadores ao longo da sua jornada acadêmica, identificados a partir do desempenho dos atuais e ex alunos do curso. Explore os detalhes da graduação e informe-se!
                         </Text>
                     </Box>

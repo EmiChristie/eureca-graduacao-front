@@ -4,15 +4,12 @@ import { Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex, Box, Span,Text, Badge, ColorSwatch } from "@chakra-ui/react";
 import { LuCalendarFold, LuUsers, LuUsersRound } from "react-icons/lu";
 import { Bar, BarChart, CartesianGrid, Legend, Tooltip, XAxis, YAxis } from "recharts";
-
-interface GraduadosEvadidosEAtivosProps{
-    metricas:MetricasCurso;
-}
+import { MertricasProps } from "../PerfilCalculado";
 
 export const IngressantesEGraduadosPorGeneroPorPeriodo = (
   {
     metricas,
-  }: GraduadosEvadidosEAtivosProps
+  }: MertricasProps
 ) => {
 
          const cores = [
@@ -60,7 +57,7 @@ export const IngressantesEGraduadosPorGeneroPorPeriodo = (
                         </Icon>
                     </HStack>
 
-                    <Flex mt={8} alignItems={"center"} h={"full"}>
+                    <Flex mt={4} alignItems={"center"} h={"full"}>
                         <Chart.Root maxH="2xs" chart={chart}>
                         <BarChart data={chart.data}>
                             <CartesianGrid vertical={false} />

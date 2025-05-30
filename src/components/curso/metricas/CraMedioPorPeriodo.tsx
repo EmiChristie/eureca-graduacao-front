@@ -56,7 +56,7 @@ export const CraMedioPorPeriodo = ({
           <Flex mt={2} h={"full"} alignItems={"center"} justify={"center"} gap={0}>
             <Box w={"full"}>
               <Stat.ValueText
-                fontSize={"xl"}
+                fontSize={"lg"}
                 lineHeight={"short"}
                 color={`${EURECA_COLORS.CINZA}/80`}
               >

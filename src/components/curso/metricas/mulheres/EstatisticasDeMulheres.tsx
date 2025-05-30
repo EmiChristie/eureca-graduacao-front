@@ -5,6 +5,7 @@ import { ComparacaoGeralGenero } from "./ComparacaoGeralGenero";
 import { DisciplinasQueMaisReprovam } from "../DisciplinasQueMaisReprovam";
 import { ComparacaoIngressantesGenero } from "./ComparacaoIngressantesGenero";
 import { IngressantesEGraduadosPorGeneroPorPeriodo } from "./IngressantesEGraduadosPorGeneroPorPeriodo";
+import { MediaDePermanenciaDeGenero } from "./MediaDePermanenciaDeGenero";
 
 export const EstatisticasDeMulheres = (
     {
@@ -31,6 +32,7 @@ export const EstatisticasDeMulheres = (
                     <ComparacaoIngressantesGenero metricas={metricas} curso={curso}/>
                 </Flex>
                 <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
+                    <MediaDePermanenciaDeGenero curso={curso} metricas={metricas}/>
                     <IngressantesEGraduadosPorGeneroPorPeriodo metricas={metricas}/>
                 </Flex>
             </Flex>
