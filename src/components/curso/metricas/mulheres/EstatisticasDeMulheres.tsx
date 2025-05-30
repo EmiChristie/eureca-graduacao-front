@@ -4,6 +4,7 @@ import { TituloMulheres } from "./TituloMulheres";
 import { ComparacaoGeralGenero } from "./ComparacaoGeralGenero";
 import { DisciplinasQueMaisReprovam } from "../DisciplinasQueMaisReprovam";
 import { ComparacaoIngressantesGenero } from "./ComparacaoIngressantesGenero";
+import { IngressantesEGraduadosPorGeneroPorPeriodo } from "./IngressantesEGraduadosPorGeneroPorPeriodo";
 
 export const EstatisticasDeMulheres = (
     {
@@ -25,10 +26,12 @@ export const EstatisticasDeMulheres = (
                 }
 
                 <TituloMulheres/>
-
                 <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                     <ComparacaoGeralGenero metricas={metricas} curso={curso}/>
                     <ComparacaoIngressantesGenero metricas={metricas} curso={curso}/>
+                </Flex>
+                <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
+                    <IngressantesEGraduadosPorGeneroPorPeriodo metricas={metricas}/>
                 </Flex>
             </Flex>
         </>
