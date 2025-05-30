@@ -2,7 +2,7 @@
  import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
  import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
  import { Card, Stat, HStack, Icon, Flex, Box } from "@chakra-ui/react";
- import { LuCalendarOff, LuCalendarSearch, LuCrown, LuMedal, LuUserSearch } from "react-icons/lu";
+ import { LuCalendarOff, LuCalendarSearch, LuCrown, LuMedal, LuUserRoundSearch, LuUserSearch } from "react-icons/lu";
  import { PieChart, Pie, Cell,Tooltip, Legend, LabelList, Sector, Label } from "recharts";
  
  interface DistribuicaoProps{
@@ -41,7 +41,7 @@
                  <HStack justify="space-between">
                      <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Distribuição dos status dos alunos</Stat.Label>
                      <Icon color={`${EURECA_COLORS.CINZA}/55`}>
-                     <LuUserSearch  strokeWidth={2.6}/>
+                     <LuUserRoundSearch strokeWidth={2.6}/>
                      </Icon>
                  </HStack>
  

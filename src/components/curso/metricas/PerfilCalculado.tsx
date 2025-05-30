@@ -10,6 +10,7 @@ import { CraMedioPorPeriodo } from "./CraMedioPorPeriodo";
 import { formatarNome } from "@/util/utilities";
 import { VelocidadeMediaPorPeriodo } from "./VelocidadeMediaPorPeriodo";
 import { TaxaDeSucessoMediaPorPeriodo } from "./TaxaDeSucessoMediaPorPeriodo";
+import { EstatisticasDeMulheres } from "./mulheres/EstatisticasDeMulheres";
 
 
 export interface MertricasProps {
@@ -57,7 +58,9 @@ export const PerfilCalculado = (
                     <CraMedioPorPeriodo curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.cra_medio_global}/>
                     <VelocidadeMediaPorPeriodo requisitos={requisitos} curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.velocidade_media_global}/>
                     <TaxaDeSucessoMediaPorPeriodo curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.taxa_de_sucesso_media_global}/>
-                    
+                </Flex>
+                <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
+                    <EstatisticasDeMulheres disciplinasReprovacao={disciplinasReprovacao} metricas={metricas} curso={formatarNome(curso)}/>
                 </Flex>
                 <Alert.Root alignItems={"center"} status="info" bg={"blue.muted/70"} title="This is the alert title">
                     <Alert.Indicator />

@@ -13,7 +13,7 @@ import {
     VStack,
   } from "@chakra-ui/react";
   import { Toaster } from "@/components/ui/toaster";
-  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, } from "react-icons/lu";
+  import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuUserRound, } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
   import { Curriculo, Curso } from "../../interfaces/types";
 import { getCurso } from "@/service/metricasService";
@@ -110,7 +110,7 @@ export interface CursoPageProps{
                                 </Button>
                                 <Button disabled justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
                                     <Link color={EURECA_COLORS.BRANCO} className="text">
-                                        <LuUser/> Meu Desempenho
+                                        <LuUserRound/> Meu Desempenho
                                     </Link>
                                 </Button>
                                 <Button justifyContent={"left"} variant={"ghost"} onClick={()=>navigate("/graduacao/")}>

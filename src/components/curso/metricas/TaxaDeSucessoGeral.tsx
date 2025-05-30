@@ -22,14 +22,6 @@ export const TaxaDeSucessoGeral = (
         {name:"Graduados",porcentagem:metricas.taxa_de_sucesso_media,color:"blue.400"},
         {name:"Evadidos",porcentagem:100-(metricas.taxa_de_sucesso_media),color:"orange.400"},
     ];
-    const cores = [
-        "orange.500",
-        "pink.500",
-        "purple.500",
-        "blue.400",
-        "teal.500",
-        "yellow.500",
-    ]
 
     const chart = useChart({
         data: periodos,

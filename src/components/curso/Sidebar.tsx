@@ -1,7 +1,7 @@
 import { Box,Button,ButtonGroup,Card,Center,Flex,Icon,Link,Text, VStack } from "@chakra-ui/react"
 import { CursoProps } from "./CursoPerfil"
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants"
-import { LuBookText, LuChartLine, LuCombine, LuLayoutDashboard, LuLightbulb, LuUser } from "react-icons/lu"
+import { LuBookText, LuChartLine, LuCombine, LuLayoutDashboard, LuLightbulb, LuUser, LuUserRound } from "react-icons/lu"
 
   export const Sidebar = (
     {
@@ -42,7 +42,7 @@ import { LuBookText, LuChartLine, LuCombine, LuLayoutDashboard, LuLightbulb, LuU
                             </Button>
                             <Button justifyContent={"left"} variant={"ghost"}>
                                 <Link href="#" color={EURECA_COLORS.BRANCO} className="text">
-                                    <LuUser/> Meu Desempenho
+                                    <LuUserRound/> Meu Desempenho
                                 </Link>
                             </Button></Flex>
                     </Card.Body>

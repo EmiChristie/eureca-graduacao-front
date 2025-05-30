@@ -16,7 +16,7 @@ export const PerfilAlunoMedio = (
 ) => {
   return(
       <>
-        <TituloAluno tipo={"médio"} />
+        <TituloAluno tipo={"médio"} cor="#f97316" />
 
         <Box py={16}>
             <PerfilAlunoMedioComponent perfil={perfil}/>

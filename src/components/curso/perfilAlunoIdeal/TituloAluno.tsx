@@ -5,16 +5,18 @@ import { PerfilAlunoIdeal } from "../PerfilAlunoIdeal"
 
   export interface TituloProps{
     tipo:string;
+    cor?:string;
   }
 
   export const TituloAluno = (
     {
-      tipo
+      tipo,
+      cor
     }:TituloProps
   ) => {
     return(
         <>
-            <Box bgColor={`#ec4899/70`} boxShadow={"sm"} rounded={"sm"}>
+            <Box bgColor={cor?`${cor}/70`:`#ec4899/70`} boxShadow={"sm"} rounded={"sm"}>
                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
                     <LuUserPen size={"4vh"} color={"white"}/>
                     <Text fontSize={"xl"} color={"white"}>Perfil do aluno {tipo}</Text>
