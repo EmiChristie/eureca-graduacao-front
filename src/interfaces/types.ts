@@ -306,3 +306,35 @@ export type MetricasDisciplina = {
   distribuicao_de_notas_faixa: DistribuicaoFaixa[];
   distribuicao_de_notas_em_faixas_de_aprovacao: DistribuicaoFaixa[];
 }
+
+export type ProfileSig = {
+  id: string;
+  name: string;
+  identityProviderId: string;
+  email: string;
+  type: string;
+  attributes: {
+    professor?:string;
+    coordenador?:string;
+    aluno?:string; 
+  }
+}
+
+export type ProfileScao = {
+  id: string;
+  name: string;
+  identityProviderId: string;
+  attributes: {
+    code:string;
+    type:string;
+    email:string;
+  }
+}
+
+export type UserProfile = {
+  id:string; //matrícula
+  name:string;
+  type:string;
+  code?:string; //se for aluno ou coordenador, tem um curso associado;
+  curriculum?:string; //só se for aluno
+}

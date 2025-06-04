@@ -1,6 +1,6 @@
 import { DAS_ENDPOINT, ENDPOINT } from "@/util/constants";
 import axiosInstance from "./axios";
-import { Autenticacao, Curriculo, CursoHome, Disciplina, DisciplinaCurriculo, DisciplinaPreRequisito, PlanoDeCurso, RelacionamentosDisciplina, Token, User, UserInfoPayload } from "@/interfaces/types";
+import { Autenticacao, Curriculo, CursoHome, Disciplina, DisciplinaCurriculo, DisciplinaPreRequisito, PlanoDeCurso, ProfileSig, ProfileScao, RelacionamentosDisciplina, Token, User, UserInfoPayload } from "@/interfaces/types";
 import axiosEureca from "./axiosEureca";
 import { cursorTo } from "readline";
 import axiosDAS from "./axiosDAS";
@@ -36,6 +36,19 @@ export const getToken = async (credenciais: Autenticacao) => {
 
     sessionStorage.setItem("token",data.token);
     return data.token;
+};
+
+export const getProfile = async (token: string) => {
+  const { data } = await axiosEureca.get<ProfileScao>(
+    '/profile',
+    {
+      headers: {
+        'accept': 'application/json',
+        'token-de-autenticacao': token
+      }
+    }
+  );
+  return data;
 };
 
 export const getUserInfo = async ({matricula}:UserInfoPayload) => {

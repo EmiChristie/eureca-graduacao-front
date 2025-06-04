@@ -72,7 +72,9 @@ export const CraMedioPorPeriodo = ({
                     dataKey={chart.key("quantidade_de_periodos")}
                     tickFormatter={formatPeriodo}
                   />
-                  <YAxis axisLine={false} tickLine={false} dataKey={chart.key("cra")} />
+                  <YAxis
+                  domain={[0,10]}
+                  axisLine={false} tickLine={false} dataKey={chart.key("cra")} />
                   <Tooltip
                     cursor={{ fill: chart.color("blue.100") }}
                     animationDuration={100}

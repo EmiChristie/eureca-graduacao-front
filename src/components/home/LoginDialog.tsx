@@ -4,7 +4,7 @@ import { PasswordInput } from "../ui/password-input";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toaster, Toaster } from "../ui/toaster";
-import { getToken, getUserInfo } from "@/service/eurecaService";
+import { getProfile, getToken, getUserInfo } from "@/service/eurecaService";
 import { useUserStore } from "@/stores/user/user.store";
 
 export interface LoginDialogProps{
@@ -25,7 +25,8 @@ export const LoginDialog = (
         mutationKey: ["getToken"],
         mutationFn: getToken,
         onSuccess: (data) => {
-          mutation2.mutate({matricula: loginvalue,token:data});
+          mutation2.mutate(data);
+          //mutation3.mutate({matricula: loginvalue,token:data});
         },
         onError: (error) => {
           console.log(error);
@@ -38,6 +39,61 @@ export const LoginDialog = (
       });
 
       const mutation2 = useMutation({
+        mutationKey: ["getProfile"],
+        mutationFn: getProfile,
+        onSuccess: (data,token) => {
+          console.log(data)
+          if(data.attributes.type.toLowerCase() === "aluno"){
+            mutation3.mutate({matricula: loginvalue,token:token});
+          }else if(data.attributes.type.toLowerCase() === "curso"){
+            user.setProfile({
+              id:data.id,
+              name:data.name,
+              type:data.attributes.type,
+              code:data.attributes.code,
+            });
+            /* SIG:
+            user.setProfile({
+              id:data.id,
+              name:data.name,
+              type:data.type,
+              code:data.attributes.coordenador,
+            });
+            */
+          toaster.create({
+            title: "Login realizado com sucesso!",
+            type: "success"
+          });
+          }else{
+            user.setProfile({
+              id:data.id,
+              name:data.name,
+              type:data.attributes.type,
+            });
+            /* SIG:
+            user.setProfile({
+              id:data.id,
+              name:data.name,
+              type:data.type,
+            });
+            */
+          toaster.create({
+            title: "Login realizado com sucesso!",
+            type: "success"
+          });
+          }
+        },
+        onError: (error) => {
+          console.log(error);
+          toaster.create({
+            title: "Erro ao recuperar o perfil do usuário",
+            description: "Tente novamente mais tarde",
+            type: "error"
+          });
+        },
+      });
+
+      const mutation3 = useMutation({
         mutationKey: ["getUserInfo"],
         mutationFn: getUserInfo,
         onSuccess: (data) => {
@@ -48,6 +104,21 @@ export const LoginDialog = (
 
           console.log(data);
           user.setUser(data);
+          user.setProfile({
+              id:data.matricula_do_estudante,
+              name:data.nome,
+              type:"Aluno",
+              code:String(data.codigo_do_curso),
+              curriculum:String(data.codigo_do_curriculo)
+            });
+            /* SIG:
+            user.setProfile({
+              id:data.id,
+              name:data.name,
+              type:data.type,
+              code:data.attributes.coordenador,
+            });
+            */
         },
         onError: (error) => {
           console.log(error);

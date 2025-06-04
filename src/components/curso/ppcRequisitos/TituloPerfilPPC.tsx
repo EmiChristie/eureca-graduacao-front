@@ -33,7 +33,7 @@ import { formatarNome } from "@/util/utilities";
                                 <HoverCard.ArrowTip />
                             </HoverCard.Arrow>
 
-                            <Text fontWeight={"normal"}>O PPC (Plano Pedagógico de Curso) é o documento que define os pormenores de um curso de graduação. Abaixo, você encontrará, de forma geral, o que o PPC do currículo {user.user && user.user.codigo_do_curso === codigo_curso ? "que você está inserido" : "ativo mais recente"} define para o curso de {formatarNome(curso)}!</Text>
+                            <Text fontWeight={"normal"}>O PPC (Plano Pedagógico de Curso) é o documento que define os pormenores de um curso de graduação. Abaixo, você encontrará, de forma geral, o que o PPC do currículo {user.profile && user.profile.code === String(codigo_curso) && user.profile.type.toLowerCase() === "aluno" ? "que você está inserido" : "ativo mais recente"} define para o curso de {formatarNome(curso)}!</Text>
                         </HoverCard.Content>
                     </HoverCard.Positioner>
                     </HoverCard.Root>

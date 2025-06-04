@@ -79,13 +79,13 @@ import { formatarNome } from "@/util/utilities";
       let cursos = [...cursosHome];
   
         try {
-          cursos = cursos.filter((curso) => curso.codigo_do_curso === user.user.codigo_do_curso);
+          cursos = cursos.filter((curso) => String(curso.codigo_do_curso) === user.profile.code);
         } catch (e) {
           cursos = [];
         }
   
       return cursos;
-    }, [cursosHome, user.user?.codigo_do_curso]);
+    }, [cursosHome, user.profile?.code]);
   
     const toggleSort = (key: keyof CursoHome) => {
       setSortConfig((prev) => {
@@ -101,6 +101,7 @@ import { formatarNome } from "@/util/utilities";
 
     function logout(){
       user.setUser(undefined);
+      user.setProfile(undefined);
     }
 
     function verCurso(curso:number){
@@ -147,7 +148,7 @@ import { formatarNome } from "@/util/utilities";
                   <Box h={"full"} textAlign={"center"} bg={"#7c95b9/70"} boxShadow={"sm"} rounded={"sm"} p={4} >
                     <Center h={"full"}>
                         {
-                          user.user ?
+                          user.profile ?
                           <>
                           <Flex
                           flexDir={"column"}
@@ -164,7 +165,7 @@ import { formatarNome } from "@/util/utilities";
                                 placeSelf={"start"}
                                 lineHeight={"short"}
                                 >
-                                  Olá, {formatarNome(user.user.nome)}!
+                                  Olá, {formatarNome(user.profile.name)}!
                               </Text>
                               <Text 
                                 fontWeight={"normal"}
@@ -174,7 +175,7 @@ import { formatarNome } from "@/util/utilities";
                               <Text 
                                 fontWeight={"normal"}
                                 fontSize={"sm"}>
-                                  Você está logado como <Span fontWeight={"medium"}>aluno{/* depois adaptar p outros perfis */}</Span>. Acesse seu curso para visualizar métricas particulares sobre o seu desempenho acadêmico!
+                                  Você está logado como <Span fontWeight={"medium"}>{user.profile.type.toLowerCase()}</Span>. Acesse seu curso para visualizar métricas particulares sobre o seu desempenho acadêmico!
                               </Text>
                               <Center>
                                 <IconButton rounded={"full"} onClick={()=>logout()} color={EURECA_COLORS.BRANCO} size={"sm"} variant={"ghost"}>
@@ -357,7 +358,7 @@ import { formatarNome } from "@/util/utilities";
                           </Center>
                         </Table.Cell>
                       </Table.Row>
-                    ) : user.user ?
+                    ) : user.profile && (user.profile.type.toLowerCase() === "aluno" ||user.profile.type.toLowerCase() === "curso") ?
                     (
                       cursoDoUsuario.map((item, index) => (
                         <Table.Row
@@ -405,7 +406,7 @@ import { formatarNome } from "@/util/utilities";
                             whiteSpace="normal"
                             wordBreak="break-word"
                             >
-                            {user.user.codigo_do_curriculo}
+                            {user.profile.type.toLowerCase() === "aluno" ? user.profile.curriculum : item.codigo_do_curriculo}
                           </Table.Cell>
                         </Table.Row>
                       ))

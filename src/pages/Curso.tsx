@@ -14,7 +14,7 @@ const Curso = () => {
     <>
       <Box h={"100vh"} overflow={"hidden"}>
         {
-          user.user && parseInt(id) === user.user.codigo_do_curso ?
+          user.profile && user.profile.type.toLowerCase() === "aluno" && id === user.profile.code ?
         <CursoPage codigo_curso={parseInt(id)} codigo_curriculo={user.user.codigo_do_curriculo}/>
         :
         <CursoPage codigo_curso={parseInt(id)}/>

@@ -24,7 +24,7 @@ export interface CardProps {
               <Card.Body>
                   <Stat.Root >
                     <HStack justify="space-between">
-                      <Stat.Label color={"gray.muted"}>{user.user && user.user.codigo_do_curso === curso.codigo_do_curso ? "Seu currículo" : "Currículo atual"}</Stat.Label>
+                      <Stat.Label color={"gray.muted"}>{user.profile && user.profile.code === String(curso.codigo_do_curso) && user.profile.type.toLowerCase() === "aluno" ? "Seu currículo" : "Currículo atual"}</Stat.Label>
                       <Icon color={"gray.muted"}>
                         <LuCalendarFold />
                       </Icon>
