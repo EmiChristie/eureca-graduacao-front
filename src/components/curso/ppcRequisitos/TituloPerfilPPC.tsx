@@ -3,12 +3,16 @@ import { EURECA_COLORS } from "@/util/constants"
 import { LuBookText, LuInfo, LuSunMoon } from "react-icons/lu"
 import { CardProps } from "./DuracaoCard";
 import { TituloFluxogramaProps } from "../fluxograma/TituloFluxograma";
+import { useUserStore } from "@/stores/user/user.store";
+import { formatarNome } from "@/util/utilities";
 
   export const TituloPerfilPPC = (
     {
-        curso
+        curso,
+        codigo_curso
     }:TituloFluxogramaProps
   ) => {
+    const user = useUserStore((state) => state);
     return(
         <>
             <Box bgColor={`#f97316/70`} boxShadow={"sm"} rounded={"sm"}>
@@ -29,7 +33,7 @@ import { TituloFluxogramaProps } from "../fluxograma/TituloFluxograma";
                                 <HoverCard.ArrowTip />
                             </HoverCard.Arrow>
 
-                            <Text fontWeight={"normal"}>O PPC (Plano Pedagógico de Curso) é o documento que define os pormenores de um curso de graduação. Abaixo, você encontrará, de forma geral, o que o PPC do currículo ativo mais recente define para o curso de {curso}!</Text>
+                            <Text fontWeight={"normal"}>O PPC (Plano Pedagógico de Curso) é o documento que define os pormenores de um curso de graduação. Abaixo, você encontrará, de forma geral, o que o PPC do currículo {user.user && user.user.codigo_do_curso === codigo_curso ? "que você está inserido" : "ativo mais recente"} define para o curso de {formatarNome(curso)}!</Text>
                         </HoverCard.Content>
                     </HoverCard.Positioner>
                     </HoverCard.Root>

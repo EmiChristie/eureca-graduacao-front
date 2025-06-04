@@ -16,17 +16,21 @@
  ) => {
  
      const periodos = [];
-     const cores = [
-         "teal.500",
-         "pink.500",
-         "blue.400",
-         "orange.500",
-         "red.500",
-         "yellow.500",
-     ]
+     const mapColor = (nome:string) => {
+        switch(nome){
+            case "Aprovados":return "teal.500"
+            case "Dispensados":return "blue.400"
+            case "Reprovados por falta":return "orange.500"
+            case "Reprovados por nota":return "red.500"
+            case "Cancelados":return "pink.400"
+            case "Trancados":return "purple.400"
+            default:return "gray.500"
+        }
+     }
+     
      
      metricas.map(
-         (p,index)=> periodos.push({name: p.status, quantidade:p.quantidade_de_alunos,porcentagem:p.porcentagem_de_alunos,color:cores[index]})
+         (p,index)=> periodos.push({name: p.status, quantidade:p.quantidade_de_alunos,porcentagem:p.porcentagem_de_alunos,color:mapColor(p.status)})
      )
  
      const chart = useChart({

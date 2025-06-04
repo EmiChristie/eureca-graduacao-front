@@ -2,6 +2,7 @@ import { Box, Card, Center, Flex, HStack, Icon, Stat } from "@chakra-ui/react"
 import { EURECA_COLORS } from "@/util/constants"
 import { LuCalendarClock, LuCalendarFold, LuClock } from "react-icons/lu"
 import { Curriculo, Curso } from "@/interfaces/types";
+import { useUserStore } from "@/stores/user/user.store";
 
 export interface CardProps {
   curso: Curso;
@@ -16,13 +17,14 @@ export interface CardProps {
         w
     }:CardProps
   ) => {
+    const user = useUserStore((state) => state);
     return(
         <>
             <Card.Root h={"full"} maxW={"full"} boxShadow={"sm"} bgColor={`${EURECA_COLORS.AZUL_MEDIO}/70`}>
               <Card.Body>
                   <Stat.Root >
                     <HStack justify="space-between">
-                      <Stat.Label color={"gray.muted"}>Currículo atual</Stat.Label>
+                      <Stat.Label color={"gray.muted"}>{user.user && user.user.codigo_do_curso === curso.codigo_do_curso ? "Seu currículo" : "Currículo atual"}</Stat.Label>
                       <Icon color={"gray.muted"}>
                         <LuCalendarFold />
                       </Icon>

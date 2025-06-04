@@ -1,10 +1,12 @@
 import { Box, Button, Card, Flex, HoverCard, IconButton, Span, Text } from "@chakra-ui/react"
 import { EURECA_COLORS } from "@/util/constants"
 import { LuBookText, LuCombine, LuInfo, LuSunMoon } from "react-icons/lu"
+import { formatarNome } from "@/util/utilities";
 
 export interface TituloFluxogramaProps{
     curriculo?:number;
     curso?:string;
+    codigo_curso?:number;
 }
 
   export const TituloFluxograma= (
@@ -33,7 +35,7 @@ export interface TituloFluxogramaProps{
                                 <HoverCard.ArrowTip />
                             </HoverCard.Arrow>
 
-                            <Text fontWeight={"normal"}>O fluxograma é a <Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/30`} py={0.5} px={1} rounded={"xs"}>sequência ideal de disciplinas</Span> para cursar a cada período. Você pode conferir o fluxo sugerido para as disciplinas de {curso} no currículo de {curriculo} abaixo!</Text>
+                            <Text fontWeight={"normal"}>O fluxograma é a <Span fontWeight={"normal"} color={EURECA_COLORS.AZUL_MEDIO} bg={`${EURECA_COLORS.AZUL_CLARO}/25`} py={0.5} px={1} rounded={"xs"}>sequência ideal de disciplinas</Span> para cursar a cada período. Você pode conferir o fluxo sugerido para as disciplinas de {formatarNome(curso)} no currículo de {curriculo} abaixo!</Text>
                             <Text mt={2} fontWeight={"normal"}>Note que essa sequência ideal cobre apenas as disciplinas obrigatórias do curso. Caso queira conferir as disciplinas optativas, que também fazem parte da carga horária, veja a lista abaixo do fluxograma!</Text>
                         </HoverCard.Content>
                     </HoverCard.Positioner>

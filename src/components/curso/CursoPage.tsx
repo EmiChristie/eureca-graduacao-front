@@ -29,15 +29,18 @@ import { getCurriculoAtivoMaisRecente, getCurriculo } from "@/service/eurecaServ
   
 export interface CursoPageProps{
     codigo_curso:number,
+    codigo_curriculo?:number|undefined,
   }
     
   export const CursoPage = (
     {
-        codigo_curso
+        codigo_curso,
+        codigo_curriculo
     }:CursoPageProps
   ) => {
 
     console.log(codigo_curso)
+    console.log(codigo_curriculo)
 
     const navigate = useNavigate();
     const [aba, setAba] = useState(1)
@@ -60,7 +63,7 @@ export interface CursoPageProps{
 
     const { data: requisitos, isLoading:isLoading3, isError:isError3 } = useQuery<Curriculo, Error>({
       queryKey: ["curriculo", codigo_curso],
-      queryFn: () => getCurriculo(codigo_curso, curriculo),
+      queryFn: () => getCurriculo(codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!curriculo && !!codigo_curso,
@@ -175,10 +178,10 @@ export interface CursoPageProps{
                                 <CursoPerfil curso={curso} requisitos={requisitos}/>
                                 :
                                 aba == 2 ?
-                                <CursoFluxograma curso={curso} curriculo={curriculo} requisitos={requisitos}/>
+                                <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo} requisitos={requisitos}/>
                                 :
                                 aba == 3 ?
-                                <CursoDiagnostico requisitos={requisitos} curso={curso} curriculo={curriculo}/>
+                                <CursoDiagnostico requisitos={requisitos} curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo}/>
                                 :
                                 aba == 4 ?
                                 <MeuDesempenho curso={curso}/>

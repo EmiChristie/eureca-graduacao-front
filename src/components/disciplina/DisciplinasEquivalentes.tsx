@@ -20,7 +20,7 @@ import { formatarNome } from "@/util/utilities"
                 <Card.Body>
                     <Stat.Root >
                     <HStack justify="space-between">
-                        <Stat.Label  color={`${EURECA_COLORS.CINZA}/55`}>Disciplinas Equivalentes</Stat.Label>
+                        <Stat.Label  color={`${EURECA_COLORS.CINZA}/55`}>Disciplinas Equivalentes em outros currículos</Stat.Label>
                         <Icon  color={`${EURECA_COLORS.CINZA}/55`}>
                         <LuFiles />
                         </Icon>
@@ -31,7 +31,8 @@ import { formatarNome } from "@/util/utilities"
 
                         <Flex mt={4} alignContent={"center"} flexDir={"column"} h={"full"}>
                             <For each={disciplinas_equivalentes}>
-                                {(p)=><Link mb={1} className="text" href={`/graduacao/curso/${curso.codigo_do_curso}/disciplina/${p.codigo}`} color={`${EURECA_COLORS.CINZA}/80`} fontWeight={"medium"}><LuDot/>{p.nome}</Link>}
+                                {/*{(p)=><Link mb={1} className="text" href={`/graduacao/curso/${curso.codigo_do_curso}/disciplina/${p.codigo}`} color={`${EURECA_COLORS.CINZA}/80`} fontWeight={"medium"}><LuDot/>{p.nome}</Link>}*/}
+                                {(p)=><Link mb={1} className="text" color={`${EURECA_COLORS.CINZA}/80`} fontWeight={"medium"}><LuDot/>{p.nome}</Link>}
                             </For>
                         </Flex>
                         :

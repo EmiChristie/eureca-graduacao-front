@@ -20,7 +20,7 @@ import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
     const statsW = "max";
     return(
         <>
-            <TituloPerfilPPC curso={curso.descricao}/>
+            <TituloPerfilPPC curso={curso.descricao} codigo_curso={curso.codigo_do_curso}/>
             <Flex mt={4} wrap={"wrap"} gap={4} className="text">
             <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                     <AtuacaoCard curso={curso} requisitos={requisitos} w={statsW}/>

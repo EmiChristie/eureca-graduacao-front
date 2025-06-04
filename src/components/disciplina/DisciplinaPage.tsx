@@ -32,12 +32,14 @@ import { DiagnosticoDisciplina } from "./DiagnosticoDisciplina";
 export interface DisciplinaPageProps{
     codigo_curso:number,
     codigo_disciplina:number,
+    codigo_curriculo?:number|undefined,
   }
     
   export const DisciplinaPage = (
     {
         codigo_curso,
-        codigo_disciplina
+        codigo_disciplina,
+        codigo_curriculo
     }:DisciplinaPageProps
   ) => {
 
@@ -63,8 +65,8 @@ export interface DisciplinaPageProps{
     });
 
     const { data: disciplinaCurriculo, isLoading:isLoading3, isError:isError3 } = useQuery<DisciplinaCurriculo[], Error>({
-      queryKey: ["pegarDisciplinaCurriculo", codigo_curso, curriculo,codigo_disciplina],
-      queryFn: () => getDisciplinaCurriculo(codigo_curso, curriculo,codigo_disciplina),
+      queryKey: ["pegarDisciplinaCurriculo", codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo,codigo_disciplina],
+      queryFn: () => getDisciplinaCurriculo(codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo,codigo_disciplina),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!curriculo && !!codigo_curso && !!codigo_disciplina,
@@ -87,8 +89,8 @@ export interface DisciplinaPageProps{
     });
 
     const { data: requisitosDisciplina, isLoading:isLoading6, isError:isError6 } = useQuery<RelacionamentosDisciplina, Error>({
-      queryKey: ["pegarRequisitosDaDisciplina",codigo_disciplina,codigo_curso,curriculo],
-      queryFn: () => getRequisitosDisciplina(codigo_disciplina,codigo_curso,curriculo),
+      queryKey: ["pegarRequisitosDaDisciplina",codigo_disciplina,codigo_curso,codigo_curriculo ? codigo_curriculo : curriculo],
+      queryFn: () => getRequisitosDisciplina(codigo_disciplina,codigo_curso,codigo_curriculo ? codigo_curriculo : curriculo),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!curriculo && !!codigo_curso && !!codigo_disciplina,
