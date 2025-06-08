@@ -8,6 +8,7 @@ export const ENDPOINT = {
     CURRICULO_ATIVO_MAIS_RECENTE: "eureca/curriculo-ativo-mais-recente",
     CURRICULO: "eureca/curriculo",
     REQUISITOS_DISCIPLINA:"eureca/requisitos-disciplina",
+    AREA_RETENCAO:"eureca/area-de-retencao",
     
     DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
     METRICAS_CURSO: "metricas-curso/metricas-curso",

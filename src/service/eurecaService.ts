@@ -128,3 +128,10 @@ export const getPlanoDeCurso = async (disciplina:number) => {
     return data[data.length-1];
 }
 
+export const getAreaRetencao = async (curso:number) => {
+    const { data } = await axiosInstance.get<string>(
+        `/${ENDPOINT.AREA_RETENCAO}?curso=${curso}`,
+    );
+    
+    return data;
+}

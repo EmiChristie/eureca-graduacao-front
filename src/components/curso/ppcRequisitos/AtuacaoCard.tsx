@@ -6,9 +6,7 @@ import { CardProps } from "./DuracaoCard";
 
   export const AtuacaoCard = (
     {
-        curso,
-        requisitos,
-        w
+        area
     }:CardProps
   ) => {
     return(
@@ -24,7 +22,7 @@ import { CardProps } from "./DuracaoCard";
                     </HStack>
                     
                     <Flex h={"full"} alignItems={"center"}>
-                    <Stat.ValueText color={EURECA_COLORS.BRANCO}>{mapArea(curso.area_de_retencao)}</Stat.ValueText>
+                    <Stat.ValueText color={EURECA_COLORS.BRANCO}>{area}</Stat.ValueText>
                     </Flex>
                   </Stat.Root>
               </Card.Body>

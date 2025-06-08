@@ -4,9 +4,10 @@ import { LuCalendarClock, LuClock } from "react-icons/lu"
 import { Curriculo, Curso } from "@/interfaces/types";
 
 export interface CardProps {
-  curso: Curso;
-  requisitos: Curriculo;
-  w: string;
+  curso?: Curso;
+  requisitos?: Curriculo;
+  w?: string;
+  area?:string;
 }
 
   export const DuracaoCard = (

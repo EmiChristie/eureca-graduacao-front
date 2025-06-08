@@ -64,7 +64,7 @@ export type Curso = {
     data_de_funcionamento: string;
     codigo_inep: number;
     modalidade_academica: string;
-    curriculo_atual: number;
+    curriculo_atual: number|string;
     area_de_retencao: number;
     ciclo_enade: number;
 };

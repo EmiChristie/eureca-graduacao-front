@@ -4,6 +4,7 @@ import { LuBriefcaseBusiness, LuClock, LuSchool } from "react-icons/lu"
 import { Curriculo, Curso } from "@/interfaces/types";
 import { mapArea } from "@/util/mapeamentos";
 import { CardProps } from "./DuracaoCard";
+import { formatarNome } from "@/util/utilities";
 
   export const CampusCard = (
     {
@@ -24,7 +25,7 @@ import { CardProps } from "./DuracaoCard";
                         </Icon>
                     </HStack>
                     <Flex h={"full"} alignItems={"center"}>
-                      <Stat.ValueText color={EURECA_COLORS.BRANCO}>{curso.nome_do_campus}</Stat.ValueText>
+                      <Stat.ValueText color={EURECA_COLORS.BRANCO}>{formatarNome(curso.nome_do_campus)}</Stat.ValueText>
                     </Flex>
                   </Stat.Root>
               </Card.Body>

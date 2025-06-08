@@ -25,7 +25,7 @@ import { MeuDesempenho } from "./MeuDesempenho";
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getCurriculo } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getCurriculo, getAreaRetencao } from "@/service/eurecaService";
   
 export interface CursoPageProps{
     codigo_curso:number,
@@ -67,6 +67,14 @@ export interface CursoPageProps{
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!curriculo && !!codigo_curso,
+    });
+
+    const { data: area, isLoading:isLoading4, isError:isError4 } = useQuery<string, Error>({
+      queryKey: ["getAreaRetencao", codigo_curso],
+      queryFn: () => getAreaRetencao(codigo_curso),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!curriculo,
     });
 
     console.log(curso);
@@ -129,7 +137,7 @@ export interface CursoPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3 ?
+                    isLoading || isLoading2||isLoading3||isLoading4 ?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -146,7 +154,7 @@ export interface CursoPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3 ?
+                    isError||isError2||isError3||isError4 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -175,7 +183,7 @@ export interface CursoPageProps{
                         <Box mx={4} h={"86vh"}>
                             {
                                 aba == 1 ?
-                                <CursoPerfil curso={curso} requisitos={requisitos}/>
+                                <CursoPerfil area={area} curso={curso} requisitos={requisitos}/>
                                 :
                                 aba == 2 ?
                                 <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo} requisitos={requisitos}/>
