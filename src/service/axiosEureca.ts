@@ -2,7 +2,7 @@ import { dominio } from "@/util/constants";
 import axios, { AxiosError } from "axios";
 
 
-const eureca_as = `https://eureca.${dominio}.ufcg.edu.br/as/`
+const eureca_as = `https://eureca.${dominio}.ufcg.edu.br/as-sig/`
 
 export const axiosEureca = axios.create({
   baseURL: eureca_as,

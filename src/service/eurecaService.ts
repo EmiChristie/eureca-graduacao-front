@@ -39,7 +39,7 @@ export const getToken = async (credenciais: Autenticacao) => {
 };
 
 export const getProfile = async (token: string) => {
-  const { data } = await axiosEureca.get<ProfileScao>(
+  const { data } = await axiosEureca.get<ProfileSig>(
     '/profile',
     {
       headers: {

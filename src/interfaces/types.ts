@@ -316,7 +316,12 @@ export type ProfileSig = {
   attributes: {
     professor?:string;
     coordenador?:string;
-    aluno?:string; 
+    aluno?:string;
+    secretarioCoordenador?:string;
+    cursos_centro?:string[];
+    unidades_centro?:string[];
+    cursos_unidade?:string[];
+    unidade?:string;
   }
 }
 

@@ -43,40 +43,41 @@ export const LoginDialog = (
         mutationFn: getProfile,
         onSuccess: (data,token) => {
           console.log(data)
-          if(data.attributes.type.toLowerCase() === "aluno"){
-            mutation3.mutate({matricula: loginvalue,token:token});
-          }else if(data.attributes.type.toLowerCase() === "curso"){
+          if(data.type.toLowerCase() === "aluno"){
+            mutation3.mutate({matricula: data.attributes.aluno,token:token});
+          }else if(data.type.toLowerCase() === "curso"){
+            /* SCAO:
             user.setProfile({
               id:data.id,
               name:data.name,
               type:data.attributes.type,
               code:data.attributes.code,
             });
-            /* SIG:
+            */
+            
             user.setProfile({
               id:data.id,
               name:data.name,
               type:data.type,
               code:data.attributes.coordenador,
             });
-            */
           toaster.create({
             title: "Login realizado com sucesso!",
             type: "success"
           });
           }else{
+            /* SCAO:
             user.setProfile({
               id:data.id,
               name:data.name,
               type:data.attributes.type,
             });
-            /* SIG:
+            */
             user.setProfile({
               id:data.id,
               name:data.name,
               type:data.type,
             });
-            */
           toaster.create({
             title: "Login realizado com sucesso!",
             type: "success"
@@ -111,14 +112,6 @@ export const LoginDialog = (
               code:String(data.codigo_do_curso),
               curriculum:String(data.codigo_do_curriculo)
             });
-            /* SIG:
-            user.setProfile({
-              id:data.id,
-              name:data.name,
-              type:data.type,
-              code:data.attributes.coordenador,
-            });
-            */
         },
         onError: (error) => {
           console.log(error);
