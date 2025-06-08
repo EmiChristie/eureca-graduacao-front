@@ -6,6 +6,7 @@ import { Curriculo, Curso } from "@/interfaces/types";
 export interface CardProps {
   curso?: Curso;
   requisitos?: Curriculo;
+  requisitosScao?: Curriculo;
   w?: string;
   area?:string;
 }

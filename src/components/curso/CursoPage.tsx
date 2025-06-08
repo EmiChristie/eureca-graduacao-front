@@ -25,7 +25,7 @@ import { MeuDesempenho } from "./MeuDesempenho";
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getCurriculo, getAreaRetencao } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getCurriculo, getAreaRetencao, getCurriculoAtivoMaisRecenteScao, getCurriculoScao } from "@/service/eurecaService";
   
 export interface CursoPageProps{
     codigo_curso:number,
@@ -61,9 +61,11 @@ export interface CursoPageProps{
       enabled: !!codigo_curso,
     });
 
+    console.log(curriculo)
+
     const { data: requisitos, isLoading:isLoading3, isError:isError3 } = useQuery<Curriculo, Error>({
       queryKey: ["curriculo", codigo_curso],
-      queryFn: () => getCurriculo(codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo),
+      queryFn: () => getCurriculo(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : String(curriculo)),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!curriculo && !!codigo_curso,
@@ -75,6 +77,24 @@ export interface CursoPageProps{
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!curriculo,
+    });
+
+    const { data: curriculoScao, isLoading:isLoading5, isError:isError5 } = useQuery<number, Error>({
+      queryKey: ["curriculoAtivoMaisRecenteScao", codigo_curso],
+      queryFn: () => getCurriculoAtivoMaisRecenteScao(codigo_curso),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!codigo_curso,
+    });
+
+    console.log(curriculo)
+
+    const { data: requisitosScao, isLoading:isLoading6, isError:isError6 } = useQuery<Curriculo, Error>({
+      queryKey: ["curriculoScao", codigo_curso],
+      queryFn: () => getCurriculoScao(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : String(curriculoScao)),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!curriculo && !!codigo_curso,
     });
 
     console.log(curso);
@@ -137,7 +157,7 @@ export interface CursoPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4 ?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6 ?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -154,7 +174,7 @@ export interface CursoPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4 ?
+                    isError||isError2||isError3||isError4||isError5||isError6||!requisitos||!curso||!curriculo||!area||!curriculoScao||!requisitosScao ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -183,7 +203,7 @@ export interface CursoPageProps{
                         <Box mx={4} h={"86vh"}>
                             {
                                 aba == 1 ?
-                                <CursoPerfil area={area} curso={curso} requisitos={requisitos}/>
+                                <CursoPerfil area={area} curso={curso} requisitos={requisitos} requisitosScao={requisitosScao}/>
                                 :
                                 aba == 2 ?
                                 <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo} requisitos={requisitos}/>

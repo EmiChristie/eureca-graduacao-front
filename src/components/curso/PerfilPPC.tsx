@@ -15,10 +15,12 @@ import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
     {
         curso,
         requisitos,
+        requisitosScao,
         area
     }:CardProps
   ) => {
     const statsW = "max";
+    console.log(requisitos)
     return(
         <>
             <TituloPerfilPPC curso={curso.descricao} codigo_curso={curso.codigo_do_curso}/>
@@ -30,7 +32,7 @@ import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
                     <TurnoCard curso={curso} requisitos={requisitos} w={statsW}/>
                 </Flex>
                 <Flex gap={4} w={"full"} placeItems={"stretch"}>
-                    <DisciplinasCard curso={curso} requisitos={requisitos} w={statsW}/>
+                    <DisciplinasCard curso={curso} requisitos={requisitosScao} w={statsW}/>
                     <Flex flexDir={"column"} gap={4}>
                     <DuracaoCard curso={curso} requisitos={requisitos} w={statsW}/>
                     <CurriculoCard curso={curso} requisitos={requisitos} w={statsW}/>

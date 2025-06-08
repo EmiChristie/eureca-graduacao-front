@@ -21,7 +21,7 @@ import { getCurso, getMetricasDisciplina } from "@/service/metricasService";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getCurriculo, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina } from "@/service/eurecaService";
 import { CursoDiagnostico } from "../curso/CursoDiagnostico";
 import { CursoFluxograma } from "../curso/CursoFluxograma";
 import { CursoPerfil } from "../curso/CursoPerfil";

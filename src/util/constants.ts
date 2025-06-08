@@ -7,6 +7,8 @@ export const ENDPOINT = {
     USER_INFO: "eureca/user-info",
     CURRICULO_ATIVO_MAIS_RECENTE: "eureca/curriculo-ativo-mais-recente",
     CURRICULO: "eureca/curriculo",
+    CURRICULO_ATIVO_MAIS_RECENTE_SCAO: "eureca/curriculo-ativo-mais-recente-scao",
+    CURRICULO_SCAO: "eureca/curriculo-scao",
     REQUISITOS_DISCIPLINA:"eureca/requisitos-disciplina",
     AREA_RETENCAO:"eureca/area-de-retencao",
     

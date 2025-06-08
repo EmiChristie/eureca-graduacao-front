@@ -8,6 +8,7 @@ export interface CursoProps{
     curso?:Curso,
     curriculo?:number,
     requisitos?:Curriculo,
+    requisitosScao?:Curriculo,
     area?:string;
   }
     
@@ -15,6 +16,7 @@ export interface CursoProps{
     {
         curso,
         requisitos,
+        requisitosScao,
         area
     }:CursoProps
   ) => {
@@ -25,7 +27,7 @@ export interface CursoProps{
                 <Box color={EURECA_COLORS.CINZA}>
 
                       <Box>
-                        <PerfilPPC area={area} curso={curso} requisitos={requisitos} w={"max"}/>
+                        <PerfilPPC requisitosScao={requisitosScao} area={area} curso={curso} requisitos={requisitos} w={"max"}/>
                       </Box>
                       <Box mt={4}>
                         <PerfilAlunoIdeal requisitos={requisitos}/>

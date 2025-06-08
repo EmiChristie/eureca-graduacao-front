@@ -67,9 +67,25 @@ export const getCurriculoAtivoMaisRecente = async (curso: number) => {
     return data;
 }
 
-export const getCurriculo = async (curso: number,curriculo:number) => {
+export const getCurriculo = async (curso: number,curriculo:string) => {
     const { data } = await axiosInstance.get<Curriculo>(
         `/${ENDPOINT.CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
+    );
+    
+    return data;
+}
+
+export const getCurriculoAtivoMaisRecenteScao = async (curso: number) => {
+    const { data } = await axiosInstance.get<number>(
+        `/${ENDPOINT.CURRICULO_ATIVO_MAIS_RECENTE_SCAO}?curso=${curso}`,
+    );
+    
+    return data;
+}
+
+export const getCurriculoScao = async (curso: number,curriculo:string) => {
+    const { data } = await axiosInstance.get<Curriculo>(
+        `/${ENDPOINT.CURRICULO_SCAO}?curso=${curso}&curriculo=${curriculo}`,
     );
     
     return data;
