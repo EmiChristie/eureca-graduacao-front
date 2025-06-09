@@ -4,6 +4,7 @@ import { Autenticacao, Curriculo, CursoHome, Disciplina, DisciplinaCurriculo, Di
 import axiosEureca from "./axiosEureca";
 import { cursorTo } from "readline";
 import axiosDAS from "./axiosDAS";
+import axiosDASSIG from "./axiosDASSIG";
 
 export const testarConexao = async () => {
     const { data } = await axiosInstance.get<String>(
@@ -60,6 +61,7 @@ export const getUserInfo = async ({matricula}:UserInfoPayload) => {
 }
 
 export const getCurriculoAtivoMaisRecente = async (curso: number) => {
+    console.log("aaaaaaaaaaaaaaaaa")
     const { data } = await axiosInstance.get<number>(
         `/${ENDPOINT.CURRICULO_ATIVO_MAIS_RECENTE}?curso=${curso}`,
     );
@@ -68,14 +70,18 @@ export const getCurriculoAtivoMaisRecente = async (curso: number) => {
 }
 
 export const getCurriculo = async (curso: number,curriculo:string) => {
+    console.log("dsfsdfdsfsdfdsfds")
+    console.log("curriculo enviado: "+curriculo)
     const { data } = await axiosInstance.get<Curriculo>(
         `/${ENDPOINT.CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
     );
     
+    console.log(data)
     return data;
 }
 
 export const getCurriculoAtivoMaisRecenteScao = async (curso: number) => {
+    console.log("bbbbbbbbbbbbbbb")
     const { data } = await axiosInstance.get<number>(
         `/${ENDPOINT.CURRICULO_ATIVO_MAIS_RECENTE_SCAO}?curso=${curso}`,
     );
@@ -104,8 +110,8 @@ export const getRequisitosDisciplina = async (disciplina:number,curso: number,cu
     return data;
 }
 
-export const getDisciplinasPorCurriculo = async (curso: number,curriculo:number) => {
-    const { data } = await axiosDAS.get<DisciplinaCurriculo[]>(
+export const getDisciplinasPorCurriculo = async (curso: number,curriculo:string) => {
+    const { data } = await axiosDASSIG.get<DisciplinaCurriculo[]>(
         `/${DAS_ENDPOINT.DISCIPLINAS_CURRICULO}?curso=${curso}&curriculo=${curriculo}`,
     );
     
@@ -120,8 +126,8 @@ export const getDisciplinaCurriculo = async (curso: number,curriculo:number,disc
     return data;
 }
 
-export const getPreRequisitos = async (curso: number,curriculo:number) => {
-    const { data } = await axiosDAS.get<DisciplinaPreRequisito[]>(
+export const getPreRequisitos = async (curso: number,curriculo:string) => {
+    const { data } = await axiosDASSIG.get<DisciplinaPreRequisito[]>(
         `/${DAS_ENDPOINT.PRE_REQUISITOS}?curso=${curso}&curriculo=${curriculo}`,
     );
     

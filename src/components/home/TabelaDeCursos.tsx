@@ -104,8 +104,9 @@ import { formatarNome } from "@/util/utilities";
       user.setProfile(undefined);
     }
 
-    function verCurso(curso:number){
-      navigate(`/graduacao/curso/${curso}`);
+    function verCurso(curso: number) {
+      const url = `/graduacao/curso/${curso}`;
+      window.open(url, '_blank');
     }
 
     const tamanhoTabela = "72vh";

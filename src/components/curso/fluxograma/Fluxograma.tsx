@@ -229,7 +229,7 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos,curso,curricu
             {<TituloListaOptativas cor={mostrarOutrosComponentes ? "#f97316" : "#ec4899"}/>}
             <Box position="relative" w="full" pt={4}>
                 <Grid className="grid-cols-6" gap={4}>
-                    <For each={disciplinas.filter(d=>d.tipo === "OPCIONAL" && d.status === "ATIVO")}>
+                    <For each={disciplinas.filter(d=>d.tipo === "OPTATIVO" && d.status === "ATIVO")}>
                         {
                             (disciplina)=>
                                 <Box 

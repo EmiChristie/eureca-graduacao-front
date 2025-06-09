@@ -22,18 +22,18 @@ import { Optativas } from "./fluxograma/Optativas";
 
     const { data: disciplinas, isLoading, isError } = useQuery<DisciplinaCurriculo[], Error>({
       queryKey: ["disciplinasPorCurriculo", curso.codigo_do_curso,curriculo],
-      queryFn: () => getDisciplinasPorCurriculo(curso.codigo_do_curso,curriculo),
+      queryFn: () => getDisciplinasPorCurriculo(curso.codigo_do_curso,String(curriculo)),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curso.codigo_do_curso,
+      enabled: !!curso.codigo_do_curso && !!curriculo,
     });
 
     const { data: preRequisitos, isLoading:isLoading2, isError:isError2 } = useQuery<DisciplinaPreRequisito[], Error>({
       queryKey: ["pre-requisito-disciplinas", curso.codigo_do_curso,curriculo],
-      queryFn: () => getPreRequisitos(curso.codigo_do_curso,curriculo),
+      queryFn: () => getPreRequisitos(curso.codigo_do_curso,String(curriculo)),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curso.codigo_do_curso,
+      enabled: !!curso.codigo_do_curso && !!curriculo,
     });
 
     return(

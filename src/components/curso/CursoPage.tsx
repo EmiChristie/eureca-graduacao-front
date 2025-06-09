@@ -63,25 +63,27 @@ export interface CursoPageProps{
 
     console.log(curriculo)
 
-    const { data: requisitos, isLoading:isLoading3, isError:isError3 } = useQuery<Curriculo, Error>({
-      queryKey: ["curriculo", codigo_curso],
-      queryFn: () => getCurriculo(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : String(curriculo)),
+    const { data: curriculoScao, isLoading:isLoading5, isError:isError5 } = useQuery<number, Error>({
+      queryKey: ["curriculoAtivoMaisRecenteScao", codigo_curso],
+      queryFn: () => getCurriculoAtivoMaisRecenteScao(codigo_curso),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curriculo && !!codigo_curso,
+      enabled: !!codigo_curso,
+    });
+
+    console.log(curriculoScao)
+    
+    const { data: requisitos, isLoading:isLoading3, isError:isError3 } = useQuery<Curriculo, Error>({
+      queryKey: ["curriculo", codigo_curso],
+      queryFn: () => getCurriculo(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : curriculo ? String(curriculo) : curriculoScao ? String(curriculoScao) : "0"),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) && !!codigo_curso,
     });
 
     const { data: area, isLoading:isLoading4, isError:isError4 } = useQuery<string, Error>({
       queryKey: ["getAreaRetencao", codigo_curso],
       queryFn: () => getAreaRetencao(codigo_curso),
-      staleTime: 1000 * 60 * 5,
-      refetchOnWindowFocus: false,
-      enabled: !!curriculo,
-    });
-
-    const { data: curriculoScao, isLoading:isLoading5, isError:isError5 } = useQuery<number, Error>({
-      queryKey: ["curriculoAtivoMaisRecenteScao", codigo_curso],
-      queryFn: () => getCurriculoAtivoMaisRecenteScao(codigo_curso),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!codigo_curso,
@@ -91,23 +93,13 @@ export interface CursoPageProps{
 
     const { data: requisitosScao, isLoading:isLoading6, isError:isError6 } = useQuery<Curriculo, Error>({
       queryKey: ["curriculoScao", codigo_curso],
-      queryFn: () => getCurriculoScao(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : String(curriculoScao)),
+      queryFn: () => getCurriculoScao(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : curriculoScao ? String(curriculoScao) : curriculo ? String(curriculo) : "0"),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curriculo && !!codigo_curso,
+      enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) && !!codigo_curso,
     });
 
     console.log(curso);
-
-    const getAba = () => {
-        switch(aba){
-            case 1: return "Perfil do curso";
-            case 2: return "Fluxograma";
-            case 3: return "Diagnóstico";
-            case 4: return "Meu Desempenho";
-            default: return "Perfil do curso";
-        }
-    }
   
     return (
       <>
@@ -174,7 +166,7 @@ export interface CursoPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4||isError5||isError6||!requisitos||!curso||!curriculo||!area||!curriculoScao||!requisitosScao ?
+                    isError||isError4||isError5||isError6||!requisitos||!curso||!area||!requisitosScao ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -206,10 +198,10 @@ export interface CursoPageProps{
                                 <CursoPerfil area={area} curso={curso} requisitos={requisitos} requisitosScao={requisitosScao}/>
                                 :
                                 aba == 2 ?
-                                <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo} requisitos={requisitos}/>
+                                <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0} requisitos={requisitos}/>
                                 :
                                 aba == 3 ?
-                                <CursoDiagnostico requisitos={requisitos} curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo}/>
+                                <CursoDiagnostico requisitos={requisitos} curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0}/>
                                 :
                                 aba == 4 ?
                                 <MeuDesempenho curso={curso}/>
