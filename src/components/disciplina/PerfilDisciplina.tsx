@@ -29,12 +29,22 @@ export const PerfilDisciplina = (
             <TituloPerfilDisciplina/>
             <Flex flexDir={"column"} gap={4} mt={4}>
                 <Sobre curso={curso} disciplinaCurriculo={disciplinaCurriculo}/>
-                <Informacoes informacoes={informacoes} />
-                <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
-                    <PreRequisitos curso={curso} requisitosDisciplina={requisitosDisciplina} />
-                    <CoRequisitos curso={curso} requisitosDisciplina={requisitosDisciplina} />
-                    <DisciplinasEquivalentes curso={curso} requisitosDisciplina={requisitosDisciplina} />
-                </Flex>
+                {
+                    informacoes ?
+                        <Informacoes informacoes={informacoes} />
+                    :
+                        <></>
+                }
+                {
+                    requisitosDisciplina ?
+                        <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
+                            <PreRequisitos curso={curso} requisitosDisciplina={requisitosDisciplina} />
+                            <CoRequisitos curso={curso} requisitosDisciplina={requisitosDisciplina} />
+                            <DisciplinasEquivalentes curso={curso} requisitosDisciplina={requisitosDisciplina} />
+                        </Flex>
+                        :
+                        <></>
+                }
             </Flex>
         </>
     )

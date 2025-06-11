@@ -119,7 +119,7 @@ export const getDisciplinasPorCurriculo = async (curso: number,curriculo:string)
 }
 
 export const getDisciplinaCurriculo = async (curso: number,curriculo:number,disciplina:number) => {
-    const { data } = await axiosDAS.get<DisciplinaCurriculo[]>(
+    const { data } = await axiosDASSIG.get<DisciplinaCurriculo[]>(
         `/${DAS_ENDPOINT.DISCIPLINAS_CURRICULO}?curso=${curso}&curriculo=${curriculo}&disciplina=${disciplina}`,
     );
     
@@ -143,7 +143,7 @@ export const getPreRequisitosScao = async (curso: number,curriculo:string) => {
 }
 
 export const getDisciplina = async (disciplina:number) => {
-    const { data } = await axiosDAS.get<Disciplina[]>(
+    const { data } = await axiosDASSIG.get<Disciplina[]>(
         `/${DAS_ENDPOINT.DISCIPLINAS}?disciplina=${disciplina}`,
     );
     

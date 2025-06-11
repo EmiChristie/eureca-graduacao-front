@@ -14,8 +14,8 @@ import { Cell, Pie, PieChart, Tooltip } from "recharts"
     }:CardProps
   ) => {
 
-    const numeroDisciplinasObg = requisitos.numero_disciplinas_obrigatorias_minimo;
-    const numeroDisciplinasOpt = requisitos.numero_disciplinas_optativas_minimo;
+    const numeroDisciplinasObg = requisitos ? requisitos.numero_disciplinas_obrigatorias_minimo : 0;
+    const numeroDisciplinasOpt = requisitos ? requisitos.numero_disciplinas_optativas_minimo : 0;
 
     const chart = useChart({
         sort: { by: "value", direction: "desc" },

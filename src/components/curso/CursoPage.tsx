@@ -166,7 +166,7 @@ export interface CursoPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError4||isError5||isError6||!requisitos||!curso||!area||!requisitosScao ?
+                    isError||isError4||isError5||!requisitos||!curso||!area ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 

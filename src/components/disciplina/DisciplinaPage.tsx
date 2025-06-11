@@ -21,13 +21,14 @@ import { getCurso, getMetricasDisciplina } from "@/service/metricasService";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina, getCurriculoAtivoMaisRecenteScao } from "@/service/eurecaService";
 import { CursoDiagnostico } from "../curso/CursoDiagnostico";
 import { CursoFluxograma } from "../curso/CursoFluxograma";
 import { CursoPerfil } from "../curso/CursoPerfil";
 import { MeuDesempenho } from "../curso/MeuDesempenho";
 import { PerfilDisciplina } from "./PerfilDisciplina";
 import { DiagnosticoDisciplina } from "./DiagnosticoDisciplina";
+import { mapearCurso } from "@/util/mapeamentos";
   
 export interface DisciplinaPageProps{
     codigo_curso:number,
@@ -63,13 +64,22 @@ export interface DisciplinaPageProps{
       refetchOnWindowFocus: false,
       enabled: !!codigo_curso,
     });
+    
+    const { data: curriculoScao, isLoading:isLoading8, isError:isError8 } = useQuery<number, Error>({
+        queryKey: ["curriculoAtivoMaisRecenteScao", codigo_curso],
+        queryFn: () => getCurriculoAtivoMaisRecenteScao(codigo_curso),
+        staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
+        enabled: !!codigo_curso,
+    });
+    
 
     const { data: disciplinaCurriculo, isLoading:isLoading3, isError:isError3 } = useQuery<DisciplinaCurriculo[], Error>({
       queryKey: ["pegarDisciplinaCurriculo", codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo,codigo_disciplina],
-      queryFn: () => getDisciplinaCurriculo(codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo,codigo_disciplina),
+      queryFn: () => getDisciplinaCurriculo(codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0,codigo_disciplina),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curriculo && !!codigo_curso && !!codigo_disciplina,
+      enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) && !!codigo_curso && !!codigo_disciplina,
     });
 
     const { data: disciplina, isLoading:isLoading4, isError:isError4 } = useQuery<Disciplina[], Error>({
@@ -80,6 +90,7 @@ export interface DisciplinaPageProps{
       enabled: !!codigo_disciplina,
     });
 
+    //usando o SCAO já que no SIG não tem planos de curso
     const { data: informacoes, isLoading:isLoading5, isError:isError5 } = useQuery<PlanoDeCurso, Error>({
       queryKey: ["pegarPlanoDeCurso",codigo_disciplina],
       queryFn: () => getPlanoDeCurso(codigo_disciplina),
@@ -88,14 +99,16 @@ export interface DisciplinaPageProps{
       enabled: !!codigo_disciplina,
     });
 
+    //estou usando o SCAO já que no sig não tem os co-requisitos nem disciplinas equivalentes
     const { data: requisitosDisciplina, isLoading:isLoading6, isError:isError6 } = useQuery<RelacionamentosDisciplina, Error>({
       queryKey: ["pegarRequisitosDaDisciplina",codigo_disciplina,codigo_curso,codigo_curriculo ? codigo_curriculo : curriculo],
-      queryFn: () => getRequisitosDisciplina(codigo_disciplina,codigo_curso,codigo_curriculo ? codigo_curriculo : curriculo),
+      queryFn: () => getRequisitosDisciplina(codigo_disciplina,mapearCurso[codigo_curso],codigo_curriculo ? codigo_curriculo : curriculoScao),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!curriculo && !!codigo_curso && !!codigo_disciplina,
+      enabled: (!!codigo_curriculo||!!curriculoScao) && !!codigo_curso && !!codigo_disciplina,
     });
 
+    //usando SCAO + SIG
     const { data: metricas, isLoading:isLoading7, isError:isError7 } = useQuery<MetricasDisciplina, Error>({
       queryKey: ["pegarMetricasDaDisciplina",codigo_disciplina,codigo_curso],
       queryFn: () => getMetricasDisciplina(codigo_disciplina,codigo_curso),
@@ -151,7 +164,7 @@ export interface DisciplinaPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7 ?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -168,7 +181,7 @@ export interface DisciplinaPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4||isError5||isError6 ?
+                    isError||isError2||isError3||isError4||isError8||isError7 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
