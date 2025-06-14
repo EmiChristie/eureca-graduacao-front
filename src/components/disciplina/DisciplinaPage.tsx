@@ -181,7 +181,7 @@ export interface DisciplinaPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4||isError8||isError7 ?
+                    isError||isError2||isError3||isError4||isError8 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
