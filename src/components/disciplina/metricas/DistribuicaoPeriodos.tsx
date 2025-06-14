@@ -15,6 +15,9 @@ export const DistribuicaoPeriodos = (
   }: DistribuicaoPeriodosProps
 ) => {
 
+    console.log("distribuição de períodos disciplina:")
+    console.log(metricas)
+
     const periodos = [];
     const cores = [
         "orange.500",
