@@ -14,11 +14,11 @@ export const IngressantesEGraduadosPorGeneroPorPeriodo = (
 
          const cores = [
          "#a3cfff", //homens ingressantes
-         "#60a5fa", //homens graduados
-         "#173da6", //homens evadidos
+         "#1a3478", //homens graduados
+         "#60a5fa", //homens evadidos
          "#f9a8d4", //mulheres ingressantes
-         "#ec4899", //mulheres graduadas
-         "#6d0e34", //mulheres evadidas
+         "#6d0e34", //mulheres graduadas
+         "#f472b6", //mulheres evadidas
      ]
      
 
@@ -38,10 +38,10 @@ export const IngressantesEGraduadosPorGeneroPorPeriodo = (
     const chart = useChart({
         data: periodos,
         series: [
-        { name: "mulheres_evadidas", label:"Mulheres Evadidas", color: cores[5], stackId: "a" },
         { name: "mulheres_graduadas", label:"Mulheres Graduadas", color: cores[4], stackId: "a" },
-        { name: "homens_evadidos", label:"Homens Evadidos", color: cores[2], stackId: "b" },
+        { name: "mulheres_evadidas", label:"Mulheres Evadidas", color: cores[5], stackId: "a" },
         { name: "homens_graduados", label:"Homens Graduados", color: cores[1], stackId: "b" },
+        { name: "homens_evadidos", label:"Homens Evadidos", color: cores[2], stackId: "b" },
         ],
     })
 

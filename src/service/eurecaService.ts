@@ -1,4 +1,4 @@
-import { DAS_ENDPOINT, ENDPOINT } from "@/util/constants";
+import { DAS_ENDPOINT, ENDPOINT, periodoDe } from "@/util/constants";
 import axiosInstance from "./axios";
 import { Autenticacao, Curriculo, CursoHome, Disciplina, DisciplinaCurriculo, DisciplinaPreRequisito, PlanoDeCurso, ProfileSig, ProfileScao, RelacionamentosDisciplina, Token, User, UserInfoPayload } from "@/interfaces/types";
 import axiosEureca from "./axiosEureca";
@@ -161,6 +161,22 @@ export const getPlanoDeCurso = async (disciplina:number) => {
 export const getAreaRetencao = async (curso:number) => {
     const { data } = await axiosInstance.get<string>(
         `/${ENDPOINT.AREA_RETENCAO}?curso=${curso}`,
+    );
+    
+    return data;
+}
+
+export const getExisteEstudanteScao = async (curso:number) => {
+    const { data } = await axiosDAS.get<any>(
+        `/${DAS_ENDPOINT.ESTUDANTES}?curso=${curso}&periodo-de-ingresso-de=${periodoDe}&pagina=1&tamanho=1`,
+    );
+    
+    return data;
+}
+
+export const getExisteEstudanteSig = async (curso:number) => {
+    const { data } = await axiosDASSIG.get<any>(
+        `/${DAS_ENDPOINT.ESTUDANTES}?curso=${curso}&periodo-de-ingresso-de=${periodoDe}&pagina=1&tamanho=1`,
     );
     
     return data;

@@ -25,7 +25,8 @@ import { MeuDesempenho } from "./MeuDesempenho";
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getCurriculo, getAreaRetencao, getCurriculoAtivoMaisRecenteScao, getCurriculoScao } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getCurriculo, getAreaRetencao, getCurriculoAtivoMaisRecenteScao, getCurriculoScao, getExisteEstudanteScao, getExisteEstudanteSig } from "@/service/eurecaService";
+import { mapearCurso } from "@/util/mapeamentos";
   
 export interface CursoPageProps{
     codigo_curso:number,
@@ -99,6 +100,25 @@ export interface CursoPageProps{
       enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) && !!codigo_curso,
     });
 
+    const { data: existeEstudanteScao, isLoading:isLoading7, isError:isError7 } = useQuery<any, Error>({
+      queryKey: ["getExisteEstudanteScao", codigo_curso],
+      queryFn: () => getExisteEstudanteScao(mapearCurso[codigo_curso]),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!codigo_curso,
+    });
+
+    const { data: existeEstudanteSig, isLoading:isLoading8, isError:isError8 } = useQuery<any, Error>({
+      queryKey: ["getExisteEstudanteSig", codigo_curso],
+      queryFn: () => getExisteEstudanteSig(codigo_curso),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!codigo_curso,
+    });
+
+    console.log("existe estudante scao? "+isError7)
+    console.log("existe estudante sig? "+isError8)
+    
     console.log(curso);
   
     return (
@@ -121,12 +141,12 @@ export interface CursoPageProps{
                                         <LuBookText/> Perfil do curso
                                     </Link>
                                 </Button>
-                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
+                                <Button disabled={isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8} justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
                                     <Link  color={EURECA_COLORS.BRANCO} className="text">
                                         <LuCombine /> Fluxograma
                                     </Link>
                                 </Button>
-                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(3)}>
+                                <Button disabled={isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 || (isError7 && isError8)} justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(3)}>
                                     <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuChartLine /> Diagnóstico
                                     </Link>
@@ -149,7 +169,7 @@ export interface CursoPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6 ?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -195,7 +215,7 @@ export interface CursoPageProps{
                         <Box mx={4} h={"86vh"}>
                             {
                                 aba == 1 ?
-                                <CursoPerfil area={area} curso={curso} requisitos={requisitos} requisitosScao={requisitosScao}/>
+                                <CursoPerfil diagnosticoPossivel={(!isError7||!isError8)} area={area} curso={curso} requisitos={requisitos} requisitosScao={requisitosScao}/>
                                 :
                                 aba == 2 ?
                                 <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0} requisitos={requisitos}/>

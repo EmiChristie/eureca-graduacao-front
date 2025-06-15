@@ -21,12 +21,11 @@ export const ComparacaoIngressantesGenero = (
     const pct_mulheres = round2((metricas.quantidade_media_mulheres_ingressantes/metricas.quantidade_media_ingressantes)*100)
 
     const periodos = [
-        {name:"Mulheres",value:metricas.quantidade_media_mulheres_ingressantes,porcentagem:pct_mulheres,color:"pink.500"},
         {name:"Homens",value:metricas.quantidade_media_homens_ingressantes,porcentagem:100-pct_mulheres,color:"teal.500"},
+        {name:"Mulheres",value:metricas.quantidade_media_mulheres_ingressantes,porcentagem:pct_mulheres,color:"pink.500"},
     ];
 
     const chart = useChart({
-        sort: { by: "value", direction: "desc" },
         data: periodos,
     })
 
@@ -35,7 +34,7 @@ export const ComparacaoIngressantesGenero = (
     const categoria_procura=()=>{
         if(Math.abs(diferenca) < 10){
             return "bastante equilibrada"
-        }else if(diferenca > -19.99){
+        }else if(diferenca > -19.99 && diferenca < 0){
             return "tendendo ao público masculino"
         }else if(diferenca < 0){
             return "centrada no público masculino"

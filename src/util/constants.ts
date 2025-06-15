@@ -1,5 +1,7 @@
 export const dominio = "lsd";
 
+export const periodoDe = "2014.1"
+
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",
     CURSOS: "eureca/cursos",
@@ -23,6 +25,7 @@ export const DAS_ENDPOINT = {
     PRE_REQUISITOS: "pre-requisito-disciplinas",
     DISCIPLINAS:"disciplinas",
     PLANO_DE_CURSO:"planos-de-curso",
+    ESTUDANTES:"estudantes"
 }
 
 export const EURECA_COLORS = {

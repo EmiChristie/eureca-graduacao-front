@@ -15,11 +15,11 @@ export const MediaDePermanenciaDeGenero = (
 
          const cores = [
          "#a3cfff", //homens ingressantes
-         "#60a5fa", //homens graduados
-         "#173da6", //homens evadidos
+         "#1a3478", //homens graduados
+         "#60a5fa", //homens evadidos
          "#f9a8d4", //mulheres ingressantes
-         "#ec4899", //mulheres graduadas
-         "#6d0e34", //mulheres evadidas
+         "#6d0e34", //mulheres graduadas
+         "#f472b6", //mulheres evadidas
      ]
 
     const chart = useChart({
@@ -27,10 +27,10 @@ export const MediaDePermanenciaDeGenero = (
             {mulheres_graduadas: metricas.porcentagem_media_mulheres_graduadas_em_relacao_as_mulheres_ingressantes, mulheres_evadidas:100-metricas.porcentagem_media_mulheres_graduadas_em_relacao_as_mulheres_ingressantes, homens_graduados:metricas.porcentagem_media_homens_graduados_em_relacao_aos_homens_ingressantes, homens_evadidos: 100-metricas.porcentagem_media_homens_graduados_em_relacao_aos_homens_ingressantes,periodo:"Permanência média" }
         ],
         series: [
-        { name: "mulheres_evadidas", label:"Mulheres Evadidas", color: cores[5], stackId: "a" },
         { name: "mulheres_graduadas", label:"Mulheres Graduadas", color: cores[4], stackId: "a" },
-        { name: "homens_evadidos", label:"Homens Evadidos", color: cores[2], stackId: "b" },
+        { name: "mulheres_evadidas", label:"Mulheres Evadidas", color: cores[5], stackId: "a" },
         { name: "homens_graduados", label:"Homens Graduados", color: cores[1], stackId: "b" },
+        { name: "homens_evadidos", label:"Homens Evadidos", color: cores[2], stackId: "b" },
         ],
     })
 
@@ -59,7 +59,7 @@ export const MediaDePermanenciaDeGenero = (
                     <Flex mt={4} h={"full"}>
                         <Box>
                             <Text fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
-                                De 100 mulheres ingressantes no curso de {curso}, em média, {Math.round(metricas.porcentagem_media_mulheres_graduadas_em_relacao_as_mulheres_ingressantes)} conseguem se formar. Já entre 100 homens ingressantes, é provável que {Math.round(metricas.porcentagem_media_homens_graduados_em_relacao_aos_homens_ingressantes)} consigam se formar.
+                                De 100 mulheres ingressantes neste curso, em média, {Math.round(metricas.porcentagem_media_mulheres_graduadas_em_relacao_as_mulheres_ingressantes)} conseguem se formar. Já entre 100 homens ingressantes, é provável que {Math.round(metricas.porcentagem_media_homens_graduados_em_relacao_aos_homens_ingressantes)} consigam se formar.
                             </Text>
                             <Text mt={4} fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
                                 Em geral, a taxa de permanência {categoria_taxa()}.

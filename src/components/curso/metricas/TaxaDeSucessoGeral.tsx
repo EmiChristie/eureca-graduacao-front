@@ -1,6 +1,6 @@
 import { MetricasCurso } from "@/interfaces/types"
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
-import { formatarNome } from "@/util/utilities";
+import { formatarNome, round2 } from "@/util/utilities";
 import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex, Box,Text, Alert } from "@chakra-ui/react";
 import { LuCalendarOff, LuMedal } from "react-icons/lu";
@@ -19,8 +19,8 @@ export const TaxaDeSucessoGeral = (
 ) => {
 
     const periodos = [
-        {name:"Graduados",porcentagem:metricas.taxa_de_sucesso_media,color:"blue.400"},
-        {name:"Evadidos",porcentagem:100-(metricas.taxa_de_sucesso_media),color:"orange.400"},
+        {name:"Graduados",porcentagem:round2(metricas.taxa_de_sucesso_media),color:"blue.400"},
+        {name:"Evadidos",porcentagem:round2(100-(metricas.taxa_de_sucesso_media)),color:"orange.400"},
     ];
 
     const chart = useChart({
