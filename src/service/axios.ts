@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 
-const api_url = "http://localhost:8080/" //"https://eureca.lsd.ufcg.edu.br/graduacao-backend/"
+const api_url = "https://eureca.lsd.ufcg.edu.br/graduacao-backend/"//"http://localhost:8080/" //
 
 export const axiosInstance = axios.create({
   baseURL: api_url,
