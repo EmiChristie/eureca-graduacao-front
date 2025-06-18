@@ -1,6 +1,6 @@
 import { Box, Card, Center, Flex, HStack, Icon, Stat } from "@chakra-ui/react"
 import { EURECA_COLORS } from "@/util/constants"
-import { LuBriefcaseBusiness, LuClock, LuSchool } from "react-icons/lu"
+import { LuBriefcaseBusiness, LuCalendarClock, LuCalendarOff, LuClock, LuSchool } from "react-icons/lu"
 import { Curriculo, Curso } from "@/interfaces/types";
 import { mapArea } from "@/util/mapeamentos";
 import { formatarNome } from "@/util/utilities";
@@ -20,7 +20,7 @@ import { DisciplinaCardProps } from "./Tipo";
                     <HStack justify="space-between">
                         <Stat.Label color={"gray.muted"}>Período ideal</Stat.Label>
                         <Icon color={"gray.muted"}>
-                        <LuSchool />
+                        <LuCalendarClock/>
                         </Icon>
                     </HStack>
                     <Flex h={"full"} alignItems={"center"}>

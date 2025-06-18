@@ -24,7 +24,7 @@ export interface DisciplinaCardProps2 {
                     <HStack justify="space-between">
                         <Stat.Label color={"gray.muted"}>Carga horária</Stat.Label>
                         <Icon color={"gray.muted"}>
-                        <LuSchool />
+                        <LuClock/>
                         </Icon>
                     </HStack>
                     <Flex h={"full"} alignItems={"center"}>

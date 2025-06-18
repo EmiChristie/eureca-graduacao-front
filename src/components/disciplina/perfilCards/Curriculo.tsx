@@ -1,6 +1,6 @@
 import { Card, Flex, HStack, Icon, Stat } from "@chakra-ui/react"
 import { EURECA_COLORS } from "@/util/constants"
-import { LuSchool } from "react-icons/lu"
+import { LuCalendarFold, LuSchool } from "react-icons/lu"
 import { DisciplinaCardProps } from "./Tipo";
 
   export const Curriculo = (
@@ -17,7 +17,7 @@ import { DisciplinaCardProps } from "./Tipo";
                     <HStack justify="space-between">
                         <Stat.Label color={"gray.muted"}>Currículo exibido</Stat.Label>
                         <Icon color={"gray.muted"}>
-                        <LuSchool />
+                        <LuCalendarFold/>
                         </Icon>
                     </HStack>
                     <Flex h={"full"} alignItems={"center"}>

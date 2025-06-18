@@ -1,6 +1,6 @@
 import { Button, Card, CloseButton, Dialog, Flex, HStack, Icon, Portal, Stat,Text } from "@chakra-ui/react"
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants"
-import { LuSchool } from "react-icons/lu"
+import { LuBookOpenText, LuSchool } from "react-icons/lu"
 import { DisciplinaCardProps } from "./Tipo"
 
   export const Referencias = (
@@ -21,7 +21,7 @@ import { DisciplinaCardProps } from "./Tipo"
                         <HStack justify="space-between">
                             <Stat.Label color={"gray.muted"}>Referências</Stat.Label>
                             <Icon color={"gray.muted"}>
-                            <LuSchool />
+                            <LuBookOpenText />
                             </Icon>
                         </HStack>
                         <Flex h={"full"} alignItems={"center"}>

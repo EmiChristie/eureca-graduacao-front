@@ -21,7 +21,7 @@ import { getCurso, getMetricasDisciplina } from "@/service/metricasService";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina, getCurriculoAtivoMaisRecenteScao } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina, getCurriculoAtivoMaisRecenteScao, getDisciplinasPorCurriculo } from "@/service/eurecaService";
 import { CursoDiagnostico } from "../curso/CursoDiagnostico";
 import { CursoFluxograma } from "../curso/CursoFluxograma";
 import { CursoPerfil } from "../curso/CursoPerfil";
@@ -117,6 +117,17 @@ export interface DisciplinaPageProps{
       enabled: !!codigo_disciplina && !!codigo_curso,
     });
     
+    const { data: disciplinas, isLoading:isLoading9, isError:isError9 } = useQuery<DisciplinaCurriculo[], Error>({
+        queryKey: ["disciplinasPorCurriculo", codigo_curso,(!!codigo_curriculo||!!curriculo||!!curriculoScao)],
+        queryFn: () => getDisciplinasPorCurriculo(codigo_curso,String(codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0)),
+        staleTime: 1000 * 60 * 5,
+        refetchOnWindowFocus: false,
+        enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) &&!!codigo_curso,
+    });
+
+    console.log("disciplinas validas???")
+    console.log(disciplinas)
+    
     return (
       <>
         <Box color={EURECA_COLORS.CINZA}>
@@ -164,7 +175,7 @@ export interface DisciplinaPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ||isLoading9?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -181,7 +192,7 @@ export interface DisciplinaPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4||isError8 ?
+                    isError||isError2||isError3||isError4||isError8||isError9 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -209,7 +220,12 @@ export interface DisciplinaPageProps{
                         </Box>
                         <Box mx={4} h={"86vh"}>
                             {
-                                aba == 1 ?
+                                aba == 2 ?
+                                <DiagnosticoDisciplina 
+                                    disciplina={disciplinaCurriculo[0]}
+                                    metricas={metricas}
+                                    />
+                                :
                                 <>
                                     <PerfilDisciplina 
                                         curso={curso} 
@@ -217,6 +233,7 @@ export interface DisciplinaPageProps{
                                         disciplinaCurriculo={disciplinaCurriculo[0]}
                                         requisitosDisciplina={requisitosDisciplina}
                                         informacoes={informacoes}
+                                        disciplinas_validas={disciplinas.map(d=>String(d.codigo_da_disciplina))}
                                         />
                                     {isError7 ? 
                                         <>
@@ -232,20 +249,6 @@ export interface DisciplinaPageProps{
                                         <></>
                                     }
                                 </>
-                                :
-                                aba == 2 ?
-                                <DiagnosticoDisciplina 
-                                    disciplina={disciplinaCurriculo[0]}
-                                    metricas={metricas}
-                                    />
-                                :
-                                <PerfilDisciplina 
-                                    curso={curso} 
-                                    disciplina={disciplina[0]} 
-                                    disciplinaCurriculo={disciplinaCurriculo[0]}
-                                    requisitosDisciplina={requisitosDisciplina}
-                                    informacoes={informacoes}
-                                    />
                             }
                         </Box>
                     </Box>

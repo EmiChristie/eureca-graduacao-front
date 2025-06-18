@@ -1,6 +1,6 @@
 import { Box, Card, Center, Flex, HStack, Icon, Stat } from "@chakra-ui/react"
 import { EURECA_COLORS } from "@/util/constants"
-import { LuBriefcaseBusiness, LuClock, LuSchool } from "react-icons/lu"
+import { LuBriefcaseBusiness, LuClock, LuPencilLine, LuSchool } from "react-icons/lu"
 import { Curriculo, Curso } from "@/interfaces/types";
 import { mapArea } from "@/util/mapeamentos";
 import { formatarNome } from "@/util/utilities";
@@ -34,7 +34,7 @@ export interface DisciplinaCardProps {
                     <HStack justify="space-between">
                         <Stat.Label color={"gray.muted"}>Tipo do componente</Stat.Label>
                         <Icon color={"gray.muted"}>
-                        <LuSchool />
+                        <LuPencilLine/>
                         </Icon>
                     </HStack>
                     <Flex h={"full"} alignItems={"center"}>
