@@ -36,7 +36,7 @@ export const AlunosMatriculadosPorPeriodo = (
                 <Flex h={"full"} alignItems={"center"} gap={0}>
                     <Flex direction={"column"}>
                         <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>{quantidade} alunos</Stat.ValueText>
-                        <Stat.Label color={`${EURECA_COLORS.CINZA}/80`}>Com uma variação média de {desvio_padrao} matrículas</Stat.Label>
+                        <Stat.Label color={`${EURECA_COLORS.CINZA}/80`}>Com uma variação de cerca de {desvio_padrao} alunos por período</Stat.Label>
                     </Flex>
                 </Flex>
                 </Stat.Root>

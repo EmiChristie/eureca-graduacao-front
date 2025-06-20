@@ -65,7 +65,7 @@ export const DistribuicaoNotasFaixa = ({ metricas }: DistribuicaoProps) => {
                     label={{
                       value: "Nota",
                       position: "bottom",
-                      style: { fill: "#52525b", fontWeight: 500 },
+                      style: { fill: "#696d72", fontWeight: 500 },
                     }}
                   />
                   <YAxis
@@ -77,7 +77,7 @@ export const DistribuicaoNotasFaixa = ({ metricas }: DistribuicaoProps) => {
                       value: "Porcentagem de Alunos",
                       angle: -90,
                       position: "insideLeft",
-                      style: { fill: "#52525b", fontWeight: 500 },
+                      style: { fill: "#696d72", fontWeight: 500 },
                       dy: 75,
                     }}
                   />

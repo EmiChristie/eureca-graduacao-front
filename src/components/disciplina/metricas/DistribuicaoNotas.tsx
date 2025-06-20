@@ -35,13 +35,6 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
     porcentagem: item.porcentagem_de_alunos,
   }));
 
-  const dadosVermelhos = periodos.map((p) =>
-    p.nota < 5 ? { ...p, verde: null } : { ...p, quantidade: null }
-  );
-  const dadosVerdes = periodos.map((p) =>
-    p.nota >= 5 ? { ...p, vermelho: null } : { ...p, quantidade: null }
-  );
-
   const chart = useChart({
     data: periodos,
     series: [
@@ -78,7 +71,7 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                     label={{
                       value: "Nota",
                       position: "bottom",
-                      style: { fill: "#52525b", fontWeight: 500 },
+                      style: { fill: `#696d72`, fontWeight: 500 },
                     }}
                   />
                   <YAxis
@@ -90,7 +83,7 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                       value: "Quantidade de Alunos",
                       angle: -90,
                       position: "insideLeft",
-                      style: { fill: "#52525b", fontWeight: 500 },
+                      style: { fill: `#696d72`, fontWeight: 500 },
                       dy: 80,
                     }}
                   />
