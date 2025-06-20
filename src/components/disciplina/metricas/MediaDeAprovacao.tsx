@@ -17,21 +17,21 @@ export const MediaDeAprovacao = (
 
     const mapear = (media:number) => {
         if(media == 10){
-            return "perfeita"
+            return "Perfeita"
         }else if(media >= 9){
-            return "ótima"
+            return "Ótima"
         }else if(media >= 8){
-            return "boa"
+            return "Boa"
         }else if(media >= 7){
-            return "razoável"
+            return "Razoável"
         }else{
-            return "preocupante"
+            return "Abaixo do ideal"
         }
     }
 
     return(
         <>
-            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+            <Card.Root minW={"18vw"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
@@ -42,7 +42,10 @@ export const MediaDeAprovacao = (
                 </HStack>
 
                 <Flex h={"full"} alignItems={"center"} gap={0}>
-                    <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>A nota média dos aprovados é de {media}, a qual é considerada uma média {mapear(media)}.</Stat.ValueText>
+                    <Flex direction={"column"}>
+                        <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>{media}</Stat.ValueText>
+                        <Stat.Label color={`${EURECA_COLORS.CINZA}/80`}>{mapear(media)}</Stat.Label>
+                    </Flex>
                 </Flex>
                 </Stat.Root>
             </Card.Body>

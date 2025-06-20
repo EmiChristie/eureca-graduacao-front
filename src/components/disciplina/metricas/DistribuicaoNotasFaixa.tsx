@@ -61,11 +61,25 @@ export const DistribuicaoNotasFaixa = ({ metricas }: DistribuicaoProps) => {
                     axisLine={false}
                     tickLine={false}
                     dataKey={chart.key("faixa")}
+                    stroke={chart.color("border")}
+                    label={{
+                      value: "Nota",
+                      position: "bottom",
+                      style: { fill: "#52525b", fontWeight: 500 },
+                    }}
                   />
                   <YAxis
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value) => `${value}%`}
+                    stroke={chart.color("border")}
+                    label={{
+                      value: "Porcentagem de Alunos",
+                      angle: -90,
+                      position: "insideLeft",
+                      style: { fill: "#52525b", fontWeight: 500 },
+                      dy: 75,
+                    }}
                   />
                   <Tooltip
                     animationDuration={100}

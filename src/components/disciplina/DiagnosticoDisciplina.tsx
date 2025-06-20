@@ -16,6 +16,7 @@ import { DistribuicaoNotas } from "./metricas/DistribuicaoNotas";
 import { TaxaDeReprovacao } from "./metricas/TaxaDeReprovacao";
 import { EURECA_COLORS } from "@/util/constants";
 import { LuFrown } from "react-icons/lu";
+import { AlunosMatriculadosPorPeriodo } from "./metricas/AlunosMatriculadosPorPeriodo";
 
 export interface DiagnosticoDisciplinaProps {
     disciplina?:DisciplinaCurriculo,
@@ -38,6 +39,7 @@ export const DiagnosticoDisciplina = (
                     <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                         <MediaDeAprovacao media={metricas.media_de_notas_dos_aprovados}/>
                         <TaxaDeReprovacao metricas={metricas.distribuicao_de_status}/>
+                        <AlunosMatriculadosPorPeriodo quantidade={0}quantidade_mais_dp={0}quantidade_menos_dp={0} desvio_padrao={0}/>
                     </Flex>
                     <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                         <DistribuicaoStatus metricas={metricas.distribuicao_de_status} />

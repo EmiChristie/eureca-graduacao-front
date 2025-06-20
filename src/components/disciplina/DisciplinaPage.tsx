@@ -241,7 +241,7 @@ export interface DisciplinaPageProps{
                                                 <Alert.Indicator />
                                                 <Alert.Content>
                                                     <Alert.Title>Diagnóstico indisponível</Alert.Title>
-                                                    <Alert.Description>Não há registros de matrículas nesta disciplina dos últimos 5 anos.</Alert.Description>
+                                                    <Alert.Description>Não há registros de matrículas nesta disciplina nos últimos 5 anos.</Alert.Description>
                                                 </Alert.Content>
                                             </Alert.Root>
                                         </>

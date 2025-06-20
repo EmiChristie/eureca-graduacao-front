@@ -35,11 +35,11 @@ import { PieChart, Pie, Cell,Tooltip, Legend, LabelList } from "recharts";
 
     const mapear = (taxa:number) => {
     if(taxa < 15){
-        return "baixa"
+        return "baixo"
     }else if(taxa < 25){
-        return "média"
+        return "médio"
     }else if(taxa < 35){
-        return "alta"
+        return "alto"
     }else{
         return "preocupante"
     }
@@ -47,18 +47,21 @@ import { PieChart, Pie, Cell,Tooltip, Legend, LabelList } from "recharts";
 
     return(
         <>
-            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+            <Card.Root maxW={"full"} w={"full"} minW={"23vw"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Taxa de reprovação</Stat.Label>
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Taxa média de reprovação</Stat.Label>
                     <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                     <LuThumbsDown  strokeWidth={2.6}/>
                     </Icon>
                 </HStack>
 
                 <Flex h={"full"} alignItems={"center"} gap={0}>
-                    <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>A taxa de reprovação é de cerca de {percentual}%, a qual é considerada {mapear(percentual)}.</Stat.ValueText>
+                    <Flex direction={"column"}>
+                        <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>Cerca de {percentual}%</Stat.ValueText>
+                        <Stat.Label color={`${EURECA_COLORS.CINZA}/80`}>Considerado um percentual de reprovação {mapear(percentual)}</Stat.Label>
+                    </Flex>
                 </Flex>
                 </Stat.Root>
             </Card.Body>

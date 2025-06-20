@@ -75,12 +75,24 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                     stroke={chart.color("border")}
                     axisLine={false}
                     tickLine={false}
+                    label={{
+                      value: "Nota",
+                      position: "bottom",
+                      style: { fill: "#52525b", fontWeight: 500 },
+                    }}
                   />
                   <YAxis
                     axisLine={false}
                     tickLine={false}
                     tickMargin={10}
                     stroke={chart.color("border")}
+                    label={{
+                      value: "Quantidade de Alunos",
+                      angle: -90,
+                      position: "insideLeft",
+                      style: { fill: "#52525b", fontWeight: 500 },
+                      dy: 80,
+                    }}
                   />
                   <Tooltip
                     animationDuration={100}
