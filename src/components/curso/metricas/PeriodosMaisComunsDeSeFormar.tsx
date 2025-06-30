@@ -1,7 +1,7 @@
 import { MediaPeriodosParaSeFormar } from "@/interfaces/types";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { formatarNome } from "@/util/utilities";
-import { Chart, useChart } from "@chakra-ui/charts";
+import { BarSegment, Chart, useChart } from "@chakra-ui/charts";
 import {
   Card,
   Stat,
@@ -13,14 +13,7 @@ import {
   Span,
 } from "@chakra-ui/react";
 import { LuGraduationCap } from "react-icons/lu";
-import {
-  BarChart,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Bar,
-} from "recharts";
+import { PieChart, Pie, Cell, Tooltip, LabelList } from "recharts";
 
 interface PeriodosMaisComunsDeSeFormarProps {
   metricas: MediaPeriodosParaSeFormar;
@@ -32,28 +25,27 @@ export const PeriodosMaisComunsDeSeFormar = ({
   curso,
 }: PeriodosMaisComunsDeSeFormarProps) => {
   
-  const periodos = metricas.graduados_por_qtd_periodos.map((x) => ({
-    quantidade_de_graduados: x.quantidade_de_graduados,
-    porcentagem_de_graduados: x.porcentagem_de_graduados,
-    quantidade_de_periodos: x.quantidade_de_periodos,
+  const cores = [
+    "orange.500",
+    "pink.500",
+    "purple.500",
+    "blue.400",
+    "teal.500",
+    "yellow.500",
+    "red.400",
+    "cyan.500",
+    "green.500",
+    "indigo.500",
+  ];
+
+  const dados = metricas.graduados_por_qtd_periodos.map((x, index) => ({
+    name: x.quantidade_de_periodos,
+    quantidade: x.quantidade_de_graduados,
+    porcentagem: x.porcentagem_de_graduados,
+    color: cores[index % cores.length],
   }));
 
-  const chart = useChart({
-    data: periodos,
-    series: [
-      {
-        name: "porcentagem_de_graduados",
-        label: "Porcentagem de Graduados",
-        color: "orange.400",
-      },
-    ],
-  });
-
-  const formatPeriodo = (value: string) => {
-    if (value.includes("mais")) return value.slice(0, 2) + "+";
-    if (value.includes("menos")) return "-" + value.slice(0, 2);
-    return value.slice(0, 2);
-  };
+  const chart = useChart({ data: dados });
 
   return (
     <Card.Root
@@ -65,15 +57,14 @@ export const PeriodosMaisComunsDeSeFormar = ({
         <Stat.Root>
           <HStack justify="space-between">
             <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>
-              Distribuição de quantidade de períodos para se graduar
+              Períodos mais comuns para se formar
             </Stat.Label>
             <Icon color={`${EURECA_COLORS.CINZA}/55`}>
               <LuGraduationCap strokeWidth={2.6} />
             </Icon>
           </HStack>
 
-          <Flex h={"full"} w={"full"} mt={4} alignItems={"center"} gap={0}>
-            <Box w={"full"}>
+          <Box my={3}>
               {metricas.quantidade_media_periodos_para_se_formar.length === 1 ? (
                 <Stat.ValueText
                   fontSize={"lg"}
@@ -94,61 +85,50 @@ export const PeriodosMaisComunsDeSeFormar = ({
                   {metricas.quantidade_media_periodos_para_se_formar[1]} períodos.
                 </Stat.ValueText>
               )}
+          </Box>
 
-              <Chart.Root pr={8} justifyContent={"left"} mt={6} maxH="2xs" chart={chart}>
-                <BarChart data={chart.data}>
-                  <CartesianGrid vertical={false} />
-                  <XAxis
-                    axisLine={false}
-                    tickLine={false}
-                    dataKey={chart.key("quantidade_de_periodos")}
-                    tickFormatter={formatPeriodo}
+          <Flex h={"full"} alignItems={"center"} justify={"center"} gap={12}>
+            <Chart.Root boxSize={"220px"} border={"none"} chart={chart}>
+              <PieChart>
+                <Tooltip
+                  cursor={false}
+                  animationDuration={100}
+                  content={<Chart.Tooltip labelFormatter={() => "Quantidade de Alunos"} />}
+                />
+                <Pie
+                  innerRadius={60}
+                  outerRadius={100}
+                  isAnimationActive={true}
+                  data={chart.data}
+                  dataKey={chart.key("quantidade")}
+                  paddingAngle={6}
+                  cornerRadius={4}
+                  stroke="none"
+                >
+                  <LabelList
+                    dataKey={"porcentagem"}
+                    formatter={(v: number) => `${v.toFixed(1)}%`}
+                    position="outside"
                   />
-                  <YAxis
-                    axisLine={false}
-                    tickLine={false}
-                    tickFormatter={(value) => `${value}%`}
-                  />
-                  <Tooltip
-                    cursor={{ fill: chart.color("transparent") }}
-                    animationDuration={100}
-                    content={({ payload }) => {
-                      if (!payload || !payload.length) return null;
-                      const data = payload[0].payload;
-                      return (
-                        <Box p={2} bg="white" boxShadow="sm" borderRadius="md">
-                          <Text fontWeight="bold">
-                            {data.quantidade_de_periodos}
-                          </Text>
-                          <Text fontWeight="normal" mt={2}>
-                            Graduados:{" "}
-                            <Span fontWeight="semibold" color="black">
-                              {data.quantidade_de_graduados}
-                            </Span>
-                          </Text>
-                          <Text fontWeight="normal">
-                            Porcentagem:{" "}
-                            <Span fontWeight="semibold" color="black">
-                              {data.porcentagem_de_graduados.toFixed(2)}%
-                            </Span>
-                          </Text>
-                        </Box>
-                      );
-                    }}
-                  />
-                  {chart.series.map((item) => (
-                    <Bar
-                      barSize={50}
+                  {chart.data.map((item) => (
+                    <Cell
                       key={item.name}
-                      isAnimationActive={true}
-                      dataKey={chart.key(item.name)}
                       fill={chart.color(item.color)}
-                      radius={4}
+                      stroke={chart.color(item.color)}
                     />
                   ))}
-                </BarChart>
-              </Chart.Root>
-            </Box>
+                </Pie>
+              </PieChart>
+            </Chart.Root>
+
+            <BarSegment.Root mr={6} justifySelf={"left"} chart={chart}>
+              <BarSegment.Legend
+                display={"flex"}
+                flexDir={"column"}
+                align={"left"}
+                color={`${EURECA_COLORS.CINZA}/80`}
+              />
+            </BarSegment.Root>
           </Flex>
         </Stat.Root>
       </Card.Body>

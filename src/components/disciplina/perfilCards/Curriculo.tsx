@@ -15,13 +15,22 @@ import { DisciplinaCardProps } from "./Tipo";
               <Card.Body>
                   <Stat.Root >
                     <HStack justify="space-between">
-                        <Stat.Label color={"gray.muted"}>Currículo exibido</Stat.Label>
+                        <Stat.Label color={"gray.muted"}>Plano de curso exibido</Stat.Label>
                         <Icon color={"gray.muted"}>
                         <LuCalendarFold/>
                         </Icon>
                     </HStack>
                     <Flex h={"full"} alignItems={"center"}>
-                      <Stat.ValueText color={EURECA_COLORS.BRANCO}>{valor}</Stat.ValueText>
+                        {
+                          valor ?
+                        <Flex direction={"column"}>
+                            <Stat.ValueText color={EURECA_COLORS.BRANCO}>{valor}</Stat.ValueText>
+                        </Flex>
+                        :
+                        <Flex direction={"column"}>
+                            <Stat.ValueText color={EURECA_COLORS.BRANCO} lineHeight={"shorter"}>Não há plano de curso associado.</Stat.ValueText>
+                        </Flex>
+                        }
                     </Flex>
                   </Stat.Root>
               </Card.Body>

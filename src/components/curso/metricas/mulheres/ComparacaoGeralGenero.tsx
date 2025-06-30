@@ -20,7 +20,7 @@ export const ComparacaoGeralGenero = (
 
     const periodos = [
         {name:"Mulheres",porcentagem:metricas.porcentagem_media_mulheres_entre_graduados,color:"pink.500"},
-        {name:"Homens",porcentagem:metricas.porcentagem_media_homens_entre_graduados,color:"teal.500"},
+        {name:"Homens",porcentagem:metricas.porcentagem_media_homens_entre_graduados,color:"blue.500"},
     ];
 
     const chart = useChart({

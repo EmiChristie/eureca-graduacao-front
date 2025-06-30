@@ -39,7 +39,7 @@ export const DiagnosticoDisciplina = (
                     <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                         <MediaDeAprovacao media={metricas.media_de_notas_dos_aprovados}/>
                         <TaxaDeReprovacao metricas={metricas.distribuicao_de_status}/>
-                        <AlunosMatriculadosPorPeriodo quantidade={0}quantidade_mais_dp={0}quantidade_menos_dp={0} desvio_padrao={0}/>
+                        {/*<AlunosMatriculadosPorPeriodo quantidade={0}quantidade_mais_dp={0}quantidade_menos_dp={0} desvio_padrao={0}/>*/}
                     </Flex>
                     <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                         <DistribuicaoStatus metricas={metricas.distribuicao_de_status} />

@@ -11,7 +11,8 @@ import { Curriculo } from "./perfilCards/Curriculo"
   export const Sobre = (
     {
         curso,
-        disciplinaCurriculo
+        disciplinaCurriculo,
+        periodo
     }:PerfilDisciplinaProps
   ) => {
 
@@ -23,7 +24,7 @@ import { Curriculo } from "./perfilCards/Curriculo"
         <>
             <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                 <Tipo valor={tipo}/>
-                <Curriculo valor={String(codigo_do_curriculo)}/>
+                <Curriculo valor={periodo}/>
                 <PeriodoIdeal valor={String(semestre_ideal)}/>
                 <CargaHoraria horas={horas_totais} creditos={quantidade_de_creditos}/>
             </Flex>

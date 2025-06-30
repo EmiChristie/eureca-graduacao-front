@@ -13,12 +13,12 @@ export const IngressantesEGraduadosPorGeneroPorPeriodo = (
 ) => {
 
          const cores = [
-         "#a3cfff", //homens ingressantes
-         "#1a3478", //homens graduados
-         "#60a5fa", //homens evadidos
-         "#f9a8d4", //mulheres ingressantes
-         "#6d0e34", //mulheres graduadas
-         "#f472b6", //mulheres evadidas
+         "#000", //homens ingressantes
+         "#3b82f6", //homens graduados
+         "#a3cfff", //homens evadidos
+         "#000", //mulheres ingressantes
+         "#ec4899", //mulheres graduadas
+         "#f9a8d4", //mulheres evadidas
      ]
      
 
@@ -86,7 +86,7 @@ export const IngressantesEGraduadosPorGeneroPorPeriodo = (
                                     </Span>
                                     </Text>
                                         <Badge bgColor={"transparent"} mt={1}>
-                                            <ColorSwatch value={cores[3]} boxSize="0.82em" />
+                                            <ColorSwatch rounded={"full"} value={cores[3]} boxSize="0.5em" />
                                             Mulheres ingressantes:
                                             <Span fontWeight="semibold" color="black">
                                             {data.mulheres_ingressantes}
@@ -94,7 +94,7 @@ export const IngressantesEGraduadosPorGeneroPorPeriodo = (
                                         </Badge>
                                         <br></br>
                                         <Badge bgColor={"transparent"}>
-                                            <ColorSwatch value={cores[0]} boxSize="0.82em" />
+                                            <ColorSwatch rounded={"full"} value={cores[0]} boxSize="0.5em" />
                                             Homens ingressantes:
                                             <Span fontWeight="semibold" color="black">
                                             {data.homens_ingressantes}

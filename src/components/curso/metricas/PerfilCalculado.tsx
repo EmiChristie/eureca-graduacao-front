@@ -52,11 +52,15 @@ export const PerfilCalculado = (
                 </Flex>
                 <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                     <PeriodosMaisComunsDeSeFormar curso={curso} metricas={metricas.media_periodos_para_se_formar}/>
-                    <PeriodosMaisComunsDeEvadir metricas={metricas.periodos_mais_comuns_de_evadir}/>
+                    <PeriodosMaisComunsDeEvadir curso={formatarNome(curso)} metricas={metricas.periodos_mais_comuns_de_evadir}/>
                 </Flex>
                 <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                     <CraMedioPorPeriodo curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.cra_medio_global}/>
+                </Flex>
+                <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                     <VelocidadeMediaPorPeriodo requisitos={requisitos} curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.velocidade_media_global}/>
+                </Flex>
+                <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
                     <TaxaDeSucessoMediaPorPeriodo curso={formatarNome(curso)} metricas={metricas.taxas_medias_graduados} metricaGlobal={metricas.taxas_medias_globais.taxa_de_sucesso_media_global}/>
                 </Flex>
                 <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>

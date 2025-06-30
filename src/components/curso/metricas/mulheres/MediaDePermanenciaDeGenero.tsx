@@ -14,12 +14,12 @@ export const MediaDePermanenciaDeGenero = (
 ) => {
 
          const cores = [
-         "#a3cfff", //homens ingressantes
-         "#1a3478", //homens graduados
-         "#60a5fa", //homens evadidos
-         "#f9a8d4", //mulheres ingressantes
-         "#6d0e34", //mulheres graduadas
-         "#f472b6", //mulheres evadidas
+         "#dbeafe", //homens ingressantes
+         "#3b82f6", //homens graduados
+         "#a3cfff", //homens evadidos
+         "#fce7f3", //mulheres ingressantes
+         "#ec4899", //mulheres graduadas
+         "#f9a8d4", //mulheres evadidas
      ]
 
     const chart = useChart({

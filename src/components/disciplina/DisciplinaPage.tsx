@@ -92,11 +92,11 @@ export interface DisciplinaPageProps{
 
     //usando o SCAO já que no SIG não tem planos de curso
     const { data: informacoes, isLoading:isLoading5, isError:isError5 } = useQuery<PlanoDeCurso, Error>({
-      queryKey: ["pegarPlanoDeCurso",codigo_disciplina],
-      queryFn: () => getPlanoDeCurso(codigo_disciplina),
+      queryKey: ["pegarPlanoDeCurso",codigo_disciplina,mapearCurso[codigo_curso]],
+      queryFn: () => getPlanoDeCurso(codigo_disciplina,mapearCurso[codigo_curso]),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!codigo_disciplina,
+      enabled: !!codigo_disciplina && !!codigo_curso,
     });
 
     //estou usando o SCAO já que no sig não tem os co-requisitos nem disciplinas equivalentes

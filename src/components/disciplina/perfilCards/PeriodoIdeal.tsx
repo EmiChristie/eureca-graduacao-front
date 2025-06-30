@@ -24,7 +24,7 @@ import { DisciplinaCardProps } from "./Tipo";
                         </Icon>
                     </HStack>
                     <Flex h={"full"} alignItems={"center"}>
-                      <Stat.ValueText color={EURECA_COLORS.BRANCO}>{valor && parseInt(valor) > 0 ? `${valor}º período` : "Não há período ideal associado"}</Stat.ValueText>
+                      <Stat.ValueText color={EURECA_COLORS.BRANCO} lineHeight={"shorter"}>{valor && parseInt(valor) > 0 ? `${valor}º período` : "Não há período ideal associado"}</Stat.ValueText>
                     </Flex>
                   </Stat.Root>
               </Card.Body>

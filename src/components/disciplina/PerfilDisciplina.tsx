@@ -16,6 +16,7 @@ export interface PerfilDisciplinaProps {
     informacoes?:PlanoDeCurso,
     disciplinas_validas?:string[],
     relacionamentos?:DisciplinaRelacionada[],
+    periodo?:string,
 }
 
 export const PerfilDisciplina = (
@@ -35,7 +36,7 @@ export const PerfilDisciplina = (
         <>
             <TituloPerfilDisciplina/>
             <Flex flexDir={"column"} gap={4} mt={4}>
-                <Sobre curso={curso} disciplinaCurriculo={disciplinaCurriculo}/>
+                <Sobre curso={curso} disciplinaCurriculo={disciplinaCurriculo} periodo={informacoes ? informacoes.periodo : null}/>
                 {
                     requisitosDisciplina ?
                         <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>

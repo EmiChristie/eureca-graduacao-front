@@ -6,12 +6,14 @@ import { LuCalendarOff, LuMedal } from "react-icons/lu";
 import { PieChart, Pie, Cell,Tooltip, Legend, LabelList } from "recharts";
 
 interface PeriodosMaisComunsDeEvadirProps{
-    metricas:PeriodoMaisComumDeEvadir[];
+    metricas:PeriodoMaisComumDeEvadir[],
+    curso?: string;
 } 
 
 export const PeriodosMaisComunsDeEvadir = (
   {
-    metricas
+    metricas,
+    curso
   }: PeriodosMaisComunsDeEvadirProps
 ) => {
 
@@ -45,8 +47,18 @@ export const PeriodosMaisComunsDeEvadir = (
                     </Icon>
                 </HStack>
 
-                <Flex h={"full"} alignItems={"center"} justify={"center"} gap={0}>
-                    <Chart.Root boxSize={"220px"} border={"none"} chart={chart} mr={8} ml={10}>
+                <Box my={3}>
+                    <Stat.ValueText
+                        fontSize={"lg"}
+                        lineHeight={"short"}
+                        color={`${EURECA_COLORS.CINZA}/80`}
+                    >
+                       O {metricas[0].periodo} é o mais propenso a fazer um estudante de {curso} evadir.
+                    </Stat.ValueText>
+                </Box>
+
+                <Flex h={"full"} alignItems={"center"} justify={"center"} gap={12}>
+                    <Chart.Root boxSize={"220px"} border={"none"} chart={chart} ml={10}>
                      <PieChart>
                          <Tooltip
                          cursor={false}
