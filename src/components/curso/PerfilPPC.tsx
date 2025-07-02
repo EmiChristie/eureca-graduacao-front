@@ -37,7 +37,7 @@ import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
                     <DuracaoCard curso={curso} requisitos={requisitos} w={statsW}/>
                     <CurriculoCard curso={curso} requisitos={requisitos} w={statsW}/>
                     </Flex>
-                    <CargaHorariaCard curso={curso} requisitos={requisitos} w={statsW}/>
+                    <CargaHorariaCard curso={curso} requisitos={requisitos} requisitosScao={requisitosScao} w={statsW}/>
                 </Flex>
             </Flex>
         </>

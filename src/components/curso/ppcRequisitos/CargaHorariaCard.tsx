@@ -10,6 +10,7 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
     {
         curso,
         requisitos,
+        requisitosScao,
         w
     }:CardProps
   ) => {
@@ -17,12 +18,22 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
     const obg = requisitos.carga_horaria_disciplinas_obrigatorias_minima;
     const opt = requisitos.carga_horaria_disciplinas_optativas_minima;
     const comp = requisitos.carga_horaria_atividades_complementares_minima;
+    const ext = requisitos.carga_horaria_extensao ? requisitos.carga_horaria_extensao : requisitosScao.carga_horaria_extensao ? requisitosScao.carga_horaria_extensao : null;
     
 
     const chart = useChart({
         data: [
         { name: "Disciplinas Obrigatórias", value: obg, color: "orange.500" },
-        { name: "Atividades complementares", value: comp, color: "teal.500" },
+        { name: "Atividades complementares", value: comp, color: "teal.400" },
+        { name: "Disciplinas Optativas", value: opt, color: "pink.500" },
+        ],
+    })
+
+    const chartExt = useChart({
+        data: [
+        { name: "Disciplinas Obrigatórias", value: obg, color: "orange.500" },
+        { name: "Atividades complementares", value: comp - ext, color: "teal.400" },
+        { name: "Atividades de extensão", value: ext, color: "yellow.500" },
         { name: "Disciplinas Optativas", value: opt, color: "pink.500" },
         ],
     })
@@ -40,32 +51,61 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
                     </HStack>
                     
                     <Stat.ValueText mt={2} color={EURECA_COLORS.BRANCO}>{requisitos.carga_horaria_minima_total} horas totais</Stat.ValueText>
-
-                    <Chart.Root border={"none"} chart={chart} mx="auto">
-                    <PieChart>
-                        <Tooltip
-                        cursor={false}
-                        animationDuration={100}
-                        content={<Chart.Tooltip hideLabel />}
-                        />
-                        <Pie
-                        innerRadius={40}
-                        outerRadius={70}
-                        isAnimationActive={true}
-                        data={chart.data}
-                        dataKey={chart.key("value")}
-                        paddingAngle={8}
-                        cornerRadius={4}
-                        stroke="none"
-                        > 
-                        
-                        {chart.data.map((item) => (
-                            <Cell key={item.name} fill={chart.color(item.color)} />
-                        ))}
-                        </Pie>
-                        <Chart.Legend color={EURECA_COLORS.BRANCO}/>
-                    </PieChart>
-                    </Chart.Root>
+                    {
+                      ext ?
+                      <Chart.Root border={"none"} chart={chartExt} mx="auto">
+                        <PieChart>
+                            <Tooltip
+                            cursor={false}
+                            animationDuration={100}
+                            content={<Chart.Tooltip hideLabel />}
+                            />
+                            <Pie
+                            innerRadius={40}
+                            outerRadius={70}
+                            isAnimationActive={true}
+                            data={chartExt.data}
+                            dataKey={chartExt.key("value")}
+                            paddingAngle={8}
+                            cornerRadius={4}
+                            stroke="none"
+                            > 
+                            
+                            {chartExt.data.map((item) => (
+                                <Cell key={item.name} fill={chartExt.color(item.color)} />
+                            ))}
+                            </Pie>
+                            <Chart.Legend color={EURECA_COLORS.BRANCO}/>
+                        </PieChart>
+                      </Chart.Root>
+                    :
+                      <Chart.Root border={"none"} chart={chart} mx="auto">
+                        <PieChart>
+                            <Tooltip
+                            cursor={false}
+                            animationDuration={100}
+                            content={<Chart.Tooltip hideLabel />}
+                            />
+                            <Pie
+                            innerRadius={40}
+                            outerRadius={70}
+                            isAnimationActive={true}
+                            data={chart.data}
+                            dataKey={chart.key("value")}
+                            paddingAngle={8}
+                            cornerRadius={4}
+                            stroke="none"
+                            > 
+                            
+                            {chart.data.map((item) => (
+                                <Cell key={item.name} fill={chart.color(item.color)} />
+                            ))}
+                            </Pie>
+                            <Chart.Legend color={EURECA_COLORS.BRANCO}/>
+                        </PieChart>
+                      </Chart.Root>
+                    }
+                    
                   </Stat.Root>
               </Card.Body>
             </Card.Root>

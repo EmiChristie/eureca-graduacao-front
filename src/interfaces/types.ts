@@ -129,6 +129,7 @@ export type Curriculo = {
     numero_disciplinas_obrigatorias_minimo: number;
     numero_disciplinas_optativas_minimo: number;
     numero_disciplinas_minimo: number;
+    carga_horaria_extensao: number;
   };
 
 export type DisciplinaCurriculo = {
