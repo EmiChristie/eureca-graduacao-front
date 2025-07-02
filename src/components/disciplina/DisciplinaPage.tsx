@@ -127,6 +127,11 @@ export interface DisciplinaPageProps{
 
     console.log("disciplinas validas???")
     console.log(disciplinas)
+
+    const voltar = () => {
+        sessionStorage.setItem("irDiretoAoFluxograma","sim");
+        navigate(`/graduacao/curso/${codigo_curso}`)
+    }
     
     return (
       <>
@@ -162,9 +167,9 @@ export interface DisciplinaPageProps{
                                         </Button>
                                     */
                                 }
-                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>navigate(`/graduacao/curso/${codigo_curso}`)}>
+                                <Button justifyContent={"left"} variant={"ghost"} onClick={()=>voltar()}>
                                     <Link color={EURECA_COLORS.BRANCO} className="text">
-                                        <LuUndo2/> Voltar ao curso
+                                        <LuUndo2/> Voltar ao fluxograma
                                     </Link>
                                 </Button>
                             </Flex>

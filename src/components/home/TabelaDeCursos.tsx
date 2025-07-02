@@ -106,7 +106,8 @@ import { formatarNome } from "@/util/utilities";
 
     function verCurso(curso: number) {
       const url = `/graduacao/curso/${curso}`;
-      window.open(url, '_blank');
+      //window.open(url, '_blank');
+      navigate(url)
     }
 
     const tamanhoTabela = "72vh";

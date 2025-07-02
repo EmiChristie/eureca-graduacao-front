@@ -79,13 +79,16 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos,curso,curricu
     };
 
     const changePreRequisites = (disciplina:number) =>{
-        const pr = preRequisitos.filter((p)=>p.codigo_da_disciplina === disciplina);
+        sessionStorage.setItem("disciplinaFluxogramaAtual",String(disciplina))
+        const pr = preRequisitos.filter((p)=>p.codigo_da_disciplina === disciplina || p.condicao === disciplina );
+        console.log(pr)
         setPreRequisites(pr);
     }
 
     const mostrarDisciplina = (disciplina:number) =>{
         const url = `/graduacao/curso/${id}/disciplina/${disciplina}`;
-        window.open(url, '_blank');
+        //window.open(url, '_blank');
+        navigate(url);
     }
 
     return (
@@ -169,7 +172,7 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos,curso,curricu
                                         onMouseOverCapture={()=>changePreRequisites(disciplina.codigo_da_disciplina)} 
                                         onClick={()=>mostrarDisciplina(disciplina.codigo_da_disciplina)}
                                         _hover={{ bg: `#1d8bdf/70` }} 
-                                        bgColor={preRequisites.find(p=>p.condicao === disciplina.codigo_da_disciplina) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
+                                        bgColor={preRequisites.find(p=>(p.codigo_da_disciplina === disciplina.codigo_da_disciplina || p.condicao === disciplina.codigo_da_disciplina) && disciplina.codigo_da_disciplina !== parseInt(sessionStorage.getItem("disciplinaFluxogramaAtual"))) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
                                         key={disciplina.codigo_da_disciplina} 
                                         px={4} 
                                         boxShadow={"sm"} 
@@ -205,7 +208,7 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos,curso,curricu
                                 h={"10vh"} 
                                 cursor={"pointer"} 
                                 _hover={{ bg: `#1d8bdf/70` }} 
-                                bgColor={preRequisites.find(p=>p.condicao === disciplina.codigo_da_disciplina) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
+                                bgColor={preRequisites.find(p=>(p.codigo_da_disciplina === disciplina.codigo_da_disciplina || p.condicao === disciplina.codigo_da_disciplina) && disciplina.codigo_da_disciplina !== parseInt(sessionStorage.getItem("disciplinaFluxogramaAtual"))) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
                                 key={disciplina.codigo_da_disciplina} 
                                 px={4} 
                                 boxShadow={"sm"} 
@@ -239,7 +242,7 @@ export const Fluxograma = ({ disciplinas, requisitos,preRequisitos,curso,curricu
                                 h={"10vh"} 
                                 cursor={"pointer"} 
                                 _hover={{ bg: `#1d8bdf/70` }} 
-                                bgColor={preRequisites.find(p=>p.condicao === disciplina.codigo_da_disciplina) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
+                                bgColor={preRequisites.find(p=>(p.codigo_da_disciplina === disciplina.codigo_da_disciplina || p.condicao === disciplina.codigo_da_disciplina) && disciplina.codigo_da_disciplina !== parseInt(sessionStorage.getItem("disciplinaFluxogramaAtual"))) ? `${EURECA_COLORS.CINZA}/70`:`#8797a7/70`} 
                                 key={disciplina.codigo_da_disciplina} 
                                 px={4} 
                                 boxShadow={"sm"} 

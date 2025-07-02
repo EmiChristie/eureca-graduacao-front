@@ -44,7 +44,11 @@ export interface CursoPageProps{
     console.log(codigo_curriculo)
 
     const navigate = useNavigate();
-    const [aba, setAba] = useState(1)
+    const [aba, setAba] = useState(sessionStorage.getItem("irDiretoAoFluxograma") === "sim" ? 2 : 1)
+
+    if(sessionStorage.getItem("irDiretoAoFluxograma") === "sim"){
+        sessionStorage.setItem("irDiretoAoFluxograma","nao");
+    }
 
     const { data: curso, isLoading, isError } = useQuery<Curso, Error>({
         queryKey: ["curso", codigo_curso],
