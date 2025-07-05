@@ -1,6 +1,7 @@
 export const dominio = "lsd";
 
 export const periodoDe = "2014.1"
+export const limiteAtivos = 10
 
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",
