@@ -75,7 +75,7 @@ import { PerfilCalculado } from "./metricas/PerfilCalculado";
                             <PerfilCalculado requisitos={requisitos} curso={curso.descricao} metricas={metricasCurso} disciplinasReprovacao={disciplinasQueMaisReprovam}/>
                           </Box>
                           <Box mt={4}>
-                            <PerfilAlunoMedio perfil={metricasCurso.perfil_aluno_medio}/>
+                            <PerfilAlunoMedio requisitos={requisitos} perfil={metricasCurso.perfil_aluno_medio}/>
                           </Box>
 
                     </Box>
