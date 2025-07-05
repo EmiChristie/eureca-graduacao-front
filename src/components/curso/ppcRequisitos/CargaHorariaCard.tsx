@@ -18,7 +18,7 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
     const obg = requisitos.carga_horaria_disciplinas_obrigatorias_minima;
     const opt = requisitos.carga_horaria_disciplinas_optativas_minima;
     const comp = requisitos.carga_horaria_atividades_complementares_minima;
-    const ext = requisitos.carga_horaria_extensao ? requisitos.carga_horaria_extensao : requisitosScao.carga_horaria_extensao ? requisitosScao.carga_horaria_extensao : null;
+    const ext = requisitos && requisitos.carga_horaria_extensao ? requisitos.carga_horaria_extensao : requisitosScao && requisitosScao.carga_horaria_extensao ? requisitosScao.carga_horaria_extensao : null;
     
 
     const chart = useChart({
