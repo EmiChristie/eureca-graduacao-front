@@ -47,8 +47,8 @@ export const TaxaDeSucessoGeral = (
                     <Chart.Root boxSize={"220px"} border={"none"} chart={chart} mr={8} ml={10}>
                      <PieChart>
                          <Pie
-                         innerRadius={60}
-                         outerRadius={100}
+                         innerRadius={50}
+                         outerRadius={90}
                          isAnimationActive={true}
                          data={chart.data}
                          dataKey={chart.key("porcentagem")}

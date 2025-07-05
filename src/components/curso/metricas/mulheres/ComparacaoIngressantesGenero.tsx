@@ -47,7 +47,7 @@ export const ComparacaoIngressantesGenero = (
 
     return(
         <>
-            <Card.Root w={"5/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+            <Card.Root w={"4/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
