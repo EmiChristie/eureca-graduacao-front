@@ -58,7 +58,7 @@ export interface CursoPageProps{
         enabled: !!codigo_curso,
     });
 
-    const { data: curriculo, isLoading:isLoading2, isError:isError2 } = useQuery<number, Error>({
+    const { data: curriculo, isLoading:isLoading2, isError:isError2 } = useQuery<string, Error>({
       queryKey: ["curriculoAtivoMaisRecente", codigo_curso],
       queryFn: () => getCurriculoAtivoMaisRecente(codigo_curso),
       staleTime: 1000 * 60 * 5,
@@ -120,10 +120,17 @@ export interface CursoPageProps{
       enabled: !!codigo_curso,
     });
 
-    console.log("existe estudante scao? "+isError7)
-    console.log("existe estudante sig? "+isError8)
+    console.log("erro buscando estudantes no scao? "+isError7)
+    console.log("erro buscando estudantes no sig? "+isError8)
     
-    console.log(curso);
+    console.log("o que faz dar erro?");
+    console.log(isError||isError4||isError5||!requisitos||!curso||!area)
+    console.log(isError)
+    console.log(isError4)
+    console.log(isError5)
+    console.log(requisitos)
+    console.log(curso)
+    console.log(area)
   
     return (
       <>

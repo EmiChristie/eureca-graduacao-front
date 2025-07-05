@@ -1,4 +1,4 @@
-export const dominio = "lsd";
+export const dominio = "sti";
 
 export const periodoDe = "2014.1"
 export const limiteAtivos = 10

@@ -6,7 +6,7 @@ import { PerfilAlunoIdeal } from "./PerfilAlunoIdeal"
 
 export interface CursoProps{
     curso?:Curso,
-    curriculo?:number,
+    curriculo?:number|string,
     requisitos?:Curriculo,
     requisitosScao?:Curriculo,
     area?:string;

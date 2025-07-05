@@ -23,18 +23,18 @@ import { Cell, Label, Pie, PieChart, Tooltip } from "recharts"
 
     const chart = useChart({
         data: [
-        { name: "Disciplinas Obrigatórias", value: obg, color: "orange.500" },
-        { name: "Atividades complementares", value: comp, color: "teal.400" },
-        { name: "Disciplinas Optativas", value: opt, color: "pink.500" },
+        { name: "Disciplinas Obrigatórias", value: obg > 0 ? obg : null, color: "orange.500" },
+        { name: "Atividades complementares", value: comp > 0 ? comp : null, color: "teal.400" },
+        { name: "Disciplinas Optativas", value: opt > 0 ? opt : null, color: "pink.500" },
         ],
     })
 
     const chartExt = useChart({
         data: [
-        { name: "Disciplinas Obrigatórias", value: obg, color: "orange.500" },
-        { name: "Atividades complementares", value: comp - ext, color: "teal.400" },
-        { name: "Atividades de extensão", value: ext, color: "yellow.500" },
-        { name: "Disciplinas Optativas", value: opt, color: "pink.500" },
+        { name: "Disciplinas Obrigatórias", value: obg > 0 ? obg : null, color: "orange.500" },
+        { name: "Atividades complementares", value: comp > 0 ? comp - ext : null, color: "teal.400" },
+        { name: "Atividades de extensão", value: ext > 0 ? ext : null, color: "yellow.500" },
+        { name: "Disciplinas Optativas", value: opt > 0 ? opt : null, color: "pink.500" },
         ],
     })
         

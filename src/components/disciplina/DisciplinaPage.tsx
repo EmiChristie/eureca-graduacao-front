@@ -57,7 +57,7 @@ export interface DisciplinaPageProps{
         enabled: !!codigo_curso,
     });
 
-    const { data: curriculo, isLoading:isLoading2, isError:isError2 } = useQuery<number, Error>({
+    const { data: curriculo, isLoading:isLoading2, isError:isError2 } = useQuery<string, Error>({
       queryKey: ["curriculoAtivoMaisRecente", codigo_curso],
       queryFn: () => getCurriculoAtivoMaisRecente(codigo_curso),
       staleTime: 1000 * 60 * 5,

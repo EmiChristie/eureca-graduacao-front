@@ -24,7 +24,7 @@ export interface FluxogramaProps {
     requisitos?: Curriculo;
     preRequisitos?: DisciplinaPreRequisito[];
     curso?:Curso;
-    curriculo?:number;
+    curriculo?:number|string;
 }
 
 export const Fluxograma = ({ disciplinas, requisitos,preRequisitos,curso,curriculo }: FluxogramaProps) => {

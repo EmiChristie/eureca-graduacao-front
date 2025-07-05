@@ -62,7 +62,7 @@ export const getUserInfo = async ({matricula}:UserInfoPayload) => {
 
 export const getCurriculoAtivoMaisRecente = async (curso: number) => {
     console.log("aaaaaaaaaaaaaaaaa")
-    const { data } = await axiosInstance.get<number>(
+    const { data } = await axiosInstance.get<string>(
         `/${ENDPOINT.CURRICULO_ATIVO_MAIS_RECENTE}?curso=${curso}`,
     );
     
@@ -118,7 +118,7 @@ export const getDisciplinasPorCurriculo = async (curso: number,curriculo:string)
     return data;
 }
 
-export const getDisciplinaCurriculo = async (curso: number,curriculo:number,disciplina:number) => {
+export const getDisciplinaCurriculo = async (curso: number,curriculo:number|string,disciplina:number) => {
     const { data } = await axiosDASSIG.get<DisciplinaCurriculo[]>(
         `/${DAS_ENDPOINT.DISCIPLINAS_CURRICULO}?curso=${curso}&curriculo=${curriculo}&disciplina=${disciplina}`,
     );

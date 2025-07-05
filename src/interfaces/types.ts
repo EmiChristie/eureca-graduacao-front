@@ -5,7 +5,7 @@ export type CursoHome = {
     nome_do_campus: string,
     area_de_retencao: number,
     area_de_retencao_descricao: string,
-    codigo_do_curriculo: number|null
+    codigo_do_curriculo: number|string|null
 }
 
 export type User = {
