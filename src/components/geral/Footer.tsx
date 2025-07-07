@@ -1,6 +1,5 @@
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants"
 import { Box, Center,Flex,Separator,Text } from "@chakra-ui/react"
-import { LuLightbulb } from "react-icons/lu"
 
 export const Footer = () => {
     return (

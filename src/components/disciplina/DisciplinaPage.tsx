@@ -12,6 +12,7 @@ import {
     Tabs,
     Text,
     VStack,
+    Image
   } from "@chakra-ui/react";
   import { Toaster } from "@/components/ui/toaster";
   import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuNotebook, LuNotebookPen, LuNotebookTabs, LuNotebookText, LuChartPie, } from "react-icons/lu";
@@ -22,13 +23,10 @@ import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina, getCurriculoAtivoMaisRecenteScao, getDisciplinasPorCurriculo } from "@/service/eurecaService";
-import { CursoDiagnostico } from "../curso/CursoDiagnostico";
-import { CursoFluxograma } from "../curso/CursoFluxograma";
-import { CursoPerfil } from "../curso/CursoPerfil";
-import { MeuDesempenho } from "../curso/MeuDesempenho";
 import { PerfilDisciplina } from "./PerfilDisciplina";
 import { DiagnosticoDisciplina } from "./DiagnosticoDisciplina";
 import { mapearCurso } from "@/util/mapeamentos";
+import img from "../../assets/eureca_graduacao_logo.png"
   
 export interface DisciplinaPageProps{
     codigo_curso:number,
@@ -139,11 +137,18 @@ export interface DisciplinaPageProps{
             <Center placeItems={"stretch"}>
             <Box my={4} ml={4} w={"20vw"}>
                 <Box w={"full"}>
+                    {
+                        /*
                     <Box h={"8vh"} bg={`${EURECA_COLORS.AZUL_ESCURO}/70`} boxShadow={"sm"} rounded={"sm"}>
                         <Center h={"8vh"} px={4} gapX={2}>
                             <LuLightbulb size={"4vh"} color={EURECA_COLORS.BRANCO}/>
                             <Text fontSize={"xl"} lineHeight={"shorter"} color={EURECA_COLORS.BRANCO}>Eureca Graduação</Text>
                         </Center>
+                    </Box>
+                        */
+                    }
+                    <Box w={"20vw"} h={"8vh"}>
+                        <Image src={img}></Image>
                     </Box>
                     <Card.Root bg={"#7c95b9/70"} boxShadow={"sm"} h={"86vh"} mt={4}>
                         <Card.Body>

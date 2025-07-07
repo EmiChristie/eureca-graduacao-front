@@ -15,6 +15,7 @@ import {
     Icon,
     FieldHelperText,
     Link,
+    Image,
   } from "@chakra-ui/react";
   import { useState, useMemo, useReducer, useEffect } from "react";
   import { Toaster } from "@/components/ui/toaster";
@@ -111,28 +112,26 @@ import { formatarNome } from "@/util/utilities";
     }
 
     const tamanhoTabela = "72vh";
-    const tamanhoTabelaFull = "76vh";
+    const tamanhoTabelaFull = "86vh";
+    const tamanhoTabelaFull2 = "76vh";
     const tabelaBg = `#8797a7/70`;
     const tabelaAccent = `#8797a7/60`;
   
     return (
       <>
         <Box w={"full"} color={EURECA_COLORS.CINZA}>
-          <Box w={"full"} h={"8vh"} bg={`${EURECA_COLORS.AZUL_ESCURO}/70`} boxShadow={"sm"} rounded={"sm"}>
-                  <Flex alignItems={"center"} h={"8vh"} px={4} gapX={2}>
-                      <LuLightbulb size={"4vh"} color={EURECA_COLORS.BRANCO}/>
-                      <Text fontSize={"xl"} lineHeight={"shorter"} color={EURECA_COLORS.BRANCO}>Eureca Graduação</Text>
-                  </Flex>
-              </Box>
           <Flex
             w={"full"}
             my={4}
             gap={4}
           >
             <Box minW={"20vw"} w={"20vw"}>
-              
 
-              <Box mb={4} w={"full"} boxShadow={"sm"}>
+              <Box w={"20vw"} h={"8vh"}>
+                <Image src="src/assets/eureca_graduacao_logo.png"></Image>
+              </Box>
+
+              <Box my={4} w={"full"} boxShadow={"sm"}>
                 <InputGroup startElement={
                   <LuSearch/>}>
                   <Input
@@ -146,7 +145,7 @@ import { formatarNome } from "@/util/utilities";
                 </InputGroup>
               </Box>
 
-              <Flex h={tamanhoTabelaFull} flexDir={"column"} gap={4}>
+              <Flex h={tamanhoTabelaFull2} flexDir={"column"} gap={4}>
                   <Box h={"full"} textAlign={"center"} bg={"#7c95b9/70"} boxShadow={"sm"} rounded={"sm"} p={4} >
                     <Center h={"full"}>
                         {

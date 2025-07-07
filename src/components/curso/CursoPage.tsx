@@ -11,6 +11,7 @@ import {
     Tabs,
     Text,
     VStack,
+    Image
   } from "@chakra-ui/react";
   import { Toaster } from "@/components/ui/toaster";
   import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuUserRound, } from "react-icons/lu";
@@ -27,6 +28,7 @@ import { Sidebar } from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 import { getCurriculoAtivoMaisRecente, getCurriculo, getAreaRetencao, getCurriculoAtivoMaisRecenteScao, getCurriculoScao, getExisteEstudanteScao, getExisteEstudanteSig } from "@/service/eurecaService";
 import { mapearCurso } from "@/util/mapeamentos";
+import img from "../../assets/eureca_graduacao_logo.png"
   
 export interface CursoPageProps{
     codigo_curso:number,
@@ -138,11 +140,18 @@ export interface CursoPageProps{
             <Center placeItems={"stretch"}>
             <Box my={4} ml={4} w={"20vw"}>
                 <Box w={"full"}>
+                    {
+                        /*
                     <Box h={"8vh"} bg={`${EURECA_COLORS.AZUL_ESCURO}/70`} boxShadow={"sm"} rounded={"sm"}>
                         <Center h={"8vh"} px={4} gapX={2}>
                             <LuLightbulb size={"4vh"} color={EURECA_COLORS.BRANCO}/>
                             <Text fontSize={"xl"} lineHeight={"shorter"} color={EURECA_COLORS.BRANCO}>Eureca Graduação</Text>
                         </Center>
+                    </Box>
+                        */
+                    }
+                    <Box w={"20vw"} h={"8vh"}>
+                        <Image src={img}></Image>
                     </Box>
                     <Card.Root bg={"#7c95b9/70"} boxShadow={"sm"} h={"86vh"} mt={4}>
                         <Card.Body>

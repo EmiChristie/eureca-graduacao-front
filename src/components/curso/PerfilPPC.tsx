@@ -6,8 +6,6 @@ import { CargaHorariaCard } from "./ppcRequisitos/CargaHorariaCard"
 import { DisciplinasCard } from "./ppcRequisitos/DisciplinasCard"
 import { FormacaoCard } from "./ppcRequisitos/FormacaoCard"
 import { TurnoCard } from "./ppcRequisitos/TurnoCard"
-import { EURECA_COLORS } from "@/util/constants"
-import { LuLightbulb } from "react-icons/lu"
 import { CurriculoCard } from "./ppcRequisitos/CurriculoCard"
 import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
 

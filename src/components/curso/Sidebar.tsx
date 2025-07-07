@@ -1,4 +1,4 @@
-import { Box,Button,ButtonGroup,Card,Center,Flex,Icon,Link,Text, VStack } from "@chakra-ui/react"
+import { Box,Button,ButtonGroup,Card,Center,Flex,Icon,Link,Image} from "@chakra-ui/react"
 import { CursoProps } from "./CursoPerfil"
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants"
 import { LuBookText, LuChartLine, LuCombine, LuLayoutDashboard, LuLightbulb, LuUser, LuUserRound } from "react-icons/lu"
@@ -11,11 +11,18 @@ import { LuBookText, LuChartLine, LuCombine, LuLayoutDashboard, LuLightbulb, LuU
     return(
         <>
             <Box w={"full"} h={"full"}>
+                    {
+                        /*
                 <Box bg={EURECA_COLORS.AZUL_ESCURO} boxShadow={"sm"} rounded={"sm"}>
                     <Center h={"8vh"} px={4} gap={2}>
                         <LuLightbulb size={"4vh"} color={EURECA_COLORS.BRANCO}/>
                         <Text fontSize={"xl"} lineHeight={"shorter"} color={EURECA_COLORS.BRANCO}>Eureca Graduação</Text>
                     </Center>
+                </Box>
+                        */
+                    }
+                <Box w={"20vw"} h={"8vh"}>
+                    <Image src="src/assets/eureca_graduacao_logo.png"></Image>
                 </Box>
                 <Card.Root mt={4} bg={"blue.800/70"} boxShadow={"sm"} h={"full"}>
                     <Card.Body>
