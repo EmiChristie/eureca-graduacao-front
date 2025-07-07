@@ -105,6 +105,7 @@ export const PeriodosMaisComunsDeSeFormar = ({
                     dataKey={chart.key("quantidade_de_periodos")}
                     axisLine={false}
                     tickLine={false}
+                    width={90}
                   />
                   <Tooltip
                     cursor={{ fill: chart.color("transparent") }}

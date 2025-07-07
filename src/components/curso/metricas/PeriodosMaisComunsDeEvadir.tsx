@@ -37,6 +37,12 @@ export const PeriodosMaisComunsDeEvadir = ({
     porcentagem: p.porcentagem_de_evadidos,
   }));
 
+  const periodoMaisPropenso = metricas
+  .filter((m) => !m.periodo.toLowerCase().includes("acima"))
+  .reduce((prev, current) =>
+    current.porcentagem_de_evadidos > prev.porcentagem_de_evadidos ? current : prev,
+  );
+
   const chart = useChart({
     data: periodos,
     series: [
@@ -71,7 +77,8 @@ export const PeriodosMaisComunsDeEvadir = ({
               lineHeight={"short"}
               color={`${EURECA_COLORS.CINZA}/80`}
             >
-              O {metricas[0].periodo} é o mais propenso a fazer um estudante de {curso} evadir.
+              O {periodoMaisPropenso.periodo} é o mais propenso a fazer um estudante
+              {curso ? ` de ${curso}` : ""} evadir.
             </Stat.ValueText>
           </Box>
 
@@ -91,6 +98,7 @@ export const PeriodosMaisComunsDeEvadir = ({
                     dataKey={chart.key("periodo")}
                     axisLine={false}
                     tickLine={false}
+                    width={100}
                   />
                   <Tooltip
                     cursor={{ fill: chart.color("transparent") }}
