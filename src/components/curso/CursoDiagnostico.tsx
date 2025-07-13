@@ -22,7 +22,7 @@ import { PerfilCalculado } from "./metricas/PerfilCalculado";
       isLoading,
       isError,
     } = useQuery<DisciplinasReprovacao[], Error>({
-      queryKey: ["disciplinas-obrigatorias-reprovacao", curso.codigo_do_curso, curriculo],
+      queryKey: ["disciplinas-reprovacao", curso.codigo_do_curso, curriculo],
       queryFn: () => getDisciplinasObrigatoriasQueMaisReprovam(curso.codigo_do_curso, curriculo),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,

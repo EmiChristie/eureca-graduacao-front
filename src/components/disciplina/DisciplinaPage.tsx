@@ -17,8 +17,8 @@ import {
   import { Toaster } from "@/components/ui/toaster";
   import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuNotebook, LuNotebookPen, LuNotebookTabs, LuNotebookText, LuChartPie, } from "react-icons/lu";
   import { useQuery } from "@tanstack/react-query";
-  import { Curriculo, Curso, Disciplina, DisciplinaCurriculo, MetricasDisciplina, PlanoDeCurso, RelacionamentosDisciplina } from "../../interfaces/types";
-import { getCurso, getMetricasDisciplina } from "@/service/metricasService";
+  import { Curriculo, Curso, Disciplina, DisciplinaCurriculo, DisciplinasReprovacao, MetricasDisciplina, PlanoDeCurso, RelacionamentosDisciplina } from "../../interfaces/types";
+import { getCurso, getDisciplinasObrigatoriasQueMaisReprovam, getMetricasDisciplina } from "@/service/metricasService";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -123,6 +123,18 @@ export interface DisciplinaPageProps{
         enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) &&!!codigo_curso,
     });
 
+    const {
+      data: disciplinasQueMaisReprovam,
+      isLoading:isLoading10,
+      isError:isError10,
+    } = useQuery<DisciplinasReprovacao[], Error>({
+      queryKey: ["disciplinas-reprovacao", codigo_curso,(!!codigo_curriculo||!!curriculo||!!curriculoScao)],
+      queryFn: () => getDisciplinasObrigatoriasQueMaisReprovam(codigo_curso, String(codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0)),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!codigo_curso && (!!codigo_curriculo||!!curriculo||!!curriculoScao),
+    });
+
     console.log("disciplinas validas???")
     console.log(disciplinas)
 
@@ -158,7 +170,7 @@ export interface DisciplinaPageProps{
                                         <LuNotebookText/> Perfil da disciplina
                                     </Link>
                                 </Button>
-                                <Button disabled={isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7 || isError7} justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
+                                <Button disabled={isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading10 || isError7} justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(2)}>
                                     <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuChartPie/> Diagnóstico
                                     </Link>
@@ -185,7 +197,7 @@ export interface DisciplinaPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ||isLoading9?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ||isLoading9||isLoading10?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -202,7 +214,7 @@ export interface DisciplinaPageProps{
                         </Box>
                     </>
                     :
-                    isError||isError2||isError3||isError4||isError8||isError9 ?
+                    isError||isError2||isError3||isError4||isError8||isError9||isError10 ?
                     <>
                         <Box m={4} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
 
@@ -234,6 +246,7 @@ export interface DisciplinaPageProps{
                                 <DiagnosticoDisciplina 
                                     disciplina={disciplinaCurriculo[0]}
                                     metricas={metricas}
+                                    disciplinasReprovacao={disciplinasQueMaisReprovam}
                                     />
                                 :
                                 <>

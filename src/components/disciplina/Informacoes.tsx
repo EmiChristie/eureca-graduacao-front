@@ -96,17 +96,38 @@ import { Conteudo } from "./perfilCards/Conteudo"
             */
         }
 
-        <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
-            <Ementa valor={informacoes.ementa}/>
-            <Metodologia valor={informacoes.metodologia}/>
-            <Objetivos valor={informacoes.objetivos}/>
-        </Flex>
-
-        <Flex gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
-            <Avaliacao valor={informacoes.avaliacao}/>
-            <Conteudo valor={informacoes.conteudo}/>
-            <Referencias valor={informacoes.referencias}/>
-        </Flex>
+        <Grid templateColumns={"repeat(3,1fr)"} gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
+            {informacoes.ementa && informacoes.ementa !== null ? 
+                <Ementa valor={informacoes.ementa}/>
+                :
+                <></>
+            }
+            {informacoes.metodologia && informacoes.metodologia !== null ? 
+                <Metodologia valor={informacoes.metodologia}/>
+                :
+                <></>
+            }
+            {informacoes.objetivos && informacoes.objetivos !== null ? 
+                <Objetivos valor={informacoes.objetivos}/>
+                :
+                <></>
+            }
+            {informacoes.avaliacao && informacoes.avaliacao !== null ? 
+                <Avaliacao valor={informacoes.avaliacao}/>
+                :
+                <></>
+            }
+            {informacoes.conteudo && informacoes.conteudo !== null ? 
+                <Conteudo valor={informacoes.conteudo}/>
+                :
+                <></>
+            }
+            {informacoes.referencias && informacoes.referencias !== null ? 
+                <Referencias valor={informacoes.referencias}/>
+                :
+                <></>
+            }
+        </Grid>
         </>
     )
   }
