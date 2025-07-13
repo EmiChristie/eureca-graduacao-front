@@ -42,6 +42,12 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
     ],
   });
 
+  const qtdReprovacoes = periodos.filter((d) => d.nota < 5 && d.quantidade > 0);
+  const qtdAprovacoes = periodos.filter((d) => d.nota >= 5 && d.quantidade > 0);
+
+  const mostrarPontoReprovacoes = qtdReprovacoes.length === 1;
+  const mostrarPontoAprovacoes = qtdAprovacoes.length === 1;
+
   return (
     <Card.Root w={"8/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
       <Card.Body>
@@ -131,7 +137,8 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                     dataKey={(d: any) => (d.nota < 5 ? d.quantidade : null)}
                     stroke="#E53E3E"
                     strokeWidth={2}
-                    dot={false}
+                    dot={mostrarPontoReprovacoes}
+                    activeDot
                     isAnimationActive={true}
                     connectNulls={false}
                   />
@@ -140,7 +147,7 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                     dataKey={(d: any) => (d.nota >= 5 ? d.quantidade : null)}
                     stroke="#14b8a6"
                     strokeWidth={2}
-                    dot={false}
+                    dot={mostrarPontoAprovacoes}
                     isAnimationActive={true}
                     connectNulls={false}
                   />
