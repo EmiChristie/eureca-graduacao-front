@@ -67,19 +67,19 @@ import { PieChart, Pie, Cell,Tooltip, Legend, LabelList } from "recharts";
             }
 
             if (i === 0) {
-                return "É a disciplina com maior taxa de reprovação no curso";
+                return "É a disciplina com maior percentual de reprovação no curso";
             } else if (i === total - 1) {
-                return "É a disciplina com menor taxa de reprovação no curso";
+                return "É a disciplina com menor percentual de reprovação no curso";
             }
 
             const posicao = i + 1;
             const percentual = (posicao / total) * 100;
 
             if (percentual <= 50) {
-                return `A disciplina está entre as ${Math.ceil(percentual)}% com maior reprovação`;
+                return `A disciplina está entre as ${Math.ceil(percentual)}% com maior percentual de reprovação`;
             } else {
                 const percentualMenores = 100 - percentual;
-                return `A disciplina está entre as ${Math.ceil(percentualMenores)}% com menor reprovação`;
+                return `A disciplina está entre as ${Math.ceil(percentualMenores)}% com menor percentual de reprovação`;
             }
             }
         }

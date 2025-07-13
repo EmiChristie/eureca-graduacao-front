@@ -31,7 +31,7 @@ export const MediaDeAprovacao = (
 
     return(
         <>
-            <Card.Root maxW={"full"} w={"full"} minW={"23vw"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+            <Card.Root w={"6/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
