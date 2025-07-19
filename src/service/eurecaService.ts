@@ -150,6 +150,27 @@ export const getDisciplina = async (disciplina:number) => {
     return data;
 }
 
+export const getPlanoDeCursoSig = async (disciplina:number) => {
+    const { data } = await axiosDASSIG.get<PlanoDeCurso[]>(
+        `/${DAS_ENDPOINT.PLANO_DE_CURSO}?disciplina=${disciplina}&periodo-de=2019.1`,
+    );
+    
+    if (!data || data.length === 0) return null;
+
+    const sorted = data.sort((a, b) => {
+        const [anoA, semestreA] = a.periodo.split('.').map(Number);
+        const [anoB, semestreB] = b.periodo.split('.').map(Number);
+
+        if (anoA !== anoB) return anoB - anoA;
+        return semestreB - semestreA;
+    });
+
+    console.log("planos de curso ordenados por periodo:")
+    console.log(sorted)
+
+    return sorted[0];
+}
+
 export const getPlanoDeCurso = async (disciplina:number,curso:number) => {
     const { data } = await axiosDAS.get<PlanoDeCurso[]>(
         `/${DAS_ENDPOINT.PLANO_DE_CURSO}?curso=${curso}&disciplina=${disciplina}&periodo-de=2019.1`,

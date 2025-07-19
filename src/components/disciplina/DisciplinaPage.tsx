@@ -22,7 +22,7 @@ import { getCurso, getDisciplinasObrigatoriasQueMaisReprovam, getMetricasDiscipl
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina, getCurriculoAtivoMaisRecenteScao, getDisciplinasPorCurriculo } from "@/service/eurecaService";
+import { getCurriculoAtivoMaisRecente, getDisciplinaCurriculo, getDisciplina, getPlanoDeCurso, getRequisitosDisciplina, getCurriculoAtivoMaisRecenteScao, getDisciplinasPorCurriculo, getPlanoDeCursoSig } from "@/service/eurecaService";
 import { PerfilDisciplina } from "./PerfilDisciplina";
 import { DiagnosticoDisciplina } from "./DiagnosticoDisciplina";
 import { mapearCurso } from "@/util/mapeamentos";
@@ -88,7 +88,15 @@ export interface DisciplinaPageProps{
       enabled: !!codigo_disciplina,
     });
 
-    //usando o SCAO já que no SIG não tem planos de curso
+    const { data: informacoesSig, isLoading:isLoading11, isError:isError11 } = useQuery<PlanoDeCurso, Error>({
+      queryKey: ["pegarPlanoDeCursoSig",codigo_disciplina],
+      queryFn: () => getPlanoDeCursoSig(codigo_disciplina),
+      staleTime: 1000 * 60 * 5,
+      refetchOnWindowFocus: false,
+      enabled: !!codigo_disciplina,
+    });
+
+    //plano de curso do scao
     const { data: informacoes, isLoading:isLoading5, isError:isError5 } = useQuery<PlanoDeCurso, Error>({
       queryKey: ["pegarPlanoDeCurso",codigo_disciplina,mapearCurso[codigo_curso]],
       queryFn: () => getPlanoDeCurso(codigo_disciplina,mapearCurso[codigo_curso]),
@@ -142,6 +150,11 @@ export interface DisciplinaPageProps{
         sessionStorage.setItem("irDiretoAoFluxograma","sim");
         navigate(`/graduacao/curso/${codigo_curso}`)
     }
+
+    console.log("plano de curso do sig")
+    console.log(informacoesSig)
+    console.log("plano de curso do scao")
+    console.log(informacoes)
     
     return (
       <>
@@ -197,7 +210,7 @@ export interface DisciplinaPageProps{
 
             <Box maxW={"80vw"} minW={"80vw"} w={"80vw"}>
                 {
-                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ||isLoading9||isLoading10?
+                    isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 ||isLoading9||isLoading10||isLoading11?
                     <>
                         <Box m={4} h={"8vh"} bgColor={`${EURECA_COLORS.AZUL_CLARO}/70`} boxShadow={"sm"} rounded={"sm"}>
                                 <Flex alignItems={"center"} h={"8vh"} px={4} gap={2}>
@@ -255,7 +268,7 @@ export interface DisciplinaPageProps{
                                         disciplina={disciplina[0]} 
                                         disciplinaCurriculo={disciplinaCurriculo[0]}
                                         requisitosDisciplina={requisitosDisciplina}
-                                        informacoes={informacoes}
+                                        informacoes={informacoesSig ? informacoesSig : informacoes}
                                         disciplinas_validas={disciplinas.map(d=>String(d.codigo_da_disciplina))}
                                         />
                                     {isError7 ? 
