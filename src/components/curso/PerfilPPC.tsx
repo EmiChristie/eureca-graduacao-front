@@ -6,8 +6,6 @@ import { CargaHorariaCard } from "./ppcRequisitos/CargaHorariaCard"
 import { DisciplinasCard } from "./ppcRequisitos/DisciplinasCard"
 import { FormacaoCard } from "./ppcRequisitos/FormacaoCard"
 import { TurnoCard } from "./ppcRequisitos/TurnoCard"
-import { EURECA_COLORS } from "@/util/constants"
-import { LuLightbulb } from "react-icons/lu"
 import { CurriculoCard } from "./ppcRequisitos/CurriculoCard"
 import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
 
@@ -32,12 +30,12 @@ import { TituloPerfilPPC } from "./ppcRequisitos/TituloPerfilPPC"
                     <TurnoCard curso={curso} requisitos={requisitos} w={statsW}/>
                 </Flex>
                 <Flex gap={4} w={"full"} placeItems={"stretch"}>
-                    <DisciplinasCard curso={curso} requisitos={requisitosScao} w={statsW}/>
+                    <DisciplinasCard curso={curso} requisitos={requisitos} requisitosScao={requisitosScao} w={statsW}/>
                     <Flex flexDir={"column"} gap={4}>
                     <DuracaoCard curso={curso} requisitos={requisitos} w={statsW}/>
                     <CurriculoCard curso={curso} requisitos={requisitos} w={statsW}/>
                     </Flex>
-                    <CargaHorariaCard curso={curso} requisitos={requisitos} w={statsW}/>
+                    <CargaHorariaCard curso={curso} requisitos={requisitos} requisitosScao={requisitosScao} w={statsW}/>
                 </Flex>
             </Flex>
         </>

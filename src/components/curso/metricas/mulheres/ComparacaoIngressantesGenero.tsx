@@ -21,7 +21,7 @@ export const ComparacaoIngressantesGenero = (
     const pct_mulheres = round2((metricas.quantidade_media_mulheres_ingressantes/metricas.quantidade_media_ingressantes)*100)
 
     const periodos = [
-        {name:"Homens",value:metricas.quantidade_media_homens_ingressantes,porcentagem:100-pct_mulheres,color:"teal.500"},
+        {name:"Homens",value:metricas.quantidade_media_homens_ingressantes,porcentagem:100-pct_mulheres,color:"blue.500"},
         {name:"Mulheres",value:metricas.quantidade_media_mulheres_ingressantes,porcentagem:pct_mulheres,color:"pink.500"},
     ];
 
@@ -47,7 +47,7 @@ export const ComparacaoIngressantesGenero = (
 
     return(
         <>
-            <Card.Root w={"5/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+            <Card.Root w={"4/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">

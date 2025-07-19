@@ -41,7 +41,7 @@ export const CraMedioPorPeriodo = ({
   };
 
   return (
-    <Card.Root w={"5/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+    <Card.Root w={"full"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
       <Card.Body>
         <Stat.Root>
           <HStack justify="space-between">
@@ -70,11 +70,25 @@ export const CraMedioPorPeriodo = ({
                     axisLine={false}
                     tickLine={false}
                     dataKey={chart.key("quantidade_de_periodos")}
-                    tickFormatter={formatPeriodo}
+                    interval={0}
+                    label={{
+                      value: "Quantidade de Períodos",
+                      position: "bottom",
+                      style: { fill: "#696d72", fontWeight: 500 },
+                    }}
                   />
                   <YAxis
-                  domain={[0,10]}
-                  axisLine={false} tickLine={false} dataKey={chart.key("cra")} />
+                    domain={[0, 10]}
+                    ticks={[0,1,4,7,10]}
+                    axisLine={false}
+                    tickLine={false}
+                    label={{
+                      value: "CRA",
+                      angle: -90,
+                      position: "insideLeft",
+                      style: { fill: "#696d72", fontWeight: 500 },
+                    }}
+                  />
                   <Tooltip
                     cursor={{ fill: chart.color("blue.100") }}
                     animationDuration={100}

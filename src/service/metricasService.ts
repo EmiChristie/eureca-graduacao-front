@@ -13,7 +13,7 @@ export const getCurso = async (curso: number) => {
     return data;
 }
 
-export const getDisciplinasObrigatoriasQueMaisReprovam = async (curso: number,curriculo: number) => {
+export const getDisciplinasObrigatoriasQueMaisReprovam = async (curso: number,curriculo: number|string) => {
     const { data } = await axiosInstance.get<DisciplinasReprovacao[]>(
       `/${ENDPOINT.DISCIPLINAS_OBRIGATORIAS_REPROVACAO}`,
       {
@@ -30,7 +30,7 @@ export const getDisciplinasObrigatoriasQueMaisReprovam = async (curso: number,cu
   };
 
 
-export const getMetricasCurso = async (curso: number,curriculo: number) => {
+export const getMetricasCurso = async (curso: number,curriculo: number|string) => {
     const { data } = await axiosInstance.get<MetricasCurso>(
       `/${ENDPOINT.METRICAS_CURSO}`,
       {

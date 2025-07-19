@@ -1,7 +1,7 @@
 import { Box, Center, Spinner, VStack,Text, Icon } from "@chakra-ui/react"
 import { CursoProps } from "./CursoPerfil"
 import { useQuery } from "@tanstack/react-query";
-import { getCurriculoAtivoMaisRecente, getDisciplinasPorCurriculo, getPreRequisitos, getPreRequisitosScao } from "@/service/eurecaService";
+import { getDisciplinasPorCurriculo, getPreRequisitos, getPreRequisitosScao } from "@/service/eurecaService";
 import { DisciplinaCurriculo, DisciplinaPreRequisito } from "@/interfaces/types";
 import { EURECA_COLORS } from "@/util/constants";
 import { LuFrown } from "react-icons/lu";

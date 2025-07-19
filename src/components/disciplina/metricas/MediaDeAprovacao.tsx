@@ -25,7 +25,7 @@ export const MediaDeAprovacao = (
         }else if(media >= 7){
             return "razoável"
         }else{
-            return "preocupante"
+            return "abaixo do ideal"
         }
     }
 
@@ -42,7 +42,10 @@ export const MediaDeAprovacao = (
                 </HStack>
 
                 <Flex h={"full"} alignItems={"center"} gap={0}>
-                    <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>A nota média dos aprovados é de {media}, a qual é considerada uma média {mapear(media)}.</Stat.ValueText>
+                    <Flex direction={"column"}>
+                        <Stat.ValueText color={`${EURECA_COLORS.CINZA}/80`}>{media}</Stat.ValueText>
+                        <Stat.Label color={`${EURECA_COLORS.CINZA}/80`}>Considerada uma média {mapear(media)}</Stat.Label>
+                    </Flex>
                 </Flex>
                 </Stat.Root>
             </Card.Body>

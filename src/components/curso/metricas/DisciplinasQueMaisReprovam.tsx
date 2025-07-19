@@ -38,7 +38,7 @@ export const DisciplinasQueMaisReprovam = (
         <Card.Body>
           <Stat.Root >
             <HStack justify="space-between">
-              <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Top 5 disciplinas obrigatórias que mais reprovam</Stat.Label>
+              <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Top 5 disciplinas que mais reprovam</Stat.Label>
               <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                 <LuCopyX strokeWidth={2.6} />
               </Icon>

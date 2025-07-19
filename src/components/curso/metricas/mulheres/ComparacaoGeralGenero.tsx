@@ -20,7 +20,7 @@ export const ComparacaoGeralGenero = (
 
     const periodos = [
         {name:"Mulheres",porcentagem:metricas.porcentagem_media_mulheres_entre_graduados,color:"pink.500"},
-        {name:"Homens",porcentagem:metricas.porcentagem_media_homens_entre_graduados,color:"teal.500"},
+        {name:"Homens",porcentagem:metricas.porcentagem_media_homens_entre_graduados,color:"blue.500"},
     ];
 
     const chart = useChart({
@@ -80,7 +80,7 @@ export const ComparacaoGeralGenero = (
 
     return(
         <>
-            <Card.Root w={"7/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+            <Card.Root w={"8/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
@@ -90,13 +90,13 @@ export const ComparacaoGeralGenero = (
                     </Icon>
                 </HStack>
 
-                <Flex h={"full"} gap={8} mt={4}>
-                    <Box w={"2/6"} justifyItems={"center"} h={"full"} alignContent={"center"}>
-                    <Chart.Root boxSize={"220px"} border={"none"} chart={chart} mr={8} ml={10}>
+                <Flex h={"full"} gap={6} mt={4}>
+                    <Box w={"5/12"} justifyItems={"center"} h={"full"} alignContent={"center"}>
+                    <Chart.Root boxSize={"220px"} border={"none"} chart={chart}>
                      <PieChart>
                          <Pie
-                         innerRadius={50}
-                         outerRadius={90}
+                         innerRadius={40}
+                         outerRadius={80}
                          isAnimationActive={true}
                          data={chart.data}
                          dataKey={chart.key("porcentagem")}
@@ -119,7 +119,7 @@ export const ComparacaoGeralGenero = (
                         <BarSegment.Legend display={"flex"} align={"left"} color={`${EURECA_COLORS.CINZA}/80`}/>
                     </BarSegment.Root>
                     </Box>
-                    <Box w={"4/6"} mt={1}>
+                    <Box w={"7/12"} mt={1}>
                         <Text fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
                             Dentre 100 graduados do curso de {formatarNome(curso)}, em média, {apenas ? "apenas ":" "}{graduadas_media} são mulheres, com um desvio padrão de gênero de {metricas.desvio_padrao_percentual_medio_de_genero}% entre os graduados analisados. Em números concretos, dos 16 graduados entre os 40 ingressantes do mesmo período, {apenas ? "apenas":""} {qtd_mulheres} serão mulheres, enquanto os outros {qtd_homens} serão homens.
                         </Text>

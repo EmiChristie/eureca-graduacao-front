@@ -1,6 +1,7 @@
 export const dominio = "lsd";
 
 export const periodoDe = "2014.1"
+export const limiteAtivos = 10
 
 export const ENDPOINT = {
     CONEXAO: "teste/conexao",
@@ -14,7 +15,7 @@ export const ENDPOINT = {
     REQUISITOS_DISCIPLINA:"eureca/requisitos-disciplina",
     AREA_RETENCAO:"eureca/area-de-retencao",
     
-    DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-obrigatorias-que-mais-reprovam",
+    DISCIPLINAS_OBRIGATORIAS_REPROVACAO: "metricas-curso/disciplinas-que-mais-reprovam",
     METRICAS_CURSO: "metricas-curso/metricas-curso",
 
     METRICAS_DISCIPLINA: "metricas-disciplina/metricas-disciplina",

@@ -35,19 +35,18 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
     porcentagem: item.porcentagem_de_alunos,
   }));
 
-  const dadosVermelhos = periodos.map((p) =>
-    p.nota < 5 ? { ...p, verde: null } : { ...p, quantidade: null }
-  );
-  const dadosVerdes = periodos.map((p) =>
-    p.nota >= 5 ? { ...p, vermelho: null } : { ...p, quantidade: null }
-  );
-
   const chart = useChart({
     data: periodos,
     series: [
       { name: "quantidade", label: "Quantidade de Alunos", color: "blue.400" },
     ],
   });
+
+  const qtdReprovacoes = periodos.filter((d) => d.nota < 5 && d.quantidade > 0);
+  const qtdAprovacoes = periodos.filter((d) => d.nota >= 5 && d.quantidade > 0);
+
+  const mostrarPontoReprovacoes = qtdReprovacoes.length === 1;
+  const mostrarPontoAprovacoes = qtdAprovacoes.length === 1;
 
   return (
     <Card.Root w={"8/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
@@ -75,12 +74,24 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                     stroke={chart.color("border")}
                     axisLine={false}
                     tickLine={false}
+                    label={{
+                      value: "Nota",
+                      position: "bottom",
+                      style: { fill: `#696d72`, fontWeight: 500 },
+                    }}
                   />
                   <YAxis
                     axisLine={false}
                     tickLine={false}
                     tickMargin={10}
                     stroke={chart.color("border")}
+                    label={{
+                      value: "Quantidade de Alunos",
+                      angle: -90,
+                      position: "insideLeft",
+                      style: { fill: `#696d72`, fontWeight: 500 },
+                      dy: 80,
+                    }}
                   />
                   <Tooltip
                     animationDuration={100}
@@ -126,7 +137,8 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                     dataKey={(d: any) => (d.nota < 5 ? d.quantidade : null)}
                     stroke="#E53E3E"
                     strokeWidth={2}
-                    dot={false}
+                    dot={mostrarPontoReprovacoes}
+                    activeDot
                     isAnimationActive={true}
                     connectNulls={false}
                   />
@@ -135,7 +147,7 @@ export const DistribuicaoNotas = ({ metricas }: DistribuicaoProps) => {
                     dataKey={(d: any) => (d.nota >= 5 ? d.quantidade : null)}
                     stroke="#14b8a6"
                     strokeWidth={2}
-                    dot={false}
+                    dot={mostrarPontoAprovacoes}
                     isAnimationActive={true}
                     connectNulls={false}
                   />

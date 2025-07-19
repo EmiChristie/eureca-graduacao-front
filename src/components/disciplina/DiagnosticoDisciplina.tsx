@@ -1,4 +1,4 @@
-import { Curso, Disciplina, DisciplinaCurriculo, MetricasDisciplina, PlanoDeCurso, RelacionamentosDisciplina } from "@/interfaces/types"
+import { Curso, Disciplina, DisciplinaCurriculo, DisciplinasReprovacao, MetricasDisciplina, PlanoDeCurso, RelacionamentosDisciplina } from "@/interfaces/types"
 import { TituloPerfilDisciplina } from "./TituloPerfilDisciplina"
 import { Sobre } from "./Sobre"
 import { Box, Center, Flex, Icon, VStack,Text} from "@chakra-ui/react"
@@ -16,16 +16,19 @@ import { DistribuicaoNotas } from "./metricas/DistribuicaoNotas";
 import { TaxaDeReprovacao } from "./metricas/TaxaDeReprovacao";
 import { EURECA_COLORS } from "@/util/constants";
 import { LuFrown } from "react-icons/lu";
+import { AlunosMatriculadosPorPeriodo } from "./metricas/AlunosMatriculadosPorPeriodo";
 
 export interface DiagnosticoDisciplinaProps {
     disciplina?:DisciplinaCurriculo,
     metricas?:MetricasDisciplina,
+    disciplinasReprovacao?:DisciplinasReprovacao[],
 }
 
 export const DiagnosticoDisciplina = (
     {
         disciplina,
-        metricas
+        metricas,
+        disciplinasReprovacao,
     }:DiagnosticoDisciplinaProps
   ) => {
     
@@ -37,7 +40,8 @@ export const DiagnosticoDisciplina = (
                 <Flex flexDir={"column"} gap={4} mt={4}>
                     <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                         <MediaDeAprovacao media={metricas.media_de_notas_dos_aprovados}/>
-                        <TaxaDeReprovacao metricas={metricas.distribuicao_de_status}/>
+                        <TaxaDeReprovacao codigo_disciplina={disciplina.codigo_da_disciplina} disciplinasReprovacao={disciplinasReprovacao} metricas={metricas.distribuicao_de_status}/>
+                        {/*<AlunosMatriculadosPorPeriodo quantidade={0}quantidade_mais_dp={0}quantidade_menos_dp={0} desvio_padrao={0}/>*/}
                     </Flex>
                     <Flex gap={4} w={"full"} placeContent={"space-between"} placeItems={"stretch"}>
                         <DistribuicaoStatus metricas={metricas.distribuicao_de_status} />

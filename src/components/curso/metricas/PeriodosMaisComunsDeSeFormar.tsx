@@ -31,7 +31,6 @@ export const PeriodosMaisComunsDeSeFormar = ({
   metricas,
   curso,
 }: PeriodosMaisComunsDeSeFormarProps) => {
-  
   const periodos = metricas.graduados_por_qtd_periodos.map((x) => ({
     quantidade_de_graduados: x.quantidade_de_graduados,
     porcentagem_de_graduados: x.porcentagem_de_graduados,
@@ -44,16 +43,10 @@ export const PeriodosMaisComunsDeSeFormar = ({
       {
         name: "porcentagem_de_graduados",
         label: "Porcentagem de Graduados",
-        color: "orange.400",
+        color: "blue.400",
       },
     ],
   });
-
-  const formatPeriodo = (value: string) => {
-    if (value.includes("mais")) return value.slice(0, 2) + "+";
-    if (value.includes("menos")) return "-" + value.slice(0, 2);
-    return value.slice(0, 2);
-  };
 
   return (
     <Card.Root
@@ -72,8 +65,7 @@ export const PeriodosMaisComunsDeSeFormar = ({
             </Icon>
           </HStack>
 
-          <Flex h={"full"} w={"full"} mt={4} alignItems={"center"} gap={0}>
-            <Box w={"full"}>
+          <Box my={3}>
               {metricas.quantidade_media_periodos_para_se_formar.length === 1 ? (
                 <Stat.ValueText
                   fontSize={"lg"}
@@ -94,20 +86,26 @@ export const PeriodosMaisComunsDeSeFormar = ({
                   {metricas.quantidade_media_periodos_para_se_formar[1]} períodos.
                 </Stat.ValueText>
               )}
+          </Box>
 
-              <Chart.Root pr={8} justifyContent={"left"} mt={6} maxH="2xs" chart={chart}>
-                <BarChart data={chart.data}>
-                  <CartesianGrid vertical={false} />
+          <Flex h={"full"} w={"full"} mt={4} alignItems={"center"} gap={0}>
+            <Box w={"full"}>
+
+              <Chart.Root pr={6} justifyContent={"left"} chart={chart}>
+                <BarChart data={chart.data} layout="vertical" height={300}>
+                  <CartesianGrid horizontal={false} />
                   <XAxis
-                    axisLine={false}
-                    tickLine={false}
-                    dataKey={chart.key("quantidade_de_periodos")}
-                    tickFormatter={formatPeriodo}
-                  />
-                  <YAxis
+                    type="number"
                     axisLine={false}
                     tickLine={false}
                     tickFormatter={(value) => `${value}%`}
+                  />
+                  <YAxis
+                    type="category"
+                    dataKey={chart.key("quantidade_de_periodos")}
+                    axisLine={false}
+                    tickLine={false}
+                    width={90}
                   />
                   <Tooltip
                     cursor={{ fill: chart.color("transparent") }}
@@ -138,12 +136,11 @@ export const PeriodosMaisComunsDeSeFormar = ({
                   />
                   {chart.series.map((item) => (
                     <Bar
-                      barSize={50}
                       key={item.name}
                       isAnimationActive={true}
                       dataKey={chart.key(item.name)}
                       fill={chart.color(item.color)}
-                      radius={4}
+                      radius={[0, 4, 4, 0]}
                     />
                   ))}
                 </BarChart>

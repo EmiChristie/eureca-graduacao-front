@@ -5,7 +5,7 @@ export type CursoHome = {
     nome_do_campus: string,
     area_de_retencao: number,
     area_de_retencao_descricao: string,
-    codigo_do_curriculo: number|null
+    codigo_do_curriculo: number|string|null
 }
 
 export type User = {
@@ -129,6 +129,7 @@ export type Curriculo = {
     numero_disciplinas_obrigatorias_minimo: number;
     numero_disciplinas_optativas_minimo: number;
     numero_disciplinas_minimo: number;
+    carga_horaria_extensao: number;
   };
 
 export type DisciplinaCurriculo = {

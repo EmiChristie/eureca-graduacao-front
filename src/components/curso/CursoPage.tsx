@@ -11,6 +11,7 @@ import {
     Tabs,
     Text,
     VStack,
+    Image
   } from "@chakra-ui/react";
   import { Toaster } from "@/components/ui/toaster";
   import { LuBlocks, LuBookCopy, LuBookText, LuChartLine, LuChevronRight, LuFrown, LuCombine, LuFolder, LuLayoutDashboard, LuLightbulb, LuSquareCheck, LuUndo, LuUndo2, LuUser, LuWorkflow, LuUserRound, } from "react-icons/lu";
@@ -27,6 +28,7 @@ import { Sidebar } from "./Sidebar";
 import { useNavigate } from "react-router-dom";
 import { getCurriculoAtivoMaisRecente, getCurriculo, getAreaRetencao, getCurriculoAtivoMaisRecenteScao, getCurriculoScao, getExisteEstudanteScao, getExisteEstudanteSig } from "@/service/eurecaService";
 import { mapearCurso } from "@/util/mapeamentos";
+import img from "../../assets/eureca_graduacao_logo.png"
   
 export interface CursoPageProps{
     codigo_curso:number,
@@ -44,7 +46,11 @@ export interface CursoPageProps{
     console.log(codigo_curriculo)
 
     const navigate = useNavigate();
-    const [aba, setAba] = useState(1)
+    const [aba, setAba] = useState(sessionStorage.getItem("irDiretoAoFluxograma") === "sim" ? 2 : 1)
+
+    if(sessionStorage.getItem("irDiretoAoFluxograma") === "sim"){
+        sessionStorage.setItem("irDiretoAoFluxograma","nao");
+    }
 
     const { data: curso, isLoading, isError } = useQuery<Curso, Error>({
         queryKey: ["curso", codigo_curso],
@@ -54,7 +60,7 @@ export interface CursoPageProps{
         enabled: !!codigo_curso,
     });
 
-    const { data: curriculo, isLoading:isLoading2, isError:isError2 } = useQuery<number, Error>({
+    const { data: curriculo, isLoading:isLoading2, isError:isError2 } = useQuery<string, Error>({
       queryKey: ["curriculoAtivoMaisRecente", codigo_curso],
       queryFn: () => getCurriculoAtivoMaisRecente(codigo_curso),
       staleTime: 1000 * 60 * 5,
@@ -116,10 +122,17 @@ export interface CursoPageProps{
       enabled: !!codigo_curso,
     });
 
-    console.log("existe estudante scao? "+isError7)
-    console.log("existe estudante sig? "+isError8)
+    console.log("erro buscando estudantes no scao? "+isError7)
+    console.log("erro buscando estudantes no sig? "+isError8)
     
-    console.log(curso);
+    console.log("o que faz dar erro?");
+    console.log(isError||isError4||isError5||!requisitos||!curso||!area)
+    console.log(isError)
+    console.log(isError4)
+    console.log(isError5)
+    console.log(requisitos)
+    console.log(curso)
+    console.log(area)
   
     return (
       <>
@@ -127,11 +140,18 @@ export interface CursoPageProps{
             <Center placeItems={"stretch"}>
             <Box my={4} ml={4} w={"20vw"}>
                 <Box w={"full"}>
+                    {
+                        /*
                     <Box h={"8vh"} bg={`${EURECA_COLORS.AZUL_ESCURO}/70`} boxShadow={"sm"} rounded={"sm"}>
                         <Center h={"8vh"} px={4} gapX={2}>
                             <LuLightbulb size={"4vh"} color={EURECA_COLORS.BRANCO}/>
                             <Text fontSize={"xl"} lineHeight={"shorter"} color={EURECA_COLORS.BRANCO}>Eureca Graduação</Text>
                         </Center>
+                    </Box>
+                        */
+                    }
+                    <Box w={"20vw"} h={"8vh"}>
+                        <Image src={img}></Image>
                     </Box>
                     <Card.Root bg={"#7c95b9/70"} boxShadow={"sm"} h={"86vh"} mt={4}>
                         <Card.Body>

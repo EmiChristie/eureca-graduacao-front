@@ -4,6 +4,12 @@ import { PerfilDisciplinaProps } from "./PerfilDisciplina"
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants"
 import { formatarNome } from "@/util/utilities"
 import { useState } from "react"
+import { Ementa } from "./perfilCards/Ementa"
+import { Metodologia } from "./perfilCards/Metodologia"
+import { Objetivos } from "./perfilCards/Objetivos"
+import { Referencias } from "./perfilCards/Referencias"
+import { Avaliacao } from "./perfilCards/Avaliacao"
+import { Conteudo } from "./perfilCards/Conteudo"
 
   export const Informacoes = (
     {
@@ -39,6 +45,8 @@ import { useState } from "react"
 
     return(
         <>
+        {
+            /*
         <Flex gap={4}>
             <Grid className="grid-cols-2" gap={2}>
                 <Button h={"full"} onClick={()=>setSelected(1)} bgColor={selected == 1 ? `${EURECA_COLORS.AZUL_CLARO}/70`:`${EURECA_COLORS.CINZA}/70`} _hover={{bg:`${EURECA_COLORS.AZUL_CLARO}/90`}} w={"full"}>Ementa</Button>
@@ -85,6 +93,41 @@ import { useState } from "react"
             </Card.Body>
             </Card.Root>
         </Flex>
+            */
+        }
+
+        <Grid templateColumns={"repeat(3,1fr)"} gap={4} w={"full"}  placeContent={"space-between"} placeItems={"stretch"}>
+            {informacoes.ementa && informacoes.ementa !== null ? 
+                <Ementa valor={informacoes.ementa}/>
+                :
+                <></>
+            }
+            {informacoes.metodologia && informacoes.metodologia !== null ? 
+                <Metodologia valor={informacoes.metodologia}/>
+                :
+                <></>
+            }
+            {informacoes.objetivos && informacoes.objetivos !== null ? 
+                <Objetivos valor={informacoes.objetivos}/>
+                :
+                <></>
+            }
+            {informacoes.avaliacao && informacoes.avaliacao !== null ? 
+                <Avaliacao valor={informacoes.avaliacao}/>
+                :
+                <></>
+            }
+            {informacoes.conteudo && informacoes.conteudo !== null ? 
+                <Conteudo valor={informacoes.conteudo}/>
+                :
+                <></>
+            }
+            {informacoes.referencias && informacoes.referencias !== null ? 
+                <Referencias valor={informacoes.referencias}/>
+                :
+                <></>
+            }
+        </Grid>
         </>
     )
   }

@@ -4,7 +4,7 @@ import { LuBookText, LuCombine, LuInfo, LuSunMoon } from "react-icons/lu"
 import { formatarNome } from "@/util/utilities";
 
 export interface TituloFluxogramaProps{
-    curriculo?:number;
+    curriculo?:number|string;
     curso?:string;
     codigo_curso?:number;
 }

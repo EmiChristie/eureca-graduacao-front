@@ -41,7 +41,7 @@ export const TaxaDeSucessoMediaPorPeriodo = ({
   };
 
   return (
-    <Card.Root w={"5/12"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
+    <Card.Root w={"full"} boxShadow={"sm"} bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}>
       <Card.Body>
         <Stat.Root>
           <HStack justify="space-between" alignItems={"start"}>
@@ -78,9 +78,24 @@ export const TaxaDeSucessoMediaPorPeriodo = ({
                     axisLine={false}
                     tickLine={false}
                     dataKey={chart.key("quantidade_de_periodos")}
-                    tickFormatter={formatPeriodo}
+                    label={{
+                      value: "Quantidade de Períodos",
+                      position: "bottom",
+                      style: { fill: "#696d72", fontWeight: 500 },
+                    }}
                   />
-                  <YAxis axisLine={false} tickLine={false} dataKey={chart.key("cra")} />
+                  <YAxis 
+                    axisLine={false} 
+                    tickLine={false} 
+                    dataKey={chart.key("cra")}
+                    label={{
+                      value: "Taxa de Sucesso",
+                      angle: -90,
+                      position: "insideLeft",
+                      style: { fill: "#696d72", fontWeight: 500 },
+                      dy: 50,
+                    }}
+                   />
                   <Tooltip
                     cursor={{ fill: chart.color("blue.100") }}
                     animationDuration={100}

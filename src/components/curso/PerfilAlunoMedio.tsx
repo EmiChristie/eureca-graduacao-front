@@ -4,24 +4,26 @@ import { TituloAluno } from "./perfilAlunoIdeal/TituloAluno"
 import { Curriculo, PerfilAlunoMedioType } from "@/interfaces/types"
 import { PerfilAlunoIdealComponent } from "./perfilAlunoIdeal/PerfilAlunoIdealComponent";
 import { PerfilAlunoMedioComponent } from "./perfilAlunoMedio/PerfilAlunoMedioComponent";
+import { TituloPerfisAluno } from "./perfilAlunoMedio/TituloPerfisAluno";
 
 export interface PerfilAlunoMedioProps {
-    perfil:PerfilAlunoMedioType;
+    perfil?:PerfilAlunoMedioType;
+    requisitos?:Curriculo;
 }
 
 export const PerfilAlunoMedio = (
   {
     perfil,
+    requisitos
   }:PerfilAlunoMedioProps
 ) => {
   return(
       <>
-        <TituloAluno tipo={"médio"} cor="#f97316" />
+        <TituloPerfisAluno/>
 
-        <Box py={16}>
-            <PerfilAlunoMedioComponent perfil={perfil}/>
+        <Box py={4}>
+            <PerfilAlunoMedioComponent requisitos={requisitos} perfil={perfil}/>
         </Box>
-        
       </>
   )
   }
