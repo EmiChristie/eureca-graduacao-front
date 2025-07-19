@@ -136,8 +136,8 @@ export interface DisciplinaPageProps{
       isLoading:isLoading10,
       isError:isError10,
     } = useQuery<DisciplinasReprovacao[], Error>({
-      queryKey: ["disciplinas-reprovacao", codigo_curso,(!!codigo_curriculo||!!curriculo||!!curriculoScao)],
-      queryFn: () => getDisciplinasObrigatoriasQueMaisReprovam(codigo_curso, String(codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0)),
+      queryKey: ["disciplinas-reprovacao", codigo_curso,(!!codigo_curriculo||!!curriculo||!!curriculoScao).toString()],
+      queryFn: () => getDisciplinasObrigatoriasQueMaisReprovam(codigo_curso, (codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0).toString()),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
       enabled: !!codigo_curso && (!!codigo_curriculo||!!curriculo||!!curriculoScao),
