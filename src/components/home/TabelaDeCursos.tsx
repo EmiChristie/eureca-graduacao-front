@@ -171,13 +171,24 @@ import { formatarNome } from "@/util/utilities";
                               <Text 
                                 fontWeight={"normal"}
                                 fontSize={"sm"}>
-                                  Aqui você pode acessar informações de planejamento e execução curricular sobre os cursos de graduação oferecidos pela UFCG.
+                                  Você está logado como <Span fontWeight={"medium"}>{user.profile.type.toLowerCase()}</Span>.
                               </Text>
                               <Text 
                                 fontWeight={"normal"}
                                 fontSize={"sm"}>
-                                  Você está logado como <Span fontWeight={"medium"}>{user.profile.type.toLowerCase()}</Span>. Acesse seu curso para visualizar métricas particulares sobre o seu desempenho acadêmico!
+                                  Aqui você pode acessar informações de planejamento e execução curricular sobre os cursos de graduação oferecidos pela UFCG.
                               </Text>
+                              {
+                                user.profile.type.toLowerCase() === "aluno" ?
+                                
+                              <Text 
+                                fontWeight={"normal"}
+                                fontSize={"sm"}>
+                                  Acesse seu curso para visualizar métricas particulares sobre o seu desempenho acadêmico!
+                              </Text>
+                              :
+                              <></>
+                              }
                               <Center>
                                 <IconButton rounded={"full"} onClick={()=>logout()} color={EURECA_COLORS.BRANCO} size={"sm"} variant={"ghost"}>
                                   <LuLogOut strokeWidth={2.5}/>
