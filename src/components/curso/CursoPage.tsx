@@ -171,7 +171,7 @@ export interface CursoPageProps{
                                         <LuChartLine /> Diagnóstico
                                     </Link>
                                 </Button>
-                                <Button disabled justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
+                                <Button disabled={!codigo_curriculo} justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
                                     <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuUserRound/> Meu Desempenho
                                     </Link>

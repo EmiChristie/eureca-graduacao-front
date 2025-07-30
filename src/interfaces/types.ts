@@ -344,3 +344,28 @@ export type UserProfile = {
   code?:string; //se for aluno ou coordenador, tem um curso associado;
   curriculum?:string; //só se for aluno
 }
+
+export interface PontoFda {
+  valor: number;
+  probabilidade_acumulada: number;
+}
+
+export interface ResultadoFda {
+  fda: PontoFda[];
+  percentil: number;
+  valor_do_aluno: number;
+}
+
+export interface DesempenhoAlunoResponse {
+  cra: ResultadoFda;
+  velocidade_media: ResultadoFda;
+  taxa_de_sucesso: ResultadoFda;
+}
+
+export interface GetDesempenhoAlunoPayload {
+  codigoCurso: number;
+  codigoCurriculo: number;
+  cra: number;
+  velocidadeMedia: number;
+  taxaDeSucesso: number;
+}

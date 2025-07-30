@@ -19,6 +19,8 @@ export const ENDPOINT = {
     METRICAS_CURSO: "metricas-curso/metricas-curso",
 
     METRICAS_DISCIPLINA: "metricas-disciplina/metricas-disciplina",
+
+    DESEMPENHO_ALUNO: "desempenho-aluno/fdas",
 } as const;
 
 export const DAS_ENDPOINT = {
