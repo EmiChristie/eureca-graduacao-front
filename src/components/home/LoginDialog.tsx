@@ -139,7 +139,7 @@ return (
                   <Dialog.Content boxShadow={"sm"} bgColor={`${EURECA_COLORS.BRANCO}/95`} className="text" color={EURECA_COLORS.CINZA} textAlign={"justify"}>
                       <Dialog.Header display={"flex"} flexDir={"column"}>
                           <Dialog.Title color={"black"}>Login</Dialog.Title>
-                          <Dialog.Description>Entre com suas credenciais do SCAO para acessar métricas particulares de desempenho acadêmico!</Dialog.Description>
+                          <Dialog.Description>Entre com suas credenciais do SIGAA para acessar métricas particulares de desempenho acadêmico!</Dialog.Description>
                       </Dialog.Header>
                       <Dialog.Body>
                         <form>
