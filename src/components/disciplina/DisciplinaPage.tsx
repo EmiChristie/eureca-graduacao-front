@@ -32,13 +32,15 @@ export interface DisciplinaPageProps{
     codigo_curso:number,
     codigo_disciplina:number,
     codigo_curriculo?:number|undefined,
+    flag_aluno_do_curso:boolean,
   }
     
   export const DisciplinaPage = (
     {
         codigo_curso,
         codigo_disciplina,
-        codigo_curriculo
+        codigo_curriculo,
+        flag_aluno_do_curso
     }:DisciplinaPageProps
   ) => {
 
@@ -73,11 +75,11 @@ export interface DisciplinaPageProps{
     
 
     const { data: disciplinaCurriculo, isLoading:isLoading3, isError:isError3 } = useQuery<DisciplinaCurriculo[], Error>({
-      queryKey: ["pegarDisciplinaCurriculo", codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo,codigo_disciplina],
-      queryFn: () => getDisciplinaCurriculo(codigo_curso, codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0,codigo_disciplina),
+      queryKey: ["pegarDisciplinaCurriculo", codigo_curso, flag_aluno_do_curso ? codigo_curriculo : curriculo,codigo_disciplina],
+      queryFn: () => getDisciplinaCurriculo(codigo_curso, flag_aluno_do_curso? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0,codigo_disciplina),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) && !!codigo_curso && !!codigo_disciplina,
+      enabled: flag_aluno_do_curso ? (!!codigo_curriculo && !!codigo_curso && !!codigo_disciplina) : ((!!curriculo||!!curriculoScao) && !!codigo_curso && !!codigo_disciplina),
     });
 
     const { data: disciplina, isLoading:isLoading4, isError:isError4 } = useQuery<Disciplina[], Error>({
@@ -107,11 +109,11 @@ export interface DisciplinaPageProps{
 
     //estou usando o SCAO já que no sig não tem os co-requisitos nem disciplinas equivalentes
     const { data: requisitosDisciplina, isLoading:isLoading6, isError:isError6 } = useQuery<RelacionamentosDisciplina, Error>({
-      queryKey: ["pegarRequisitosDaDisciplina",codigo_disciplina,codigo_curso,codigo_curriculo ? codigo_curriculo : curriculo],
-      queryFn: () => getRequisitosDisciplina(codigo_disciplina,mapearCurso[codigo_curso],codigo_curriculo ? codigo_curriculo : curriculoScao),
+      queryKey: ["pegarRequisitosDaDisciplina",codigo_disciplina,codigo_curso,flag_aluno_do_curso ? codigo_curriculo : curriculo],
+      queryFn: () => getRequisitosDisciplina(codigo_disciplina,mapearCurso[codigo_curso],flag_aluno_do_curso ? codigo_curriculo : curriculoScao),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: (!!codigo_curriculo||!!curriculoScao) && !!codigo_curso && !!codigo_disciplina,
+      enabled: flag_aluno_do_curso ? (!!codigo_curriculo && !!codigo_curso && !!codigo_disciplina) : (!!curriculo && !!codigo_curso && !!codigo_disciplina),
     });
 
     //usando SCAO + SIG
@@ -124,11 +126,11 @@ export interface DisciplinaPageProps{
     });
     
     const { data: disciplinas, isLoading:isLoading9, isError:isError9 } = useQuery<DisciplinaCurriculo[], Error>({
-        queryKey: ["disciplinasPorCurriculo", codigo_curso,(!!codigo_curriculo||!!curriculo||!!curriculoScao)],
-        queryFn: () => getDisciplinasPorCurriculo(codigo_curso,String(codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0)),
+        queryKey: ["disciplinasPorCurriculo", codigo_curso],
+        queryFn: () => getDisciplinasPorCurriculo(codigo_curso,String(flag_aluno_do_curso ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0)),
         staleTime: 1000 * 60 * 5,
         refetchOnWindowFocus: false,
-        enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) &&!!codigo_curso,
+        enabled: flag_aluno_do_curso ? (!!codigo_curriculo && !!codigo_curso) : ((!!curriculo||!!curriculoScao) && !!codigo_curso),
     });
 
     const {
@@ -136,11 +138,11 @@ export interface DisciplinaPageProps{
       isLoading:isLoading10,
       isError:isError10,
     } = useQuery<DisciplinasReprovacao[], Error>({
-      queryKey: ["disciplinas-reprovacao", codigo_curso,(!!codigo_curriculo||!!curriculo||!!curriculoScao).toString()],
-      queryFn: () => getDisciplinasObrigatoriasQueMaisReprovam(codigo_curso, (codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0).toString()),
+      queryKey: ["disciplinas-reprovacao", codigo_curso],
+      queryFn: () => getDisciplinasObrigatoriasQueMaisReprovam(codigo_curso, (flag_aluno_do_curso ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao :0).toString()),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: !!codigo_curso && (!!codigo_curriculo||!!curriculo||!!curriculoScao),
+      enabled: flag_aluno_do_curso ? (!!codigo_curriculo && !!codigo_curso) : ((!!curriculo||!!curriculoScao) && !!codigo_curso),
     });
 
     console.log("disciplinas validas???")

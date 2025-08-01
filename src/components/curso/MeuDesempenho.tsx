@@ -1,10 +1,13 @@
-import { Box } from "@chakra-ui/react"
+import { Box, Center, Icon, Spinner, VStack,Text } from "@chakra-ui/react"
 import { CursoProps } from "./CursoPerfil"
 import { useUserStore } from "@/stores/user/user.store";
 import { useQuery } from "@tanstack/react-query";
 import { getDesempenhoAluno } from "@/service/metricasService";
 import { calcularCra } from "@/util/utilities";
 import { User } from "@/interfaces/types";
+import { EURECA_COLORS } from "@/util/constants";
+import { LuFrown } from "react-icons/lu";
+import { DesempenhoAluno } from "./desempenho/DesempenhoAluno";
 
   export const MeuDesempenho = (
     {
@@ -17,23 +20,29 @@ import { User } from "@/interfaces/types";
 
     return(
         <>
-
-        {
-          isLoading ?
-            <Box px={4}>
-                carregando
-            </Box>
+          {
+            isLoading ?
+              <Center h={"80vh"}>
+              <VStack>
+                  <Spinner color={`${EURECA_COLORS.AZUL_MEDIO}/70`} size={"lg"} borderWidth={3}/>
+                  <Text color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>Carregando Meu Desempenho...</Text>
+              </VStack>
+              </Center>
             :
-            isError ?
-            <Box px={4}>
-                erro
-            </Box>
+            isError?
+              <Center h={"80vh"}>
+              <VStack>
+                  <Icon color={`${EURECA_COLORS.AZUL_MEDIO}/70`} >
+                    <LuFrown size={36} strokeWidth={1.8} />
+                  </Icon>
+                  <Text  color={`${EURECA_COLORS.AZUL_MEDIO}/70`} mt={2}>As estatísticas de desempenho não puderam ser carregadas.</Text>
+              </VStack>
+              </Center>
             :
-            <Box px={4}>
-                {data.cra.percentil}
-                {data.cra.valor_do_aluno}
-            </Box>
-        }
+              <Box color={EURECA_COLORS.CINZA}>
+                <DesempenhoAluno metricas={data}/>
+              </Box>
+          }
         </>
     )
   }
