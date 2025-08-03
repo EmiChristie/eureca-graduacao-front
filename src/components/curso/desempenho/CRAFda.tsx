@@ -52,6 +52,11 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                   stroke={chart.color("border")}
                   tickFormatter={(v) => formatDinamico(v)}
                   scale="linear"
+                  label={{
+                    value: "Nota do CRA",
+                    position: "bottom",
+                    style: { fill: `#696d72`, fontWeight: 500 },
+                  }}
                 />
                 <YAxis
                 type="number"
@@ -60,6 +65,13 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                 stroke={chart.color("border")}
                 tickFormatter={(v) => `${Math.round((1-v)*100)}%`}
                 scale="linear"
+                label={{
+                    value: "Porcentagem",
+                    angle: -90,
+                    position: "insideLeft",
+                    style: { fill: `#696d72`, fontWeight: 500 },
+                    dy: 35,
+                }}
                 />
                 <ReferenceLine
                   x={7}
