@@ -2,7 +2,7 @@ import { ResultadoFda } from "@/interfaces/types";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex } from "@chakra-ui/react";
-import { LuPencilLine } from "react-icons/lu";
+import { LuArrowUp10, LuPencilLine } from "react-icons/lu";
 import { AreaChart, XAxis, YAxis, Area, Tooltip, ReferenceLine, Scatter } from "recharts";
 
 interface DesempenhoAlunoProps {
@@ -26,8 +26,7 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
 
   return (
     <Card.Root
-      maxW={"full"}
-      minW={"18vw"}
+      w={"full"}
       boxShadow={"sm"}
       bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}
     >
@@ -36,11 +35,11 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
           <HStack justify="space-between">
             <Stat.Label color={`${EURECA_COLORS.CINZA}/55`}>Meu CRA</Stat.Label>
             <Icon color={`${EURECA_COLORS.CINZA}/55`}>
-              <LuPencilLine />
+                <LuArrowUp10 strokeWidth={2.6} />
             </Icon>
           </HStack>
           <Flex h={"full"} mt={8} alignItems={"center"}>
-            <Chart.Root maxH="sm" chart={chart}>
+            <Chart.Root maxH="2xs" chart={chart}>
               <AreaChart
                 accessibilityLayer
                 data={chart.data}
