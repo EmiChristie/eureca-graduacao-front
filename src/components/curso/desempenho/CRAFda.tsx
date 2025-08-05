@@ -20,8 +20,8 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
     const str = num.toString();
     const [, decimal] = str.split(".");
     if (!decimal) return num.toString();
-    if (decimal.length <= 2) return num.toString();
-    return num.toFixed(2);
+    if (decimal.length <= 3) return num.toString();
+    return num.toFixed(3);
   };
 
   return (

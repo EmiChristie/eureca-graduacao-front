@@ -13,15 +13,15 @@ export const ComentarioCRA = ({ fda }: DesempenhoAlunoProps) => {
 
   return (
     <Card.Root
-      maxW={"full"}
-      minW={"18vw"}
+      w={"25vw"}
       boxShadow={"sm"}
       bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}
     >
       <Card.Body>
         <Stat.Root>
-          <Flex h={"full"} mt={8} alignItems={"center"}>
-            <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>Comentário aqui</Text>
+          <Flex h={"full"} flexDir={"column"}>
+            <Text textAlign={"justify"} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>Atualmente, seu CRA é igual a {fda.valor_do_aluno.toFixed(2)}.</Text>
+            <Text mt={2} textAlign={"justify"} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>Na curva ao lado, você verá que a probabilidade acumulada para o seu CRA é de {fda.percentil.toFixed(3)}. Isso significa que seu CRA é mais alto que {parseFloat(fda.percentil.toFixed(3))*100}% dos CRAs ativos no seu curso, e você {fda.percentil == 0 ? "tem o menor CRA ativo do seu curso." : fda.percentil == 1 ? "tem o maior CRA ativo do seu curso, parabéns!" : `está entre os ${parseFloat((1-fda.percentil).toFixed(3))*100}% maiores CRAs ativos.`}</Text>
           </Flex>
         </Stat.Root>
       </Card.Body>
