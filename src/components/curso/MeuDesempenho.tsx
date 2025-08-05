@@ -40,7 +40,7 @@ import { DesempenhoAluno } from "./desempenho/DesempenhoAluno";
               </Center>
             :
               <Box color={EURECA_COLORS.CINZA}>
-                <DesempenhoAluno metricas={data}/>
+                <DesempenhoAluno aluno={aluno} metricas={data}/>
               </Box>
           }
         </>

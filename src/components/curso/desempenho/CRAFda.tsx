@@ -1,7 +1,7 @@
 import { ResultadoFda } from "@/interfaces/types";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { Chart, useChart } from "@chakra-ui/charts";
-import { Card, Stat, HStack, Icon, Flex } from "@chakra-ui/react";
+import { Card, Stat, HStack, Icon, Flex, Box, Text, Strong, Span } from "@chakra-ui/react";
 import { LuArrowUp10, LuPencilLine } from "react-icons/lu";
 import { AreaChart, XAxis, YAxis, Area, Tooltip, ReferenceLine, Scatter } from "recharts";
 
@@ -33,8 +33,8 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
       <Card.Body>
         <Stat.Root>
           <HStack justify="space-between">
-            <Stat.Label color={`${EURECA_COLORS.CINZA}/55`}>Meu CRA</Stat.Label>
-            <Icon color={`${EURECA_COLORS.CINZA}/55`}>
+            <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Meu CRA</Stat.Label>
+            <Icon fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>
                 <LuArrowUp10 strokeWidth={2.6} />
             </Icon>
           </HStack>
@@ -63,14 +63,13 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                 domain={[0, 1]}
                 ticks={[0, 0.2, 0.4, 0.6, 0.8, 1]}
                 stroke={chart.color("border")}
-                tickFormatter={(v) => `${Math.round((1-v)*100)}%`}
                 scale="linear"
                 label={{
-                    value: "Porcentagem",
+                    value: "Probabilidade Acumulada",
                     angle: -90,
                     position: "insideLeft",
                     style: { fill: `#696d72`, fontWeight: 500 },
-                    dy: 35,
+                    dy: 70,
                 }}
                 />
                 <ReferenceLine
@@ -110,20 +109,14 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                     const top = ((1 - item.probabilidade_acumulada) * 100).toFixed(1);
 
                     return (
-                      <div
-                        style={{
-                          background: "white",
-                          border: "1px solid #ccc",
-                          padding: "8px",
-                          borderRadius: "4px",
-                          fontSize: "14px",
-                          color: "#333",
-                        }}
-                      >
-                        Alunos com CRA igual a{" "}
-                        <strong>{craFormatado}</strong> estão no top{" "}
-                        <strong>{top}%</strong> melhores CRAs ativos.
-                      </div>
+                      <Box border={"1px solid #ccc"} bg={"white"} p={2} rounded={"md"} >
+                        <Text fontWeight={"bold"}>{item.probabilidade_acumulada.toFixed(3)}</Text>
+                        <Text fontWeight={"medium"} color={"gray.800"} mt={2}>
+                          Alunos com CRA igual a{" "}
+                          <Span fontWeight={"bold"} color={"black"}>{craFormatado}</Span> estão entre os {" "}
+                          <Span fontWeight={"bold"} color={"black"}>{top}%</Span> CRAs mais altos entre os alunos ativos.
+                        </Text>
+                      </Box>
                     );
                   }}
                 />
