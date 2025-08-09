@@ -118,6 +118,8 @@ export type Curriculo = {
     codigo_do_curriculo: number;
     duracao_minima: number;
     duracao_maxima: number;
+    carga_horaria_creditos_minima?: number,
+    carga_horaria_creditos_maxima?: number,
     carga_horaria_disciplinas_obrigatorias_minima: number;
     carga_horaria_disciplinas_optativas_minima: number;
     carga_horaria_atividades_complementares_minima: number;
@@ -368,4 +370,5 @@ export interface GetDesempenhoAlunoPayload {
   cra: number;
   velocidadeMedia: number;
   taxaDeSucesso: number;
+  velocidadeMaxima: number;
 }

@@ -4,7 +4,7 @@ import { useUserStore } from "@/stores/user/user.store";
 import { useQuery } from "@tanstack/react-query";
 import { getDesempenhoAluno } from "@/service/metricasService";
 import { calcularCra } from "@/util/utilities";
-import { User } from "@/interfaces/types";
+import { Curriculo, User } from "@/interfaces/types";
 import { EURECA_COLORS } from "@/util/constants";
 import { LuFrown } from "react-icons/lu";
 import { DesempenhoAluno } from "./desempenho/DesempenhoAluno";
@@ -17,7 +17,7 @@ import { DesempenhoAluno } from "./desempenho/DesempenhoAluno";
   ) => {
 
     const aluno = useUserStore((state) => state.user);
-    const { data, isLoading, isError } = useDesempenhoAluno(aluno);
+    const { data, isLoading, isError } = useDesempenhoAluno(aluno, requisitos);
 
     return(
         <>
@@ -48,7 +48,8 @@ import { DesempenhoAluno } from "./desempenho/DesempenhoAluno";
     )
   }
 
-export const useDesempenhoAluno = (aluno: User | null) => {
+export const useDesempenhoAluno = (aluno: User | null, requisitos: Curriculo) => {
+  const vMax = requisitos.carga_horaria_creditos_maxima && requisitos.carga_horaria_creditos_maxima > 0 ? requisitos.carga_horaria_creditos_maxima : requisitos.duracao_minima && requisitos.duracao_minima > 0 ? Math.ceil(requisitos.minimo_creditos_total/requisitos.duracao_minima) : 30;
   return useQuery({
     queryKey: ["desempenho-aluno", aluno?.matricula_do_estudante],
     queryFn: () => {
@@ -62,6 +63,7 @@ export const useDesempenhoAluno = (aluno: User | null) => {
         cra,
         velocidadeMedia: aluno.velocidade_media,
         taxaDeSucesso: aluno.taxa_de_sucesso,
+        velocidadeMaxima: vMax,
       });
     },
     enabled: !!aluno,

@@ -10,7 +10,7 @@ export const ComentarioTaxaDeSucesso = ({ fda }: DesempenhoAlunoProps) => {
 
   return (
     <Card.Root
-      w={"25vw"}
+      w={"36vw"}
       boxShadow={"sm"}
       bgColor={`${EURECA_GRADUACAO_COLORS.CINZA_CLARO}/70`}
     >

@@ -26,8 +26,8 @@ export const VelocidadeMediaFda = ({ fda, vIdeal }: DesempenhoAlunoProps) => {
   };
 
   const maxValor = Math.max(...fda.fda.map((d) => d.valor));
-  const maxArredondado = Math.floor(maxValor / 10) * 10;
-  const xTicks = Array.from({ length: Math.floor(maxArredondado / 10) + 1 }, (_, i) => i * 10);
+  const maxArredondado = Math.floor(maxValor / 5) * 5;
+  const xTicks = Array.from({ length: Math.floor(maxArredondado / 5) + 1 }, (_, i) => i * 5);
 
   return (
     <Card.Root
@@ -116,7 +116,7 @@ export const VelocidadeMediaFda = ({ fda, vIdeal }: DesempenhoAlunoProps) => {
                       <Box border={"1px solid #ccc"} bg={"white"} p={2} rounded={"md"} >
                         <Text fontWeight={"bold"}>{item.probabilidade_acumulada.toFixed(3)}</Text>
                         <Text fontWeight={"medium"} color={"gray.800"} mt={2}>
-                          Alunos com velocidade média igual a{" "}
+                          Alunos com velocidade média {item.probabilidade_acumulada == 1 ? "maior ou " : ""} igual a{" "}
                           <Span fontWeight={"bold"} color={"black"}>{craFormatado}</Span> estão entre as {" "}
                           <Span fontWeight={"bold"} color={"black"}>{top}%</Span> velocidades médias mais {item.probabilidade_acumulada < 0.5 ? "baixas":"altas"} entre os alunos ativos.
                         </Text>
