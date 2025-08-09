@@ -11,7 +11,8 @@ import { DesempenhoAluno } from "./desempenho/DesempenhoAluno";
 
   export const MeuDesempenho = (
     {
-        curso
+        curso,
+        requisitos
     }:CursoProps
   ) => {
 
@@ -40,7 +41,7 @@ import { DesempenhoAluno } from "./desempenho/DesempenhoAluno";
               </Center>
             :
               <Box color={EURECA_COLORS.CINZA}>
-                <DesempenhoAluno aluno={aluno} metricas={data}/>
+                <DesempenhoAluno curso={curso} requisitos={requisitos} aluno={aluno} metricas={data}/>
               </Box>
           }
         </>

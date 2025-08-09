@@ -2,14 +2,15 @@ import { ResultadoFda } from "@/interfaces/types";
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { Chart, useChart } from "@chakra-ui/charts";
 import { Card, Stat, HStack, Icon, Flex, Box, Text, Strong, Span } from "@chakra-ui/react";
-import { LuArrowUp10, LuPencilLine } from "react-icons/lu";
+import { LuArrowUp10, LuPencilLine, LuTimer } from "react-icons/lu";
 import { AreaChart, XAxis, YAxis, Area, Tooltip, ReferenceLine, Scatter } from "recharts";
 
 interface DesempenhoAlunoProps {
   fda: ResultadoFda;
+  vIdeal: number;
 }
 
-export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
+export const VelocidadeMediaFda = ({ fda, vIdeal }: DesempenhoAlunoProps) => {
 
   const chart = useChart({
     data: fda.fda,
@@ -24,6 +25,10 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
     return num.toFixed(3);
   };
 
+  const maxValor = Math.max(...fda.fda.map((d) => d.valor));
+  const maxArredondado = Math.floor(maxValor / 10) * 10;
+  const xTicks = Array.from({ length: Math.floor(maxArredondado / 10) + 1 }, (_, i) => i * 10);
+
   return (
     <Card.Root
       w={"full"}
@@ -33,9 +38,9 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
       <Card.Body>
         <Stat.Root>
           <HStack justify="space-between">
-            <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Meu CRA</Stat.Label>
+            <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Minha velocidade média</Stat.Label>
             <Icon fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>
-                <LuArrowUp10 strokeWidth={2.6} />
+                <LuTimer strokeWidth={2.6} />
             </Icon>
           </HStack>
           <Flex h={"full"} mt={8} alignItems={"center"}>
@@ -47,13 +52,12 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                 <XAxis
                   type="number"
                   dataKey={chart.key("valor")}
-                  domain={[0, 10]}
-                  ticks={[0,1,2,3,4,5,6,7,8,9,10]}
                   stroke={chart.color("border")}
                   tickFormatter={(v) => formatDinamico(v)}
+                  ticks={xTicks}
                   scale="linear"
                   label={{
-                    value: "Coeficiente de Rendimento Acadêmico (CRA)",
+                    value: "Velocidade Média",
                     position: "bottom",
                     style: { fill: `#696d72`, fontWeight: 500 },
                   }}
@@ -73,13 +77,13 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                 }}
                 />
                 <ReferenceLine
-                  x={7}
+                  x={vIdeal}
                   stroke={chart.color("gray.500")}
                   strokeDasharray="5 5"
                   strokeWidth={2}
                   label={{
-                    value: "7",
-                    position: fda.valor_do_aluno > 7 ? "insideTopRight" : "insideTopLeft",
+                    value: vIdeal,
+                    position: fda.valor_do_aluno > vIdeal ? "insideTopRight" : "insideTopLeft",
                     fill: chart.color("gray.500"),
                     fontSize: 12,
                     style: { fontWeight: "600" },
@@ -87,13 +91,13 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                 />
                 <ReferenceLine
                   x={fda.valor_do_aluno}
-                  stroke={fda.valor_do_aluno >= 7 ? chart.color("teal.600") : chart.color("red.solid")}
+                  stroke={fda.valor_do_aluno >= vIdeal ? chart.color("teal.600") : chart.color("red.solid")}
                   strokeDasharray="5 5"
                   strokeWidth={2}
                   label={{
                     value: formatDinamico(fda.valor_do_aluno),
-                    position: fda.valor_do_aluno > 7 ? "insideTopLeft" : "insideTopRight",
-                    fill: fda.valor_do_aluno >= 7 ? chart.color("teal.600") : chart.color("red.solid"),
+                    position: fda.valor_do_aluno > vIdeal ? "insideTopLeft" : "insideTopRight",
+                    fill: fda.valor_do_aluno >= vIdeal ? chart.color("teal.600") : chart.color("red.solid"),
                     fontWeight: "bold",
                     style: { fontWeight: "600" },
                   }}
@@ -112,9 +116,9 @@ export const CRAFda = ({ fda }: DesempenhoAlunoProps) => {
                       <Box border={"1px solid #ccc"} bg={"white"} p={2} rounded={"md"} >
                         <Text fontWeight={"bold"}>{item.probabilidade_acumulada.toFixed(3)}</Text>
                         <Text fontWeight={"medium"} color={"gray.800"} mt={2}>
-                          Alunos com CRA igual a{" "}
-                          <Span fontWeight={"bold"} color={"black"}>{craFormatado}</Span> estão entre os {" "}
-                          <Span fontWeight={"bold"} color={"black"}>{top}%</Span> CRAs mais {item.probabilidade_acumulada >= 0.5 ? "altos" : "baixos"} entre os alunos ativos.
+                          Alunos com velocidade média igual a{" "}
+                          <Span fontWeight={"bold"} color={"black"}>{craFormatado}</Span> estão entre as {" "}
+                          <Span fontWeight={"bold"} color={"black"}>{top}%</Span> velocidades médias mais {item.probabilidade_acumulada < 0.5 ? "baixas":"altas"} entre os alunos ativos.
                         </Text>
                       </Box>
                     );

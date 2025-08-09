@@ -237,10 +237,10 @@ export interface CursoPageProps{
                                 <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0} requisitos={requisitos}/>
                                 :
                                 aba == 3 ?
-                                <CursoDiagnostico requisitos={requisitos} curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0}/>
+                                <CursoDiagnostico requisitos={requisitos ? requisitos : requisitosScao} curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0}/>
                                 :
                                 aba == 4 ?
-                                <MeuDesempenho curso={curso}/>
+                                <MeuDesempenho curso={curso} requisitos={requisitos ? requisitos : requisitosScao}/>
                                 :
                                 <CursoPerfil curso={curso}/>
                             }

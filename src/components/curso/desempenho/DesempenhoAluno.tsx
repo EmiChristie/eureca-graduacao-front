@@ -1,31 +1,54 @@
-import { DesempenhoAlunoResponse, User } from "@/interfaces/types";
+import { Curriculo, Curso, DesempenhoAlunoResponse, User } from "@/interfaces/types";
 import { CRAFda } from "./CRAFda";
 import { TituloMeuDesempenho } from "./TituloMeuDesempenho";
 import { Alert, Box, Flex, Span } from "@chakra-ui/react";
 import { ComentarioCRA } from "./ComentarioCRA";
 import { CardBoasVindas } from "./CardBoasVindas";
+import { ComentarioTaxaDeSucesso } from "./ComentarioTaxaDeSucesso";
+import { TaxaDeSucessoFda } from "./TaxaDeSucessoFDA";
+import { ComentarioVelocidadeMedia } from "./ComentarioVelocidadeMedia";
+import { VelocidadeMediaFda } from "./VelocidadeMediaFDA";
+import { CardDiagnosticoAluno } from "./CardDiagnosticoAluno";
 
 interface DesempenhoAlunoProps {
     metricas: DesempenhoAlunoResponse;
     aluno: User;
+    requisitos: Curriculo;
+    curso: Curso;
 }
 export const DesempenhoAluno = (
     {
         aluno,
         metricas,
+        requisitos,
+        curso,
     }:DesempenhoAlunoProps
 ) => {
+
+    const creditosMatriculadosIdeal = (requisitos.minimo_creditos_disciplinas_obrigatorias+requisitos.minimo_creditos_disciplinas_optativas)
+    const vIdeal = parseFloat((creditosMatriculadosIdeal / requisitos.duracao_minima).toFixed(2));
     return(
         <>
             <Flex flexDir={"column"} gap={4}>
                 <Flex flexDir={"column"} gap={4}>
                     <TituloMeuDesempenho/>
-                    {/*<CardBoasVindas aluno={aluno} />*/}
+                    <CardBoasVindas aluno={aluno} />
                 </Flex>
                 <Flex gap={4} alignItems={"stretch"}>
                     <CRAFda fda={metricas.cra}/>
                     <ComentarioCRA fda={metricas.cra}/>
                 </Flex>
+                <Flex gap={4} alignItems={"stretch"}>
+                    <ComentarioTaxaDeSucesso fda={metricas.taxa_de_sucesso}/>
+                    <TaxaDeSucessoFda fda={metricas.taxa_de_sucesso}/>
+                </Flex>
+                <Flex gap={4} alignItems={"stretch"}>
+                    <VelocidadeMediaFda vIdeal={vIdeal} fda={metricas.velocidade_media}/>
+                    <ComentarioVelocidadeMedia fda={metricas.velocidade_media}/>
+                </Flex>
+                {/*<Flex gap={4} alignItems={"stretch"}>
+                    <CardDiagnosticoAluno curso={curso} aluno={aluno} metricas={metricas} requisitos={requisitos}/>
+                </Flex>*/}
                 <Flex flexDir={"column"} gap={4}>
                     <Alert.Root status="info" bg={"blue.muted/70"} variant={"surface"} boxShadow={"sm"} title="Diagnóstico indisponível">
                         <Alert.Indicator />
