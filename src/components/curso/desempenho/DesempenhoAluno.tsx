@@ -46,9 +46,9 @@ export const DesempenhoAluno = (
                     <VelocidadeMediaFda vIdeal={vIdeal} fda={metricas.velocidade_media}/>
                     <ComentarioVelocidadeMedia fda={metricas.velocidade_media}/>
                 </Flex>
-                {<Flex gap={4} alignItems={"stretch"}>
+                {/*<Flex gap={4} alignItems={"stretch"}>
                     <CardDiagnosticoAluno curso={curso} aluno={aluno} metricas={metricas} requisitos={requisitos}/>
-                </Flex>}
+                </Flex>*/}
                 <Flex flexDir={"column"} gap={4}>
                     <Alert.Root status="info" bg={"blue.muted/70"} variant={"surface"} boxShadow={"sm"} title="Diagnóstico indisponível">
                         <Alert.Indicator />
