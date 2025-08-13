@@ -22,7 +22,7 @@ export const CardDiagnosticoAluno = (
     }: DesempenhoAlunoProps
 ) => {
 
-  const nome = 'Fulano' //aluno.nome;
+  const nome = aluno.nome;
   const vMedia = aluno.velocidade_media;
   const periodoAtualDoAluno = 7//aluno.periodos_completados+1;
   const creditosPendentes = requisitos.minimo_creditos_disciplinas_obrigatorias+requisitos.minimo_creditos_disciplinas_optativas-aluno.creditos_completados;
