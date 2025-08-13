@@ -24,9 +24,9 @@ export const CardDiagnosticoAluno = (
 
   const nome = aluno.nome;
   const vMedia = aluno.velocidade_media;
-  const periodoAtualDoAluno = 7//aluno.periodos_completados+1;
+  const periodoAtualDoAluno = aluno.periodos_completados+1;
   const creditosPendentes = requisitos.minimo_creditos_disciplinas_obrigatorias+requisitos.minimo_creditos_disciplinas_optativas-aluno.creditos_completados;
-  const previsao = 3//vMedia == 0 ? 0 : Math.ceil(creditosPendentes/vMedia)-1;
+  const previsao = vMedia == 0 ? 0 : Math.ceil(creditosPendentes/vMedia)-1;
   const periodoPrevisao = periodoAtualDoAluno+previsao;
   const duracao_media =  Math.floor((requisitos.duracao_maxima+requisitos.duracao_minima)/2) 
   const dentroOuForaDaMedia = periodoPrevisao <= duracao_media ? true : false
