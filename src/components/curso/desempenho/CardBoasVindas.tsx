@@ -24,7 +24,7 @@ export const CardBoasVindas = (
     >
       <Card.Body>
         <Stat.Root>
-            <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>Olá, {formatarNome(aluno.nome)}! Este é o seu dashboard pessoal de desempenho acadêmico. Aqui, você encontra informações sobre seu desempenho em três dimensões diferentes, e um diagnóstico personalizado para te auxiliar no planejamento do seu trajeto na graduação. Explore os gráficos abaixo para conhecer a fundo como você está se saindo em relação aos outros alunos e às expectativas do curso!</Text>
+            <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>Olá, {formatarNome(aluno.nome)}. Este é o seu dashboard pessoal de desempenho acadêmico. Aqui, você encontra informações sobre seu desempenho em três dimensões diferentes, e um diagnóstico personalizado para te auxiliar no planejamento do seu trajeto na graduação. Explore os gráficos abaixo para conhecer a fundo como você está se saindo em relação aos outros alunos e às expectativas do curso!</Text>
         </Stat.Root>
       </Card.Body>
     </Card.Root>

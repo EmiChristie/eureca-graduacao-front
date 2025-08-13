@@ -15,6 +15,7 @@ export type User = {
     codigo_do_curriculo: number;
     campus: number;
     codigo_do_setor: number;
+    periodo_de_ingresso:string;
     situacao: string;
     cra: number;
     mc: number;

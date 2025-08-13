@@ -22,15 +22,16 @@ export const CardDiagnosticoAluno = (
     }: DesempenhoAlunoProps
 ) => {
 
+  const nome = 'Fulano' //aluno.nome;
   const vMedia = aluno.velocidade_media;
-  const periodoAtualDoAluno = aluno.periodos_completados+1;
+  const periodoAtualDoAluno = 7//aluno.periodos_completados+1;
   const creditosPendentes = requisitos.minimo_creditos_disciplinas_obrigatorias+requisitos.minimo_creditos_disciplinas_optativas-aluno.creditos_completados;
-  const previsao = vMedia == 0 ? 0 : Math.ceil(creditosPendentes/vMedia);
-  const periodoPrevisao = periodoAtualDoAluno+previsao-1;
-  const dentroOuForaDoLimite = periodoPrevisao < requisitos.duracao_minima ? -1 : periodoPrevisao <= requisitos.duracao_maxima ? 0 : 1
-  //-1 = previsão de se formar antes da faixa normal: x < duracao_minima
-  //0 = dentro da faixa normal: duracao_minima <= x <= duracao_maxima
-  //1 = acima da faixa normal: x > duracao_maxima
+  const previsao = 3//vMedia == 0 ? 0 : Math.ceil(creditosPendentes/vMedia)-1;
+  const periodoPrevisao = periodoAtualDoAluno+previsao;
+  const duracao_media =  Math.floor((requisitos.duracao_maxima+requisitos.duracao_minima)/2) 
+  const dentroOuForaDaMedia = periodoPrevisao <= duracao_media ? true : false
+  //true = dentro da faixa media: x <= duracao_media
+  //false = acima da faixa media: x > duracao_media
 
   return (
     <Card.Root
@@ -47,7 +48,7 @@ export const CardDiagnosticoAluno = (
               </Icon>
             </HStack>
             
-          <Flex h={"full"} mt={4} alignItems={"center"}>
+          <Flex h={"full"} mt={4} flexDir={"column"} gap={2}>
             {/*<Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>{formatarNome(aluno.nome.split(" ")[0])}, você está cursando {formatarNome(curso.descricao)} há {aluno.periodos_completados} períodos.</Text>
             <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
             Você está no {periodoAtualDoAluno}º período.
@@ -58,6 +59,57 @@ export const CardDiagnosticoAluno = (
             0 = sua velocidade média é 0, você ainda não foi aprovado em nenhuma disciplina. Fazer um texto especial)
             Isso significa que você provavelmente vai se formar no seu {periodoPrevisao}º período.
             </Text>*/}
+            {
+              periodoAtualDoAluno == 1 ? //Você está no 1º período
+                <>
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    {formatarNome(nome.split(" ")[0])}, você ainda está cursando o 1º período de {formatarNome(curso.descricao)}. Isso significa que ainda não existem registros do seu desempenho no banco de dados da universidade e não conseguimos calcular um diagnóstico para você ainda. Porém, a partir das métricas do curso e dos alunos ativos, esperamos que você consiga se guiar e se manter no desempenho esperado.
+                  </Text>
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    Volte quando suas notas forem registradas ao fim do período para ter um panorama inicial do seu desempenho. Boa sorte nos estudos!
+                  </Text>
+                </>
+              :
+              periodoAtualDoAluno == requisitos.duracao_maxima ? //Você está no último período possível
+                <>
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    {formatarNome(nome.split(" ")[0])}, você está cursando o último período possível de {formatarNome(curso.descricao)}. Com base na sua velocidade média, taxa de sucesso e créditos pendentes, {periodoPrevisao === periodoAtualDoAluno ? `é possível que você consiga concluir o curso ainda dentro da duração máxima, neste período. Ainda assim, o risco de você precisar de mais tempo e acabar tendo que passar por um novo SISU para re-ingressar no curso é real. `:`é matematicamente provável que você precise de mais ${periodoPrevisao-periodoAtualDoAluno} períodos para se formar. Isso totalizaria ${periodoPrevisao} períodos, o que foge da duração máxima do seu curso.`}
+                  </Text>
+                  {
+                    periodoPrevisao === periodoAtualDoAluno ?
+                    <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                      Para que isso não aconteça, recomendamos que você entre em contato com a coordenação do seu curso para se informar sobre a possibilidade de extensão de curso, que é a solução mais segura para o seu caso. Você acordará um plano de conclusão e receberá mais tempo para conseguir se formar, caso necessário. Ainda assim, dê seu melhor neste período! Você ainda pode conseguir a tempo de não precisar da extensão.
+                    </Text>
+                    :
+                    <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                      Nesse cenário, suas opções seriam re-ingressar no curso através de um novo SISU, ou prolongar a sua graduação a partir de um acordo com a universidade, que não necessita de um re-ingresso. Recomendamos que você entre em contato com a coordenação do seu curso para se informar sobre a possibilidade de extensão de curso, que é a solução mais segura para o seu caso. Você acordará um plano de conclusão e receberá mais tempo para conseguir se formar. Ainda há como chegar ao fim, então continue dando seu melhor. Boa sorte!
+                    </Text>
+
+                  }
+                </>
+              :
+              periodoAtualDoAluno > requisitos.duracao_maxima ? //Você está realizando extensão de curso
+                <>
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    {formatarNome(nome.split(" ")[0])}, você está cursando o {periodoAtualDoAluno}º período de {formatarNome(curso.descricao)}. Isso significa que você ultrapassou o máximo de períodos do seu curso, e deve tomar cuidado para conseguir se graduar dentro do tempo acordado no seu plano de conclusão. Tomando como base sua velocidade média, taxa de sucesso e créditos pendentes, é provável que você consiga se graduar {previsao == 0 ? "no período atual.":previsao == 1 ? "no próximo período.":`dentro de ${previsao} períodos, ou seja, no seu ${periodoPrevisao}º período.`} Esperamos que isso esteja de acordo com seu plano de conclusão. Fique atento para os prazos e boa sorte nessa reta final! 
+                  </Text>
+                </>
+              :
+              dentroOuForaDaMedia ? 
+              //Alunos entre o 2º e (duração máxima-1)º período com previsão de se formar dentro da duração média
+              <>
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    {formatarNome(nome.split(" ")[0])}, você está cursando o {periodoAtualDoAluno}º período de {formatarNome(curso.descricao)}. Tomando como base sua velocidade média, taxa de sucesso e créditos pendentes, é provável que você consiga se formar {previsao == 0 ? "neste período":previsao == 1?"no próximo período":`em ${previsao} períodos, ou seja, no seu ${periodoPrevisao}º período`}.
+                  </Text>
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                     Isso significa que, caso você se mantenha neste ritmo, você conseguirá se formar dentro da duração média do seu curso, com um baixo risco de precisar solicitar extensão ou re-ingressar através de um novo SISU. Você está indo bem! Parabéns pelo bom desempenho e boa sorte na sua jornada!
+                  </Text>
+              </>
+              : //Alunos entre o 2º e (duração máxima-1)º período com previsão de se formar acima da duração média
+              <>
+              
+              </>
+            }
           </Flex>
         </Stat.Root>
       </Card.Body>
