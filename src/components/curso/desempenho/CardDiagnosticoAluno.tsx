@@ -2,7 +2,7 @@ import { Curriculo, Curso, DesempenhoAlunoResponse, ResultadoFda, User } from "@
 import { EURECA_COLORS, EURECA_GRADUACAO_COLORS } from "@/util/constants";
 import { formatarNome } from "@/util/utilities";
 import { Chart, useChart } from "@chakra-ui/charts";
-import { Card, Stat, HStack, Icon, Flex, Box, Text, Strong, Span } from "@chakra-ui/react";
+import { Card, Stat, HStack, Icon, Flex, Box, Text, Strong, Span, List } from "@chakra-ui/react";
 import { LuArrowUp10, LuClipboardList, LuPencilLine } from "react-icons/lu";
 import { AreaChart, XAxis, YAxis, Area, Tooltip, ReferenceLine, Scatter } from "recharts";
 
@@ -107,7 +107,15 @@ export const CardDiagnosticoAluno = (
               </>
               : //Alunos entre o 2º e (duração máxima-1)º período com previsão de se formar acima da duração média
               <>
-              
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    {formatarNome(nome.split(" ")[0])}, você está cursando o {periodoAtualDoAluno}º período de {formatarNome(curso.descricao)}. Tomando como base sua velocidade média, taxa de sucesso e créditos pendentes, é provável que você consiga se formar {previsao == 0 ? "neste período":previsao == 1?"no próximo período":`em ${previsao} períodos, ou seja, no seu ${periodoPrevisao}º período`}.
+                  </Text>
+                  <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                     Essa previsão está acima da duração média{periodoPrevisao > requisitos.duracao_maxima ? ", assim como acima da duração máxima":""} do seu curso. Isso significa que há um risco real de você não conseguir concluir o curso dentro do máximo de períodos, e precisar solicitar extensão ou re-ingressar através de um novo SISU. Seu sucesso acadêmico também é nosso objetivo. Portanto, a partir das suas métricas e desse risco, recomendamos que você:
+                  </Text>
+                  <List.Root mx={8} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                    <List.Item>Dica personalizada 1</List.Item>
+                  </List.Root>
               </>
             }
           </Flex>
