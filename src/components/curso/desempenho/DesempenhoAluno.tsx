@@ -9,6 +9,11 @@ import { TaxaDeSucessoFda } from "./TaxaDeSucessoFDA";
 import { ComentarioVelocidadeMedia } from "./ComentarioVelocidadeMedia";
 import { VelocidadeMediaFda } from "./VelocidadeMediaFDA";
 import { CardDiagnosticoAluno } from "./CardDiagnosticoAluno";
+import { CardTS } from "./exibicaoMetricasEOutros/CardTS";
+import { CardPeriodoAtual } from "./exibicaoMetricasEOutros/CardPeriodoAtual";
+import { CardCRA } from "./exibicaoMetricasEOutros/CardCRA";
+import { CardPorcentagemCompleta } from "./exibicaoMetricasEOutros/CardPorcentagemCompleta";
+import { CardVM } from "./exibicaoMetricasEOutros/CardVM";
 
 interface DesempenhoAlunoProps {
     metricas: DesempenhoAlunoResponse;
@@ -32,7 +37,16 @@ export const DesempenhoAluno = (
             <Flex flexDir={"column"} gap={4}>
                 <Flex flexDir={"column"} gap={4}>
                     <TituloMeuDesempenho/>
+                </Flex>
+                <Flex gap={4} alignItems={"stretch"}>
                     <CardBoasVindas aluno={aluno} />
+                    <CardPeriodoAtual aluno={aluno} />
+                    <CardCRA valor={metricas.cra.valor_do_aluno} />
+                </Flex>
+                <Flex gap={4} alignItems={"stretch"}>
+                    <CardTS valor={metricas.taxa_de_sucesso.valor_do_aluno} />
+                    <CardVM valor={metricas.velocidade_media.valor_do_aluno} />
+                    <CardPorcentagemCompleta requisitos={requisitos} aluno={aluno} />
                 </Flex>
                 <Flex gap={4} alignItems={"stretch"}>
                     <CRAFda fda={metricas.cra}/>

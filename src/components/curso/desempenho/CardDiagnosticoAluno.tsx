@@ -26,13 +26,14 @@ export const CardDiagnosticoAluno = (
   const vMedia = aluno.velocidade_media;
   const periodoAtualDoAluno = aluno.periodos_completados+1;
   const creditosPendentes = requisitos.minimo_creditos_disciplinas_obrigatorias+requisitos.minimo_creditos_disciplinas_optativas-aluno.creditos_completados;
-  const previsao = 5//vMedia == 0 ? 0 : Math.ceil(creditosPendentes/vMedia)-1;
+  const previsao = vMedia == 0 ? 0 : Math.ceil(creditosPendentes/vMedia)-1;
   const periodoPrevisao = periodoAtualDoAluno+previsao;
   const duracao_media =  Math.floor((requisitos.duracao_maxima+requisitos.duracao_minima)/2) 
   const dentroOuForaDaMedia = periodoPrevisao <= duracao_media ? true : false
   //true = dentro da faixa media: x <= duracao_media
   //false = acima da faixa media: x > duracao_media
 
+  
   const situacao = () => {
     const encontrarMediana = (fda: PontoFda[]) => {
       const ponto = fda.find(p => p.probabilidade_acumulada >= 0.5);
@@ -53,6 +54,13 @@ export const CardDiagnosticoAluno = (
     if (!taxaSucessoAlta && !velocidadeAlta) return 3;
     return 0;
   };
+  
+  
+  //const situacao = () => {return 3}
+
+  const vmReduzida = () => {
+    return creditosPendentes/(requisitos.duracao_maxima-periodoAtualDoAluno);
+  }
 
   return (
     <Card.Root
@@ -69,7 +77,7 @@ export const CardDiagnosticoAluno = (
               </Icon>
             </HStack>
             
-          <Flex h={"full"} mt={4} flexDir={"column"} gap={2}>
+          <Flex className="be-vietnam" h={"full"} mt={4} flexDir={"column"} gap={2}>
             {/*<Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>{formatarNome(aluno.nome.split(" ")[0])}, você está cursando {formatarNome(curso.descricao)} há {aluno.periodos_completados} períodos.</Text>
             <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
             Você está no {periodoAtualDoAluno}º período.
@@ -132,26 +140,52 @@ export const CardDiagnosticoAluno = (
                     {formatarNome(nome.split(" ")[0])}, você está cursando o {periodoAtualDoAluno}º período de {formatarNome(curso.descricao)}. Tomando como base sua velocidade média, taxa de sucesso e créditos pendentes, é provável que você consiga se formar {previsao == 0 ? "neste período":previsao == 1?"no próximo período":`em ${previsao} períodos, ou seja, no seu ${periodoPrevisao}º período`}.
                   </Text>
                   <Text fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
-                     Essa previsão está acima da duração média{periodoPrevisao > requisitos.duracao_maxima ? ", assim como acima da duração máxima":""} do seu curso. Isso significa que há um risco real de você não conseguir concluir o curso dentro do máximo de períodos, e precisar solicitar extensão ou re-ingressar através de um novo SISU. Seu sucesso acadêmico também é nosso objetivo. Portanto, a partir das suas métricas e desse risco, recomendamos que você:
+                     Essa previsão está acima da duração média{periodoPrevisao > requisitos.duracao_maxima ? ", assim como acima da duração máxima":""} do seu curso. Isso significa que há um risco real de você não conseguir concluir o curso dentro do máximo de períodos, e precisar solicitar extensão ou re-ingressar através de um novo SISU. Seu sucesso acadêmico também é nosso objetivo. Portanto, a partir das suas métricas e desse risco, identificamos e recomendamos que você...
                   </Text>
                     {
                       situacao() == 1 ? //TS alta e VM baixa
                         <List.Root mx={8} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
-                          <List.Item>TS alta e VM baixa</List.Item>
+                          <List.Item><Span fontWeight={"semibold"}>Considere aumentar a quantidade de disciplinas matriculadas nos próximos períodos.</Span> Sua velocidade média está abaixo do esperado, embora sua taxa de sucesso esteja adequada. Assim, recomendamos que você tente aumentar um pouco o ritmo para buscar reduzir o risco de chegar ou ultrapassar a duração máxima do curso.</List.Item>
+                          {
+                            previsao > 0 ?
+                            <List.Item><Span fontWeight={"semibold"}>Prepare-se para os próximos períodos através do Eureca Graduação.</Span> No nosso fluxograma, você encontra informações detalhadas sobre todas as disciplinas ofertadas para {formatarNome(curso.descricao)}. Além das métricas, você tem acesso ao plano de curso completo, com referências bibligráficas, descrição do método de avaliação, entre outras informações importantes sobre a disciplina. Assim, não deixe a garantia do seu sucesso ao acaso! Faça uso deste recurso e prepare-se de forma robusta para enfrentar as futuras disciplinas.</List.Item>
+                            :
+                            <></>
+                          }
                         </List.Root>
                       :
                       situacao() == 2 ? //TS baixa e VM alta
                         <List.Root mx={8} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
-                          <List.Item>TS baixa e VM alta</List.Item>
+                          <List.Item><Span fontWeight={"semibold"}>Considere reduzir a quantidade de disciplinas matriculadas nos próximos períodos.</Span> Sua taxa de sucesso está abaixo do esperado, embora sua velocidade média esteja adequada. Assim, recomendamos que você diminua um pouco o ritmo, buscando encontrar um equilíbrio entre a quantidade de disciplinas suficientes, por período, para conseguir se formar, enquanto reduz as chances de reprovação. Você ainda tem {requisitos.duracao_maxima-periodoAtualDoAluno} períodos possíveis dentro da duração máxima do curso. Reduzindo sua velocidade média para cerca de {vmReduzida()} créditos bem-sucedidos por período, você ainda conseguiria concluir o curso sem necessidade de extensão de prazo. Esta é a velocidade mínima que você poderia assumir para ainda conseguir se formar dentro da duração máxima do curso. Tome este número como base e encontre sua própria velocidade ideal, entre a atual e a mínima, mais adequada ao seu ritmo de aprendizado.</List.Item>
+                          {
+                            previsao > 0 ?
+                            <List.Item><Span fontWeight={"semibold"}>Prepare-se para os próximos períodos através do Eureca Graduação.</Span> No nosso fluxograma, você encontra informações detalhadas sobre todas as disciplinas ofertadas para {formatarNome(curso.descricao)}. Além das métricas, você tem acesso ao plano de curso completo, com referências bibligráficas, descrição do método de avaliação, entre outras informações importantes sobre a disciplina. Assim, não deixe a garantia do seu sucesso ao acaso! Faça uso deste recurso e prepare-se de forma robusta para enfrentar as futuras disciplinas.</List.Item>
+                            :
+                            <></>
+                          }
                         </List.Root>
                       :
                       situacao() == 3 ? //TS baixa e VM baixa
                         <List.Root mx={8} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
-                          <List.Item>TS baixa e VM baixa</List.Item>
+                          <List.Item><Span fontWeight={"semibold"}>Considere reduzir a quantidade de disciplinas matriculadas nos próximos períodos.</Span> Sua velocidade média está abaixo do esperado. Contudo, sua taxa de sucesso também não está na média. Isso pode ser um indício de que você precisa não só encontrar um ritmo ideal para o seu aprendizado, como também equilibrar quais disciplinas você está cursando simultaneamente. Você ainda tem {requisitos.duracao_maxima-periodoAtualDoAluno} períodos possíveis dentro da duração máxima do curso. Reduzindo sua velocidade média para cerca de {vmReduzida()} créditos bem-sucedidos por período, você ainda conseguiria concluir o curso sem necessidade de extensão de prazo. Esta é a velocidade mínima que você poderia assumir para ainda conseguir se formar dentro da duração máxima do curso. Tome este número como base e encontre sua própria velocidade ideal, entre a atual e a mínima, mais adequada ao seu ritmo de aprendizado. Contudo, se as próprias cargas teóricas (ou práticas) estão sendo demais para você, considere as recomendações abaixo.</List.Item>
+                        {
+                            previsao > 0 ?
+                            <List.Item><Span fontWeight={"semibold"}>Prepare-se para os próximos períodos através do Eureca Graduação.</Span> No nosso fluxograma, você encontra informações detalhadas sobre todas as disciplinas ofertadas para {formatarNome(curso.descricao)}. Além das métricas, você tem acesso ao plano de curso completo, com referências bibligráficas, descrição do método de avaliação, entre outras informações importantes sobre a disciplina. Assim, não deixe a garantia do seu sucesso ao acaso! Faça uso deste recurso e prepare-se de forma robusta para enfrentar as futuras disciplinas.</List.Item>
+                            :
+                            <></>
+                          }
+                          <List.Item><Span fontWeight={"semibold"}>Contate a coordenação do seu curso, professores e monitores para uma ajuda mais especializada.</Span> O Eureca Graduação, embora sirva como ferramenta de apoio e diagnóstico, não substitui o apoio especializado. Se você apresenta dificuldades em certa área ou disciplina, recomendamos fortemente que você busque ajuda dos professores e monitores, ou até mesmo da coordenação do seu curso para montar um plano de curso mais adequado e personalizado para o seu caso.</List.Item>
                         </List.Root>
                       : //TS alta e VM alta, não deveria ocorrer
-                        <List.Root mx={8} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
-                          <List.Item>TS alta e VM alta, não deveria ocorrer</List.Item>
+                        <List.Root  mx={8} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>
+                          <List.Item><Span fontWeight={"semibold"}>Parece estar com velocidade média e taxa de sucesso adequadas.</Span> O período de conclusão previsto não é exato, e pode desconsiderar variações pequenas, principalmente na velocidade média. Assim, mantenha o bom ritmo! Suas taxas estão na média.</List.Item>
+                          <List.Item><Span fontWeight={"semibold"}>Entre em contato com a coordenação do seu curso para investigar a causa desta previsão.</Span> Ainda que inexata, ela representa um risco à sua formação acadêmica, e é importante estar preparado e bem informado, no caso da necessidade de solicitar extensão do prazo de conclusão.</List.Item>
+                          {
+                            previsao > 0 ?
+                            <List.Item><Span fontWeight={"semibold"}>Prepare-se para os próximos períodos através do Eureca Graduação.</Span> No nosso fluxograma, você encontra informações detalhadas sobre todas as disciplinas ofertadas para {formatarNome(curso.descricao)}. Além das métricas, você tem acesso ao plano de curso completo, com referências bibligráficas, descrição do método de avaliação, entre outras informações importantes sobre a disciplina. Assim, não deixe a garantia do seu sucesso ao acaso! Faça uso deste recurso e prepare-se de forma robusta para enfrentar as futuras disciplinas.</List.Item>
+                            :
+                            <></>
+                          }
                         </List.Root>
                     }
               </>
