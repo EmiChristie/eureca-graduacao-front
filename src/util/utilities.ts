@@ -17,3 +17,8 @@ export function formatarNome(texto: string): string {
 
 export const round2 = (valor: number) =>
   Math.round(valor * 100) / 100;
+
+export const calcularCra = (notasAcumuladas: number, creditosDoCra: number): number => {
+  if (creditosDoCra === 0) return 0;
+  return +(notasAcumuladas / creditosDoCra).toFixed(2);
+};

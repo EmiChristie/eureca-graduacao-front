@@ -33,16 +33,18 @@ import img from "../../assets/eureca_graduacao_logo.png"
 export interface CursoPageProps{
     codigo_curso:number,
     codigo_curriculo?:number|undefined,
+    flag_aluno_do_curso:boolean,
   }
     
   export const CursoPage = (
     {
         codigo_curso,
-        codigo_curriculo
+        codigo_curriculo,
+        flag_aluno_do_curso
     }:CursoPageProps
   ) => {
 
-    console.log(codigo_curso)
+    console.log("é aluno do curso?"+flag_aluno_do_curso)
     console.log(codigo_curriculo)
 
     const navigate = useNavigate();
@@ -68,8 +70,6 @@ export interface CursoPageProps{
       enabled: !!codigo_curso,
     });
 
-    console.log(curriculo)
-
     const { data: curriculoScao, isLoading:isLoading5, isError:isError5 } = useQuery<number, Error>({
       queryKey: ["curriculoAtivoMaisRecenteScao", codigo_curso],
       queryFn: () => getCurriculoAtivoMaisRecenteScao(codigo_curso),
@@ -77,15 +77,13 @@ export interface CursoPageProps{
       refetchOnWindowFocus: false,
       enabled: !!codigo_curso,
     });
-
-    console.log(curriculoScao)
     
     const { data: requisitos, isLoading:isLoading3, isError:isError3 } = useQuery<Curriculo, Error>({
       queryKey: ["curriculo", codigo_curso],
-      queryFn: () => getCurriculo(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : curriculo ? String(curriculo) : curriculoScao ? String(curriculoScao) : "0"),
+      queryFn: () => getCurriculo(codigo_curso, flag_aluno_do_curso ? String(codigo_curriculo) : curriculo ? String(curriculo) : curriculoScao ? String(curriculoScao) : "0"),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) && !!codigo_curso,
+      enabled: flag_aluno_do_curso ? (!!codigo_curriculo && !!codigo_curso) : ((!!curriculo||!!curriculoScao) && !!codigo_curso),
     });
 
     const { data: area, isLoading:isLoading4, isError:isError4 } = useQuery<string, Error>({
@@ -96,14 +94,12 @@ export interface CursoPageProps{
       enabled: !!codigo_curso,
     });
 
-    console.log(curriculo)
-
     const { data: requisitosScao, isLoading:isLoading6, isError:isError6 } = useQuery<Curriculo, Error>({
       queryKey: ["curriculoScao", codigo_curso],
-      queryFn: () => getCurriculoScao(codigo_curso, codigo_curriculo ? String(codigo_curriculo) : curriculoScao ? String(curriculoScao) : curriculo ? String(curriculo) : "0"),
+      queryFn: () => getCurriculoScao(codigo_curso, flag_aluno_do_curso ? String(codigo_curriculo) : curriculoScao ? String(curriculoScao) : curriculo ? String(curriculo) : "0"),
       staleTime: 1000 * 60 * 5,
       refetchOnWindowFocus: false,
-      enabled: (!!codigo_curriculo||!!curriculo||!!curriculoScao) && !!codigo_curso,
+      enabled: flag_aluno_do_curso ? (!!codigo_curriculo && !!codigo_curso) : ((!!curriculo||!!curriculoScao) && !!codigo_curso),
     });
 
     const { data: existeEstudanteScao, isLoading:isLoading7, isError:isError7 } = useQuery<any, Error>({
@@ -171,7 +167,7 @@ export interface CursoPageProps{
                                         <LuChartLine /> Diagnóstico
                                     </Link>
                                 </Button>
-                                <Button disabled justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
+                                <Button disabled={!codigo_curriculo || (isLoading || isLoading2||isLoading3||isLoading4||isLoading5||isLoading6||isLoading7||isLoading8 || (isError7 && isError8)) } justifyContent={"left"} variant={"ghost"} onClick={()=>setAba(4)}>
                                     <Link color={EURECA_COLORS.BRANCO} className="text">
                                         <LuUserRound/> Meu Desempenho
                                     </Link>
@@ -241,10 +237,10 @@ export interface CursoPageProps{
                                 <CursoFluxograma curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0} requisitos={requisitos}/>
                                 :
                                 aba == 3 ?
-                                <CursoDiagnostico requisitos={requisitos} curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0}/>
+                                <CursoDiagnostico requisitos={requisitos ? requisitos : requisitosScao} curso={curso} curriculo={codigo_curriculo ? codigo_curriculo : curriculo ? curriculo : curriculoScao ? curriculoScao : 0}/>
                                 :
                                 aba == 4 ?
-                                <MeuDesempenho curso={curso}/>
+                                <MeuDesempenho curso={curso} requisitos={requisitos ? requisitos : requisitosScao}/>
                                 :
                                 <CursoPerfil curso={curso}/>
                             }

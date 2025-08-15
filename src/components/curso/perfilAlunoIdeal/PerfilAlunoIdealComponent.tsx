@@ -19,7 +19,6 @@ import { VelocidadeIdeal } from "./VelocidadeIdeal"
     const creditosFalhadosIdeal = 0;
     const vIdeal = parseFloat((creditosMatriculadosIdeal / requisitos.duracao_minima).toFixed(2));
 
-
     
     return(
         <>

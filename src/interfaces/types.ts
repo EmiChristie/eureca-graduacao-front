@@ -15,6 +15,7 @@ export type User = {
     codigo_do_curriculo: number;
     campus: number;
     codigo_do_setor: number;
+    periodo_de_ingresso:string;
     situacao: string;
     cra: number;
     mc: number;
@@ -118,6 +119,8 @@ export type Curriculo = {
     codigo_do_curriculo: number;
     duracao_minima: number;
     duracao_maxima: number;
+    carga_horaria_creditos_minima?: number,
+    carga_horaria_creditos_maxima?: number,
     carga_horaria_disciplinas_obrigatorias_minima: number;
     carga_horaria_disciplinas_optativas_minima: number;
     carga_horaria_atividades_complementares_minima: number;
@@ -343,4 +346,30 @@ export type UserProfile = {
   type:string;
   code?:string; //se for aluno ou coordenador, tem um curso associado;
   curriculum?:string; //só se for aluno
+}
+
+export interface PontoFda {
+  valor: number;
+  probabilidade_acumulada: number;
+}
+
+export interface ResultadoFda {
+  fda: PontoFda[];
+  percentil: number;
+  valor_do_aluno: number;
+}
+
+export interface DesempenhoAlunoResponse {
+  cra: ResultadoFda;
+  velocidade_media: ResultadoFda;
+  taxa_de_sucesso: ResultadoFda;
+}
+
+export interface GetDesempenhoAlunoPayload {
+  codigoCurso: number;
+  codigoCurriculo: number;
+  cra: number;
+  velocidadeMedia: number;
+  taxaDeSucesso: number;
+  velocidadeMaxima: number;
 }

@@ -2,7 +2,7 @@ import { EURECA_COLORS } from "@/util/constants";
 import { Box, Button, CloseButton, defineStyle, Dialog, Field, Input, Portal, Stack, Text } from "@chakra-ui/react";
 import { PasswordInput } from "../ui/password-input";
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { toaster, Toaster } from "../ui/toaster";
 import { getProfile, getToken, getUserInfo } from "@/service/eurecaService";
 import { useUserStore } from "@/stores/user/user.store";
@@ -20,6 +20,8 @@ export const LoginDialog = (
 
     const [passwordvalue,setPasswordValue] = useState("");
     const [loginvalue,setLoginValue] = useState("");
+    
+    const queryClient = useQueryClient();
 
     const mutation = useMutation({
         mutationKey: ["getToken"],
@@ -97,7 +99,7 @@ export const LoginDialog = (
       const mutation3 = useMutation({
         mutationKey: ["getUserInfo"],
         mutationFn: getUserInfo,
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
           toaster.create({
             title: "Login realizado com sucesso!",
             type: "success"
@@ -112,6 +114,17 @@ export const LoginDialog = (
               code:String(data.codigo_do_curso),
               curriculum:String(data.codigo_do_curriculo)
             });
+
+          await queryClient.invalidateQueries({ queryKey: ["curriculo"] });
+          await queryClient.invalidateQueries({ queryKey: ["getAreaRetencao"] });
+          await queryClient.invalidateQueries({ queryKey: ["curriculoScao"] });
+          await queryClient.invalidateQueries({ queryKey: ["disciplinas-reprovacao"] });
+          await queryClient.invalidateQueries({ queryKey: ["metricas-curso"] });
+          await queryClient.invalidateQueries({ queryKey: ["disciplinasPorCurriculo"] });
+          await queryClient.invalidateQueries({ queryKey: ["pre-requisito-disciplinas"] });
+          await queryClient.invalidateQueries({ queryKey: ["pre-requisito-disciplinas-scao"] });
+          await queryClient.invalidateQueries({ queryKey: ["pegarDisciplinaCurriculo"] });
+          await queryClient.invalidateQueries({ queryKey: ["pegarRequisitosDaDisciplina"] });
         },
         onError: (error) => {
           console.log(error);

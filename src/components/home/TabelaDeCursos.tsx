@@ -21,7 +21,7 @@ import {
   import { Toaster } from "@/components/ui/toaster";
   import { EURECA_COLORS, linkTCC } from "@/util/constants";
   import { LuArrowUpDown, LuCloudy, LuExternalLink, LuFrown, LuLightbulb, LuLogOut, LuSearch } from "react-icons/lu";
-  import { useQuery } from "@tanstack/react-query";
+  import { useQuery, useQueryClient } from "@tanstack/react-query";
   import { CursoHome } from "../../interfaces/types";
   import { getCursos } from "@/service/eurecaService";
 import { LoginDialog } from "./LoginDialog";
@@ -100,9 +100,21 @@ import { formatarNome } from "@/util/utilities";
       });
     };
 
-    function logout(){
+    const queryClient = useQueryClient();
+
+    async function logout(){
       user.setUser(undefined);
       user.setProfile(undefined);
+      await queryClient.invalidateQueries({ queryKey: ["curriculo"] });
+      await queryClient.invalidateQueries({ queryKey: ["getAreaRetencao"] });
+      await queryClient.invalidateQueries({ queryKey: ["curriculoScao"] });
+      await queryClient.invalidateQueries({ queryKey: ["disciplinas-reprovacao"] });
+      await queryClient.invalidateQueries({ queryKey: ["metricas-curso"] });
+      await queryClient.invalidateQueries({ queryKey: ["disciplinasPorCurriculo"] });
+      await queryClient.invalidateQueries({ queryKey: ["pre-requisito-disciplinas"] });
+      await queryClient.invalidateQueries({ queryKey: ["pre-requisito-disciplinas-scao"] });
+      await queryClient.invalidateQueries({ queryKey: ["pegarDisciplinaCurriculo"] });
+      await queryClient.invalidateQueries({ queryKey: ["pegarRequisitosDaDisciplina"] });
     }
 
     function verCurso(curso: number) {
