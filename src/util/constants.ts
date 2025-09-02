@@ -51,4 +51,4 @@ export const EURECA_GRADUACAO_COLORS = {
     CINZA_CLARO: "#e2e8f0",
 } as const;
 
-export const linkTCC = "";
+export const linkTCC = `https://eureca.${dominio}.ufcg.edu.br/arquivos/eureca_graduacao.pdf`;
