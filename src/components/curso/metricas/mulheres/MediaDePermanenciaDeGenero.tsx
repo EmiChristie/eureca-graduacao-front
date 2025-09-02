@@ -50,7 +50,7 @@ export const MediaDePermanenciaDeGenero = (
                 <Card.Body>
                     <Stat.Root >
                     <HStack justify="space-between">
-                        <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Média de permanência por gênero</Stat.Label>
+                        <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Média de permanência por sexo</Stat.Label>
                         <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                         <LuUsersRound strokeWidth={2.6}/>
                         </Icon>

@@ -84,7 +84,7 @@ export const ComparacaoGeralGenero = (
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Taxa de sucesso entre gêneros</Stat.Label>
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Taxa de sucesso entre sexos</Stat.Label>
                     <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                     <LuUserRoundSearch strokeWidth={2.6}/>
                     </Icon>
@@ -121,7 +121,7 @@ export const ComparacaoGeralGenero = (
                     </Box>
                     <Box w={"7/12"} mt={1}>
                         <Text fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
-                            Dentre 100 graduados do curso de {formatarNome(curso)}, em média, {apenas ? "apenas ":" "}{graduadas_media} são mulheres, com um desvio padrão de gênero de {metricas.desvio_padrao_percentual_medio_de_genero}% entre os graduados analisados. Em números concretos, dos 16 graduados entre os 40 ingressantes do mesmo período, {apenas ? "apenas":""} {qtd_mulheres} serão mulheres, enquanto os outros {qtd_homens} serão homens.
+                            Dentre 100 graduados do curso de {formatarNome(curso)}, em média, {apenas ? "apenas ":" "}{graduadas_media} são mulheres, com um desvio padrão de sexo de {metricas.desvio_padrao_percentual_medio_de_genero}% entre os graduados analisados. Em números concretos, dos 16 graduados entre os 40 ingressantes do mesmo período, {apenas ? "apenas":""} {qtd_mulheres} serão mulheres, enquanto os outros {qtd_homens} serão homens.
                         </Text>
                         <Text fontSize={"sm"} mt={4} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
                             Dada a variação de cerca de {Math.round(metricas.desvio_padrao_percentual_medio_de_genero)}% nessa análise, a taxa de sucesso feminina entre os graduados é considerada {categoria_sucesso_feminino()} {porem()? "porém":"e"} com uma variação {categoria_variacao()}. Enquanto isso, a taxa de sucesso masculina é considerada {categoria_sucesso_masculino()}, com a mesma variação.

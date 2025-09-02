@@ -51,7 +51,7 @@ export const ComparacaoIngressantesGenero = (
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Média de ingressantes por gênero</Stat.Label>
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Média de ingressantes por sexo</Stat.Label>
                     <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                     <LuUserRoundSearch strokeWidth={2.6}/>
                     </Icon>
@@ -60,7 +60,7 @@ export const ComparacaoIngressantesGenero = (
                 <Flex h={"full"} flexDir={"column"} gap={6} mt={4}>
                     <Box mt={1}>
                         <Text fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
-                            Dos {metricas.quantidade_media_ingressantes} ingressantes por período, em média, {metricas.quantidade_media_mulheres_ingressantes} são mulheres e {metricas.quantidade_media_homens_ingressantes} são homens, podendo haver uma variação de {metricas.desvio_padrao_ingressantes}% na quantidade de ingressantes e {metricas.desvio_padrao_mulheres_ingressantes}% na diferença de gênero dos ingressantes.
+                            Dos {metricas.quantidade_media_ingressantes} ingressantes por período, em média, {metricas.quantidade_media_mulheres_ingressantes} são mulheres e {metricas.quantidade_media_homens_ingressantes} são homens, podendo haver uma variação de {metricas.desvio_padrao_ingressantes}% na quantidade de ingressantes e {metricas.desvio_padrao_mulheres_ingressantes}% na diferença de sexo dos ingressantes.
                         </Text>
                     </Box>
                     <Box justifyItems={"center"} alignContent={"center"}>
@@ -73,7 +73,7 @@ export const ComparacaoIngressantesGenero = (
                     </Box>
                     <Box mt={1}>
                         <Text fontSize={"sm"} fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/80`}>
-                            Dada a diferença de cerca de {Math.abs(diferenca)}% no gênero dos ingressantes, o curso pode ser visto como tendo uma procura {categoria_procura()}.
+                            Dada a diferença de cerca de {Math.abs(diferenca)}% no sexo dos ingressantes, o curso pode ser visto como tendo uma procura {categoria_procura()}.
                         </Text>
                     </Box>
                 </Flex>

@@ -84,7 +84,7 @@ export const TaxaDeSucessoFeminina = (
             <Card.Body>
                 <Stat.Root >
                 <HStack justify="space-between">
-                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Taxa de sucesso entre gêneros</Stat.Label>
+                    <Stat.Label fontWeight={"medium"} color={`${EURECA_COLORS.CINZA}/55`}>Taxa de sucesso entre sexos</Stat.Label>
                     <Icon color={`${EURECA_COLORS.CINZA}/55`}>
                     <LuUserRoundSearch strokeWidth={2.6}/>
                     </Icon>

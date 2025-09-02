@@ -18,7 +18,7 @@ export const ComentarioVelocidadeMedia = ({ fda }: DesempenhoAlunoProps) => {
         <Stat.Root>
           <Flex h={"full"} flexDir={"column"}>
             <Text textAlign={"justify"} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>Atualmente, você tem uma velocidade média de {fda.valor_do_aluno.toFixed(2)} créditos bem sucedidos por período.</Text>
-            <Text mt={2} textAlign={"justify"} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>A probabilidade acumulada para a sua velocidade média é de {fda.percentil.toFixed(3)}. Isso significa que sua velocidade média é mais alta que {fda.percentil < 0.5 ? "apenas" : ""} {parseFloat(fda.percentil.toFixed(3))*100}% das velocidades médias dos alunos ativos de seu curso. Consequentemente, você está entre os {parseFloat((1-fda.percentil).toFixed(3))*100}% alunos ativos do seu curso com {fda.percentil < 0.5 ? "menores":"maiores"} velocidades médias.</Text>
+            <Text mt={2} textAlign={"justify"} fontWeight={"normal"} color={`${EURECA_COLORS.CINZA}/80`}>A probabilidade acumulada para a sua velocidade média é de {fda.percentil.toFixed(2)}. Isso significa que sua velocidade média é mais alta que {fda.percentil < 0.5 ? "apenas" : ""} {(parseFloat(fda.percentil.toFixed(2))*100).toFixed(2)}% das velocidades médias dos alunos ativos de seu curso. Consequentemente, você está entre os {(parseFloat((1-fda.percentil).toFixed(32))*100).toFixed(2)}% alunos ativos do seu curso com {fda.percentil < 0.5 ? "menores":"maiores"} velocidades médias.</Text>
           </Flex>
         </Stat.Root>
       </Card.Body>
