@@ -55,7 +55,7 @@ import { PerfilCalculado } from "./metricas/PerfilCalculado";
                     </Center>
                   </>
                   :
-                  isError || isError2 ?
+                  isError || isError2 || !disciplinasQueMaisReprovam || disciplinasQueMaisReprovam == undefined || !metricasCurso || metricasCurso === undefined?
                   <>
                     <Center h={"80vh"}>
                     <VStack>
