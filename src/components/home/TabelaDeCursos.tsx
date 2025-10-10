@@ -16,6 +16,11 @@ import {
     FieldHelperText,
     Link,
     Image,
+    Grid,
+    Menu,
+    Portal,
+    Select,
+    createListCollection,
   } from "@chakra-ui/react";
   import { useState, useMemo, useReducer, useEffect } from "react";
   import { Toaster } from "@/components/ui/toaster";
@@ -34,6 +39,8 @@ import { formatarNome } from "@/util/utilities";
     const navigate = useNavigate();
     const user = useUserStore((state) => state);
 
+    const [valuecampi, setValueCampi] = useState<string[]>([])
+    const [valueAreas, setValueAreas] = useState<string[]>([]);
     const [search, setSearch] = useState("");
     const [indice, setIndice] = useState(-1);
     const [sortConfig, setSortConfig] = useState<{ key: keyof CursoHome; direction: "asc" | "desc" } | null>(null);
@@ -48,33 +55,30 @@ import { formatarNome } from "@/util/utilities";
   
     const cursosFiltrados = useMemo(() => {
       let cursos = [...cursosHome];
-  
       if (search.trim()) {
         try {
           cursos = cursos.filter((curso) =>
             curso.descricao.toLowerCase().includes(search.toLowerCase()) ||
             curso.area_de_retencao_descricao.toLowerCase().includes(search.toLowerCase()) ||
-            curso.nome_do_campus.toLowerCase().includes(search.toLowerCase()) ||
-            String(curso.codigo_do_curriculo).includes(search)
+            curso.nome_do_campus.toLowerCase().includes(search.toLowerCase())
           );
         } catch (e) {
           cursos = [];
         }
       }
-  
-      if (sortConfig) {
-        cursos.sort((a, b) => {
-          const aVal = a[sortConfig.key];
-          const bVal = b[sortConfig.key];
-  
-          if (aVal < bVal) return sortConfig.direction === "asc" ? -1 : 1;
-          if (aVal > bVal) return sortConfig.direction === "asc" ? 1 : -1;
-          return 0;
-        });
+
+      if (valuecampi.length > 0 && !valuecampi.includes("todos_campi")) {
+        cursos = cursos.filter((curso) => valuecampi.includes(curso.nome_do_campus));
       }
-  
+
+      if (valueAreas.length > 0 && !valueAreas.includes("todas_areas")) {
+        cursos = cursos.filter((curso) => valueAreas.includes(curso.area_de_retencao_descricao));
+      }
+
+      cursos.sort((a, b) => a.descricao.localeCompare(b.descricao));
       return cursos;
-    }, [cursosHome, search, sortConfig]);
+    }, [cursosHome, search, sortConfig, valuecampi, valueAreas]);
+
 
     const cursoDoUsuario = useMemo(() => {
       let cursos = [...cursosHome];
@@ -128,6 +132,55 @@ import { formatarNome } from "@/util/utilities";
     const tamanhoTabelaFull2 = "76vh";
     const tabelaBg = `#8797a7/70`;
     const tabelaAccent = `#8797a7/60`;
+
+const campi = useMemo(() => {
+  const campiUnicos = Array.from(
+    new Set(cursosHome.map((c) => c.nome_do_campus))
+  ).sort();
+  return createListCollection({
+    items: campiUnicos.map((campus) => ({
+      label: campus,
+      value: campus,
+    })),
+  });
+}, [cursosHome]);
+
+const areas = useMemo(() => {
+  const areasUnicas = Array.from(
+    new Set(cursosHome.map((c) => c.area_de_retencao_descricao))
+  ).sort();
+
+  return createListCollection({
+    items: areasUnicas.map((area) => ({
+      label: area,
+      value: area,
+    })),
+  });
+}, [cursosHome]);
+
+
+  const filtrarCampi = (filtros: string[]) => {
+    if(filtros.includes('resetar_campi')){
+      setValueCampi([])
+    }else if(filtros.includes('todos_campi')){
+      setValueCampi(campi.items.map(f=>f.label))
+    }else{
+      setValueCampi(filtros);
+    }
+    console.log(filtros);
+  }
+
+  const filtrarAreas = (filtros: string[]) => {
+  if (filtros.includes('resetar_areas')) {
+    setValueAreas([]);
+  } else if (filtros.includes('todas_areas')) {
+    setValueAreas(areas.items.map(a => a.label));
+  } else {
+    setValueAreas(filtros);
+  }
+  console.log(filtros);
+}
+
   
     return (
       <>
@@ -139,25 +192,11 @@ import { formatarNome } from "@/util/utilities";
           >
             <Box minW={"20vw"} w={"20vw"}>
 
-              <Box w={"20vw"} h={"8vh"}>
+              <Box cursor={"pointer"} w={"20vw"} h={"8vh"} mb={4}>
                 <Image src="src/assets/eureca_graduacao_logo.png"></Image>
               </Box>
 
-              <Box my={4} w={"full"} boxShadow={"sm"}>
-                <InputGroup startElement={
-                  <LuSearch/>}>
-                  <Input
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    bgColor={"white/85"}
-                    placeholder="Buscar cursos..."
-                    h={"8vh"}
-                    
-                  />
-                </InputGroup>
-              </Box>
-
-              <Flex h={tamanhoTabelaFull2} flexDir={"column"} gap={4}>
+              <Flex h={tamanhoTabelaFull} flexDir={"column"} gap={4} mt={4}>
                   <Box h={"full"} textAlign={"center"} bg={"#7c95b9/70"} boxShadow={"sm"} rounded={"sm"} p={4} >
                     <Center h={"full"}>
                         {
@@ -284,58 +323,123 @@ import { formatarNome } from "@/util/utilities";
               
 
           <Box w={"full"}>
-            <Box w={"full"} boxShadow={"sm"} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} rounded={"sm"}>
-              <Flex h={"full"} >
-                <Box w={"full"} 
-                  cursor={"pointer"}
-                  onClick={() => toggleSort("descricao")} 
+            <Grid className="grid-cols-4" gap={2}>
+              <InputGroup boxShadow={"xs"} className="col-span-2" startElement={
+                <LuSearch/>}>
+                <Input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  bgColor={"white/85"}
+                  placeholder="Buscar cursos..."
+                  h={"8vh"}
+                  
+                />
+              </InputGroup>
+              <Box w={"full"} 
+                _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/90` }}
+                boxShadow={"sm"} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} rounded={"sm"}
+                cursor={"pointer"}
+                textAlign={"center"}
+                color={EURECA_COLORS.BRANCO}
+                alignContent={"center"}
+                //onClick={() => toggleSort("nome_do_campus")}
+                >
+                <Center h={"full"} w={"2/3"} justifySelf={"center"}>
+                <Select.Root 
+                  multiple 
+                  value={valuecampi}
+                  onValueChange={(details) => {
+                    filtrarCampi(details.value);
+                  }}
+                  border={"none"}
+                  collection={campi} size="sm">
+                    <Select.HiddenSelect/>
+                    <Select.Control>
+                      <Select.Trigger
+                        border={"none"}
+                        cursor={"pointer"}>
+                        <Box w={"full"} 
+                          cursor={"pointer"}
+                          textAlign={"center"}
+                          color={EURECA_COLORS.BRANCO}
+                          alignContent={"center"}
+                          //onClick={() => toggleSort("nome_do_campus")}
+                          >
+                            Campus
+                        </Box>
+                        </Select.Trigger>
+                    </Select.Control>
+                    <Portal>
+                      <Select.Positioner mt={2} >
+                        <Select.Content bg={`${EURECA_COLORS.AZUL_CLARO_95}/90`} color={EURECA_COLORS.BRANCO} >
+                            <Select.Item item={"todos_campi"} key={"todos_campi"}>
+                              Selecionar todos
+                              <Select.ItemIndicator />
+                            </Select.Item>
+                            <Select.Item item={"resetar_campi"} key={"resetar_campi"}>
+                              Resetar seleção
+                              <Select.ItemIndicator />
+                            </Select.Item>
+                          {campi.items.map((campus) => (
+                            <Select.Item item={campus} key={campus.value}>
+                              {campus.label}
+                              <Select.ItemIndicator />
+                            </Select.Item>
+                          ))}
+                        </Select.Content>
+                      </Select.Positioner>
+                    </Portal>
+                  </Select.Root>
+                </Center>
+                  
+              </Box>
+              
+              <Box w={"full"} 
+                _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/90` }}
+                boxShadow={"sm"} h={"8vh"} bg={`${EURECA_COLORS.AZUL_CLARO}/70`} rounded={"sm"}
+                cursor={"pointer"}
+              >
+                <Center h={"full"} w={"2/3"} justifySelf={"center"}>
+                  <Select.Root 
+                    multiple 
+                    value={valueAreas}
+                    onValueChange={(details) => filtrarAreas(details.value)}
+                    border={"none"}
+                    collection={areas} size="sm"
                   >
-                    <Center h={"full"} >
-                      <Button color={EURECA_COLORS.BRANCO}
-                        _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/80` }}  
-                        variant={"ghost"}>
-                        Curso <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                    </Center>
-                </Box>
-                <Box w={"full"} 
-                  cursor={"pointer"}
-                  onClick={() => toggleSort("area_de_retencao_descricao")}
-                  >
-                    <Center h={"full"} >
-                      <Button color={EURECA_COLORS.BRANCO}
-                        _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/80` }}  
-                        variant={"ghost"}>
-                        Área <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                    </Center>
-                </Box>
-                <Box w={"full"} 
-                  cursor={"pointer"}
-                  onClick={() => toggleSort("nome_do_campus")}
-                  >
-                    <Center h={"full"} >
-                      <Button color={EURECA_COLORS.BRANCO}
-                        _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/80` }}  
-                        variant={"ghost"}>
-                        Campus <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                    </Center>
-                </Box>
-                <Box w={"full"} 
-                  cursor={"pointer"}
-                  onClick={() => toggleSort("codigo_do_curriculo")}
-                  >
-                    <Center h={"full"} >
-                      <Button color={EURECA_COLORS.BRANCO}
-                        _hover={{ bg: `${EURECA_COLORS.AZUL_CLARO}/80` }}  
-                        variant={"ghost"}>
-                        Currículo <LuArrowUpDown strokeWidth={"1.75"} />
-                      </Button>
-                    </Center>
-                </Box>
-              </Flex>
-            </Box>
+                    <Select.HiddenSelect/>
+                    <Select.Control>
+                      <Select.Trigger border={"none"} cursor={"pointer"}>
+                        <Box w={"full"} textAlign={"center"} color={EURECA_COLORS.BRANCO}>
+                          Área
+                        </Box>
+                      </Select.Trigger>
+                    </Select.Control>
+                    <Portal>
+                      <Select.Positioner mt={2}>
+                        <Select.Content bg={`${EURECA_COLORS.AZUL_CLARO_95}/90`} color={EURECA_COLORS.BRANCO}>
+                          <Select.Item item={"todas_areas"} key={"todas_areas"}>
+                            Selecionar todas
+                            <Select.ItemIndicator />
+                          </Select.Item>
+                          <Select.Item item={"resetar_areas"} key={"resetar_areas"}>
+                            Resetar seleção
+                            <Select.ItemIndicator />
+                          </Select.Item>
+                          {areas.items.map((area) => (
+                            <Select.Item item={area} key={area.value}>
+                              {area.label}
+                              <Select.ItemIndicator />
+                            </Select.Item>
+                          ))}
+                        </Select.Content>
+                      </Select.Positioner>
+                    </Portal>
+                  </Select.Root>
+                </Center>
+              </Box>
+
+            </Grid>
 
             <Box h={tamanhoTabelaFull} bgColor={tabelaBg} boxShadow={"sm"} overflow={"auto"} mt={4} rounded={"sm"}>
               <Table.ScrollArea>
@@ -395,22 +499,12 @@ import { formatarNome } from "@/util/utilities";
                           <Table.Cell
                             textAlign={"center"}
                             border={"none"}
-                            w="25%"
-                            maxW="25%"
+                            w="50%"
+                            maxW="50%"
                             whiteSpace="normal"
                             wordBreak="break-word"
                             >
                             {item.descricao}
-                          </Table.Cell>
-                          <Table.Cell
-                            textAlign={"center"}
-                            border={"none"}
-                            w="25%"
-                            maxW="25%"
-                            whiteSpace="normal"
-                            wordBreak="break-word"
-                            >
-                            {item.area_de_retencao_descricao}
                           </Table.Cell>
                           <Table.Cell
                             textAlign={"center"}
@@ -430,8 +524,23 @@ import { formatarNome } from "@/util/utilities";
                             whiteSpace="normal"
                             wordBreak="break-word"
                             >
+                            {item.area_de_retencao_descricao}
+                          </Table.Cell>
+                          {
+                            /*
+                            
+                          <Table.Cell
+                            textAlign={"center"}
+                            border={"none"}
+                            w="25%"
+                            maxW="25%"
+                            whiteSpace="normal"
+                            wordBreak="break-word"
+                            >
                             {user.profile.type.toLowerCase() === "aluno" ? user.profile.curriculum : item.codigo_do_curriculo}
                           </Table.Cell>
+                            */
+                          }
                         </Table.Row>
                       ))
                     ) : (
@@ -448,22 +557,12 @@ import { formatarNome } from "@/util/utilities";
                           <Table.Cell
                             textAlign={"center"}
                             border={"none"}
-                            w="25%"
-                            maxW="25%"
+                            w="50%"
+                            maxW="50%"
                             whiteSpace="normal"
                             wordBreak="break-word"
                             >
                             {item.descricao}
-                          </Table.Cell>
-                          <Table.Cell
-                            textAlign={"center"}
-                            border={"none"}
-                            w="25%"
-                            maxW="25%"
-                            whiteSpace="normal"
-                            wordBreak="break-word"
-                            >
-                            {item.area_de_retencao_descricao}
                           </Table.Cell>
                           <Table.Cell
                             textAlign={"center"}
@@ -483,8 +582,20 @@ import { formatarNome } from "@/util/utilities";
                             whiteSpace="normal"
                             wordBreak="break-word"
                             >
+                            {item.area_de_retencao_descricao}
+                          </Table.Cell>
+                          {/*
+                          <Table.Cell
+                            textAlign={"center"}
+                            border={"none"}
+                            w="25%"
+                            maxW="25%"
+                            whiteSpace="normal"
+                            wordBreak="break-word"
+                            >
                             {item.codigo_do_curriculo}
                           </Table.Cell>
+                          */}
                         </Table.Row>
                       ))
                     )}

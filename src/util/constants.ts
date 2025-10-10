@@ -35,6 +35,7 @@ export const EURECA_COLORS = {
     AZUL_ESCURO: "#00205B",
     AZUL_MEDIO: "#1A4E8A",
     AZUL_CLARO: "#3D87CB",
+    AZUL_CLARO_95: "#66a2daff",
     CIANO: "#00BCE1",
     BRANCO: "#F6FAFC",
     CINZA: "#4B4F54",

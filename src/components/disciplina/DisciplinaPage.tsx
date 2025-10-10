@@ -174,7 +174,7 @@ export interface DisciplinaPageProps{
                     </Box>
                         */
                     }
-                    <Box w={"20vw"} h={"8vh"}>
+                    <Box cursor={"pointer"} onClick={()=>navigate('/graduacao/')} w={"20vw"} h={"8vh"}>
                         <Image src={img}></Image>
                     </Box>
                     <Card.Root bg={"#7c95b9/70"} boxShadow={"sm"} h={"86vh"} mt={4}>
